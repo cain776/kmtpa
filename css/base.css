@@ -1,0 +1,142 @@
+/* =========================================================================
+   한국의료관광협회 공개 홈페이지 — IABC 스타일
+   라이트 모드, 네이비 중심, 절제된 액센트, 문서 중심 미학
+   ========================================================================= */
+
+/* =========================================================================
+   base.css — 디자인 토큰, 리셋, 타이포그래피, 레이아웃 프리미티브, 공용 유틸
+   로드 순서: base → layout → components → pages
+   ========================================================================= */
+
+:root {
+  --navy-900: #020028;   /* primary — 업로드 색상 */
+  --navy-800: #1a1845;   /* hover · 살짝 밝게 */
+  --navy-700: #3a3865;   /* secondary 액센트 · pillar 넘버 등 */
+  --navy-100: #e9e9f2;   /* 라이트 틴트 · 배지 배경 */
+
+  --text-heading:  #0f172a;
+  --text-body:     #475569;
+  --text-muted:    #94a3b8;
+
+  --border-default: #e5e7eb;
+  --border-strong:  #cbd5e1;
+
+  --bg-white:   #ffffff;
+  --bg-subtle:  #f8fafc;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg-white);
+  color: var(--text-body);
+  font-family: "Pretendard", "Apple SD Gothic Neo", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--navy-100); color: var(--navy-900); }
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4 { color: var(--text-heading); margin: 0; font-weight: 600; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; }
+h2 { font-size: clamp(1.625rem, 2.5vw, 2rem); line-height: 1.25; }
+h3 { font-size: 1.125rem; line-height: 1.4; }
+p  { margin: 0; }
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy-700);
+  margin-bottom: 16px;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.container-narrow {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 페이지 전체가 1280 풀폭을 활용하도록 내부 max-width 캡 해제 */
+.page-fullwidth .journey-hero .lede,
+.page-fullwidth .step-lede,
+.page-fullwidth .step-support,
+.page-fullwidth .next-row .copy p,
+.page-fullwidth .faq-a,
+.page-fullwidth .transparency-intro,
+.page-fullwidth .transparency-block p,
+.page-fullwidth .section-head .desc {
+  max-width: none;
+}
+
+section { padding: 80px 0; }
+@media (max-width: 768px) { section { padding: 56px 0; } }
+
+.section-band { background: var(--bg-subtle); }
+
+.section-head { margin-bottom: 40px; }
+.section-head .desc { margin-top: 12px; max-width: 640px; color: var(--text-body); }
+
+/* section-head + 우측 보조 링크 (예: "전체 자료실 →") */
+.section-head--split {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* section 간격 미세 조정 모디파이어 */
+.section--tight-top { padding-top: 40px; }
+.section--snug-top  { padding-top: 56px; }
+.section-band--with-gap { margin-top: 24px; }
+
+/* ---------- 본문 인라인 링크 (body text 내 a) ---------- */
+.inline-link {
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.inline-link:hover { opacity: 0.7; }
+
+/* ---------- 작은 보조 텍스트 ---------- */
+.text-mini {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ---------- 아이콘 헤드 (info-card · transit-card 공통) ---------- */
+.info-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.info-head h3 {
+  font-size: 16px;
+  color: var(--text-heading);
+}
+.info-icon {
+  width: 32px; height: 32px;
+  background: var(--navy-100);
+  color: var(--navy-900);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
