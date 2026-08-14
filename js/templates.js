@@ -45,7 +45,9 @@ window.KMTPA = window.KMTPA || {};
   }
 
   const page = (route) => localUrl(new URL(normalizeRoute(route), siteRoot));
-  const adminUrl = localUrl(new URL('../frontend/login.html', siteRoot));
+  // 내부 시스템 로그인. frontend/ 가 shared/·workspace/·admin/ 으로 분리되면서
+  // 진입점이 shared/login.html 로 바뀌었습니다.
+  const adminUrl = localUrl(new URL('../shared/login.html', siteRoot));
   const flags = {
     isAbout: path === 'about/' || path === 'about/index.html',
     isVisitKorea: path === 'patient-journey/' || path === 'patient-journey/index.html',
@@ -215,6 +217,66 @@ window.KMTPA = window.KMTPA || {};
         </div>
       </div>
     </footer>
+  `;
+
+  /* ----- 히어로 상단 바 (홈 전용 — 이미지 위에 얹히는 투명 헤더) -----
+     스크롤하면 공용 .site-header 가 내려오므로, 여기서는 대메뉴만 간결하게
+     보여줍니다. 링크는 위 헤더와 동일한 page() 를 써서 한 곳에서 관리합니다. ----- */
+  NS.HERO_TOPBAR_HTML = `
+    <div class="hero-topbar">
+      <a href="${page('')}" class="hero-brand" aria-label="KMTPA 홈으로">
+        <img src="${page('images_homepage/logo2.png')}" alt="">
+        <span>
+          <span class="ko">한국의료관광진흥협회</span>
+          <span class="en">Korean Medical Tourism Promotion Association</span>
+        </span>
+      </a>
+      <nav class="hero-nav" aria-label="주요 메뉴">
+        <a href="${page('about/')}">협회 소개</a>
+        <a href="${page('communications/')}">커뮤니케이션</a>
+        <a href="${page('patient-journey/')}">Visit Korea</a>
+        <a href="${page('programs/')}">활동·자료</a>
+      </nav>
+      <a href="${adminUrl}" class="hero-admin">관리자 로그인</a>
+    </div>
+  `;
+
+  /* ----- 히어로 하단 바로가기 바 (홈 전용) ----- */
+  NS.HERO_QUICKBAR_HTML = `
+    <nav class="hero-quickbar" aria-label="바로가기">
+      <a href="https://mymedicon.com/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"></path></svg>
+        <span class="qb-label">MEDICON<span class="qb-sub">바로가기</span></span>
+      </a>
+      <a href="${page('patient-journey/')}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2c2.7 2.7 4 6.2 4 10s-1.3 7.3-4 10c-2.7-2.7-4-6.2-4-10s1.3-7.3 4-10z"></path></svg>
+        <span class="qb-label">Visit Korea<span class="qb-sub">바로가기</span></span>
+      </a>
+      <a href="mailto:info@kmtpa.org?subject=KMTPA%20%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%EB%AC%B8%EC%9D%98">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="16" y1="11" x2="22" y2="11"></line></svg>
+        <span class="qb-label">회원가입 안내</span>
+      </a>
+      <a href="${page('communications/#notice')}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-7-4 16-6-5-3 4-1-6z"></path></svg>
+        <span class="qb-label">공지사항</span>
+      </a>
+      <a href="${page('#resources')}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        <span class="qb-label">자료실</span>
+      </a>
+      <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+        <span class="qb-label">인스타그램</span>
+      </a>
+      <a href="mailto:info@kmtpa.org">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span class="qb-label">문의하기</span>
+      </a>
+      <a href="mailto:concierge@kmtpa.org?subject=KMTPA%20%ED%9A%8C%EC%9B%90%EA%B8%B0%EA%B4%80%20%EC%B0%BE%EA%B8%B0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+        <span class="qb-label">회원기관 찾기</span>
+      </a>
+    </nav>
   `;
 
   /* ----- Quick Banner (우측 날개 — MEDICON & Instagram) ----- */

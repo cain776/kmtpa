@@ -31,6 +31,12 @@ window.KMTPA = window.KMTPA || {};
     const footerMount = document.getElementById('footer-mount');
     if (headerMount) headerMount.outerHTML = NS.HEADER_HTML;
     if (footerMount) footerMount.outerHTML = NS.FOOTER_HTML;
+
+    // 홈 히어로 전용 — 상단 투명 바와 하단 바로가기 바
+    const heroTopbar = document.getElementById('hero-topbar-mount');
+    const heroQuickbar = document.getElementById('hero-quickbar-mount');
+    if (heroTopbar) heroTopbar.outerHTML = NS.HERO_TOPBAR_HTML;
+    if (heroQuickbar) heroQuickbar.outerHTML = NS.HERO_QUICKBAR_HTML;
     // 우측 날개 배너 — 모든 페이지에 자동 부착
     if (!document.querySelector('.quick-banner')) {
       document.body.insertAdjacentHTML('beforeend', NS.QUICK_BANNER_HTML);
@@ -38,6 +44,89 @@ window.KMTPA = window.KMTPA || {};
   };
 
   /* ----- Hero 배경 영상 재생 (playlist 순환 + 속도 조절) ----- */
+  /* ----- 홈 히어로 슬라이더 -----
+     배경 3장을 교차 전환하고, 슬라이드마다 헤드라인을 바꿉니다.
+     히어로를 지나 스크롤하면 공용 헤더가 내려옵니다. */
+  NS.setupHeroSlider = function () {
+    const stage = document.querySelector('.hero-stage');
+    if (!stage) return;
+
+    const slides = Array.from(stage.querySelectorAll('.hero-slide'));
+    const dots = Array.from(stage.querySelectorAll('.hero-dot'));
+    const headline = stage.querySelector('.hero-headline');
+    const counter = stage.querySelector('.hero-counter');
+    const total = slides.length;
+    if (!total) return;
+
+    // 슬라이드별 헤드라인 — index.html 의 .hero-slide 순서와 1:1 로 맞춥니다.
+    // <em>은 금색 강조입니다.
+    // 슬라이드를 추가하면 아래 예비 문구를 살려 쓰세요.
+    //   '<em>환자 안전과 진료 품질</em>,<br>협회가 기준을 세웁니다.'
+    const COPY = [
+      '세계가 신뢰하는 <em>K-의료관광</em>을<br>만들어갑니다.',
+      '치료를 넘어, <em>한국을 경험하는 여정</em>을<br>함께 만듭니다.'
+    ];
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const INTERVAL = 6000;
+    let index = 0;
+    let timer = null;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function render() {
+      slides.forEach((el, i) => el.classList.toggle('is-active', i === index));
+      dots.forEach((el, i) => {
+        el.classList.toggle('is-active', i === index);
+        el.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      if (headline && COPY[index]) headline.innerHTML = COPY[index];
+      if (counter) counter.textContent = `${pad(index + 1)} / ${pad(total)}`;
+    }
+
+    function go(next) {
+      index = ((next % total) + total) % total;
+      render();
+      restart();
+    }
+
+    function restart() {
+      if (timer) clearInterval(timer);
+      if (reduceMotion) return;              // 모션 최소화 설정이면 자동 전환 안 함
+      timer = setInterval(() => go(index + 1), INTERVAL);
+    }
+
+    stage.querySelector('.hero-arrow--prev')?.addEventListener('click', () => go(index - 1));
+    stage.querySelector('.hero-arrow--next')?.addEventListener('click', () => go(index + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
+
+    stage.querySelector('.hero-scroll')?.addEventListener('click', () => {
+      const target = stage.nextElementSibling;
+      if (target) target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+
+    // 탭이 가려져 있는 동안에는 타이머를 돌리지 않습니다.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { if (timer) clearInterval(timer); }
+      else restart();
+    });
+
+    render();
+    restart();
+
+    /* ----- 히어로를 지나면 고정 헤더 노출 ----- */
+    const header = document.querySelector('.site-header');
+    if (header) {
+      const onScroll = () => {
+        const past = window.scrollY > stage.offsetHeight - 220;
+        header.classList.toggle('is-revealed', past);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+    }
+  };
+
   NS.setupHeroVideo = function () {
     const heroVideo = document.querySelector('.hero-video');
     if (!heroVideo) return;

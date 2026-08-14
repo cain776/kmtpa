@@ -29,37 +29,69 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
+  <!-- 홈 전용 (전면 히어로 슬라이더 등) — 반드시 마지막 -->
+  <link rel="stylesheet" href="css/home.css">
+
+  <!-- 첫 화면 배경은 LCP 요소이므로 미리 받아둡니다 -->
+  <link rel="preload" as="image" href="images_homepage/hero/hero-1.avif" type="image/avif">
 </head>
-<body>
+<body class="is-home">
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
 
-  <!-- ============== Hero ============== -->
-  <section class="hero">
-    <video class="hero-video" autoplay muted playsinline preload="auto" aria-hidden="true">
-      <source src="images_homepage/hero-bg2.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay" aria-hidden="true"></div>
-
-    <div class="container">
-      <span class="eyebrow">공식 협회 · Official Association</span>
-      <h1>대한민국 의료관광의<br>신뢰를 만듭니다.</h1>
-      <p class="lede">
-        (사)한국의료관광진흥협회는 회원 의료기관과 전문가 네트워크를 통해
-        환자 안전과 국제 의료의 표준을 정립하고, 산업의 지속 가능한 성장을 지원합니다.
-      </p>
-      <div class="hero-ctas">
-        <a href="#about" class="link-cta">
-          협회 소개 보기
-          <i data-lucide="arrow-right"></i>
-        </a>
-        <a href="patient-journey/index.html" class="link-cta-muted">
-          Visit Korea
-          <i data-lucide="arrow-right"></i>
-        </a>
-      </div>
+  <!-- ============== Hero (전면 이미지 슬라이더) ==============
+       상단 바·하단 바로가기 바는 templates.js에서 주입되고,
+       슬라이드 전환과 헤드라인은 components.js의 setupHeroSlider가 담당합니다. -->
+  <section class="hero-stage">
+    <div class="hero-media" aria-hidden="true">
+      <!-- 슬라이드를 늘리려면 여기에 <img class="hero-slide"> 를 추가하고
+           components.js 의 HERO_COPY 에 같은 순서로 문구를 넣으세요.
+           표시기(.hero-dot)도 같은 개수로 맞춰야 합니다. -->
+      <img class="hero-slide is-active" src="images_homepage/hero/hero-1.avif" alt="" fetchpriority="high" decoding="async">
+      <img class="hero-slide" src="images_homepage/hero/hero-2.avif" alt="" loading="lazy" decoding="async">
     </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+    <div id="hero-topbar-mount"></div>
+
+    <!-- 바깥은 중앙 정렬, 안쪽은 등장 애니메이션 (transform 이 서로 덮어쓰지 않도록 분리) -->
+    <div class="hero-copy">
+    <div class="hero-copy-inner">
+      <svg class="hero-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <g fill="#E8A33D">
+          <rect x="17" y="3"  width="14" height="14" rx="4.5" transform="rotate(45 24 10)"></rect>
+          <rect x="31" y="17" width="14" height="14" rx="4.5" transform="rotate(45 38 24)"></rect>
+          <rect x="17" y="31" width="14" height="14" rx="4.5" transform="rotate(45 24 38)"></rect>
+          <rect x="3"  y="17" width="14" height="14" rx="4.5" transform="rotate(45 10 24)"></rect>
+        </g>
+      </svg>
+      <p class="hero-kicker">한국의료관광진흥협회는</p>
+      <h1 class="hero-headline" aria-live="polite">
+        세계가 신뢰하는 <em>K-의료관광</em>을<br>만들어갑니다.
+      </h1>
+    </div>
+    </div>
+
+    <button type="button" class="hero-arrow hero-arrow--prev" aria-label="이전 슬라이드">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button type="button" class="hero-arrow hero-arrow--next" aria-label="다음 슬라이드">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+
+    <button type="button" class="hero-scroll" aria-label="아래로 스크롤">
+      <span class="hero-scroll-label">SCROLL</span>
+      <span class="hero-mouse" aria-hidden="true"><span></span></span>
+    </button>
+
+    <div class="hero-pager" role="tablist" aria-label="히어로 슬라이드">
+      <span class="hero-counter">01 / 02</span>
+      <button type="button" class="hero-dot is-active" role="tab" aria-selected="true"  aria-label="1번 슬라이드"></button>
+      <button type="button" class="hero-dot"           role="tab" aria-selected="false" aria-label="2번 슬라이드"></button>
+    </div>
+
+    <div id="hero-quickbar-mount"></div>
   </section>
 
   <!-- ============== Why Korea (MHTC visit 패턴) ============== -->

@@ -1,0 +1,587 @@
+/* =========================================================================
+   home.css — 홈(index.html) 전용 스타일
+   (사)한국의료관광진흥협회 KMTPA 공개 홈페이지
+
+   전면 이미지 히어로 슬라이더와, 그에 맞춰 정돈한 Why Korea·이벤트 섹션.
+   이 파일은 index.html 에서만 로드되므로 다른 페이지에 영향을 주지 않습니다.
+   base/layout/components/pages.css 다음에 로드하세요.
+   ========================================================================= */
+
+.is-home {
+  --hero-ink: #0E0E2C;
+  --hero-gold: #E8A33D;
+  --home-heading: #141432;
+  --home-body: #5A6072;
+  --home-faint: #8A90A0;
+  --home-line: #E6E8EF;
+  --home-line-strong: #DDE0E8;
+  --home-band: #F6F7FA;
+  --home-eyebrow: #5A6BC0;
+}
+
+/* -------------------------------------------------------------------------
+   고정 헤더 — 히어로 위에서는 숨고, 히어로를 지나면 내려온다.
+   공용 .site-header 를 그대로 재사용하므로 메뉴·드롭다운은 다른 페이지와 동일.
+   ------------------------------------------------------------------------- */
+.is-home .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .45s cubic-bezier(.22, .8, .3, 1), opacity .35s ease;
+  box-shadow: 0 4px 24px rgba(13, 13, 43, 0.06);
+}
+.is-home .site-header.is-revealed {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* -------------------------------------------------------------------------
+   히어로
+   ------------------------------------------------------------------------- */
+.hero-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 760px;
+  overflow: hidden;
+  background: var(--hero-ink);
+  color: #fff;
+  isolation: isolate;
+}
+/* 히어로 안의 링크는 밑줄 없이 (전역 a 리셋이 없는 사이트입니다) */
+.hero-stage a { text-decoration: none; }
+
+/* 우측 날개 배너는 하단 바로가기 바와 MEDICON·인스타그램이 겹치므로
+   홈에서는 감춥니다. 다른 페이지에서는 그대로 노출됩니다. */
+.is-home .quick-banner { display: none; }
+
+/* ----- 배경 슬라이드 ----- */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1.4s ease, transform 8s linear;
+}
+.hero-slide.is-active {
+  opacity: 1;
+  transform: scale(1.07);   /* 천천히 밀려드는 켄번스 효과 */
+}
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    /* 카피 뒤쪽만 부드럽게 눌러 밝은 사진에서도 글자가 읽히게 합니다 */
+    radial-gradient(58% 42% at 50% 44%,
+      rgba(9, 9, 30, 0.42) 0%,
+      rgba(9, 9, 30, 0.20) 55%,
+      rgba(9, 9, 30, 0) 100%),
+    linear-gradient(180deg,
+      rgba(11, 11, 36, 0.44) 0%,
+      rgba(13, 13, 43, 0.16) 34%,
+      rgba(13, 13, 43, 0.10) 58%,
+      rgba(9, 9, 30, 0.54) 100%);
+}
+
+/* ----- 히어로 안쪽 상단 바 (투명 헤더) ----- */
+.hero-topbar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 34px 24px 0;
+  animation: heroRise .8s ease both;
+}
+.hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+.hero-brand:hover { color: #fff; }
+.hero-brand img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.hero-brand .ko {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.hero-brand .en {
+  display: block;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.66);
+}
+.hero-nav {
+  display: flex;
+  gap: 64px;
+  font-size: 19px;
+  font-weight: 600;
+}
+.hero-nav a {
+  color: #fff;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s ease;
+}
+.hero-nav a:hover,
+.hero-nav a[aria-current="page"] {
+  color: #fff;
+  border-bottom-color: var(--hero-gold);
+}
+.hero-admin {
+  position: absolute;
+  right: 36px;
+  top: 40px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 8px 16px;
+  transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+.hero-admin:hover {
+  color: var(--hero-ink);
+  background: #fff;
+  border-color: #fff;
+}
+
+/* ----- 중앙 카피 ----- */
+/* 중앙 정렬(transform)과 등장 애니메이션(transform)이 충돌하지 않도록
+   바깥/안쪽 두 겹으로 나눕니다. */
+.hero-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.hero-copy-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  padding: 0 24px;
+  animation: heroRise 1s .15s ease both;
+}
+.hero-mark {
+  width: 58px;
+  height: 58px;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.35));
+}
+.hero-kicker {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+.hero-headline {
+  margin: 0;
+  font-size: 54px;
+  line-height: 1.28;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 3px 22px rgba(0, 0, 0, 0.45);
+  text-wrap: pretty;
+  /* 한국어는 어절 중간에서 끊기면 안 되므로 keep-all.
+     줄바꿈은 헤드라인의 <br> 로만 정합니다. */
+  word-break: keep-all;
+}
+.hero-headline em {
+  font-style: normal;
+  color: var(--hero-gold);
+  /* "K-의료관광" 처럼 하이픈이 든 강조어가 하이픈 뒤에서 끊기지 않도록 */
+  white-space: nowrap;
+}
+
+/* ----- 좌우 화살표 ----- */
+.hero-arrow {
+  position: absolute;
+  top: 46%;
+  z-index: 4;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(10, 10, 32, 0.25);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.hero-arrow:hover {
+  background: var(--hero-gold);
+  border-color: var(--hero-gold);
+  color: var(--hero-ink);
+}
+.hero-arrow--prev { left: 26px; }
+.hero-arrow--next { right: 26px; }
+
+/* ----- 스크롤 유도 ----- */
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 196px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.hero-scroll-label {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+}
+.hero-mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 7px;
+}
+.hero-mouse span {
+  width: 4px;
+  height: 9px;
+  border-radius: 3px;
+  background: var(--hero-gold);
+  animation: heroBob 1.6s ease-in-out infinite;
+}
+
+/* ----- 카운터 + 인디케이터 ----- */
+.hero-pager {
+  position: absolute;
+  right: 36px;
+  bottom: 160px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-counter {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.8);
+  font-variant-numeric: tabular-nums;
+}
+.hero-dot {
+  width: 26px;
+  height: 4px;
+  border: none;
+  border-radius: 2px;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.35);
+  transition: background .3s ease;
+}
+.hero-dot.is-active { background: var(--hero-gold); }
+
+/* ----- 하단 바로가기 바 ----- */
+.hero-quickbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  background: rgba(9, 9, 28, 0.72);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.hero-quickbar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 128px;
+  color: #fff;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
+  transition: background .2s ease, color .2s ease;
+}
+.hero-quickbar a:last-child { border-right: none; }
+.hero-quickbar a:hover {
+  background: var(--hero-gold);
+  color: var(--hero-ink);
+}
+.hero-quickbar .qb-label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.hero-quickbar .qb-sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: .75;
+}
+.hero-quickbar svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.8;
+}
+
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroBob {
+  0%, 100% { transform: translateY(0);   opacity: .9; }
+  50%      { transform: translateY(7px); opacity: .4; }
+}
+
+/* -------------------------------------------------------------------------
+   Why Korea — 테두리로 묶은 4열 그리드
+   #why-korea / .section-head / .pillar-grid .pillar 구조는 관리자 CMS가
+   찾아 쓰는 계약이므로 클래스 이름을 바꾸지 마세요 (js/cms.js).
+   ------------------------------------------------------------------------- */
+.is-home #why-korea {
+  background: #fff;
+  padding: 120px 0 110px;
+}
+.is-home #why-korea .section-head .eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--home-eyebrow);
+  text-transform: uppercase;
+}
+.is-home #why-korea .section-head h2 {
+  margin: 18px 0 0;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--home-heading);
+}
+.is-home #why-korea .section-head .desc {
+  margin: 16px 0 0;
+  font-size: 16px;
+  color: var(--home-body);
+}
+.is-home #why-korea .pillar-grid {
+  margin-top: 54px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--home-line);
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+.is-home #why-korea .pillar {
+  padding: 36px 30px;
+  border-right: 1px solid var(--home-line);
+  background: none;
+}
+.is-home #why-korea .pillar:last-child { border-right: none; }
+.is-home #why-korea .pillar-num {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #2A2A5C;
+}
+.is-home #why-korea .pillar h3 {
+  margin: 18px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--home-heading);
+}
+.is-home #why-korea .pillar p {
+  margin: 14px 0 0;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--home-body);
+  text-wrap: pretty;
+}
+
+/* -------------------------------------------------------------------------
+   이벤트 — 날짜 + 제목 + 유형 한 줄 리스트
+   ------------------------------------------------------------------------- */
+.is-home #events {
+  background: var(--home-band);
+  padding: 110px 0 120px;
+  border-top: 1px solid var(--home-line);
+}
+.is-home #events .section-head .eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--home-eyebrow);
+  text-transform: uppercase;
+}
+.is-home #events .section-head h2 {
+  margin: 18px 0 0;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--home-heading);
+}
+.is-home #events .event-list {
+  margin-top: 44px;
+  border-top: 1px solid var(--home-line-strong);
+}
+/* 기존 .event-item 은 grid(100px 1fr auto) 입니다. 구조는 두고 치수만 맞춥니다. */
+.is-home #events .event-item {
+  grid-template-columns: 92px 1fr auto;
+  gap: 28px;
+  padding: 26px 8px;
+  border-bottom-color: var(--home-line-strong);
+  transition: background .2s ease, padding-left .15s ease;
+}
+.is-home #events .event-item:hover {
+  background: rgba(255, 255, 255, 0.7);
+  padding-left: 14px;
+}
+.is-home #events .e-date {
+  border-right-color: var(--home-line-strong);
+  padding-right: 28px;
+}
+.is-home #events .e-date .month {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--home-faint);
+}
+.is-home #events .e-date .day {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-top: 2px;
+  color: var(--home-heading);
+}
+.is-home #events .e-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--home-heading);
+}
+.is-home #events .e-meta {
+  margin-top: 7px;
+  font-size: 13.5px;
+  color: var(--home-faint);
+}
+.is-home #events .e-type {
+  font-size: 12.5px;
+  color: var(--home-body);
+  border: 1px solid var(--home-line-strong);
+  border-radius: 999px;
+  padding: 7px 16px;
+  background: #fff;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------------------
+   반응형 — 원본 디자인은 데스크톱 기준이라 아래 단계를 덧붙였습니다.
+   ------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .hero-nav { gap: 38px; font-size: 17px; }
+  .hero-headline { font-size: 44px; }
+  .hero-quickbar a { height: 112px; }
+  .hero-quickbar .qb-label { font-size: 13px; }
+  .is-home #why-korea .pillar-grid { grid-template-columns: repeat(2, 1fr); }
+  .is-home #why-korea .pillar:nth-child(2n) { border-right: none; }
+  .is-home #why-korea .pillar:nth-child(-n+2) { border-bottom: 1px solid var(--home-line); }
+}
+
+@media (max-width: 900px) {
+  /* 모바일에서는 공용 헤더(햄버거 메뉴)를 항상 보이게 두고,
+     히어로 안쪽 중앙 네비는 감춥니다. */
+  .is-home .site-header {
+    position: sticky;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .hero-stage { height: auto; min-height: 0; padding-bottom: 0; }
+  .hero-topbar { display: none; }
+  .hero-copy {
+    position: static;
+    transform: none;
+    padding: 120px 24px 140px;
+  }
+  .hero-media, .hero-scrim { z-index: 0; }
+  .hero-copy { z-index: 2; }
+  .hero-headline { font-size: 26px; }
+  .hero-kicker { font-size: 18px; }
+  .hero-mark { width: 44px; height: 44px; }
+  .hero-arrow { display: none; }
+  .hero-scroll { display: none; }
+  /* 흐름 배치로 바꾸므로 위치 지정과 transform 을 모두 되돌립니다.
+     (transform 이 남아 있으면 static 상태에서도 왼쪽으로 밀립니다) */
+  /* 흐름 배치로 바뀌면 밝은 사진 위에 놓일 수 있으므로 어두운 칩을 깔아 둡니다. */
+  .hero-pager {
+    position: static;
+    inset: auto;
+    transform: none;
+    width: fit-content;
+    margin: 0 auto 22px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(9, 9, 28, 0.55);
+    backdrop-filter: blur(6px);
+  }
+  .hero-quickbar {
+    position: static;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .hero-quickbar a { height: 96px; }
+  .hero-quickbar a:nth-child(4n) { border-right: none; }
+  .hero-quickbar a:nth-child(-n+4) { border-bottom: 1px solid rgba(255, 255, 255, 0.10); }
+  .is-home #why-korea { padding: 72px 0 64px; }
+  .is-home #why-korea .section-head h2,
+  .is-home #events .section-head h2 { font-size: 27px; }
+  .is-home #events { padding: 64px 0 72px; }
+}
+
+@media (max-width: 600px) {
+  .hero-quickbar { grid-template-columns: repeat(2, 1fr); }
+  .hero-quickbar a:nth-child(2n) { border-right: none; }
+  .hero-quickbar a:nth-child(-n+6) { border-bottom: 1px solid rgba(255, 255, 255, 0.10); }
+  .is-home #why-korea .pillar-grid { grid-template-columns: 1fr; }
+  .is-home #why-korea .pillar { border-right: none; border-bottom: 1px solid var(--home-line); }
+  .is-home #why-korea .pillar:last-child { border-bottom: none; }
+  .is-home #events .event-item { grid-template-columns: 76px 1fr; gap: 18px; }
+  .is-home #events .e-date { padding-right: 18px; }
+  .is-home #events .e-title { font-size: 15px; }
+}
+
+/* 모션 최소화 설정 존중 — 자동 전환과 확대는 JS에서도 함께 끕니다. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .hero-slide.is-active { transition: opacity .2s ease; transform: none; }
+  .hero-topbar, .hero-copy { animation: none; }
+  .hero-mouse span { animation: none; }
+  .is-home .site-header { transition: none; }
+}
