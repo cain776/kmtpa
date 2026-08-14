@@ -367,199 +367,23 @@
 .org-chart-wrap {
   margin-top: 8px;
 }
-
-/* ---------- 조직도 (about · 조직 탭) ----------
-   단계(.org-step)를 세로로 쌓고, 각 단계 위에 연결선을 그립니다.
-   갈라지는 단계는 .org-fork 를 붙여 가로 막대 + 세로 가지를 그립니다.
-   좁은 화면에서는 가로 막대를 지우고 한 줄씩 세로로 접습니다. */
-.org {
-  --org-line: #c9d3e6;
-  --org-gap: 26px;          /* 단계 사이 간격 = 연결선 길이 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
-  border: 1px solid var(--border-default);
-  border-radius: 10px;
-  background: linear-gradient(180deg, #fbfcfe 0%, #f5f8fd 100%);
+.org-chart-link {
+  display: block;
+  border-radius: 8px;
 }
-.org-step {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  width: 100%;
+.org-chart-link:hover .org-chart {
+  border-color: var(--navy-700);
 }
-/* 단계와 단계를 잇는 세로선 */
-.org-step + .org-step { margin-top: var(--org-gap); }
-.org-step + .org-step::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: calc(var(--org-gap) * -1);
-  width: 1px;
-  height: var(--org-gap);
-  background: var(--org-line);
-}
-
-.org-node {
+.org-chart-note {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-height: 56px;
-  padding: 12px 22px;
-  border: 1px solid var(--border-default);
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(2, 0, 40, 0.05);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-heading);
-  text-align: center;
-}
-.org-node--lead { box-shadow: inset 3px 0 0 var(--navy-700), 0 1px 3px rgba(2, 0, 40, 0.05); }
-.org-node--tint { background: #eef3fc; }
-.org-node--unit { border-top: 3px solid #4a72d0; background: #eef3fc; }
-.org-node--chief {
-  min-width: 260px;
-  border: none;
-  background: linear-gradient(135deg, #1c3a80 0%, #2f5bc0 100%);
-  color: #fff;
-  box-shadow: 0 8px 22px rgba(28, 58, 128, 0.28);
-}
-.org-node--office {
-  min-width: 240px;
-  border: none;
-  background: #2f6ad9;
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(47, 106, 217, 0.26);
-}
-.org-name { font-size: 16px; font-weight: 800; }
-.org-node--chief .org-name { font-size: 19px; }
-.org-role {
-  font-size: 12px;
-  font-weight: 600;
+  margin-top: 12px;
+  font-size: 13px;
   color: var(--text-muted);
-  background: var(--navy-100);
-  border-radius: 999px;
-  padding: 3px 12px;
 }
-.org-node--chief .org-role {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.18);
-}
-
-/* 총회 옆에 나란히 붙는 감사 */
-.org-node--side { position: relative; margin-left: 72px; }
-.org-node--side::before {
-  content: "";
-  position: absolute;
-  left: -72px;
-  top: 50%;
-  width: 72px;
-  height: 1px;
-  background: var(--org-line);
-}
-
-/* ----- 갈라지는 단계 ----- */
-.org-fork {
-  display: grid;
-  gap: 24px;
-  align-items: start;
-}
-.org-fork--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.org-fork--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-/* 가지들을 잇는 가로 막대 — 첫 열 중앙에서 마지막 열 중앙까지 */
-.org-fork::after {
-  content: "";
-  position: absolute;
-  top: calc(var(--org-gap) * -1);
-  left: calc(100% / 6);
-  right: calc(100% / 6);
-  height: 1px;
-  background: var(--org-line);
-}
-.org-fork--4::after {
-  left: calc(100% / 8);
-  right: calc(100% / 8);
-}
-.org-col {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--org-gap);
-}
-/* 가로 막대에서 각 노드로 내려오는 세로 가지 */
-.org-col::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: calc(var(--org-gap) * -1);
-  width: 1px;
-  height: var(--org-gap);
-  background: var(--org-line);
-}
-/* 한 열 안에서 노드가 이어질 때의 세로선 */
-.org-col .org-node + .org-node::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: calc(var(--org-gap) * -1);
-  width: 1px;
-  height: var(--org-gap);
-  background: var(--org-line);
-}
-.org-col .org-node { position: relative; width: 100%; }
-
-/* 태블릿 — 열 수는 그대로 두고 크기만 줄입니다.
-   2열로 접으면 고문단이 부회장단 아래로 보이는 등 계층이 잘못 읽힙니다. */
-@media (max-width: 820px) {
-  .org { padding: 28px 12px; --org-gap: 18px; }
-  .org-fork { gap: 12px; }
-  .org-node {
-    min-height: 48px;
-    padding: 10px 8px;
-    font-size: 13px;
-    gap: 4px;
-  }
-  .org-name { font-size: 14px; }
-  .org-node--chief .org-name { font-size: 17px; }
-  .org-role { font-size: 11px; padding: 2px 8px; }
-  .org-node--chief, .org-node--office { min-width: 0; width: 100%; max-width: 320px; }
-  .org-node--side { margin-left: 40px; }
-  .org-node--side::before { left: -40px; width: 40px; }
-}
-
-/* 모바일 — 가로로 늘어놓을 자리가 없으므로 한 줄씩 세로로 쌓습니다.
-   가지 대신 단계 사이 세로선만 남겨 순서를 따라 읽게 합니다. */
-@media (max-width: 560px) {
-  .org-fork--3,
-  .org-fork--4 { grid-template-columns: 1fr; gap: var(--org-gap); }
-  .org-fork::after { display: none; }
-  .org-col::before { display: none; }
-  .org-col + .org-col::before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: calc(var(--org-gap) * -1);
-    width: 1px;
-    height: var(--org-gap);
-    background: var(--org-line);
-  }
-  .org-node--chief, .org-node--office { max-width: none; }
-  /* 총회 · 감사도 세로로 */
-  .org-step:first-child { flex-direction: column; align-items: center; gap: var(--org-gap); }
-  .org-node--side { margin-left: 0; }
-  .org-node--side::before {
-    left: 50%;
-    top: calc(var(--org-gap) * -1);
-    width: 1px;
-    height: var(--org-gap);
-  }
-}
+.org-chart-note svg { width: 14px; height: 14px; }
 
 /* ---------- 투명경영 (Transparency) ---------- */
 .transparency-intro {
