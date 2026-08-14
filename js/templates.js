@@ -123,6 +123,7 @@ window.KMTPA = window.KMTPA || {};
             <a href="${page('programs/')}"${isResources ? ' class="active" aria-current="page"' : ''}>활동·자료</a>
             <div class="nav-dropdown" role="menu">
               <a href="${page('programs/')}" role="menuitem">주요업무</a>
+              <a href="${page('programs/#history')}" role="menuitem">활동 연혁</a>
               <a href="${page('#resources')}" role="menuitem">산업 동향</a>
               <a href="${page('#events')}" role="menuitem">이벤트·교육</a>
               <a href="${page('#awards')}" role="menuitem">시상·인증</a>
@@ -195,6 +196,7 @@ window.KMTPA = window.KMTPA || {};
         <div class="footer-col">
           <h4>활동·자료</h4>
           <a href="${page('programs/')}">주요업무</a>
+          <a href="${page('programs/#history')}">활동 연혁</a>
           <a href="${page('#resources')}">산업 동향</a>
           <a href="${page('#events')}">이벤트·교육</a>
           <a href="${page('#awards')}">시상·인증</a>
