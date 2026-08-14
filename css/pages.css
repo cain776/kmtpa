@@ -697,41 +697,63 @@
   isolation: isolate;
   display: flex;
   align-items: center;
-  min-height: 340px;
+  min-height: 360px;
   border-bottom: none;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* contain — 인물이 잘리지 않도록 이미지를 통째로 줄여 넣습니다.
+     cover 로 채우면 2.4:1 원본이 히어로 높이에 맞춰 위아래가 잘립니다.
+     이미지 왼쪽이 흰 배경이라 페이지 바탕과 자연스럽게 이어집니다. */
+  background-size: contain;
   background-position: right center;
-  background-color: var(--bg-subtle);   /* 이미지 로드 전 바탕 */
+  background-color: #fff;
 }
 .journey-hero--banner > * { width: 100%; }
+/* 이미지가 좁은 폭에서 글자 쪽으로 넘어올 때만 살짝 덮어 줍니다. */
 .journey-hero--banner::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   background: linear-gradient(90deg,
-    rgba(255, 255, 255, 0.97) 0%,
-    rgba(255, 255, 255, 0.90) 32%,
-    rgba(255, 255, 255, 0.45) 56%,
-    rgba(255, 255, 255, 0) 76%);
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.92) 26%,
+    rgba(255, 255, 255, 0.35) 44%,
+    rgba(255, 255, 255, 0) 60%);
 }
 .journey-hero--about { background-image: url("../images_homepage/banner/about.avif"); }
 .journey-hero--communications { background-image: url("../images_homepage/banner/communications.avif"); }
 
+/* 태블릿 — 폭이 줄면 이미지가 글자 쪽으로 넘어옵니다. 덮개로 지우는 대신
+   이미지를 더 줄여 오른쪽 아래에 붙이고, 덮개는 글자 뒤쪽에만 겁니다. */
 @media (max-width: 900px) {
-  /* 좁아지면 인물이 글자 뒤로 들어오므로 흰 덮개를 전체로 넓힙니다. */
-  .journey-hero--banner { min-height: 260px; }
+  .journey-hero--banner {
+    min-height: 280px;
+    background-size: auto 78%;
+    background-position: right bottom;
+  }
   .journey-hero--banner::before {
     background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0.97) 0%,
-      rgba(255, 255, 255, 0.93) 55%,
-      rgba(255, 255, 255, 0.78) 100%);
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.94) 40%,
+      rgba(255, 255, 255, 0.55) 66%,
+      rgba(255, 255, 255, 0.25) 100%);
   }
+  /* 본문이 이미지 위로 흘러가지 않게 폭을 줄입니다.
+     아래쪽 `.journey-hero .lede { max-width: 720px }` 보다 뒤에 오지 않으므로
+     클래스를 하나 더 붙여 우선순위를 올립니다. */
+  .journey-hero.journey-hero--banner .lede { max-width: 58%; }
 }
-@media (max-width: 560px) {
-  .journey-hero--banner { min-height: 0; }
-  .journey-hero--banner::before { background: rgba(255, 255, 255, 0.93); }
+
+/* 모바일 — 나란히 놓을 폭이 없어 배너를 내립니다.
+   흐릿한 잔상만 남기느니 글자만 깔끔하게 보여주는 편이 낫습니다. */
+@media (max-width: 620px) {
+  .journey-hero--banner {
+    min-height: 0;
+    display: block;
+    background-image: none;
+    border-bottom: 1px solid var(--border-default);
+  }
+  .journey-hero--banner::before { display: none; }
 }
 .journey-hero .lede {
   margin-top: 20px;
