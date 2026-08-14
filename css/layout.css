@@ -185,6 +185,12 @@
 }
 
 @media (max-width: 960px) {
+  /* 모바일·태블릿에서는 헤더가 사진(홈 히어로) 바로 위에 붙어 있어
+     반투명이면 배경이 비쳐 로고와 글자가 흐려집니다. 불투명으로 고정. */
+  .site-header {
+    background: #fff;
+    backdrop-filter: none;
+  }
   .top-nav, .header-cta { display: none; }
   .mobile-toggle { display: inline-flex; }
   .top-nav.open {
