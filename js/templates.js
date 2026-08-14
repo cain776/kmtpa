@@ -241,7 +241,19 @@ window.KMTPA = window.KMTPA || {};
           <span class="en">Korean Medical Tourism Promotion Association</span>
         </span>
       </a>
-      <a href="${adminUrl}" class="hero-admin">관리자 로그인</a>
+      <div class="hero-lang" data-lang-select>
+        <button type="button" class="hero-lang-toggle" aria-haspopup="listbox" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.4 3.6 5.6 3.6 9s-1.2 6.6-3.6 9c-2.4-2.4-3.6-5.6-3.6-9s1.2-6.6 3.6-9z"></path></svg>
+          <span class="hero-lang-current">한국어</span>
+          <svg class="hero-lang-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <ul class="hero-lang-menu" role="listbox" aria-label="언어 선택" hidden>
+          <li role="option" aria-selected="true" class="is-current">한국어</li>
+          <li role="option" aria-selected="false" aria-disabled="true">English<span class="hero-lang-soon">준비중</span></li>
+          <li role="option" aria-selected="false" aria-disabled="true">中文<span class="hero-lang-soon">준비중</span></li>
+          <li role="option" aria-selected="false" aria-disabled="true">日本語<span class="hero-lang-soon">준비중</span></li>
+        </ul>
+      </div>
     </div>
   `;
 

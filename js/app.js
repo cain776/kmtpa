@@ -23,6 +23,7 @@
   function init() {
     NS.injectLayout();      // 헤더·푸터·날개 배너를 먼저 주입
     NS.setupHeroSlider();   // 홈 히어로 슬라이더 (.hero-stage가 있을 때만 작동)
+    NS.setupLangSelect();   // 히어로 언어 선택 드롭다운
     NS.setupHeroVideo();    // 구 히어로 영상 (.hero-video가 남아있는 페이지용)
     NS.setupMobileNav();    // 모바일 햄버거 메뉴
     NS.setupTabs();         // 탭 + 서브탭 (about·communications·programs 등)
