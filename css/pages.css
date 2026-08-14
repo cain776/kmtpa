@@ -687,6 +687,52 @@
   padding: 80px 0 64px;
   border-bottom: 1px solid var(--border-default);
 }
+
+/* ---------- 배너 이미지가 깔리는 페이지 히어로 ----------
+   배너는 오른쪽에 인물, 왼쪽은 비어 있는 구도입니다. 그 빈 쪽에 제목이
+   오도록 오른쪽 기준으로 붙이고, 글자가 놓이는 왼쪽은 흰 그라데이션으로
+   덮어 어떤 사진이 와도 대비가 유지되게 합니다. */
+.journey-hero--banner {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 340px;
+  border-bottom: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+  background-color: var(--bg-subtle);   /* 이미지 로드 전 바탕 */
+}
+.journey-hero--banner > * { width: 100%; }
+.journey-hero--banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.97) 0%,
+    rgba(255, 255, 255, 0.90) 32%,
+    rgba(255, 255, 255, 0.45) 56%,
+    rgba(255, 255, 255, 0) 76%);
+}
+.journey-hero--about { background-image: url("../images_homepage/banner/about.avif"); }
+.journey-hero--communications { background-image: url("../images_homepage/banner/communications.avif"); }
+
+@media (max-width: 900px) {
+  /* 좁아지면 인물이 글자 뒤로 들어오므로 흰 덮개를 전체로 넓힙니다. */
+  .journey-hero--banner { min-height: 260px; }
+  .journey-hero--banner::before {
+    background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 255, 255, 0.93) 55%,
+      rgba(255, 255, 255, 0.78) 100%);
+  }
+}
+@media (max-width: 560px) {
+  .journey-hero--banner { min-height: 0; }
+  .journey-hero--banner::before { background: rgba(255, 255, 255, 0.93); }
+}
 .journey-hero .lede {
   margin-top: 20px;
   font-size: 17px;
