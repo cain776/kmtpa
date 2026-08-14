@@ -687,6 +687,50 @@
   padding: 80px 0 64px;
   border-bottom: 1px solid var(--border-default);
 }
+
+/* ---------- 배너 이미지가 붙는 페이지 히어로 ----------
+   이미지를 배경(background-image)이 아니라 <img> 로 둡니다.
+   background-position 의 퍼센트는 '영역 폭'이 아니라 '영역 - 이미지' 기준이라
+   콘텐츠 경계에 맞추기가 어렵습니다. 플렉스 항목으로 두면 오른쪽 끝이
+   컨테이너 콘텐츠 오른쪽 끝에 저절로 맞습니다. */
+.journey-hero--banner {
+  padding: 0;
+  border-bottom: none;
+}
+.hero-banner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  min-height: 300px;
+}
+.hero-banner-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 32px 0;
+}
+.hero-banner-art {
+  flex: 0 0 auto;
+  height: 300px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  object-position: right center;
+}
+
+@media (max-width: 1080px) {
+  .hero-banner { min-height: 260px; gap: 24px; }
+  .hero-banner-art { height: 260px; }
+}
+/* 나란히 놓을 폭이 없어지면 이미지를 내리고 글만 남깁니다. */
+@media (max-width: 820px) {
+  .journey-hero--banner {
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--border-default);
+  }
+  .hero-banner { display: block; min-height: 0; }
+  .hero-banner-copy { padding: 0; }
+  .hero-banner-art { display: none; }
+}
 .journey-hero .lede {
   margin-top: 20px;
   font-size: 17px;
