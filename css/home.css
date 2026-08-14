@@ -145,23 +145,6 @@
   letter-spacing: 0.06em;
   color: rgba(255, 255, 255, 0.66);
 }
-.hero-nav {
-  display: flex;
-  gap: 64px;
-  font-size: 19px;
-  font-weight: 600;
-}
-.hero-nav a {
-  color: #fff;
-  padding: 6px 2px;
-  border-bottom: 2px solid transparent;
-  transition: border-color .2s ease;
-}
-.hero-nav a:hover,
-.hero-nav a[aria-current="page"] {
-  color: #fff;
-  border-bottom-color: var(--hero-gold);
-}
 .hero-admin {
   position: absolute;
   right: 36px;
@@ -179,10 +162,10 @@
   border-color: #fff;
 }
 
-/* ----- 중앙 카피 ----- */
-/* 상단 바가 차지하고 남은 공간을 모두 받아 그 안에서 가운데 정렬합니다.
-   아래쪽 여백은 SCROLL 유도와 바로가기 바가 쓰는 만큼 비워, 결과적으로
-   카피가 화면 중앙보다 위에 놓입니다. */
+/* ----- 중앙 카피 (헤드라인 한 덩어리) ----- */
+/* 상단 바가 차지하고 남은 공간을 모두 받아 그 안에서 정렬합니다.
+   아래쪽 여백을 크게 잡아 헤드라인이 화면 위쪽에 놓이게 합니다
+   (아래는 SCROLL 유도와 바로가기 바가 쓰는 영역). */
 .hero-copy {
   position: relative;
   z-index: 2;
@@ -191,7 +174,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 230px;
+  padding-bottom: 320px;
 }
 .hero-copy-inner {
   display: flex;
@@ -203,18 +186,6 @@
   animation: heroRise 1s .15s ease both;
   /* 배경 전환과 섞이지 않도록 글자도 자기 레이어에서 그립니다. */
   transform: translateZ(0);
-}
-.hero-mark {
-  width: 58px;
-  height: 58px;
-  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.35));
-}
-.hero-kicker {
-  margin: 0;
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
 }
 .hero-headline {
   margin: 0;
@@ -334,8 +305,10 @@
   z-index: 5;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  background: rgba(9, 9, 28, 0.72);
-  backdrop-filter: blur(14px);
+  /* backdrop-filter 는 쓰지 않습니다. 일부 GPU 에서 배경을 샘플링하다
+     가로 줄무늬가 번지는 보고가 있었고, 이미 충분히 어두워 blur 없이도
+     대비가 확보됩니다. */
+  background: rgba(9, 9, 28, 0.78);
   border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 .hero-quickbar a {
@@ -359,6 +332,10 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
+  /* '바로가기' 보조문구가 있는 칸과 없는 칸의 아이콘 높이를 맞추기 위해
+     라벨 영역 높이를 두 줄로 고정합니다. */
+  display: block;
+  min-height: 2.7em;
 }
 .hero-quickbar .qb-sub {
   display: block;
@@ -524,7 +501,6 @@
    반응형 — 원본 디자인은 데스크톱 기준이라 아래 단계를 덧붙였습니다.
    ------------------------------------------------------------------------- */
 @media (max-width: 1180px) {
-  .hero-nav { gap: 38px; font-size: 17px; }
   .hero-headline { font-size: 50px; }
   .hero-quickbar a { height: 112px; }
   .hero-quickbar .qb-label { font-size: 13px; }
@@ -551,8 +527,6 @@
   .hero-media, .hero-scrim { z-index: 0; }
   .hero-copy { z-index: 2; }
   .hero-headline { font-size: 26px; }
-  .hero-kicker { font-size: 18px; }
-  .hero-mark { width: 44px; height: 44px; }
   .hero-arrow { display: none; }
   .hero-scroll { display: none; }
   /* 흐름 배치로 바꾸므로 위치 지정과 transform 을 모두 되돌립니다.
