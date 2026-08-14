@@ -225,7 +225,16 @@ window.KMTPA = window.KMTPA || {};
   NS.HERO_TOPBAR_HTML = `
     <div class="hero-topbar">
       <a href="${page('')}" class="hero-brand" aria-label="KMTPA 홈으로">
-        <img src="${page('images_homepage/logo2.png')}" alt="">
+        <!-- logo2.png 는 흰 배경이 붙어 있어 사진 위에서 흰 상자로 보입니다.
+             히어로에서는 배경 없는 마름모 마크(가운데 것과 동일)를 씁니다. -->
+        <svg class="hero-brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+          <g fill="#E8A33D">
+            <rect x="17" y="3"  width="14" height="14" rx="4.5" transform="rotate(45 24 10)"></rect>
+            <rect x="31" y="17" width="14" height="14" rx="4.5" transform="rotate(45 38 24)"></rect>
+            <rect x="17" y="31" width="14" height="14" rx="4.5" transform="rotate(45 24 38)"></rect>
+            <rect x="3"  y="17" width="14" height="14" rx="4.5" transform="rotate(45 10 24)"></rect>
+          </g>
+        </svg>
         <span>
           <span class="ko">한국의료관광진흥협회</span>
           <span class="en">Korean Medical Tourism Promotion Association</span>

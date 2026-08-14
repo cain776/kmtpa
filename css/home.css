@@ -52,6 +52,13 @@
   background: var(--hero-ink);
   color: #fff;
   isolation: isolate;
+  /* base.css 의 `section { padding: 80px 0 }` 를 무효화합니다.
+     전면 히어로에는 위아래 여백이 있으면 안 됩니다. */
+  padding: 0;
+  /* 상단 바와 카피를 흐름 안에 세로로 쌓습니다. 카피를 % 로 띄우면
+     화면 높이가 낮을 때 상단 메뉴와 겹치므로 flex 로 공간을 나눕니다. */
+  display: flex;
+  flex-direction: column;
 }
 /* 히어로 안의 링크는 밑줄 없이 (전역 a 리셋이 없는 사이트입니다) */
 .hero-stage a { text-decoration: none; }
@@ -75,6 +82,11 @@
   opacity: 0;
   transform: scale(1);
   transition: opacity 1.4s ease, transform 8s linear;
+  /* 배경만 별도 합성 레이어로 올립니다. 이게 없으면 8초짜리 확대 전환이
+     도는 동안 위에 얹힌 글자의 text-shadow 가 일부 GPU 에서 가로 줄무늬로
+     번지는 경우가 있습니다. */
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 .hero-slide.is-active {
   opacity: 1;
@@ -104,8 +116,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 26px;
-  padding: 34px 24px 0;
+  gap: 18px;
+  padding: 24px 24px 0;
   animation: heroRise .8s ease both;
 }
 .hero-brand {
@@ -115,10 +127,11 @@
   color: #fff;
 }
 .hero-brand:hover { color: #fff; }
-.hero-brand img {
+.hero-brand-mark {
   width: 40px;
   height: 40px;
-  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
 }
 .hero-brand .ko {
   display: block;
@@ -167,15 +180,18 @@
 }
 
 /* ----- 중앙 카피 ----- */
-/* 중앙 정렬(transform)과 등장 애니메이션(transform)이 충돌하지 않도록
-   바깥/안쪽 두 겹으로 나눕니다. */
+/* 상단 바가 차지하고 남은 공간을 모두 받아 그 안에서 가운데 정렬합니다.
+   아래쪽 여백은 SCROLL 유도와 바로가기 바가 쓰는 만큼 비워, 결과적으로
+   카피가 화면 중앙보다 위에 놓입니다. */
 .hero-copy {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 44%;
-  transform: translateY(-50%);
+  position: relative;
   z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 230px;
 }
 .hero-copy-inner {
   display: flex;
@@ -185,6 +201,8 @@
   text-align: center;
   padding: 0 24px;
   animation: heroRise 1s .15s ease both;
+  /* 배경 전환과 섞이지 않도록 글자도 자기 레이어에서 그립니다. */
+  transform: translateZ(0);
 }
 .hero-mark {
   width: 58px;
@@ -200,8 +218,8 @@
 }
 .hero-headline {
   margin: 0;
-  font-size: 54px;
-  line-height: 1.28;
+  font-size: 64px;
+  line-height: 1.26;
   font-weight: 800;
   letter-spacing: -0.02em;
   text-shadow: 0 3px 22px rgba(0, 0, 0, 0.45);
@@ -507,7 +525,7 @@
    ------------------------------------------------------------------------- */
 @media (max-width: 1180px) {
   .hero-nav { gap: 38px; font-size: 17px; }
-  .hero-headline { font-size: 44px; }
+  .hero-headline { font-size: 50px; }
   .hero-quickbar a { height: 112px; }
   .hero-quickbar .qb-label { font-size: 13px; }
   .is-home #why-korea .pillar-grid { grid-template-columns: repeat(2, 1fr); }
@@ -524,12 +542,11 @@
     opacity: 1;
     pointer-events: auto;
   }
-  .hero-stage { height: auto; min-height: 0; padding-bottom: 0; }
+  .hero-stage { height: auto; min-height: 0; display: block; }
   .hero-topbar { display: none; }
   .hero-copy {
-    position: static;
-    transform: none;
-    padding: 120px 24px 140px;
+    display: block;
+    padding: 110px 24px 130px;
   }
   .hero-media, .hero-scrim { z-index: 0; }
   .hero-copy { z-index: 2; }
