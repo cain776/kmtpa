@@ -97,16 +97,17 @@
   inset: 0;
   z-index: 1;
   background:
-    /* 카피 뒤쪽만 부드럽게 눌러 밝은 사진에서도 글자가 읽히게 합니다 */
-    radial-gradient(58% 42% at 50% 44%,
-      rgba(9, 9, 30, 0.42) 0%,
-      rgba(9, 9, 30, 0.20) 55%,
+    /* 헤드라인 뒤쪽만 살짝 눌러 흰 글자가 뜨게 합니다 */
+    radial-gradient(56% 40% at 50% 30%,
+      rgba(9, 9, 30, 0.26) 0%,
+      rgba(9, 9, 30, 0.12) 55%,
       rgba(9, 9, 30, 0) 100%),
+    /* 위아래 가장자리만 정리하고 가운데는 사진을 그대로 보여줍니다 */
     linear-gradient(180deg,
-      rgba(11, 11, 36, 0.44) 0%,
-      rgba(13, 13, 43, 0.16) 34%,
-      rgba(13, 13, 43, 0.10) 58%,
-      rgba(9, 9, 30, 0.54) 100%);
+      rgba(11, 11, 36, 0.26) 0%,
+      rgba(13, 13, 43, 0.06) 32%,
+      rgba(13, 13, 43, 0.04) 58%,
+      rgba(9, 9, 30, 0.34) 100%);
 }
 
 /* ----- 히어로 안쪽 상단 바 (투명 헤더) ----- */
@@ -189,11 +190,15 @@
 }
 .hero-headline {
   margin: 0;
+  /* base.css 의 `h1 { color: var(--text-heading) }` 가 상속된 흰색을 덮어써
+     짙은 네이비로 나오고 있었습니다. 사진 위 헤드라인은 흰색이어야 합니다. */
+  color: #fff;
   font-size: 64px;
   line-height: 1.26;
   font-weight: 800;
   letter-spacing: -0.02em;
-  text-shadow: 0 3px 22px rgba(0, 0, 0, 0.45);
+  /* 배경 어둡기를 줄인 대신 글자 그림자로 대비를 확보합니다 */
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.4);
   text-wrap: pretty;
   /* 한국어는 어절 중간에서 끊기면 안 되므로 keep-all.
      줄바꿈은 헤드라인의 <br> 로만 정합니다. */
