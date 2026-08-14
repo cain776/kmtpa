@@ -479,81 +479,6 @@
 }
 
 /* -------------------------------------------------------------------------
-   이벤트 — 날짜 + 제목 + 유형 한 줄 리스트
-   ------------------------------------------------------------------------- */
-.is-home #events {
-  background: var(--home-band);
-  padding: 110px 0 120px;
-  border-top: 1px solid var(--home-line);
-}
-.is-home #events .section-head .eyebrow {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: var(--home-eyebrow);
-  text-transform: uppercase;
-}
-.is-home #events .section-head h2 {
-  margin: 18px 0 0;
-  font-size: 38px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--home-heading);
-}
-.is-home #events .event-list {
-  margin-top: 44px;
-  border-top: 1px solid var(--home-line-strong);
-}
-/* 기존 .event-item 은 grid(100px 1fr auto) 입니다. 구조는 두고 치수만 맞춥니다. */
-.is-home #events .event-item {
-  grid-template-columns: 92px 1fr auto;
-  gap: 28px;
-  padding: 26px 8px;
-  border-bottom-color: var(--home-line-strong);
-  transition: background .2s ease, padding-left .15s ease;
-}
-.is-home #events .event-item:hover {
-  background: rgba(255, 255, 255, 0.7);
-  padding-left: 14px;
-}
-.is-home #events .e-date {
-  border-right-color: var(--home-line-strong);
-  padding-right: 28px;
-}
-.is-home #events .e-date .month {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--home-faint);
-}
-.is-home #events .e-date .day {
-  font-size: 28px;
-  font-weight: 800;
-  line-height: 1.15;
-  margin-top: 2px;
-  color: var(--home-heading);
-}
-.is-home #events .e-title {
-  font-size: 16.5px;
-  font-weight: 700;
-  color: var(--home-heading);
-}
-.is-home #events .e-meta {
-  margin-top: 7px;
-  font-size: 13.5px;
-  color: var(--home-faint);
-}
-.is-home #events .e-type {
-  font-size: 12.5px;
-  color: var(--home-body);
-  border: 1px solid var(--home-line-strong);
-  border-radius: 999px;
-  padding: 7px 16px;
-  background: #fff;
-  white-space: nowrap;
-}
-
-/* -------------------------------------------------------------------------
    반응형 — 원본 디자인은 데스크톱 기준이라 아래 단계를 덧붙였습니다.
    ------------------------------------------------------------------------- */
 @media (max-width: 1180px) {
@@ -623,8 +548,6 @@
   .hero-quickbar a:nth-child(-n+4) { border-bottom: 1px solid rgba(255, 255, 255, 0.10); }
   .is-home #why-korea { padding: 72px 0 64px; }
   .is-home #why-korea .section-head h2,
-  .is-home #events .section-head h2 { font-size: 27px; }
-  .is-home #events { padding: 64px 0 72px; }
 }
 
 @media (max-width: 600px) {
@@ -634,9 +557,6 @@
   .is-home #why-korea .pillar-grid { grid-template-columns: 1fr; }
   .is-home #why-korea .pillar { border-right: none; border-bottom: 1px solid var(--home-line); }
   .is-home #why-korea .pillar:last-child { border-bottom: none; }
-  .is-home #events .event-item { grid-template-columns: 76px 1fr; gap: 18px; }
-  .is-home #events .e-date { padding-right: 18px; }
-  .is-home #events .e-title { font-size: 15px; }
 }
 
 /* 모션 최소화 설정 존중 — 자동 전환과 확대는 JS에서도 함께 끕니다. */
