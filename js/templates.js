@@ -253,11 +253,11 @@ window.KMTPA = window.KMTPA || {};
     <nav class="hero-quickbar" aria-label="바로가기">
       <a href="https://mymedicon.com/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"></path></svg>
-        <span class="qb-label">MEDICON<span class="qb-sub">바로가기</span></span>
+        <span class="qb-label">MEDICON</span>
       </a>
       <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
-        <span class="qb-label">인스타그램<span class="qb-sub">바로가기</span></span>
+        <span class="qb-label">인스타그램</span>
       </a>
       <a href="${page('about/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2"></path><path d="M10 7h4M10 11h4M10 15h4"></path></svg>

@@ -333,20 +333,11 @@
   background: var(--hero-gold);
   color: var(--hero-ink);
 }
+/* 8칸 모두 한 줄 라벨이라 아이콘·글자가 저절로 같은 높이에 놓입니다. */
 .hero-quickbar .qb-label {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
-  /* '바로가기' 보조문구가 있는 칸과 없는 칸의 아이콘 높이를 맞추기 위해
-     라벨 영역 높이를 두 줄로 고정합니다. */
-  display: block;
-  min-height: 2.7em;
-}
-.hero-quickbar .qb-sub {
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  opacity: .75;
 }
 .hero-quickbar svg {
   width: 26px;
