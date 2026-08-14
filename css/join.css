@@ -1,0 +1,627 @@
+/* =========================================================================
+   join.css — 회원가입(join/index.html) 전용 스타일
+   (사)한국의료관광진흥협회 KMTPA 공개 홈페이지
+
+   3단계(유형 선택 → 정보 입력 → 신청 완료) 흐름과 폼 요소를 담습니다.
+   이 파일은 join/index.html 에서만 로드되므로 다른 페이지에 영향을 주지 않습니다.
+   base/layout/components/pages.css 다음에 로드하세요.
+   ========================================================================= */
+
+.is-join {
+  --join-ink: #141432;        /* 제목 · 선택된 칩 배경 */
+  --join-gold: #E8A33D;       /* 액센트 — 홈 히어로와 같은 금색 */
+  --join-body: #5A6072;
+  --join-faint: #8A90A0;
+  --join-line: #E6E8EF;
+  --join-line-strong: #DFE3EC;
+  --join-band: #F6F7FA;
+  --join-eyebrow: #5A6BC0;
+  --join-field: #FBFBFD;
+  --join-required: #C0392B;
+}
+
+/* 날개 배너의 회원가입 버튼은 이 페이지에서 자기 자신을 가리키므로 감춥니다.
+   MEDICON·인스타그램은 그대로 둡니다. */
+.is-join .quick-link--primary { display: none; }
+
+/* -------------------------------------------------------------------------
+   단계 표시 (1 유형 선택 → 2 정보 입력 → 3 신청 완료)
+   ------------------------------------------------------------------------- */
+.join-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 40px 24px 4px;
+}
+.join-step {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+/* 단계 사이 연결선 — 지나온 단계까지 금색으로 찹니다. */
+.join-step + .join-step::before {
+  content: "";
+  width: 70px;
+  height: 1.5px;
+  margin: 0 16px;
+  background: #E1E4EC;
+  transition: background 0.3s;
+}
+.join-step.is-done + .join-step::before,
+.join-step.is-active + .join-step::before { background: var(--join-gold); }
+
+.join-step-num {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #9AA0B0;
+  background: #fff;
+  border: 1.5px solid var(--join-line-strong);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+.join-step-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #9AA0B0;
+  transition: color 0.3s;
+}
+.join-step.is-active .join-step-num {
+  background: var(--join-ink);
+  border-color: var(--join-ink);
+  color: #fff;
+}
+.join-step.is-active .join-step-label { color: var(--join-ink); font-weight: 700; }
+.join-step.is-done .join-step-num {
+  background: var(--join-gold);
+  border-color: var(--join-gold);
+  color: #fff;
+  font-size: 0;                       /* 숫자를 감추고 체크만 남깁니다 */
+}
+/* 지나온 단계의 체크 표시 — 두 변만 남긴 사각형을 기울여 그립니다. */
+.join-step.is-done .join-step-num::after {
+  content: "";
+  width: 6px;
+  height: 11px;
+  margin-top: -3px;
+  border: solid #fff;
+  border-width: 0 2.4px 2.4px 0;
+  transform: rotate(45deg);
+}
+.join-step.is-done .join-step-label { color: #B07E23; }
+
+@media (max-width: 720px) {
+  .join-steps { padding: 28px 16px 0; }
+  .join-step + .join-step::before { width: 22px; margin: 0 8px; }
+  .join-step-num { width: 30px; height: 30px; font-size: 12.5px; }
+  .join-step-label { font-size: 12.5px; }
+}
+@media (max-width: 420px) {
+  .join-step-label { display: none; }
+}
+
+/* -------------------------------------------------------------------------
+   단계별 패널
+   ------------------------------------------------------------------------- */
+.join-panel { padding: 44px 0 104px; }
+.join-panel[hidden] { display: none; }
+
+.join-panel-head { margin-bottom: 44px; }
+.join-panel-head .step-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--join-eyebrow);
+}
+.join-panel-head .step-tag i {
+  width: 22px;
+  height: 1px;
+  background: #C9CEDC;
+}
+.join-panel-head .step-tag em {
+  font-style: normal;
+  letter-spacing: 0.02em;
+  color: var(--join-faint);
+}
+.join-panel-head h2 { margin-top: 16px; color: var(--join-ink); }
+.join-panel-head .desc {
+  margin-top: 14px;
+  font-size: 15.5px;
+  color: var(--join-body);
+}
+.req { color: var(--join-required); }
+
+/* -------------------------------------------------------------------------
+   STEP 1 — 회원 유형 카드
+   ------------------------------------------------------------------------- */
+.type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+.type-card {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--join-ink);
+  background: linear-gradient(170deg, #ffffff 0%, #fbfbfd 100%);
+  border: 1px solid #E9ECF3;
+  border-radius: 20px;
+  padding: 44px 40px 38px;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.type-card::before {                  /* 카드 상단 색 띠 */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--join-ink), #3A3A6E);
+}
+.type-card--corp::before { background: linear-gradient(90deg, var(--join-gold), #F0BC6B); }
+.type-card:hover,
+.type-card:focus-visible {
+  border-color: var(--join-gold);
+  box-shadow: 0 24px 54px rgba(13, 13, 43, 0.12);
+  transform: translateY(-4px);
+  outline: none;
+}
+
+.type-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.type-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--join-ink);
+  color: var(--join-gold);
+  box-shadow: 0 8px 20px rgba(13, 13, 43, 0.22);
+}
+.type-card--corp .type-icon {
+  background: var(--join-gold);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(232, 163, 61, 0.32);
+}
+.type-icon svg { width: 26px; height: 26px; }
+.type-no {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #C9CEDC;
+}
+.type-card h3 {
+  margin-top: 26px;
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--join-ink);
+}
+.type-card > p {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--join-body);
+}
+.type-perks {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--join-body);
+}
+.type-perks span { display: block; padding-left: 14px; position: relative; }
+.type-perks span::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--join-gold);
+  font-weight: 800;
+}
+.type-cta {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--join-ink);
+}
+.type-cta svg { width: 17px; height: 17px; }
+
+.join-note {
+  margin-top: 34px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 24px;
+  background: var(--join-band);
+  border: 1px solid var(--join-line);
+  border-radius: 12px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--join-body);
+}
+.join-note svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--join-eyebrow);
+}
+.join-note a { color: var(--join-ink); }
+
+@media (max-width: 900px) {
+  .type-grid { grid-template-columns: 1fr; gap: 20px; }
+  .type-card { padding: 34px 28px 30px; }
+  .type-card h3 { font-size: 22px; }
+}
+
+/* -------------------------------------------------------------------------
+   STEP 2 — 폼
+   ------------------------------------------------------------------------- */
+.join-form { max-width: 920px; }
+
+.form-legend {
+  margin-top: 46px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--join-line);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--join-ink);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.form-legend::before {                /* 금색 마름모 불릿 */
+  content: "";
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  background: var(--join-gold);
+  border-radius: 2.5px;
+  transform: rotate(45deg);
+}
+.join-form > .form-legend:first-child { margin-top: 0; }
+
+.field-grid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 26px;
+}
+.field-grid--single { grid-template-columns: 1fr; }
+.field-stack {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.field-stack .field-grid { margin-top: 0; }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.field > span,
+.field-set > span {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--join-ink);
+}
+.field .hint,
+.field-set .hint {
+  font-weight: 400;
+  color: var(--join-faint);
+}
+.field input,
+.field textarea {
+  font: inherit;
+  font-size: 15px;
+  color: var(--join-ink);
+  padding: 13px 15px;
+  border: 1px solid var(--join-line-strong);
+  border-radius: 11px;
+  background: var(--join-field);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.field textarea { resize: vertical; min-height: 108px; }
+.field input::placeholder,
+.field textarea::placeholder { color: #B3B9C6; }
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--join-gold);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(232, 163, 61, 0.14);
+}
+/* 제출을 눌러 검증이 한 번 돈 뒤에만 빨간 테두리를 보여줍니다. */
+.join-form.is-validated .field input:invalid,
+.join-form.is-validated .field textarea:invalid {
+  border-color: var(--join-required);
+  background: #FEF7F6;
+}
+
+/* ----- 칩(라디오·체크박스) ----- */
+.field-set {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chip { display: inline-flex; }
+.chip input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.chip span {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--join-body);
+  background: #fff;
+  border: 1px solid #D5D9E2;
+  border-radius: 999px;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: color 0.18s, background 0.18s, border-color 0.18s;
+}
+.chip span:hover { border-color: var(--join-ink); color: var(--join-ink); }
+.chip input:checked + span {
+  font-weight: 700;
+  color: #fff;
+  background: var(--join-ink);
+  border-color: var(--join-ink);
+}
+.chip input:focus-visible + span {
+  outline: 2px solid var(--join-gold);
+  outline-offset: 2px;
+}
+
+/* ----- 약관 동의 ----- */
+.terms-box {
+  margin-top: 44px;
+  padding: 26px 28px;
+  background: var(--join-band);
+  border: 1px solid var(--join-line);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.term {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.term input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.term-box {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid #C9CEDC;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, border-color 0.18s;
+}
+.term-box::after {                    /* 체크 표시 */
+  content: "";
+  width: 5px;
+  height: 9px;
+  margin-top: -2px;
+  border: solid #fff;
+  border-width: 0 2.4px 2.4px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s;
+}
+.term input:checked + .term-box {
+  background: var(--join-ink);
+  border-color: var(--join-ink);
+}
+.term input:checked + .term-box::after { transform: rotate(45deg) scale(1); }
+.term input:focus-visible + .term-box {
+  outline: 2px solid var(--join-gold);
+  outline-offset: 2px;
+}
+.term-label { font-size: 14.5px; color: #41475A; }
+.term-label a { color: var(--join-ink); }
+.join-form.is-validated .term input:invalid + .term-box { border-color: var(--join-required); }
+
+/* ----- 제출 서류 안내 ----- */
+.doc-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 28px;
+  border: 1px dashed #C9CEDC;
+  border-radius: 12px;
+  background: var(--join-field);
+}
+.doc-box .doc-title { font-size: 14.5px; font-weight: 700; color: var(--join-ink); }
+.doc-box .doc-list { font-size: 14px; line-height: 1.9; color: var(--join-body); }
+.doc-box .doc-how { font-size: 13.5px; line-height: 1.8; color: var(--join-faint); }
+.doc-box .doc-how a { color: var(--join-ink); }
+
+/* ----- 액션 버튼 ----- */
+.join-actions {
+  margin-top: 34px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.btn-solid,
+.btn-ghost {
+  font: inherit;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.btn-solid {
+  font-weight: 700;
+  color: #fff;
+  background: var(--join-ink);
+  border: 1px solid var(--join-ink);
+  padding: 17px 40px;
+}
+.btn-solid:hover {
+  background: var(--join-gold);
+  border-color: var(--join-gold);
+  color: #0E0E2C;
+}
+.btn-ghost {
+  font-weight: 600;
+  color: var(--join-body);
+  background: #fff;
+  border: 1px solid #D5D9E2;
+  padding: 17px 30px;
+}
+.btn-ghost:hover { color: var(--join-ink); border-color: var(--join-ink); }
+
+.join-error {
+  margin-top: 18px;
+  font-size: 14.5px;
+  color: var(--join-required);
+}
+.join-error[hidden] { display: none; }
+
+@media (max-width: 720px) {
+  .join-panel { padding: 32px 0 72px; }
+  .field-grid { grid-template-columns: 1fr; }
+  .terms-box { padding: 20px 20px; }
+  .btn-solid, .btn-ghost { flex: 1 1 100%; padding: 15px 24px; }
+}
+
+/* -------------------------------------------------------------------------
+   STEP 3 — 신청 완료
+   ------------------------------------------------------------------------- */
+.join-done {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 96px 0 120px;
+  text-align: center;
+}
+.join-done-mark {
+  width: 74px;
+  height: 74px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #F0A32F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.join-done-mark svg { width: 34px; height: 34px; }
+.join-done h2 { margin-top: 32px; font-size: 32px; font-weight: 800; color: var(--join-ink); }
+.join-done p {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--join-body);
+}
+.join-done .join-actions { justify-content: center; }
+
+/* 메일 앱이 열리지 않은 경우를 위한 신청서 원문 */
+.join-copy {
+  margin-top: 40px;
+  text-align: left;
+  border: 1px solid var(--join-line);
+  border-radius: 12px;
+  background: var(--join-band);
+  overflow: hidden;
+}
+.join-copy-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--join-line);
+  font-size: 13.5px;
+  color: var(--join-body);
+}
+.join-copy-head button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--join-ink);
+  background: #fff;
+  border: 1px solid #D5D9E2;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.join-copy-head button:hover { border-color: var(--join-ink); }
+.join-copy pre {
+  margin: 0;
+  padding: 18px;
+  max-height: 320px;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: #41475A;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media (max-width: 720px) {
+  .join-done { padding: 60px 0 80px; }
+  .join-done h2 { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .type-card,
+  .chip span,
+  .term-box,
+  .term-box::after,
+  .join-step-num,
+  .join-step-label,
+  .join-step + .join-step::before { transition: none; }
+  .type-card:hover { transform: none; }
+}

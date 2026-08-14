@@ -358,11 +358,12 @@ window.KMTPA = window.KMTPA || {};
     document.querySelectorAll('.header-cta').forEach(el => setText(el, brand.adminLabel));
     document.querySelectorAll('.footer-tagline').forEach(el => setText(el, brand.footerTagline));
     document.querySelectorAll('.footer-brand-label').forEach(el => setText(el, brand.flagshipLabel));
-    document.querySelectorAll('.footer-brand-link, .quick-link--external:first-child').forEach(el => {
+    // 날개 배너는 회원가입 링크가 앞에 붙어 순서가 바뀌므로 위치 대신 클래스로 집습니다.
+    document.querySelectorAll('.footer-brand-link, .quick-link--flagship').forEach(el => {
       setText(el.childNodes[0], brand.flagshipName);
       setHref(el, brand.flagshipUrl);
     });
-    document.querySelectorAll('.quick-link--external:last-child, .footer-social a[aria-label="Instagram"]').forEach(el => {
+    document.querySelectorAll('.quick-link--instagram, .footer-social a[aria-label="Instagram"]').forEach(el => {
       setHref(el, brand.instagramUrl);
     });
     return true;

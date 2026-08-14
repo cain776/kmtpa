@@ -29,6 +29,7 @@
     NS.setupTabs();         // 탭 + 서브탭 (about·communications·programs 등)
     NS.setupFaq();          // FAQ 아코디언
     NS.setupPubModal();     // 뉴스레터 모달 (.pub-trigger가 있는 페이지)
+    NS.setupJoinFlow();     // 회원가입 3단계 흐름 (join 페이지에서만 작동)
 
     // 주입된 헤더·푸터·모달의 아이콘까지 렌더
     if (window.lucide && window.lucide.createIcons) {

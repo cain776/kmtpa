@@ -358,6 +358,20 @@
 .quick-link--external:hover .quick-icon { transform: translate(2px, -2px); }
 .quick-icon svg { width: 14px; height: 14px; }
 
+/* 회원가입 — 날개 배너의 주 동선이라 네이비로 채워 구분합니다. */
+.quick-link--primary {
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+  color: #fff;
+}
+.quick-link--primary .quick-icon { color: rgba(255, 255, 255, 0.75); }
+.quick-link--primary:hover {
+  background: var(--navy-800);
+  border-color: var(--navy-800);
+  color: #fff;
+}
+.quick-link--primary:hover .quick-icon { color: #fff; }
+
 @media (max-width: 960px) {
   .quick-banner {
     top: auto;

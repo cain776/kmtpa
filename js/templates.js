@@ -198,6 +198,7 @@ window.KMTPA = window.KMTPA || {};
 
         <div class="footer-col">
           <h4>문의·연결</h4>
+          <a href="${page('join/')}">회원가입</a>
           <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
           <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
           <a href="${page('directions/')}">오시는 길</a>
@@ -287,21 +288,26 @@ window.KMTPA = window.KMTPA || {};
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         <span class="qb-label">문의하기</span>
       </a>
-      <a href="mailto:concierge@kmtpa.org?subject=KMTPA%20%ED%9A%8C%EC%9B%90%EA%B8%B0%EA%B4%80%20%EC%B0%BE%EA%B8%B0">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
-        <span class="qb-label">회원기관 찾기</span>
+      <a href="${page('join/')}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="16" y1="11" x2="22" y2="11"></line></svg>
+        <span class="qb-label">회원가입</span>
       </a>
     </nav>
   `;
 
-  /* ----- Quick Banner (우측 날개 — MEDICON & Instagram) ----- */
+  /* ----- Quick Banner (우측 날개 — 회원가입 & MEDICON & Instagram) -----
+     회원가입은 협회의 주 전환 동선이라 맨 위에 두고 색을 채워 강조합니다. ----- */
   NS.QUICK_BANNER_HTML = `
     <aside class="quick-banner" aria-label="빠른 링크">
-      <a href="https://mymedicon.com/" target="_blank" rel="noopener" class="quick-link quick-link--external">
+      <a href="${page('join/')}" class="quick-link quick-link--primary">
+        <span class="quick-label">회원가입</span>
+        <span class="quick-icon"><i data-lucide="user-plus"></i></span>
+      </a>
+      <a href="https://mymedicon.com/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--flagship">
         <span class="quick-label">MEDICON</span>
         <span class="quick-icon"><i data-lucide="arrow-up-right"></i></span>
       </a>
-      <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener" class="quick-link quick-link--external">
+      <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--instagram">
         <span class="quick-label">Instagram</span>
         <span class="quick-icon"><i data-lucide="instagram"></i></span>
       </a>

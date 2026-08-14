@@ -490,4 +490,154 @@ window.KMTPA = window.KMTPA || {};
     }
   };
 
+  /* ----- 회원가입 3단계 흐름 (join/index.html 전용) -----
+     유형 선택 → 정보 입력 → 신청 완료. 모든 단계가 한 페이지에 있고
+     data-join-view 패널을 번갈아 보여줍니다.
+
+     협회에는 아직 공개 폼을 받는 서버가 없어, 제출 시 입력값을 신청서
+     본문으로 조립해 사무국 메일(info@kmtpa.org)로 보내도록 mailto를 엽니다.
+     메일 앱이 열리지 않는 환경을 위해 완료 화면에 같은 본문을 그대로 두고
+     복사 버튼을 답니다. 서버 접수창구가 생기면 sendApplication()만
+     fetch(POST)로 바꾸면 됩니다. ----- */
+  const JOIN_MAIL_TO = 'info@kmtpa.org';
+
+  NS.setupJoinFlow = function () {
+    const stepsRoot = document.querySelector('[data-join-steps]');
+    const panels = Array.from(document.querySelectorAll('[data-join-view]'));
+    if (!stepsRoot || !panels.length) return;
+
+    const steps = Array.from(stepsRoot.querySelectorAll('[data-join-step]'));
+    const doneMsgEl = document.querySelector('[data-join-done-msg]');
+    const summaryEl = document.querySelector('[data-join-summary]');
+    const mailtoEl = document.querySelector('[data-join-mailto]');
+    const copyBtn = document.querySelector('[data-join-copy]');
+
+    // 단계 표시에서 각 화면이 몇 번째 칸에 해당하는지
+    const RANK = { select: 0, personal: 1, corp: 1, done: 2 };
+    const DONE_MSG = {
+      personal: '작성하신 내용으로 사무국 앞 신청 메일을 준비했습니다. 메일을 보내주시면 확인 후 가입 처리해 드리며, 상담 연계가 필요한 경우 담당 코디네이터가 3일 내 연락드립니다.',
+      corp: '작성하신 내용으로 사무국 앞 신청 메일을 준비했습니다. 필수 서류를 첨부해 보내주시면 검토 후 영업일 기준 5일 내에 담당자 이메일로 승인 결과와 회비를 안내드립니다.'
+    };
+
+    function showView(view, opts) {
+      const target = panels.some(p => p.dataset.joinView === view) ? view : 'select';
+      panels.forEach(p => { p.hidden = p.dataset.joinView !== target; });
+
+      const rank = RANK[target] ?? 0;
+      steps.forEach((el, i) => {
+        el.classList.toggle('is-done', i < rank);
+        el.classList.toggle('is-active', i === rank);
+      });
+
+      // 처음 진입(뒤로가기 포함)에는 스크롤을 건드리지 않습니다.
+      if (opts && opts.scroll) {
+        stepsRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    /* 폼 값을 사람이 읽는 신청서 본문으로 조립.
+       체크박스처럼 같은 name이 여러 개인 항목은 쉼표로 묶습니다. */
+    function buildSummary(form, typeLabel) {
+      const lines = ['[한국의료관광진흥협회 회원가입 신청]', `가입 유형: ${typeLabel}`, ''];
+      const seen = new Map();
+
+      Array.from(form.elements).forEach(el => {
+        if (!el.name || el.disabled) return;
+        if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+        const value = (el.value || '').trim();
+        if (!value) return;
+        seen.set(el.name, (seen.get(el.name) || []).concat([value]));
+      });
+
+      seen.forEach((values, name) => {
+        lines.push(`${name}: ${values.join(', ')}`);
+      });
+
+      return lines.join('\n');
+    }
+
+    function firstInvalid(form) {
+      return Array.from(form.elements).find(el => el.willValidate && !el.checkValidity()) || null;
+    }
+
+    function sendApplication(form, kind) {
+      const typeLabel = kind === 'corp' ? '법인고객' : '개인고객';
+      const body = buildSummary(form, typeLabel);
+      const who = kind === 'corp'
+        ? (form.elements['기관명(국문)'] || {}).value
+        : (form.elements['이름(국문)'] || {}).value;
+      const subject = `[KMTPA 회원가입] ${typeLabel}${who ? ` — ${who.trim()}` : ''}`;
+      const href = `mailto:${JOIN_MAIL_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      if (summaryEl) summaryEl.textContent = body;
+      if (mailtoEl) mailtoEl.href = href;
+      if (doneMsgEl) doneMsgEl.textContent = DONE_MSG[kind] || DONE_MSG.personal;
+
+      showView('done', { scroll: true });
+      window.location.href = href;
+    }
+
+    // 유형 카드 → 해당 폼으로
+    document.querySelectorAll('[data-join-go]').forEach(btn => {
+      btn.addEventListener('click', () => showView(btn.dataset.joinGo, { scroll: true }));
+    });
+
+    // "회원 유형 다시 선택"
+    document.querySelectorAll('[data-join-back]').forEach(btn => {
+      btn.addEventListener('click', () => showView('select', { scroll: true }));
+    });
+
+    // 제출 — novalidate 이므로 직접 검증하고 첫 오류 항목으로 포커스를 옮깁니다.
+    document.querySelectorAll('[data-join-form]').forEach(form => {
+      const errorEl = form.querySelector('[data-join-error]');
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        form.classList.add('is-validated');
+
+        const bad = firstInvalid(form);
+        if (bad) {
+          if (errorEl) {
+            errorEl.textContent = bad.type === 'checkbox'
+              ? '필수 동의 항목을 확인해 주세요.'
+              : '필수 항목을 모두 올바르게 입력해 주세요.';
+            errorEl.hidden = false;
+          }
+          // 숨긴 체크박스는 포커스가 보이지 않으므로 감싼 상자로 스크롤합니다.
+          const anchor = bad.type === 'checkbox' ? (bad.closest('.term') || bad) : bad;
+          anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (anchor === bad) bad.focus({ preventScroll: true });
+          return;
+        }
+
+        if (errorEl) errorEl.hidden = true;
+        sendApplication(form, form.dataset.joinForm);
+      });
+    });
+
+    if (copyBtn && summaryEl) {
+      copyBtn.addEventListener('click', async () => {
+        const text = summaryEl.textContent || '';
+        try {
+          await navigator.clipboard.writeText(text);
+          copyBtn.textContent = '복사됨';
+        } catch (err) {
+          // 클립보드 권한이 없는 브라우저 — 선택 상태로 두어 직접 복사하게 합니다.
+          const range = document.createRange();
+          range.selectNodeContents(summaryEl);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          copyBtn.textContent = '선택됨 — Ctrl+C';
+        }
+        setTimeout(() => { copyBtn.textContent = '복사'; }, 2200);
+      });
+    }
+
+    // ?type=corp / #corp 로 들어오면 해당 폼을 바로 엽니다 (배너·메뉴 딥링크용).
+    const params = new URLSearchParams(window.location.search);
+    const deep = (params.get('type') || window.location.hash.replace('#', '')).toLowerCase();
+    showView(deep === 'corp' || deep === 'personal' ? deep : 'select');
+  };
+
 })(window.KMTPA);
