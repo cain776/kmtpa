@@ -48,6 +48,7 @@ window.KMTPA = window.KMTPA || {};
   const flags = {
     isAbout: path === 'about/' || path === 'about/index.html',
     isTransparency: path === 'transparency/' || path === 'transparency/index.html',
+    isTogether: path === 'together/' || path === 'together/index.html',
     isVisitKorea: path === 'patient-journey/' || path === 'patient-journey/index.html',
     isCommunications: path === 'communications/' || path === 'communications/index.html',
     isPrograms: path === 'programs/' || path === 'programs/index.html'
@@ -60,7 +61,7 @@ window.KMTPA = window.KMTPA || {};
   NS.sitePath = sitePath;
   NS.makePageUrl = page;
 
-  const { isAbout, isTransparency, isVisitKorea, isCommunications, isResources } = flags;
+  const { isAbout, isTransparency, isTogether, isVisitKorea, isCommunications, isResources } = flags;
 
   /* ----- Header markup (모든 페이지 공통) ----- */
   NS.HEADER_HTML = `
@@ -101,20 +102,22 @@ window.KMTPA = window.KMTPA || {};
           </div>
           <div class="nav-item-with-dropdown">
             <a href="${page('communications/')}"${isCommunications ? ' class="active" aria-current="page"' : ''}>커뮤니케이션</a>
-            <div class="nav-dropdown nav-dropdown--mega" role="menu">
-              <div class="dropdown-group">
-                <div class="dropdown-group-label">알림</div>
-                <a href="${page('communications/#press')}" role="menuitem">보도자료</a>
-                <a href="${page('communications/#notice')}" role="menuitem">공지사항</a>
-                <a href="${page('communications/#newsletter')}" role="menuitem">뉴스레터</a>
-              </div>
-              <div class="dropdown-group">
-                <div class="dropdown-group-label">대표 브랜드</div>
-                <a href="https://mymedicon.com/" target="_blank" rel="noopener" role="menuitem">
-                  MEDICON<span class="external-mark"><i data-lucide="arrow-up-right"></i></span>
-                </a>
-                <p class="dropdown-group-desc">한국을 대표하는<br>의료·뷰티 전문가와 함께</p>
-              </div>
+            <!-- MEDICON('대표 브랜드' 그룹)을 걷어내면서 일반 드롭다운으로 되돌렸다.
+                 한 그룹만 남은 620px 메가는 대부분이 빈 칸이고, 그룹 라벨('알림')도
+                 나뉠 상대가 없으면 줄만 하나 더 먹는다. MEDICON 은 우측 날개 배너와
+                 푸터에 그대로 있다. -->
+            <div class="nav-dropdown" role="menu">
+              <a href="${page('communications/#press')}" role="menuitem">보도자료</a>
+              <a href="${page('communications/#notice')}" role="menuitem">공지사항</a>
+              <a href="${page('communications/#newsletter')}" role="menuitem">뉴스레터</a>
+            </div>
+          </div>
+          <div class="nav-item-with-dropdown">
+            <a href="${page('together/')}"${isTogether ? ' class="active" aria-current="page"' : ''}>함께하기</a>
+            <div class="nav-dropdown" role="menu">
+              <a href="${page('together/')}" role="menuitem">회원 안내</a>
+              <a href="${page('join/')}" role="menuitem">회원가입 신청</a>
+              <a href="${page('consultation/')}" role="menuitem">상담 신청</a>
             </div>
           </div>
           <a href="${page('patient-journey/')}"${isVisitKorea ? ' class="active" aria-current="page"' : ''}>Visit Korea</a>
@@ -149,6 +152,7 @@ window.KMTPA = window.KMTPA || {};
     { key: 'about', label: '협회 소개', route: 'about/' },
     { key: 'transparency', label: '투명경영', route: 'transparency/' },
     { key: 'communications', label: '커뮤니케이션', route: 'communications/' },
+    { key: 'together', label: '함께하기', route: 'together/' },
     { key: 'patient-journey', label: 'Visit Korea', route: 'patient-journey/' },
     { key: 'programs', label: '활동·자료', route: 'programs/' },
   ];
@@ -232,6 +236,7 @@ window.KMTPA = window.KMTPA || {};
                다시 붙여서 그 div 만 빈 채로 남습니다. -->
           <div class="footer-col footer-col--contact">
             <h4>문의·연결</h4>
+            <a href="${page('together/')}">함께하기</a>
             <a href="${page('join/')}">회원가입</a>
             <a href="${page('consultation/')}">상담 신청</a>
             <a href="${page('directions/')}">오시는 길</a>
