@@ -87,7 +87,6 @@ window.KMTPA = window.KMTPA || {};
               <div class="dropdown-group">
                 <div class="dropdown-group-label">함께하는 사람들</div>
                 <a href="${page('about/#organization')}" role="menuitem">조직</a>
-                <a href="${page('about/#board')}" role="menuitem">이사회</a>
               </div>
               <div class="dropdown-group">
                 <div class="dropdown-group-label">투명경영</div>

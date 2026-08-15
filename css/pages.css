@@ -692,9 +692,10 @@
    숨통이고, 실제 높이는 --hero-band-h 가 정한다. 값 하나만 고치면 모든
    페이지가 같이 따라온다. */
 .journey-hero {
-  --hero-band-h: 264px;
+  --hero-band-h: 224px;
   min-height: var(--hero-band-h);
-  padding: 24px 0;
+  /* 제목 두 줄 + 설명 두 줄(184px)이 들어가고도 220 을 안 넘는 값. */
+  padding: 18px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -705,6 +706,12 @@
    꺼 버려서, 컨테이너가 1280 이 아니라 가장 넓은 자식(설명문 720px)에 맞춰
    768px 로 쪼그라들었다. 그러면 머리띠 글이 본문보다 오른쪽으로 밀린다. */
 .journey-hero > * { width: 100%; }
+
+/* 띠 높이를 실제로 정하는 건 제목 줄 수다. 전역 h1 은 최대 48px 이라 한 줄에
+   55px, 두 줄이면 110px 을 먹는다. 머리띠 안에서만 한 단계 줄인다 —
+   본문 h1 은 그대로 둔다. */
+.journey-hero h1 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.journey-hero .eyebrow { margin-bottom: 10px; }
 
 /* ---------- 배너 이미지가 붙는 페이지 히어로 ----------
    이미지를 배경(background-image)이 아니라 <img> 로 둡니다.
@@ -760,7 +767,7 @@
   .hero-banner-art { display: none; }
 }
 .journey-hero .lede {
-  margin-top: 14px;
+  margin-top: 10px;
   font-size: 16px;
   color: var(--text-body);
   max-width: 720px;
