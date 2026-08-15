@@ -8,7 +8,8 @@
    모듈 의존성 (HTML에서 이 순서로 로드해야 합니다):
      1. templates.js — HTML 마크업 상수 (HEADER_HTML, FOOTER_HTML, MODAL 등)
      2. components.js — UI 인터랙션 함수 (탭, FAQ, 모달 등)
-     3. app.js — 본 파일, init() 호출
+     3. nav-dropdown.js — 메가 드롭다운 위치 계산
+     4. app.js — 본 파일, init() 호출
    ========================================================================= */
 
 (function () {
@@ -26,6 +27,7 @@
     NS.setupLangSelect();   // 히어로 언어 선택 드롭다운
     NS.setupHeroVideo();    // 구 히어로 영상 (.hero-video가 남아있는 페이지용)
     NS.setupMobileNav();    // 모바일 햄버거 메뉴
+    NS.setupNavDropdown();  // 메가 드롭다운 위치 (왼쪽 정렬 + 화면 밖 방지)
     NS.setupTabs();         // 탭 + 서브탭 (about·communications·programs 등)
     NS.setupStandaloneSubTabs(); // 상위 탭 없이 서브탭만 있는 화면 (transparency)
     NS.setupBreadcrumb();   // Depth1 네비게이터의 '다른 메뉴' 드롭다운
