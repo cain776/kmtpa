@@ -224,7 +224,7 @@
 }
 .type-card > p {
   margin-top: 12px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.7;
   color: var(--join-body);
 }
@@ -249,7 +249,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--join-ink);
 }
@@ -345,7 +345,7 @@
 .field textarea,
 .field select {
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--join-ink);
   padding: 13px 15px;
   border: 1px solid var(--join-line-strong);

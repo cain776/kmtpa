@@ -385,7 +385,7 @@
   margin-bottom: 12px;
 }
 .program-brief p {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-body);
   line-height: 1.8;
 }
@@ -492,7 +492,7 @@
 .activity-list li {
   padding: 14px 0;
   border-bottom: 1px solid var(--border-default);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-body);
   line-height: 1.65;
   display: flex;
@@ -511,7 +511,7 @@
 }
 .activity-list li strong {
   display: block;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-heading);
   margin-bottom: 2px;
@@ -537,7 +537,7 @@
   letter-spacing: -0.01em;
 }
 .transparency-block p {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-body);
   line-height: 1.8;
   max-width: 880px;

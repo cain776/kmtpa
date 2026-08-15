@@ -225,7 +225,7 @@
      아래가 잘리는 게 아니라 min-height 라 늘어나기만 하지만, 굳이 260 을
      비워 둘 이유도 없다. */
   .journey-hero { --hero-band-h: 200px; }
-  .journey-hero .lede { font-size: 15px; }
+  .journey-hero .lede { font-size: 16px; }
   /* 좁아지면 글이 띠 폭을 다 써서 오른쪽 무리가 문장 위로 올라온다.
      대비는 충분하지만 산만해서 톤을 낮춘다. */
   .journey-hero::before { opacity: .45; }

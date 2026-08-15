@@ -253,13 +253,13 @@
   border-bottom: 1px solid var(--border-default);
 }
 .history-date {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-heading);
   white-space: nowrap;
 }
 .history-text {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--text-body);
   text-wrap: pretty;
