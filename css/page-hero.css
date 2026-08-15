@@ -1,0 +1,115 @@
+/* =========================================================================
+   page-hero.css — 하위 페이지 머리띠 (공통)
+   협회 소개·주요업무·커뮤니케이션·오시는 길·회원가입·약관 등
+   하위 페이지가 전부 이 띠를 쓴다. 특정 페이지 파일에 두면
+   그 페이지를 지울 때 나머지가 같이 죽는다.
+   ========================================================================= */
+
+/* 페이지 머리띠 — 모든 하위 페이지가 같은 높이로 선다.
+   전에는 패딩 80/64 를 그냥 주고 말아서, 제목이 한 줄인 페이지(협회 소개
+   313px)와 두 줄인 페이지(오시는 길·회원가입 368px)의 띠 높이가 55px 이나
+   차이 났다. 메뉴를 옮겨 다닐 때마다 본문 시작 위치가 위아래로 덜컹거린다.
+
+   그래서 높이를 고정하고 내용을 그 안에서 가운데에 놓는다. 패딩은 최소
+   숨통이고, 실제 높이는 --hero-band-h 가 정한다. 값 하나만 고치면 모든
+   페이지가 같이 따라온다. */
+.journey-hero {
+  --hero-band-h: 224px;
+  min-height: var(--hero-band-h);
+  /* 제목 두 줄 + 설명 두 줄(184px)이 들어가고도 220 을 안 넘는 값. */
+  padding: 18px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-default);
+}
+/* 안쪽 컨테이너는 폭을 다 쓴다.
+   .container-narrow 의 `margin: 0 auto` 가 플렉스 아이템에서는 가로 stretch 를
+   꺼 버려서, 컨테이너가 1280 이 아니라 가장 넓은 자식(설명문 720px)에 맞춰
+   768px 로 쪼그라들었다. 그러면 머리띠 글이 본문보다 오른쪽으로 밀린다. */
+.journey-hero > * { width: 100%; }
+
+/* 띠 높이를 실제로 정하는 건 제목 줄 수다. 전역 h1 은 최대 48px 이라 한 줄에
+   55px, 두 줄이면 110px 을 먹는다. 머리띠 안에서만 한 단계 줄인다 —
+   본문 h1 은 그대로 둔다. */
+.journey-hero h1 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.journey-hero .eyebrow { margin-bottom: 10px; }
+
+/* ---------- 배너 이미지가 붙는 페이지 히어로 ----------
+   이미지를 배경(background-image)이 아니라 <img> 로 둡니다.
+   background-position 의 퍼센트는 '영역 폭'이 아니라 '영역 - 이미지' 기준이라
+   콘텐츠 경계에 맞추기가 어렵습니다. 플렉스 항목으로 두면 오른쪽 끝이
+   컨테이너 콘텐츠 오른쪽 끝에 저절로 맞습니다. */
+.journey-hero--banner {
+  padding: 0;
+  border-bottom: none;
+}
+.hero-banner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  /* 배너가 붙는 페이지도 같은 띠 높이를 쓴다 — 주요업무만 혼자 300px 이면
+     메뉴를 옮길 때 그 페이지에서만 화면이 튄다. */
+  min-height: var(--hero-band-h);
+}
+.hero-banner-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 24px 0;
+}
+.hero-banner-art {
+  flex: 0 0 auto;
+  /* 띠 높이에서 위아래 숨통만 뺀 값. 이미지가 띠보다 크면 그 페이지만
+     띠가 늘어난다 — 실제로 주요업무만 300px 이었다. */
+  height: calc(var(--hero-band-h) - 24px);
+  width: auto;
+  display: block;
+  object-fit: contain;
+  object-position: right center;
+  /* 좌우 가장자리를 흐리게 지워 흰 바탕과 이어지게 합니다.
+     사각형 경계가 그대로 보이면 사진이 얹힌 티가 납니다. */
+  -webkit-mask-image: linear-gradient(90deg,
+    transparent 0%, rgba(0, 0, 0, 0.35) 8%, #000 26%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(90deg,
+    transparent 0%, rgba(0, 0, 0, 0.35) 8%, #000 26%, #000 84%, transparent 100%);
+}
+
+@media (max-width: 1080px) {
+  /* 높이는 --hero-band-h 가 정한다. 여기 260px 이 박혀 있어서 1080 아래에서
+     주요업무만 혼자 260px 이었다 (다른 페이지는 224px). */
+  .hero-banner { gap: 24px; }
+}
+/* 나란히 놓을 폭이 없어지면 이미지를 내리고 글만 남깁니다. */
+@media (max-width: 820px) {
+  .journey-hero--banner {
+    /* 이미지가 빠지면 다른 페이지와 똑같은 머리띠가 된다. 패딩도 같은 값을
+       쓴다 — 56/40 이 박혀 있어서 600px 폭에서 241px 대 200px 로 벌어졌다. */
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border-default);
+  }
+  .hero-banner { display: block; min-height: 0; }
+  .hero-banner-copy { padding: 0; }
+  .hero-banner-art { display: none; }
+}
+.journey-hero .lede {
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--text-body);
+  max-width: 720px;
+  line-height: 1.5;
+}
+@media (max-width: 720px) {
+  /* 좁아지면 설명이 세 줄, 네 줄로 늘어난다. 고정 높이를 그대로 들고 가면
+     아래가 잘리는 게 아니라 min-height 라 늘어나기만 하지만, 굳이 260 을
+     비워 둘 이유도 없다. */
+  .journey-hero { --hero-band-h: 200px; }
+  .journey-hero .lede { font-size: 15px; }
+}
+@media (max-width: 480px) {
+  /* 폰에서는 설명문이 3~5줄로 벌어져 페이지마다 높이가 67px 까지 차이 났다.
+     글자를 한 단계 줄여 줄당 높이를 낮추고, 띠를 가장 긴 페이지에 맞춰
+     고정한다. 짧은 페이지는 그만큼 여백이 생기지만, 메뉴를 옮길 때마다
+     제목 위치가 튀는 것보다 낫다. */
+  .journey-hero { --hero-band-h: 224px; padding: 16px 0; }
+  .journey-hero .lede { font-size: 14px; line-height: 1.45; }
+}

@@ -1,0 +1,229 @@
+/* =========================================================================
+   directions.css — 오시는 길
+   지도 · 교통 · 연락처
+   ========================================================================= */
+
+.directions-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.address-block {
+  display: flex;
+  flex-direction: column;
+}
+.address-block dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 14px 24px;
+}
+.address-block dt {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+.address-block dd {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-heading);
+  line-height: 1.55;
+}
+.address-block dd a {
+  color: var(--text-heading);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-default);
+  transition: color 0.15s, border-color 0.15s;
+}
+.address-block dd a:hover {
+  color: var(--navy-900);
+  border-bottom-color: var(--navy-900);
+}
+.address-block .address-divider {
+  height: 1px;
+  background: var(--border-default);
+  margin: 24px 0;
+  grid-column: 1 / -1;
+}
+
+.map-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-default);
+  background: var(--bg-subtle);
+}
+.map-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.map-caption {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+}
+.map-caption a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.map-caption a:hover {
+  color: var(--navy-900);
+  border-bottom-color: var(--navy-900);
+}
+.map-caption-sep {
+  color: var(--border-strong);
+  margin: 0 8px;
+}
+
+@media (max-width: 880px) {
+  .directions-row { grid-template-columns: 1fr; gap: 32px; }
+  .address-block dl { grid-template-columns: 76px 1fr; }
+}
+
+/* ---------- Transit Cards (지하철 / 버스 / 주차) ---------- */
+.transit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.transit-card {
+  background: #fff;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 28px;
+}
+.transit-card .info-head { margin-bottom: 14px; }
+.transit-card ul { margin: 0; padding: 0; list-style: none; }
+.transit-card li {
+  font-size: 14px;
+  color: var(--text-body);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-default);
+  line-height: 1.55;
+}
+.transit-card li:last-child { border-bottom: none; }
+.transit-card li strong {
+  display: inline-block;
+  min-width: 70px;
+  color: var(--text-heading);
+  font-weight: 600;
+  font-size: 13px;
+}
+.transit-card .line-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 6px;
+}
+.line-1 { background: #0052a4; }
+.line-2 { background: #00a84d; }
+.line-5 { background: #996cac; }
+.line-sb { background: #d31145; } /* 신분당선 */
+
+/* ---------- Visit Note (사전 방문 안내) ---------- */
+.visit-note {
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  padding: 28px 32px;
+}
+.visit-note .label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--navy-700);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.visit-note h3 {
+  font-size: 16px;
+  color: var(--text-heading);
+  margin-bottom: 8px;
+}
+.visit-note p {
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+/* FAQ */
+.faq-list {
+  border-top: 1px solid var(--border-default);
+}
+.faq-item {
+  border-bottom: 1px solid var(--border-default);
+}
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 22px 0;
+  text-align: left;
+  font-size: 16px;
+  color: var(--text-heading);
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  gap: 16px;
+}
+.faq-q .chev {
+  width: 18px; height: 18px;
+  color: var(--text-muted);
+  transition: transform 0.2s, color 0.15s;
+  flex-shrink: 0;
+}
+.faq-q:hover { color: var(--navy-900); }
+.faq-q:hover .chev { color: var(--navy-900); }
+.faq-item.open .faq-q .chev { transform: rotate(180deg); color: var(--navy-900); }
+.faq-a {
+  display: none;
+  padding: 0 0 24px 0;
+  font-size: 15px;
+  color: var(--text-body);
+  line-height: 1.65;
+  max-width: 760px;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* Journey CTA block */
+.journey-cta {
+  background: var(--bg-subtle);
+  border-radius: 12px;
+  padding: 48px;
+  text-align: center;
+  margin-top: 24px;
+}
+.journey-cta h2 { margin-bottom: 12px; }
+.journey-cta p { margin-bottom: 24px; color: var(--text-body); }
+.journey-cta .cta-row {
+  display: inline-flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 520px) {
+  .journey-cta { padding: 32px 24px; }
+}

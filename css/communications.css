@@ -1,0 +1,72 @@
+/* =========================================================================
+   communications.css — 커뮤니케이션
+   구인/구직 카드
+   ========================================================================= */
+
+/* ---------- 구인/구직 카드 ---------- */
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.job-card {
+  background: #fff;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s;
+}
+.job-card:hover {
+  border-color: var(--navy-700);
+}
+.job-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+.job-employer {
+  font-size: 13px;
+  color: var(--text-body);
+  font-weight: 500;
+}
+.job-type {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border: 1px solid var(--border-default);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.job-card h3 {
+  font-size: 17px;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+}
+.job-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+.job-tags li {
+  font-size: 13px;
+  color: var(--text-muted);
+  position: relative;
+}
+.job-tags li + li::before {
+  content: '·';
+  margin-right: 12px;
+  color: var(--border-strong);
+}
+.job-card .link-cta {
+  margin-top: auto;
+  font-size: 14px;
+}

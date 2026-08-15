@@ -13,7 +13,13 @@
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
   <link rel="stylesheet" href="../css/layout.css?v=9a99d0a6">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
-  <link rel="stylesheet" href="../css/pages.css?v=929a6e30">
+  <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
+  <link rel="stylesheet" href="../css/about.css?v=65b91c16">
+  <link rel="stylesheet" href="../css/page-hero.css?v=06c1124a">
+  <link rel="stylesheet" href="../css/patient-journey.css?v=d88a584f">
+  <link rel="stylesheet" href="../css/directions.css?v=a741e809">
+  <link rel="stylesheet" href="../css/legal.css?v=9b1df0da">
+  <link rel="stylesheet" href="../css/newsletter-detail.css?v=31525e4e">
   <link rel="stylesheet" href="../css/join.css?v=9b2875be">
   <link rel="stylesheet" href="../css/member.css?v=2c35c12f">
 </head>
@@ -59,7 +65,46 @@
           </div>
 
           <div class="panel" data-my-panel="inquiries" hidden>
-            <h2>문의 <span class="count" data-my-count>0</span></h2>
+            <div class="my-panel-head">
+              <h2>문의 <span class="count" data-my-count>0</span></h2>
+              <button type="button" class="btn-solid my-inquiry-open"
+                      data-my-inquiry-open aria-expanded="false">문의하기</button>
+            </div>
+
+            <form class="my-inquiry-form" data-my-inquiry-form hidden novalidate>
+              <div class="field-grid">
+                <label class="field">
+                  <span>문의 유형 <span class="req">*</span></span>
+                  <select name="inquiryType" required>
+                    <option value="membership">회원가입</option>
+                    <option value="partnership">기관 협력</option>
+                    <option value="education_event">교육·행사</option>
+                    <option value="publicity">홍보·미디어</option>
+                    <option value="other">기타</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>제목 <span class="req">*</span></span>
+                  <input type="text" name="subject" maxlength="200" required>
+                </label>
+              </div>
+              <label class="field">
+                <span>문의 내용 <span class="req">*</span></span>
+                <textarea name="message" rows="6" maxlength="5000" required
+                          placeholder="상담하거나 문의할 내용을 구체적으로 적어 주세요."></textarea>
+              </label>
+              <label class="term my-inquiry-consent">
+                <input type="checkbox" name="privacyConsent" required>
+                <span class="term-box" aria-hidden="true"></span>
+                <span class="term-label">(필수) 문의 답변을 위한 개인정보 수집·이용에 동의합니다.</span>
+              </label>
+              <p class="form-error" data-my-inquiry-error role="alert" hidden></p>
+              <div class="my-inquiry-actions">
+                <button type="button" class="btn-ghost" data-my-inquiry-close>취소</button>
+                <button type="submit" class="btn-solid">문의 등록</button>
+              </div>
+            </form>
+
             <div data-my-inquiries></div>
           </div>
 

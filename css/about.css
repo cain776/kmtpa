@@ -1,0 +1,566 @@
+/* =========================================================================
+   about.css — 협회 소개
+   탭 · 인사말 · 비전미션 · 핵심가치 · 조직 · 투명경영
+   ========================================================================= */
+
+/* ---------- About Tabs (segmented pill control) ---------- */
+.tabs {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--bg-subtle);
+  border-radius: 999px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.tab {
+  background: transparent;
+  border: none;
+  padding: 10px 22px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 999px;
+  transition: color 0.18s, background 0.18s, box-shadow 0.18s;
+  white-space: nowrap;
+}
+.tab:hover { color: var(--text-heading); }
+.tab.active {
+  background: var(--navy-900);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(2, 0, 40, 0.18);
+}
+.tab.active:hover { color: #fff; }
+.tab:focus-visible {
+  outline: 2px solid var(--navy-700);
+  outline-offset: 2px;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active {
+  display: block;
+  animation: tabFadeIn 0.22s ease;
+}
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 탭 라벨이 길거나 4개 이상일 때 핍이 2줄로 감겨도 자연스럽게 보이도록 */
+@media (max-width: 960px) {
+  .tabs { display: flex; row-gap: 4px; }
+  .tab { padding: 9px 16px; font-size: 13px; }
+}
+@media (max-width: 720px) {
+  .tabs {
+    width: 100%;
+    margin-bottom: 32px;
+    border-radius: 12px;
+    padding: 4px;
+  }
+  .tab {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 9px 10px;
+    font-size: 12.5px;
+    white-space: normal;
+    line-height: 1.25;
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {
+  .tabs { gap: 3px; }
+  .tab { padding: 8px 8px; font-size: 12px; letter-spacing: -0.01em; }
+}
+
+/* ---------- 인사말 ---------- */
+.greeting-row {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.greeting-photo {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-subtle);
+  margin: 0;
+}
+.greeting-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.greeting-photo figcaption {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  right: 28px;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+}
+.greeting-photo figcaption .role {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 6px;
+}
+.greeting-photo figcaption .name {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+@media (max-width: 960px) {
+  .greeting-row {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .greeting-photo {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.greeting { max-width: 760px; }
+.greeting p {
+  font-size: 16px;
+  color: var(--text-body);
+  line-height: 1.85;
+  margin-bottom: 1.2em;
+}
+.greeting p:last-of-type { margin-bottom: 0; }
+.greeting p strong {
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+/* 인사말 안의 풀-쿠오트 (Art of Vision 인용) */
+.greeting-quote {
+  margin: 1.6em 0;
+  padding: 12px 22px;
+  border-left: 1px solid var(--navy-700);
+  background: var(--bg-subtle);
+  border-radius: 0 4px 4px 0;
+}
+.greeting-quote .quote-en {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  font-style: italic;
+  color: var(--navy-900);
+  line-height: 1.3;
+  margin-bottom: 6px;
+  letter-spacing: 0.005em;
+}
+.greeting-quote .quote-ko {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+
+.greeting-sign {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-default);
+}
+.greeting-sign .sign-org {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.greeting-sign .sign-name {
+  font-family: 'Song Myung', 'Pretendard', serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--text-heading);
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+/* ---------- 비전·미션 ---------- */
+.vm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.vm-card {
+  background: #fff;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 36px 32px;
+}
+.vm-card .vm-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--navy-700);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.vm-card h3 {
+  font-size: 22px;
+  color: var(--text-heading);
+  line-height: 1.4;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.vm-card p {
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+@media (max-width: 720px) {
+  .vm-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- 핵심 가치 ---------- */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--border-default);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.value {
+  background: #fff;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.value .value-num {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--navy-700);
+  margin-bottom: 14px;
+}
+.value h3 {
+  font-size: 18px;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.value h3 .value-en {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.value-tagline {
+  font-size: 14px;
+  color: var(--navy-700);
+  font-style: italic;
+  line-height: 1.5;
+  margin: 14px 0 12px;
+}
+.value > p {
+  font-size: 13.5px;
+  color: var(--text-body);
+  line-height: 1.65;
+  flex: 1;
+}
+
+/* ---------- 조직 (Organization Chart) ---------- */
+.org-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid var(--border-default);
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(2, 0, 40, 0.04);
+}
+.org-chart-wrap {
+  margin-top: 8px;
+}
+.org-chart-link {
+  display: block;
+  border-radius: 8px;
+}
+.org-chart-link:hover .org-chart {
+  border-color: var(--navy-700);
+}
+.org-chart-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.org-chart-note svg { width: 14px; height: 14px; }
+
+/* ---------- 투명경영 (Transparency) ---------- */
+.transparency-intro {
+  font-size: 16px;
+  color: var(--text-body);
+  line-height: 1.8;
+  max-width: 880px;
+  margin-bottom: 8px;
+}
+
+.sub-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 24px 0 40px;
+}
+.sub-tabs .sub-chip {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border: 1px solid var(--border-default);
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.sub-tabs .sub-chip:hover {
+  color: var(--text-heading);
+  border-color: var(--border-strong);
+}
+.sub-tabs .sub-chip.current {
+  color: #fff;
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+}
+.sub-tabs .sub-chip:focus-visible {
+  outline: 2px solid var(--navy-700);
+  outline-offset: 2px;
+}
+
+.sub-tab-panel { display: none; }
+.sub-tab-panel.active {
+  display: block;
+  animation: tabFadeIn 0.22s ease;
+}
+
+/* ---------- 주요업무 리포트형 콘텐츠 ---------- */
+.program-brief {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 32px;
+  margin: -8px 0 32px;
+}
+.program-brief-copy {
+  max-width: 920px;
+}
+.program-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--navy-700);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.program-brief h3,
+.program-subhead h3 {
+  font-size: 20px;
+  color: var(--text-heading);
+  margin-bottom: 12px;
+}
+.program-brief p {
+  font-size: 15px;
+  color: var(--text-body);
+  line-height: 1.8;
+}
+.program-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--border-default);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+.program-stat {
+  background: #fff;
+  padding: 20px 22px;
+}
+.program-stat span {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.program-stat strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--navy-900);
+  letter-spacing: -0.01em;
+}
+.program-stat em {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-body);
+  line-height: 1.45;
+}
+.program-source {
+  margin-top: 14px;
+  font-size: 12px !important;
+  color: var(--text-muted) !important;
+  line-height: 1.6 !important;
+}
+.program-subhead {
+  margin-bottom: 12px;
+}
+.program-insight {
+  max-width: 940px;
+  margin-top: 20px;
+  padding: 18px 22px;
+  border-left: 2px solid var(--navy-700);
+  background: var(--bg-subtle);
+  border-radius: 0 6px 6px 0;
+}
+.program-insight strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--navy-700);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.program-insight span {
+  display: block;
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+@media (max-width: 880px) {
+  .program-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .program-brief {
+    padding: 24px;
+  }
+  .program-brief h3,
+  .program-subhead h3 { font-size: 18px; }
+  .program-stat-grid {
+    grid-template-columns: 1fr;
+  }
+  .program-stat { padding: 18px 18px; }
+  .program-stat strong { font-size: 22px; }
+  .program-insight { padding: 16px 18px; }
+}
+
+/* ---------- 활동 리스트 (하는 일 sub-page) ---------- */
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  max-width: 720px;
+}
+.activity-list--wide {
+  max-width: 940px;
+}
+.activity-list li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-default);
+  font-size: 15px;
+  color: var(--text-body);
+  line-height: 1.65;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.activity-list li:last-child { border-bottom: none; }
+.activity-list li::before {
+  content: '';
+  flex-shrink: 0;
+  margin-top: 9px;
+  width: 5px;
+  height: 5px;
+  background: var(--navy-700);
+  border-radius: 50%;
+}
+.activity-list li strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 2px;
+}
+.activity-list li span {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.transparency-block {
+  padding: 32px 0;
+  border-top: 1px solid var(--border-default);
+}
+.transparency-block:first-of-type {
+  border-top: none;
+  padding-top: 8px;
+}
+.transparency-block h3 {
+  font-size: 20px;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.transparency-block p {
+  font-size: 15px;
+  color: var(--text-body);
+  line-height: 1.8;
+  max-width: 880px;
+}
+
+.see-also {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin-top: 18px;
+}
+.see-also-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--navy-700);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s, gap 0.18s;
+}
+.see-also-link:hover {
+  color: var(--navy-900);
+  gap: 10px;
+}
+.see-also-link svg {
+  width: 12px;
+  height: 12px;
+}
