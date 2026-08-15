@@ -81,6 +81,12 @@
     return request('/member/withdraw', { method: 'POST', body: { password } });
   }
 
+  async function changePassword(currentPassword, newPassword) {
+    return request('/member/password', {
+      method: 'PATCH', body: { currentPassword, newPassword },
+    });
+  }
+
   /* =======================================================================
      로그인 화면
      ======================================================================= */
@@ -119,8 +125,14 @@
     const submit = form.querySelector('[data-login-submit]');
     const inputs = Array.from(form.querySelectorAll('input'));
 
-    if (notice && new URLSearchParams(window.location.search).get('withdrawn') === '1') {
-      notice.textContent = '회원 탈퇴가 완료되었습니다.';
+    const noticeParams = new URLSearchParams(window.location.search);
+    const noticeText = noticeParams.get('withdrawn') === '1'
+      ? '회원 탈퇴가 완료되었습니다.'
+      : noticeParams.get('passwordChanged') === '1'
+        ? '비밀번호가 변경되었습니다. 새 비밀번호로 다시 로그인해 주세요.'
+        : '';
+    if (notice && noticeText) {
+      notice.textContent = noticeText;
       notice.hidden = false;
       window.history.replaceState({}, '', window.location.pathname);
     }
@@ -363,6 +375,73 @@
     });
   }
 
+  function setupPasswordChange() {
+    const form = document.querySelector('[data-password-form]');
+    const openButton = document.querySelector('[data-password-open]');
+    const cancelButton = document.querySelector('[data-password-cancel]');
+    if (!form || !openButton || !cancelButton) return;
+    const error = form.querySelector('[data-password-error]');
+    const submit = form.querySelector('[type="submit"]');
+
+    function setOpen(open) {
+      form.hidden = !open;
+      openButton.setAttribute('aria-expanded', String(open));
+      if (open) form.currentPassword.focus();
+      else {
+        form.reset();
+        error.hidden = true;
+      }
+    }
+
+    function validationMessage() {
+      const current = form.currentPassword.value;
+      const next = form.newPassword.value;
+      if (!current) return '현재 비밀번호를 입력해 주세요.';
+      if (next.length < 8 || !/[A-Za-z]/.test(next) || !/\d/.test(next)) {
+        return '새 비밀번호는 영문과 숫자를 포함해 8자 이상 입력해 주세요.';
+      }
+      if (current === next) return '새 비밀번호는 현재 비밀번호와 다르게 입력해 주세요.';
+      if (next !== form.newPasswordConfirm.value) return '새 비밀번호가 서로 일치하지 않습니다.';
+      return '';
+    }
+
+    openButton.addEventListener('click', () => setOpen(form.hidden));
+    cancelButton.addEventListener('click', () => setOpen(false));
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const validationError = validationMessage();
+      if (validationError) {
+        error.textContent = validationError;
+        error.hidden = false;
+        error.focus();
+        return;
+      }
+
+      const original = submit.textContent;
+      submit.disabled = true;
+      submit.setAttribute('aria-busy', 'true');
+      submit.textContent = '변경 중…';
+      error.hidden = true;
+      try {
+        await changePassword(form.currentPassword.value, form.newPassword.value);
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.replace('../login/index.html?passwordChanged=1');
+      } catch (requestError) {
+        if (requestError.status === 401) {
+          sessionStorage.removeItem(SESSION_KEY);
+          window.location.replace('../login/index.html');
+          return;
+        }
+        error.textContent = requestError.message || '비밀번호를 변경하지 못했습니다.';
+        error.hidden = false;
+        error.focus();
+        submit.disabled = false;
+        submit.removeAttribute('aria-busy');
+        submit.textContent = original;
+      }
+    });
+  }
+
   /* 왼쪽 메뉴 ↔ 오른쪽 패널. 주소 해시(#info/#inquiries)가 기준이라
      뒤로가기와 링크 공유가 그대로 동작합니다. */
   function setupMyNav() {
@@ -403,6 +482,7 @@
       greeting.innerHTML = `<b>${esc(member.name || '회원')}</b>님, 안녕하세요.`;
       renderInfo(member);
       renderInquiries(data.consultations || []);
+      setupPasswordChange();
       setupWithdrawal();
       setupInquiryComposer(async () => {
         const refreshed = await loadMe();

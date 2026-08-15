@@ -318,10 +318,68 @@
 }
 .panel-foot a { color: var(--join-ink); font-weight: 600; }
 
+/* 비밀번호 변경 — 위험 작업인 탈퇴와 시각적으로 구분한 중립 계정 설정입니다. */
+.password-card {
+  margin-top: 24px;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--join-line);
+}
+.password-intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.password-intro h3 {
+  margin: 0;
+  color: var(--join-ink);
+  font-size: 16px;
+  font-weight: 800;
+}
+.password-intro p {
+  max-width: 540px;
+  margin: 7px 0 0;
+  color: var(--join-faint);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.btn-password,
+.btn-password-solid {
+  flex: 0 0 auto;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-password {
+  padding: 9px 14px;
+  border: 1px solid var(--join-ink);
+  background: #fff;
+  color: var(--join-ink);
+}
+.btn-password:hover { background: var(--join-band); }
+.password-form {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--join-line);
+  border-radius: 12px;
+  background: var(--join-band);
+}
+.password-form[hidden] { display: none; }
+.password-form > .field { max-width: 420px; }
+.password-new-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.password-help { margin: 10px 0 0; color: var(--join-faint); font-size: 13px; }
+.password-form .form-error { margin: 14px 0 0; background: #fff; }
+.password-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+.btn-password-solid { min-width: 104px; padding: 10px 18px; border: 1px solid var(--join-ink); background: var(--join-ink); color: #fff; }
+.btn-password-solid:hover { opacity: 0.9; }
+.btn-password-solid:disabled { opacity: 0.65; cursor: progress; }
+
 /* 회원 탈퇴 — 정보 확인과 실수 방지를 위해 패널 안에서 한 번 더 펼칩니다. */
 .withdraw-card {
   margin-top: 24px;
-  padding-top: 22px;
+  padding: 22px 0 0;
   border-top: 1px solid var(--join-line);
 }
 .withdraw-intro {
@@ -387,6 +445,9 @@
 .btn-withdraw-solid:disabled { opacity: 0.65; cursor: progress; }
 
 @media (max-width: 640px) {
+  .password-intro { flex-direction: column; gap: 14px; }
+  .btn-password { width: 100%; }
+  .password-new-grid { grid-template-columns: 1fr; }
   .withdraw-intro { flex-direction: column; gap: 14px; }
   .btn-withdraw { width: 100%; }
 }
