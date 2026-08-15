@@ -166,6 +166,8 @@ window.KMTPA = window.KMTPA || {};
     NS.applyI18n(document);
     // 스스로 다시 그리는 화면은 사전이 준비된 뒤 한 번 더 그려야 한다.
     if (typeof NS.refreshHeroCopy === 'function') NS.refreshHeroCopy();
+    // 커뮤니티의 '총 ○○건' 은 사전이 아니라 cms.js 가 숫자와 함께 만든다.
+    if (typeof NS.syncUpdateCounts === 'function') NS.syncUpdateCounts();
 
     // <title> 과 검색용 설명도 함께 바꾼다
     const page = document.body.dataset.i18nPage;

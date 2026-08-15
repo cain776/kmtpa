@@ -482,12 +482,56 @@ window.KMTPA = window.KMTPA || {};
     return true;
   }
 
+  /* 공개 목록에 그리는 건수. 사무국이 어드민에서 더 많이 골라도 여기까지만
+     그립니다 — 화면에 맞춘 값이라 어드민 선택 개수와는 별개입니다.
+     목록은 한 행 61px 이라 여덟 줄이 한 덩어리로 읽히는 한계이고,
+     뉴스레터는 3열 그리드라 2행이 딱 떨어지는 여섯입니다. */
+  const UPDATE_LIST_LIMIT = 8;
+  const NEWSLETTER_LIMIT = 6;
+
+  const EMPTY_TEXT = {
+    'panel-press': '등록된 보도자료가 없습니다.',
+    'panel-notice': '등록된 공지사항이 없습니다.',
+    'panel-newsletter': '발행된 뉴스레터가 없습니다.',
+  };
+
+  function emptyNotice(panelId) {
+    const p = document.createElement('p');
+    p.className = 'list-empty';
+    p.textContent = EMPTY_TEXT[panelId] || '등록된 항목이 없습니다.';
+    return p;
+  }
+
+  /* '총 ○○건' 은 실제로 그려진 줄 수를 씁니다. CMS 가 적용되지 않은 화면도
+     정적 목록을 세어 채우므로 자리표시자가 그대로 남지 않습니다.
+     이 자리는 data-i18n 을 달지 않습니다 — 사전이 덮어쓰면 숫자가 다시
+     '총 ○○건' 으로 돌아갑니다. 대신 템플릿 키를 직접 조회합니다. */
+  function syncUpdateCount(root) {
+    if (!root) return;
+    const badge = root.querySelector('.section-head .text-mini');
+    if (!badge) return;
+    const count = root.querySelectorAll('.update-item, .pub').length;
+    const template = (NS.t && NS.t('chrome.count.total')) || '총 {n}건';
+    badge.textContent = template.replace('{n}', count.toLocaleString('ko-KR'));
+  }
+
+  NS.syncUpdateCounts = function () {
+    ['panel-press', 'panel-notice', 'panel-newsletter']
+      .forEach(id => syncUpdateCount(document.getElementById(id)));
+  };
+
   function applyUpdateList(selector, items) {
     const root = document.querySelector(selector);
     if (!root || !Array.isArray(items)) return false;
     const list = root.querySelector('.updates');
     if (!list) return false;
-    list.replaceChildren(...items.filter(isRecord).map(item => {
+    const shown = items.filter(isRecord).slice(0, UPDATE_LIST_LIMIT);
+    if (!shown.length) {
+      list.replaceChildren(emptyNotice(root.id));
+      syncUpdateCount(root);
+      return true;
+    }
+    list.replaceChildren(...shown.map(item => {
       const link = document.createElement('a');
       link.className = 'update-item';
       link.href = resolveSiteHref(item.href) || 'mailto:info@kmtpa.org';
@@ -506,6 +550,7 @@ window.KMTPA = window.KMTPA || {};
       link.append(source, title, date);
       return link;
     }));
+    syncUpdateCount(root);
     return true;
   }
 
@@ -657,9 +702,12 @@ window.KMTPA = window.KMTPA || {};
         };
       })
       .filter(Boolean)
-      .slice(0, 3);
+      .slice(0, NEWSLETTER_LIMIT);
 
-    return items.length ? items : null;
+    // 빈 배열도 그대로 돌려줍니다. 사무국이 전부 내렸다는 뜻이므로 정적
+    // 카드를 남기면 안 됩니다. '섹션 자체가 없음'(게시본 없음)은 호출부에서
+    // findNewsletterSection 이 null 을 주는 것으로 구분합니다.
+    return items;
   }
 
   function createNewsletterCard(item) {
@@ -792,7 +840,14 @@ window.KMTPA = window.KMTPA || {};
       || document.querySelector('[data-cms-section="newsletter"]');
     if (!list) return false;
 
-    list.replaceChildren(...items.map(createNewsletterCard));
+    const shown = items.slice(0, NEWSLETTER_LIMIT);
+    const panel = list.closest('.tab-panel');
+    if (!shown.length) {
+      list.replaceChildren(emptyNotice(panel ? panel.id : 'panel-newsletter'));
+    } else {
+      list.replaceChildren(...shown.map(createNewsletterCard));
+    }
+    syncUpdateCount(panel);
 
     if (typeof NS.setupPubModal === 'function') {
       NS.setupPubModal();
@@ -809,13 +864,17 @@ window.KMTPA = window.KMTPA || {};
     // i18n.js 가 payload 의 translations 를 읽습니다 — 사무국이 고친 번역이
     // 파일(i18n/*.json)보다 우선합니다.
     NS.publishedData = data;
-    const newsletter = normalizeNewsletter(findNewsletterSection(data));
+    const newsletterSection = findNewsletterSection(data);
+    const newsletter = newsletterSection === null ? null : normalizeNewsletter(newsletterSection);
     let didApply = false;
 
     didApply = applySiteSettings(data) || didApply;
     didApply = applyPageContent(data) || didApply;
     didApply = applySectionControls(data) || didApply;
     if (newsletter) didApply = applyNewsletter(newsletter) || didApply;
+
+    // 게시본이 없어도 정적 목록을 세어 '총 ○○건' 자리표시자를 채웁니다.
+    NS.syncUpdateCounts();
 
     return didApply;
   };

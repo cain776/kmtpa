@@ -87,6 +87,16 @@
 }
 .update-item:hover { padding-left: 6px; }
 .update-item:hover .u-title { color: var(--navy-900); }
+/* 사무국이 아직 아무것도 고르지 않았을 때. 목록·그리드 양쪽에서 씁니다. */
+.list-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border-default);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 15px;
+}
 .u-source {
   flex-shrink: 0;
   display: inline-flex;
