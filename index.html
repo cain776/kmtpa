@@ -26,7 +26,7 @@
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 
   <link rel="stylesheet" href="css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="css/layout.css?v=6a6181c9">
+  <link rel="stylesheet" href="css/layout.css?v=10ed5a5a">
   <link rel="stylesheet" href="css/components.css?v=5e914f58">
   <link rel="stylesheet" href="css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="css/about.css?v=65b91c16">
@@ -41,7 +41,7 @@
   <!-- 첫 화면 배경은 LCP 요소이므로 미리 받아둡니다 -->
   <link rel="preload" as="image" href="images_homepage/hero/hero-1.avif" type="image/avif">
 </head>
-<body class="is-home">
+<body class="is-home" data-i18n-page="home">
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
@@ -50,7 +50,7 @@
        상단 바·하단 바로가기 바는 templates.js에서 주입되고,
        슬라이드 전환과 헤드라인은 components.js의 setupHeroSlider가 담당합니다. -->
   <section class="hero-stage">
-    <div class="hero-media" aria-hidden="true">
+    <div data-i18n="home.div.1" class="hero-media" aria-hidden="true">
       <!-- 슬라이드를 늘리려면 여기에 <img class="hero-slide"> 를 추가하고
            components.js 의 HERO_COPY 에 같은 순서로 문구를 넣으세요.
            표시기(.hero-dot)도 같은 개수로 맞춰야 합니다. -->
@@ -64,7 +64,7 @@
     <!-- 바깥은 위치 잡기, 안쪽은 등장 애니메이션 (transform 이 서로 덮어쓰지 않도록 분리) -->
     <div class="hero-copy">
       <div class="hero-copy-inner">
-        <h1 class="hero-headline" aria-live="polite">
+        <h1 data-i18n="home.h1.1" class="hero-headline" aria-live="polite">
           세계가 신뢰하는 <em>K-의료관광</em>을<br>만들어갑니다.
         </h1>
       </div>
@@ -96,33 +96,33 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">What We Do</span>
-        <h2>협회의 핵심 활동</h2>
-        <p class="desc">회원의 전문성과 환자의 신뢰를 동시에 지키기 위한 여덟 가지 사업 영역.</p>
+        <h2 data-i18n="home.h2.1">협회의 핵심 활동</h2>
+        <p data-i18n="home.p.1" class="desc">회원의 전문성과 환자의 신뢰를 동시에 지키기 위한 여덟 가지 사업 영역.</p>
       </div>
 
       <div class="card-grid">
         <article class="card">
           <span class="card-icon"><i data-lucide="badge-check"></i></span>
-          <h3>회원 의료기관 인증</h3>
-          <p>국제 의료서비스 표준을 충족하는 회원 의료기관을 심사·인증하여 환자가 안심하고 선택할 수 있는 기준을 제공합니다.</p>
+          <h3 data-i18n="home.h3.1">회원 의료기관 인증</h3>
+          <p data-i18n="home.p.2">국제 의료서비스 표준을 충족하는 회원 의료기관을 심사·인증하여 환자가 안심하고 선택할 수 있는 기준을 제공합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="users"></i></span>
-          <h3>전문 인력 양성</h3>
-          <p>의료관광 코디네이터·통역사 자격 과정을 운영하여 환자 응대의 일관성과 전문성을 보장합니다.</p>
+          <h3 data-i18n="home.h3.2">전문 인력 양성</h3>
+          <p data-i18n="home.p.3">의료관광 코디네이터·통역사 자격 과정을 운영하여 환자 응대의 일관성과 전문성을 보장합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="file-text"></i></span>
-          <h3>정책 연구 및 제언</h3>
-          <p>외국인환자 유치 제도, 의료비자, 비급여 가격 투명성 등 산업 핵심 이슈에 대한 연구 보고서를 발간합니다.</p>
+          <h3 data-i18n="home.h3.3">정책 연구 및 제언</h3>
+          <p data-i18n="home.p.4">외국인환자 유치 제도, 의료비자, 비급여 가격 투명성 등 산업 핵심 이슈에 대한 연구 보고서를 발간합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="globe-2"></i></span>
-          <h3>국제 협력</h3>
-          <p>해외 정부·의료기관·보험사와의 파트너십을 통해 한국 의료의 해외 진출과 외국인환자 유치를 지원합니다.</p>
+          <h3 data-i18n="home.h3.4">국제 협력</h3>
+          <p data-i18n="home.p.5">해외 정부·의료기관·보험사와의 파트너십을 통해 한국 의료의 해외 진출과 외국인환자 유치를 지원합니다.</p>
         </article>
 
         <!-- 아래 넷은 제안입니다. 협회가 실제로 하는 일과 다르면 문구만 바꾸면 됩니다.
@@ -130,26 +130,26 @@
              화면이 없는 약속을 하지 않습니다. -->
         <article class="card">
           <span class="card-icon"><i data-lucide="newspaper"></i></span>
-          <h3>산업 동향 발간</h3>
-          <p>국내외 의료관광 뉴스를 상시 수집해 매주 흐름과 시사점을 정리하고, 회원에게 뉴스레터로 전해드립니다.</p>
+          <h3 data-i18n="home.h3.5">산업 동향 발간</h3>
+          <p data-i18n="home.p.6">국내외 의료관광 뉴스를 상시 수집해 매주 흐름과 시사점을 정리하고, 회원에게 뉴스레터로 전해드립니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="messages-square"></i></span>
-          <h3>환자 상담 창구</h3>
-          <p>진료 결정 전 단계부터 다국어로 응대하여 환자에게 맞는 회원 의료기관과 자격 코디네이터를 연결합니다.</p>
+          <h3 data-i18n="home.h3.6">환자 상담 창구</h3>
+          <p data-i18n="home.p.7">진료 결정 전 단계부터 다국어로 응대하여 환자에게 맞는 회원 의료기관과 자격 코디네이터를 연결합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="bar-chart-3"></i></span>
-          <h3>통계와 실적 관리</h3>
-          <p>회원 기관의 외국인환자 유치 실적을 모아 진료과·국가별 통계로 정리하고, 사업 계획의 근거로 제공합니다.</p>
+          <h3 data-i18n="home.h3.7">통계와 실적 관리</h3>
+          <p data-i18n="home.p.8">회원 기관의 외국인환자 유치 실적을 모아 진료과·국가별 통계로 정리하고, 사업 계획의 근거로 제공합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="handshake"></i></span>
-          <h3>회원 교류와 네트워킹</h3>
-          <p>정기 포럼과 실무 세미나로 기관·코디네이터·유치업체가 만나 사례와 노하우를 나누는 자리를 만듭니다.</p>
+          <h3 data-i18n="home.h3.8">회원 교류와 네트워킹</h3>
+          <p data-i18n="home.p.9">정기 포럼과 실무 세미나로 기관·코디네이터·유치업체가 만나 사례와 노하우를 나누는 자리를 만듭니다.</p>
         </article>
       </div>
     </div>
@@ -160,18 +160,18 @@
     <div class="container">
       <div class="section-head section-head--split">
         <div>
-          <span class="eyebrow">Newsletter · 뉴스레터</span>
-          <h2>최신 뉴스레터</h2>
-          <p class="desc">매월 산업 동향, 회원사 소식, 정책 인사이트를 정리해 보내드립니다.</p>
+          <span data-i18n="home.span.1" class="eyebrow">Newsletter · 뉴스레터</span>
+          <h2 data-i18n="home.h2.2">최신 뉴스레터</h2>
+          <p data-i18n="home.p.10" class="desc">매월 산업 동향, 회원사 소식, 정책 인사이트를 정리해 보내드립니다.</p>
         </div>
-        <a href="communications/index.html#newsletter" class="link-cta-muted">
+        <a data-i18n="home.a.1" href="communications/index.html#newsletter" class="link-cta-muted">
           전체 뉴스레터
           <i data-lucide="arrow-right"></i>
         </a>
       </div>
 
       <div class="pub-grid" id="homepage-newsletter-list" data-cms-section="newsletter">
-        <article class="pub">
+        <article data-i18n="home.article.1" class="pub">
           <a class="pub-trigger pub-trigger--link" href="newsletter/vol25/index.html">
             <span class="pub-thumb">Vol. 25 · 2026.05</span>
             <span class="pub-body">
@@ -186,7 +186,7 @@
         </article>
 
         <article class="pub">
-          <button type="button" class="pub-trigger" data-pub-id="vol-24" aria-haspopup="dialog">
+          <button data-i18n="home.button.1" type="button" class="pub-trigger" data-pub-id="vol-24" aria-haspopup="dialog">
             <span class="pub-thumb">Vol. 24 · 2026.04</span>
             <span class="pub-body">
               <span class="pub-title">외국인환자 비급여 가격 투명성 — 새 가이드라인 해설</span>
@@ -200,7 +200,7 @@
         </article>
 
         <article class="pub">
-          <button type="button" class="pub-trigger" data-pub-id="vol-23" aria-haspopup="dialog">
+          <button data-i18n="home.button.2" type="button" class="pub-trigger" data-pub-id="vol-23" aria-haspopup="dialog">
             <span class="pub-thumb">Vol. 23 · 2026.03</span>
             <span class="pub-body">
               <span class="pub-title">의료관광 코디네이터 자격 체계 개편 안내</span>
@@ -220,10 +220,11 @@
   <div id="footer-mount"></div>
 
   <script src="js/runtime-config.js?v=fa335a2f"></script>
-  <script src="js/templates.js?v=4f9f1d6c"></script>
+  <script src="js/templates.js?v=414ee8ca"></script>
   <script src="js/components.js?v=85d5c6c1"></script>
   <script src="js/nav-dropdown.js?v=66d1ced0"></script>
-  <script src="js/app.js?v=add67c40"></script>
-  <script src="js/cms.js?v=04bce740"></script>
+  <script src="js/app.js?v=55b8f734"></script>
+  <script src="js/cms.js?v=7bf0c3ae"></script>
+  <script src="js/i18n.js?v=624dcfea"></script>
 </body>
 </html>

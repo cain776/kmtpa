@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="../css/layout.css?v=6a6181c9">
+  <link rel="stylesheet" href="../css/layout.css?v=10ed5a5a">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
   <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="../css/about.css?v=65b91c16">
@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="../css/legal.css?v=9b1df0da">
   <link rel="stylesheet" href="../css/newsletter-detail.css?v=31525e4e">
 </head>
-<body>
+<body data-i18n-page="about">
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
@@ -43,8 +43,8 @@
     <div class="container-narrow hero-banner">
       <div class="hero-banner-copy">
         <span class="eyebrow">About KMTPA</span>
-        <h1>협회 소개</h1>
-        <p class="lede">
+        <h1 data-i18n="about.h1.1">협회 소개</h1>
+        <p data-i18n="about.p.1" class="lede">
           (사)한국의료관광진흥협회는 K-메디의 세계화를 선도하는 플랫폼으로,
           대한민국이 글로벌 의료관광 허브로 자리매김하도록 회원사·전문가·정부와 함께 일합니다.
         </p>
@@ -62,10 +62,10 @@
     <div class="container-narrow">
 
       <nav class="tabs" role="tablist" aria-label="협회 소개 메뉴">
-        <button type="button" class="tab" id="tab-greeting" role="tab" data-tab="greeting" aria-controls="panel-greeting" aria-selected="true" tabindex="0">인사말</button>
-        <button type="button" class="tab" id="tab-vision" role="tab" data-tab="vision" aria-controls="panel-vision" aria-selected="false" tabindex="-1">비전·미션</button>
-        <button type="button" class="tab" id="tab-values" role="tab" data-tab="values" aria-controls="panel-values" aria-selected="false" tabindex="-1">핵심 가치</button>
-        <button type="button" class="tab" id="tab-organization" role="tab" data-tab="organization" aria-controls="panel-organization" aria-selected="false" tabindex="-1">조직</button>
+        <button data-i18n="about.button.1" type="button" class="tab" id="tab-greeting" role="tab" data-tab="greeting" aria-controls="panel-greeting" aria-selected="true" tabindex="0">인사말</button>
+        <button data-i18n="about.button.2" type="button" class="tab" id="tab-vision" role="tab" data-tab="vision" aria-controls="panel-vision" aria-selected="false" tabindex="-1">비전·미션</button>
+        <button data-i18n="about.button.3" type="button" class="tab" id="tab-values" role="tab" data-tab="values" aria-controls="panel-values" aria-selected="false" tabindex="-1">핵심 가치</button>
+        <button data-i18n="about.button.4" type="button" class="tab" id="tab-organization" role="tab" data-tab="organization" aria-controls="panel-organization" aria-selected="false" tabindex="-1">조직</button>
       </nav>
 
       <!-- ===== Panel 1 : 인사말 ===== -->
@@ -77,36 +77,36 @@
           </figure>
 
           <div class="greeting">
-          <p>
+          <p data-i18n="about.p.2">
             대한민국은 이제 첨단 의료기술의 시대를 넘어 한류 문화, 관광, 웰니스가 유기적으로 결합된
             <strong>'K-메디(K-Medi)'</strong>라는 보이지 않았던 새로운 가치를 창출하며 전 세계의 주목을 받고 있습니다.
           </p>
 
           <div class="greeting-quote">
             <div class="quote-en">"New vision is the art of seeing the unseen."</div>
-            <div class="quote-ko">새로운 비전이란 보이지 않는 것을 보는 예술입니다.</div>
+            <div data-i18n="about.div.1" class="quote-ko">새로운 비전이란 보이지 않는 것을 보는 예술입니다.</div>
           </div>
 
-          <p>
+          <p data-i18n="about.p.3">
             진정한 혁신은 눈에 보이는 현상을 넘어, 그 이면에 숨겨진 새로운 가능성을 발견하는 데서 시작됩니다.
             우리 협회는 문화체육관광부 산하 공익법인이자 대한민국의 선진 의료 기술과 사람을 구심점으로
             활동하는 국제 비영리 단체(INGO)로서, 의사 중심의 전문성과 견고한 회원사 네트워크를 결합해
             한국 의료관광의 미래를 설계하는 <strong>'Art of Vision'</strong>을 실천하고자 합니다.
           </p>
 
-          <p>
+          <p data-i18n="about.p.4">
             <strong>첫째, 융합을 통한 차별화된 가치 창출입니다.</strong>
             단순한 치료를 넘어, 환자들이 한국의 수준 높은 의료와 매력적인 문화를 동시에 경험하며
             삶의 새로운 에너지를 발견할 수 있는 독보적인 의료관광 모델을 구축하겠습니다.
           </p>
 
-          <p>
+          <p data-i18n="about.p.5">
             <strong>둘째, 상생을 통한 지속가능한 생태계 조성입니다.</strong>
             투명한 거버넌스와 신뢰 있는 책무성을 바탕으로 200여 회원사가 함께 성장하는 네트워크를 형성하겠습니다.
             이를 통해 외부 환경의 변화에도 흔들리지 않는 탄력적이고 회복력 있는 산업 생태계를 구현하겠습니다.
           </p>
 
-          <p>
+          <p data-i18n="about.p.6">
             우리 협회는 K-메디의 세계화를 선도하는 플랫폼이 되어, 대한민국이 글로벌 의료관광 허브로
             확고히 자리매김할 수 있도록 모든 역량을 집중할 것입니다. 보이지 않는 가치를 찾아내어
             한국 의료관광의 더 큰 미래를 그려가는 여정에, 뜻을 함께하는 여러분의 따뜻한 관심과
@@ -114,8 +114,8 @@
           </p>
 
           <div class="greeting-sign">
-            <div class="sign-org">한국의료관광진흥협회 이사장</div>
-            <div class="sign-name">김 진 국</div>
+            <div data-i18n="about.div.2" class="sign-org">한국의료관광진흥협회 이사장</div>
+            <div data-i18n="about.div.3" class="sign-name">김 진 국</div>
           </div>
           </div>
         </div>
@@ -125,7 +125,7 @@
       <div class="tab-panel" id="panel-vision" data-panel="vision" role="tabpanel" aria-labelledby="tab-vision" hidden>
         <div class="section-head">
           <span class="eyebrow">Vision &amp; Mission</span>
-          <h2>비전과 미션</h2>
+          <h2 data-i18n="about.h2.1">비전과 미션</h2>
         </div>
 
         <div class="vm-grid">
@@ -135,7 +135,7 @@
             <p style="font-size:13px; color:var(--text-muted); margin: 12px 0 16px; letter-spacing: 0.02em;">
               The Premier Global Partner for Trusted K-Medical Tourism
             </p>
-            <p>
+            <p data-i18n="about.p.7">
               대한민국을 넘어 세계가 신뢰하는 글로벌 K-의료관광 NO.1 파트너로,
               한국 의료가 국제 환자가 가장 먼저 떠올리는 신뢰의 이름이 되도록 합니다.
             </p>
@@ -143,11 +143,11 @@
 
           <article class="vm-card">
             <span class="vm-label">Mission</span>
-            <h3>투명성과 공익을<br>산업의 기준으로.</h3>
+            <h3 data-i18n="about.h3.1">투명성과 공익을<br>산업의 기준으로.</h3>
             <p style="font-size:13px; color:var(--text-muted); margin: 12px 0 16px; letter-spacing: 0.02em;">
               Transparency · Public Interest · Sustainable Growth
             </p>
-            <p>
+            <p data-i18n="about.p.8">
               의료관광의 투명성 제고와 공익적 가치 확산을 통해
               인류의 건강 증진과 국가 경제 발전에 기여한다.
             </p>
@@ -158,17 +158,17 @@
       <!-- ===== Panel 3 : 핵심 가치 ===== -->
       <div class="tab-panel" id="panel-values" data-panel="values" role="tabpanel" aria-labelledby="tab-values" hidden>
         <div class="section-head">
-          <span class="eyebrow">Core Values · 핵심 가치</span>
-          <h2>협회가 지키는 네 가지 가치</h2>
-          <p class="desc">신뢰 · 상생 · 혁신 · 공익 — 모든 활동의 기준이 되는 협회의 약속입니다.</p>
+          <span data-i18n="about.span.1" class="eyebrow">Core Values · 핵심 가치</span>
+          <h2 data-i18n="about.h2.2">협회가 지키는 네 가지 가치</h2>
+          <p data-i18n="about.p.9" class="desc">신뢰 · 상생 · 혁신 · 공익 — 모든 활동의 기준이 되는 협회의 약속입니다.</p>
         </div>
 
         <div class="values-grid">
           <article class="value">
             <div class="value-num">01</div>
-            <h3>신뢰<span class="value-en">Trust</span></h3>
-            <p class="value-tagline">"투명한 운영과 전문성으로 쌓아가는 흔들리지 않는 믿음"</p>
-            <p>
+            <h3 data-i18n="about.h3.2">신뢰<span class="value-en">Trust</span></h3>
+            <p data-i18n="about.p.10" class="value-tagline">"투명한 운영과 전문성으로 쌓아가는 흔들리지 않는 믿음"</p>
+            <p data-i18n="about.p.11">
               우리는 의료관광 산업의 투명성을 제고하고, 국제적인 신뢰를 확보하는 것을 최우선 과제로 삼습니다.
               전문 의료 지식과 엄격한 윤리 의식을 바탕으로 국내외 이해관계자 모두가 안심하고 선택할 수 있는
               대한민국 의료관광의 표준을 정립해 나갑니다.
@@ -177,9 +177,9 @@
 
           <article class="value">
             <div class="value-num">02</div>
-            <h3>상생<span class="value-en">Coexistence</span></h3>
-            <p class="value-tagline">"의료와 문화를 잇고, 파트너와 함께 성장하는 동반자 정신"</p>
-            <p>
+            <h3 data-i18n="about.h3.3">상생<span class="value-en">Coexistence</span></h3>
+            <p data-i18n="about.p.12" class="value-tagline">"의료와 문화를 잇고, 파트너와 함께 성장하는 동반자 정신"</p>
+            <p data-i18n="about.p.13">
               의료기관, 뷰티·관광 기업, 그리고 정부 부처를 하나로 연결하는 강력한 네트워크 허브로서,
               상호 보완적인 시너지를 창출합니다. 모든 회원사와 파트너가 함께 성장하며 혜택을 나누는
               건강한 비즈니스 생태계를 조성하여 의료관광의 동반 성장을 견인합니다.
@@ -188,9 +188,9 @@
 
           <article class="value">
             <div class="value-num">03</div>
-            <h3>혁신<span class="value-en">Innovation</span></h3>
-            <p class="value-tagline">"보이지 않는 가능성을 발견하는 의료관광의 새로운 미래 설계"</p>
-            <p>
+            <h3 data-i18n="about.h3.4">혁신<span class="value-en">Innovation</span></h3>
+            <p data-i18n="about.p.14" class="value-tagline">"보이지 않는 가능성을 발견하는 의료관광의 새로운 미래 설계"</p>
+            <p data-i18n="about.p.15">
               'New vision is the art of seeing the unseen'이라는 철학 아래,
               기존의 틀을 깨는 창의적인 접근으로 K-메디컬의 새로운 비전을 제시합니다.
               첨단 의료 기술과 한류 콘텐츠를 유기적으로 융합하여 전 세계가 주목하는 혁신적인 의료관광 모델을 선도합니다.
@@ -199,9 +199,9 @@
 
           <article class="value">
             <div class="value-num">04</div>
-            <h3>공익<span class="value-en">Public Interest</span></h3>
-            <p class="value-tagline">"지구촌 사회의 건강 증진과 지속가능한 가치 확산"</p>
-            <p>
+            <h3 data-i18n="about.h3.5">공익<span class="value-en">Public Interest</span></h3>
+            <p data-i18n="about.p.16" class="value-tagline">"지구촌 사회의 건강 증진과 지속가능한 가치 확산"</p>
+            <p data-i18n="about.p.17">
               우리는 단순한 산업 진흥을 넘어, 국내외 취약계층을 위한 의료복지 지원 등 사회적 책무를 다하는
               국제 NGO이자 공익법인으로서 행동합니다. 국가 경제 발전과 더불어 인류 전체의 보건복지 향상에
               기여함으로써 지속가능한 공익적 가치를 실현합니다.
@@ -213,9 +213,9 @@
       <!-- ===== Panel 4 : 조직 ===== -->
       <div class="tab-panel" id="panel-organization" data-panel="organization" role="tabpanel" aria-labelledby="tab-organization" hidden>
         <div class="section-head">
-          <span class="eyebrow">Organization · KMTPA 조직</span>
-          <h2>협회 조직도</h2>
-          <p class="desc">총회와 이사회 아래 회장이 협회를 대표하고, 사무총장이 일상 운영을 총괄합니다. 의료·관광·뷰티 3개 분과와 사무국이 분야별 사업을 책임집니다.</p>
+          <span data-i18n="about.span.2" class="eyebrow">Organization · KMTPA 조직</span>
+          <h2 data-i18n="about.h2.3">협회 조직도</h2>
+          <p data-i18n="about.p.18" class="desc">총회와 이사회 아래 회장이 협회를 대표하고, 사무총장이 일상 운영을 총괄합니다. 의료·관광·뷰티 3개 분과와 사무국이 분야별 사업을 책임집니다.</p>
         </div>
 
         <!-- 좁은 화면에서는 도표 글자가 작아지므로, 눌러서 원본을 열 수 있게 합니다. -->
@@ -226,7 +226,7 @@
                  alt="KMTPA 조직도 — 총회와 감사, 이사회, 상임 이사회, 회장 김진국, 수석 부회장·부회장단, 자문 위원단·사무총장, 고문단, 의료·관광·뷰티 분과, 사무국(배한진 국장·연제진 실장·정은지 부장·최혜인 팀장)"
                  width="1600" height="1680" loading="lazy" decoding="async">
           </a>
-          <p class="org-chart-note">
+          <p data-i18n="about.p.19" class="org-chart-note">
             <i data-lucide="maximize-2"></i>
             도표를 누르면 원본 크기로 열립니다
           </p>
@@ -242,10 +242,11 @@
   <div id="footer-mount"></div>
 
   <script src="../js/runtime-config.js?v=fa335a2f"></script>
-  <script src="../js/templates.js?v=4f9f1d6c"></script>
+  <script src="../js/templates.js?v=414ee8ca"></script>
   <script src="../js/components.js?v=85d5c6c1"></script>
   <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
-  <script src="../js/app.js?v=add67c40"></script>
-  <script src="../js/cms.js?v=04bce740"></script>
+  <script src="../js/app.js?v=55b8f734"></script>
+  <script src="../js/cms.js?v=7bf0c3ae"></script>
+  <script src="../js/i18n.js?v=624dcfea"></script>
 </body>
 </html>

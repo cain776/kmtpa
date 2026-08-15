@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="../css/layout.css?v=6a6181c9">
+  <link rel="stylesheet" href="../css/layout.css?v=10ed5a5a">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
   <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="../css/about.css?v=65b91c16">
@@ -32,7 +32,7 @@
   <!-- 회원가입 전용 — 반드시 마지막 -->
   <link rel="stylesheet" href="../css/join.css?v=9b2875be">
 </head>
-<body class="is-join">
+<body class="is-join" data-i18n-page="join">
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
@@ -40,9 +40,9 @@
   <!-- ============== Hero ============== -->
   <section class="journey-hero">
     <div class="container-narrow">
-      <span class="eyebrow">Membership · 회원가입</span>
-      <h1>협회와 함께할<br>회원을 기다립니다</h1>
-      <p class="lede">
+      <span data-i18n="join.span.1" class="eyebrow">Membership · 회원가입</span>
+      <h1 data-i18n="join.h1.1">협회와 함께할<br>회원을 기다립니다</h1>
+      <p data-i18n="join.p.1" class="lede">
       국제의료 분야에서 활동하는 개인 회원부터 의료기관·유치업 에이전시 등 법인 회원까지,
         가입 유형에 따라 제출 서류와 제공 혜택이 다릅니다. 유형을 먼저 선택해 주세요.
       </p>
@@ -51,15 +51,15 @@
 
   <!-- ============== 단계 표시 (components.js가 현재 단계를 반영) ============== -->
   <div class="join-steps" data-join-steps aria-label="회원가입 진행 단계">
-    <div class="join-step is-active" data-join-step="0">
+    <div data-i18n="join.div.1" class="join-step is-active" data-join-step="0">
       <span class="join-step-num">01</span>
       <span class="join-step-label">회원 유형 선택</span>
     </div>
-    <div class="join-step" data-join-step="1">
+    <div data-i18n="join.div.2" class="join-step" data-join-step="1">
       <span class="join-step-num">02</span>
       <span class="join-step-label">정보 입력</span>
     </div>
-    <div class="join-step" data-join-step="2">
+    <div data-i18n="join.div.3" class="join-step" data-join-step="2">
       <span class="join-step-num">03</span>
       <span class="join-step-label">신청 완료</span>
     </div>
@@ -72,8 +72,8 @@
     <div class="container-narrow">
       <div class="join-panel-head">
         <span class="eyebrow">Membership</span>
-        <h2>회원 유형을 선택해 주세요</h2>
-        <p class="desc">가입 유형에 따라 제출 서류와 제공 혜택이 다릅니다.</p>
+        <h2 data-i18n="join.h2.1">회원 유형을 선택해 주세요</h2>
+        <p data-i18n="join.p.2" class="desc">가입 유형에 따라 제출 서류와 제공 혜택이 다릅니다.</p>
       </div>
 
       <div class="type-grid">
@@ -84,14 +84,14 @@
             </span>
             <span class="type-no">TYPE 01</span>
           </span>
-          <h3>개인회원</h3>
-          <p>의료 코디네이터, 통역사, 연구·교육 전문가 등 국제의료 분야에서 활동하는 개인 회원입니다.</p>
-          <span class="type-perks">
+          <h3 data-i18n="join.h3.1">개인회원</h3>
+          <p data-i18n="join.p.3">의료 코디네이터, 통역사, 연구·교육 전문가 등 국제의료 분야에서 활동하는 개인 회원입니다.</p>
+          <span data-i18n="join.span.2" class="type-perks">
             <span>전문가 네트워크 참여</span>
             <span>코디네이터 자격 과정 신청</span>
             <span>협회 교육·행사 안내</span>
           </span>
-          <span class="type-cta">
+          <span data-i18n="join.span.3" class="type-cta">
             개인 회원가입 하기
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </span>
@@ -104,21 +104,21 @@
             </span>
             <span class="type-no">TYPE 02</span>
           </span>
-          <h3>법인회원</h3>
-          <p>의료기관, 유치업 등록 에이전시, 유관기관 단체 회원. 협회 사업 참여와 공동 마케팅 대상이 됩니다.</p>
-          <span class="type-perks">
+          <h3 data-i18n="join.h3.2">법인회원</h3>
+          <p data-i18n="join.p.4">의료기관, 유치업 등록 에이전시, 유관기관 단체 회원. 협회 사업 참여와 공동 마케팅 대상이 됩니다.</p>
+          <span data-i18n="join.span.4" class="type-perks">
             <span>회원기관 디렉터리 등재</span>
             <span>해외 로드쇼·MEDICON 참여</span>
             <span>사업자등록증 등 서류 심사 후 승인</span>
           </span>
-          <span class="type-cta">
+          <span data-i18n="join.span.5" class="type-cta">
             법인 회원가입 하기
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </span>
         </button>
       </div>
 
-      <div class="join-note">
+      <div data-i18n="join.div.4" class="join-note">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg>
         <span>
           회원가입 전 문의, 협력 제안, 교육·행사 문의는 회원가입과 별도로
@@ -126,7 +126,7 @@
         </span>
       </div>
 
-      <div class="join-note">
+      <div data-i18n="join.div.5" class="join-note">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="11" x2="12" y2="16"></line><line x1="12" y1="7.6" x2="12" y2="7.9"></line></svg>
         <span>
           어떤 유형인지 판단이 어려우면 사무국(<a href="tel:+82-2-735-8759">02-735-8759</a>) 또는
@@ -142,49 +142,49 @@
   <section class="join-panel" data-join-view="personal" hidden>
     <div class="container-narrow">
       <div class="join-panel-head">
-        <span class="step-tag">STEP 02<i aria-hidden="true"></i><em>개인회원</em></span>
-        <h2>개인 회원가입</h2>
-        <p class="desc">본인 확인 후 가입 처리됩니다. 표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
+        <span data-i18n="join.span.6" class="step-tag">STEP 02<i aria-hidden="true"></i><em>개인회원</em></span>
+        <h2 data-i18n="join.h2.2">개인 회원가입</h2>
+        <p data-i18n="join.p.5" class="desc">본인 확인 후 가입 처리됩니다. 표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
       </div>
 
       <form class="join-form" data-join-form="personal" novalidate>
-        <div class="form-legend">기본 정보</div>
+        <div data-i18n="join.div.6" class="form-legend">기본 정보</div>
         <div class="field-grid">
-          <label class="field">
+          <label data-i18n="join.label.1" class="field">
             <span>이름 (국문) <span class="req">*</span></span>
             <input type="text" name="이름(국문)" data-api="name" placeholder="홍길동" autocomplete="name" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.2" class="field">
             <span>이름 (영문) <span class="req">*</span></span>
             <input type="text" name="이름(영문)" data-api="nameEn" placeholder="HONG GILDONG" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.3" class="field">
             <span>생년월일 <span class="req">*</span></span>
             <input type="date" name="생년월일" data-api="birthDate" max="2026-08-15" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.4" class="field">
             <span>국적 <span class="req">*</span></span>
             <input type="text" name="국적" data-api="nationality" placeholder="대한민국 / Korea" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.5" class="field">
             <span>이메일 <span class="req">*</span></span>
             <input type="email" name="이메일" data-api="email" placeholder="name@email.com" autocomplete="email" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.6" class="field">
             <span>휴대전화 <span class="req">*</span></span>
             <input type="tel" name="휴대전화" data-api="phone" placeholder="+82 10-0000-0000" autocomplete="tel" required>
           </label>
         </div>
 
-        <div class="form-legend">로그인 정보</div>
+        <div data-i18n="join.div.7" class="form-legend">로그인 정보</div>
         <div class="field-grid">
-          <label class="field">
+          <label data-i18n="join.label.7" class="field">
             <span>비밀번호 <span class="req">*</span></span>
             <input id="personal-password" type="password" data-api="password"
                    minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*\d).{8,72}"
                    autocomplete="new-password" placeholder="영문+숫자 8자 이상" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.8" class="field">
             <span>비밀번호 확인 <span class="req">*</span></span>
             <input type="password" data-password-confirm data-password-source="personal-password"
                    minlength="8" maxlength="72" autocomplete="new-password"
@@ -192,37 +192,37 @@
           </label>
         </div>
 
-        <div class="form-legend">활동 정보</div>
+        <div data-i18n="join.div.8" class="form-legend">활동 정보</div>
         <div class="field-stack">
           <div class="field-set">
-            <span>활동 분야 <span class="req">*</span></span>
+            <span data-i18n="join.span.7">활동 분야 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료 코디네이터" checked><span>의료 코디네이터</span></label>
-              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료 통역사"><span>의료 통역사</span></label>
-              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료관광 · 국제의료 종사자"><span>의료관광 · 국제의료 종사자</span></label>
-              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="연구 · 교육 전문가"><span>연구 · 교육 전문가</span></label>
-              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="기타"><span>기타</span></label>
+              <label data-i18n="join.label.9" class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료 코디네이터" checked><span>의료 코디네이터</span></label>
+              <label data-i18n="join.label.10" class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료 통역사"><span>의료 통역사</span></label>
+              <label data-i18n="join.label.11" class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료관광 · 국제의료 종사자"><span>의료관광 · 국제의료 종사자</span></label>
+              <label data-i18n="join.label.12" class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="연구 · 교육 전문가"><span>연구 · 교육 전문가</span></label>
+              <label data-i18n="join.label.13" class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="기타"><span>기타</span></label>
             </div>
           </div>
 
           <div class="field-set">
-            <span>전문 분야 <span class="hint">(복수 선택)</span></span>
+            <span data-i18n="join.span.8">전문 분야 <span class="hint">(복수 선택)</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="국제환자 유치"><span>국제환자 유치</span></label>
-              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="의료 코디네이션"><span>의료 코디네이션</span></label>
-              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="통역 · 번역"><span>통역 · 번역</span></label>
-              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="해외 마케팅"><span>해외 마케팅</span></label>
-              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="연구 · 교육"><span>연구 · 교육</span></label>
-              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="관광 · MICE"><span>관광 · MICE</span></label>
+              <label data-i18n="join.label.14" class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="국제환자 유치"><span>국제환자 유치</span></label>
+              <label data-i18n="join.label.15" class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="의료 코디네이션"><span>의료 코디네이션</span></label>
+              <label data-i18n="join.label.16" class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="통역 · 번역"><span>통역 · 번역</span></label>
+              <label data-i18n="join.label.17" class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="해외 마케팅"><span>해외 마케팅</span></label>
+              <label data-i18n="join.label.18" class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="연구 · 교육"><span>연구 · 교육</span></label>
+              <label data-i18n="join.label.19" class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="관광 · MICE"><span>관광 · MICE</span></label>
             </div>
           </div>
 
           <div class="field-grid">
-            <label class="field">
+            <label data-i18n="join.label.20" class="field">
               <span>소속</span>
               <input type="text" name="소속" data-api="affiliation" placeholder="기관명 또는 프리랜서">
             </label>
-            <label class="field">
+            <label data-i18n="join.label.21" class="field">
               <span>직위</span>
               <input type="text" name="직위" data-api="position" placeholder="팀장 / 코디네이터">
             </label>
@@ -230,17 +230,17 @@
         </div>
 
         <div class="terms-box">
-          <label class="term">
+          <label data-i18n="join.label.22" class="term">
             <input type="checkbox" name="동의" value="협회 회원 약관" data-consent="terms" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) <a href="../terms/index.html" target="_blank" rel="noopener">협회 회원 약관</a>에 동의합니다.</span>
           </label>
-          <label class="term">
+          <label data-i18n="join.label.23" class="term">
             <input type="checkbox" name="동의" value="개인정보 수집·이용" data-consent="privacy" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) <a href="../privacy/index.html" target="_blank" rel="noopener">개인정보 수집·이용</a>에 동의합니다.</span>
           </label>
-          <label class="term">
+          <label data-i18n="join.label.24" class="term">
             <input type="checkbox" name="동의" value="소식·교육 안내 수신" data-consent="newsletter">
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(선택) 협회 소식·교육 안내 수신에 동의합니다.</span>
@@ -250,8 +250,8 @@
         <p class="join-error" data-join-error hidden></p>
 
         <div class="join-actions">
-          <button type="submit" class="btn-solid">가입 신청</button>
-          <button type="button" class="btn-ghost" data-join-back>회원 유형 다시 선택</button>
+          <button data-i18n="join.button.1" type="submit" class="btn-solid">가입 신청</button>
+          <button data-i18n="join.button.2" type="button" class="btn-ghost" data-join-back>회원 유형 다시 선택</button>
         </div>
       </form>
     </div>
@@ -263,100 +263,100 @@
   <section class="join-panel" data-join-view="corp" hidden>
     <div class="container-narrow">
       <div class="join-panel-head">
-        <span class="step-tag">STEP 02<i aria-hidden="true"></i><em>법인회원</em></span>
-        <h2>법인 회원가입</h2>
-        <p class="desc">서류 심사 후 영업일 기준 5일 내 승인 결과를 안내드립니다. 표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
+        <span data-i18n="join.span.9" class="step-tag">STEP 02<i aria-hidden="true"></i><em>법인회원</em></span>
+        <h2 data-i18n="join.h2.3">법인 회원가입</h2>
+        <p data-i18n="join.p.6" class="desc">서류 심사 후 영업일 기준 5일 내 승인 결과를 안내드립니다. 표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
       </div>
 
       <form class="join-form" data-join-form="corp" novalidate>
-        <div class="form-legend">기관 정보</div>
+        <div data-i18n="join.div.9" class="form-legend">기관 정보</div>
         <div class="field-stack">
           <div class="field-set">
-            <span>기관 유형 <span class="req">*</span></span>
+            <span data-i18n="join.span.10">기관 유형 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="의료기관" checked><span>의료기관</span></label>
-              <label class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="유치업 에이전시"><span>유치업 에이전시</span></label>
-              <label class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="숙박 · 관광 사업자"><span>숙박 · 관광 사업자</span></label>
-              <label class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="유관기관 · 단체"><span>유관기관 · 단체</span></label>
+              <label data-i18n="join.label.25" class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="의료기관" checked><span>의료기관</span></label>
+              <label data-i18n="join.label.26" class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="유치업 에이전시"><span>유치업 에이전시</span></label>
+              <label data-i18n="join.label.27" class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="숙박 · 관광 사업자"><span>숙박 · 관광 사업자</span></label>
+              <label data-i18n="join.label.28" class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="유관기관 · 단체"><span>유관기관 · 단체</span></label>
             </div>
           </div>
 
           <div class="field-grid">
-            <label class="field">
+            <label data-i18n="join.label.29" class="field">
               <span>기관명 (국문) <span class="req">*</span></span>
               <input type="text" name="기관명(국문)" data-api="orgName" placeholder="○○병원 / ○○에이전시" required>
             </label>
-            <label class="field">
+            <label data-i18n="join.label.30" class="field">
               <span>기관명 (영문) <span class="req">*</span></span>
               <input type="text" name="기관명(영문)" data-api="orgNameEn" placeholder="OO Hospital" required>
             </label>
-            <label class="field">
+            <label data-i18n="join.label.31" class="field">
               <span>사업자등록번호 <span class="req">*</span></span>
               <input type="text" name="사업자등록번호" data-api="bizRegNo" placeholder="000-00-00000" inputmode="numeric" required>
             </label>
-            <label class="field">
+            <label data-i18n="join.label.32" class="field">
               <span>의료 해외진출·유치업 등록번호</span>
               <input type="text" name="유치업 등록번호" data-api="promotionRegNo" placeholder="등록 기관만 입력">
             </label>
-            <label class="field">
+            <label data-i18n="join.label.33" class="field">
               <span>대표자명 <span class="req">*</span></span>
               <input type="text" name="대표자명" data-api="ceoName" placeholder="홍길동" required>
             </label>
-            <label class="field">
+            <label data-i18n="join.label.34" class="field">
               <span>홈페이지</span>
               <input type="text" name="홈페이지" data-api="website" placeholder="https://">
             </label>
           </div>
 
-          <label class="field">
+          <label data-i18n="join.label.35" class="field">
             <span>기관 주소 <span class="req">*</span></span>
             <input type="text" name="기관 주소" data-api="address" placeholder="서울특별시 ○○구 ○○로 00" required>
           </label>
 
           <div class="field-set">
-            <span>주요 진료 과목 <span class="hint">(복수 선택)</span></span>
+            <span data-i18n="join.span.11">주요 진료 과목 <span class="hint">(복수 선택)</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="건강검진"><span>건강검진</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="피부 · 미용성형"><span>피부 · 미용성형</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="치과"><span>치과</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="정형 · 재활"><span>정형 · 재활</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="한방"><span>한방</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="암 · 중증질환"><span>암 · 중증질환</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="난임"><span>난임</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="심혈관"><span>심혈관</span></label>
+              <label data-i18n="join.label.36" class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="건강검진"><span>건강검진</span></label>
+              <label data-i18n="join.label.37" class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="피부 · 미용성형"><span>피부 · 미용성형</span></label>
+              <label data-i18n="join.label.38" class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="치과"><span>치과</span></label>
+              <label data-i18n="join.label.39" class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="정형 · 재활"><span>정형 · 재활</span></label>
+              <label data-i18n="join.label.40" class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="한방"><span>한방</span></label>
+              <label data-i18n="join.label.41" class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="암 · 중증질환"><span>암 · 중증질환</span></label>
+              <label data-i18n="join.label.42" class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="난임"><span>난임</span></label>
+              <label data-i18n="join.label.43" class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="심혈관"><span>심혈관</span></label>
             </div>
           </div>
         </div>
 
-        <div class="form-legend">담당자 정보</div>
+        <div data-i18n="join.div.10" class="form-legend">담당자 정보</div>
         <div class="field-grid">
-          <label class="field">
+          <label data-i18n="join.label.44" class="field">
             <span>담당자명 <span class="req">*</span></span>
             <input type="text" name="담당자명" data-api="contactName" placeholder="홍길동" autocomplete="name" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.45" class="field">
             <span>부서 / 직위</span>
             <input type="text" name="부서 / 직위" data-api="contactDept" placeholder="국제의료센터 · 팀장">
           </label>
-          <label class="field">
+          <label data-i18n="join.label.46" class="field">
             <span>담당자 이메일 <span class="req">*</span></span>
             <input type="email" name="담당자 이메일" data-api="email" placeholder="name@hospital.co.kr" autocomplete="email" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.47" class="field">
             <span>담당자 연락처 <span class="req">*</span></span>
             <input type="tel" name="담당자 연락처" data-api="phone" placeholder="02-0000-0000" autocomplete="tel" required>
           </label>
         </div>
 
-        <div class="form-legend">로그인 정보</div>
+        <div data-i18n="join.div.11" class="form-legend">로그인 정보</div>
         <div class="field-grid">
-          <label class="field">
+          <label data-i18n="join.label.48" class="field">
             <span>비밀번호 <span class="req">*</span></span>
             <input id="corp-password" type="password" data-api="password"
                    minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*\d).{8,72}"
                    autocomplete="new-password" placeholder="영문+숫자 8자 이상" required>
           </label>
-          <label class="field">
+          <label data-i18n="join.label.49" class="field">
             <span>비밀번호 확인 <span class="req">*</span></span>
             <input type="password" data-password-confirm data-password-source="corp-password"
                    minlength="8" maxlength="72" autocomplete="new-password"
@@ -364,23 +364,23 @@
           </label>
         </div>
 
-        <div class="form-legend">신청 회원 등급 · 제출 서류</div>
+        <div data-i18n="join.div.12" class="form-legend">신청 회원 등급 · 제출 서류</div>
         <div class="field-stack">
           <div class="field-set">
-            <span>신청 등급 <span class="req">*</span></span>
+            <span data-i18n="join.span.12">신청 등급 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="정회원" checked><span>정회원</span></label>
-              <label class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="준회원"><span>준회원</span></label>
-              <label class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="특별회원"><span>특별회원</span></label>
+              <label data-i18n="join.label.50" class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="정회원" checked><span>정회원</span></label>
+              <label data-i18n="join.label.51" class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="준회원"><span>준회원</span></label>
+              <label data-i18n="join.label.52" class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="특별회원"><span>특별회원</span></label>
             </div>
           </div>
 
           <div class="doc-box">
-            <div class="doc-title">필수 제출 서류</div>
-            <div class="doc-list">
+            <div data-i18n="join.div.13" class="doc-title">필수 제출 서류</div>
+            <div data-i18n="join.div.14" class="doc-list">
               사업자등록증 사본 · 의료기관 개설신고증(의료기관) · 유치업 등록증(에이전시) · 회원가입 신청서 날인본
             </div>
-            <div class="doc-how">
+            <div data-i18n="join.div.15" class="doc-how">
               서류는 신청서 접수 후 사무국이 회신하는 메일에 첨부해 주시거나,
               <a href="mailto:info@kmtpa.org?subject=%5BKMTPA%20%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%5D%20%EC%84%9C%EB%A5%98%20%EC%A0%9C%EC%B6%9C">info@kmtpa.org</a>로 바로 보내주셔도 됩니다.
               (PDF, JPG · 최대 20MB)
@@ -389,17 +389,17 @@
         </div>
 
         <div class="terms-box">
-          <label class="term">
+          <label data-i18n="join.label.53" class="term">
             <input type="checkbox" name="동의" value="협회 정관 및 회원 규정" data-consent="terms" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) <a href="../terms/index.html" target="_blank" rel="noopener">협회 정관 및 회원 규정</a>에 동의합니다.</span>
           </label>
-          <label class="term">
+          <label data-i18n="join.label.54" class="term">
             <input type="checkbox" name="동의" value="사업자 정보 및 담당자 개인정보 수집·이용" data-consent="privacy" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) 사업자 정보 및 담당자 <a href="../privacy/index.html" target="_blank" rel="noopener">개인정보 수집·이용</a>에 동의합니다.</span>
           </label>
-          <label class="term">
+          <label data-i18n="join.label.55" class="term">
             <input type="checkbox" name="동의" value="디렉터리 및 해외 홍보물 등재" data-consent="directory">
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(선택) 회원기관 디렉터리 및 해외 홍보물 등재에 동의합니다.</span>
@@ -409,8 +409,8 @@
         <p class="join-error" data-join-error hidden></p>
 
         <div class="join-actions">
-          <button type="submit" class="btn-solid">가입 신청서 제출</button>
-          <button type="button" class="btn-ghost" data-join-back>회원 유형 다시 선택</button>
+          <button data-i18n="join.button.3" type="submit" class="btn-solid">가입 신청서 제출</button>
+          <button data-i18n="join.button.4" type="button" class="btn-ghost" data-join-back>회원 유형 다시 선택</button>
         </div>
       </form>
     </div>
@@ -425,18 +425,18 @@
         <div class="join-done-mark">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
         </div>
-        <h2>가입 신청서가 작성되었습니다</h2>
+        <h2 data-i18n="join.h2.4">가입 신청서가 작성되었습니다</h2>
         <p data-join-done-msg></p>
 
-        <div class="join-actions">
+        <div data-i18n="join.div.16" class="join-actions">
           <a class="btn-solid" data-join-mailto href="mailto:info@kmtpa.org">메일 앱 다시 열기</a>
           <a class="btn-ghost" href="../index.html">첫 화면으로</a>
         </div>
 
         <div class="join-copy">
           <div class="join-copy-head">
-            <span>메일 앱이 열리지 않았다면 아래 내용을 복사해 info@kmtpa.org 로 보내주세요.</span>
-            <button type="button" data-join-copy>복사</button>
+            <span data-i18n="join.span.13">메일 앱이 열리지 않았다면 아래 내용을 복사해 info@kmtpa.org 로 보내주세요.</span>
+            <button data-i18n="join.button.5" type="button" data-join-copy>복사</button>
           </div>
           <pre data-join-summary></pre>
         </div>
@@ -462,10 +462,11 @@
     });
   </script>
   <script src="../js/runtime-config.js?v=fa335a2f"></script>
-  <script src="../js/templates.js?v=4f9f1d6c"></script>
+  <script src="../js/templates.js?v=414ee8ca"></script>
   <script src="../js/components.js?v=85d5c6c1"></script>
   <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
-  <script src="../js/app.js?v=add67c40"></script>
-  <script src="../js/cms.js?v=04bce740"></script>
+  <script src="../js/app.js?v=55b8f734"></script>
+  <script src="../js/cms.js?v=7bf0c3ae"></script>
+  <script src="../js/i18n.js?v=624dcfea"></script>
 </body>
 </html>

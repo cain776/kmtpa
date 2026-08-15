@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="../css/layout.css?v=6a6181c9">
+  <link rel="stylesheet" href="../css/layout.css?v=10ed5a5a">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
   <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="../css/about.css?v=65b91c16">
@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="../css/legal.css?v=9b1df0da">
   <link rel="stylesheet" href="../css/newsletter-detail.css?v=31525e4e">
 </head>
-<body class="page-fullwidth">
+<body class="page-fullwidth" data-i18n-page="programs">
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
@@ -45,9 +45,9 @@
   <section class="journey-hero journey-hero--banner">
     <div class="container-narrow hero-banner">
       <div class="hero-banner-copy">
-        <span class="eyebrow">Programs · 주요업무</span>
-        <h1>주요업무</h1>
-        <p class="lede">
+        <span data-i18n="programs.span.1" class="eyebrow">Programs · 주요업무</span>
+        <h1 data-i18n="programs.h1.1">주요업무</h1>
+        <p data-i18n="programs.p.1" class="lede">
           데이터와 현장을 연결해 K-의료관광의 다음 기준을 만듭니다.
           한국 의료관광은 이미 100만 외국인환자 시대에 진입했습니다. 협회는 양적 성장 이후 필요한
           신뢰, 품질, 지역 확산, 전문 인력, 공익적 책임을 함께 설계합니다.
@@ -66,33 +66,33 @@
     <div class="container-narrow">
       <div class="section-head">
         <span class="eyebrow">What We Do</span>
-        <h2>협회의 핵심 활동</h2>
-        <p class="desc">회원의 전문성과 환자의 신뢰를 동시에 지키기 위한 여덟 가지 사업 영역.</p>
+        <h2 data-i18n="programs.h2.1">협회의 핵심 활동</h2>
+        <p data-i18n="programs.p.2" class="desc">회원의 전문성과 환자의 신뢰를 동시에 지키기 위한 여덟 가지 사업 영역.</p>
       </div>
 
       <div class="card-grid">
         <article class="card">
           <span class="card-icon"><i data-lucide="badge-check"></i></span>
-          <h3>회원 의료기관 인증</h3>
-          <p>국제 의료서비스 표준을 충족하는 회원 의료기관을 심사·인증하여 환자가 안심하고 선택할 수 있는 기준을 제공합니다.</p>
+          <h3 data-i18n="programs.h3.1">회원 의료기관 인증</h3>
+          <p data-i18n="programs.p.3">국제 의료서비스 표준을 충족하는 회원 의료기관을 심사·인증하여 환자가 안심하고 선택할 수 있는 기준을 제공합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="users"></i></span>
-          <h3>전문 인력 양성</h3>
-          <p>의료관광 코디네이터·통역사 자격 과정을 운영하여 환자 응대의 일관성과 전문성을 보장합니다.</p>
+          <h3 data-i18n="programs.h3.2">전문 인력 양성</h3>
+          <p data-i18n="programs.p.4">의료관광 코디네이터·통역사 자격 과정을 운영하여 환자 응대의 일관성과 전문성을 보장합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="file-text"></i></span>
-          <h3>정책 연구 및 제언</h3>
-          <p>외국인환자 유치 제도, 의료비자, 비급여 가격 투명성 등 산업 핵심 이슈에 대한 연구 보고서를 발간합니다.</p>
+          <h3 data-i18n="programs.h3.3">정책 연구 및 제언</h3>
+          <p data-i18n="programs.p.5">외국인환자 유치 제도, 의료비자, 비급여 가격 투명성 등 산업 핵심 이슈에 대한 연구 보고서를 발간합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="globe-2"></i></span>
-          <h3>국제 협력</h3>
-          <p>해외 정부·의료기관·보험사와의 파트너십을 통해 한국 의료의 해외 진출과 외국인환자 유치를 지원합니다.</p>
+          <h3 data-i18n="programs.h3.4">국제 협력</h3>
+          <p data-i18n="programs.p.6">해외 정부·의료기관·보험사와의 파트너십을 통해 한국 의료의 해외 진출과 외국인환자 유치를 지원합니다.</p>
         </article>
 
         <!-- 아래 넷은 제안입니다. 협회가 실제로 하는 일과 다르면 문구만 바꾸면 됩니다.
@@ -100,26 +100,26 @@
              화면이 없는 약속을 하지 않습니다. -->
         <article class="card">
           <span class="card-icon"><i data-lucide="newspaper"></i></span>
-          <h3>산업 동향 발간</h3>
-          <p>국내외 의료관광 뉴스를 상시 수집해 매주 흐름과 시사점을 정리하고, 회원에게 뉴스레터로 전해드립니다.</p>
+          <h3 data-i18n="programs.h3.5">산업 동향 발간</h3>
+          <p data-i18n="programs.p.7">국내외 의료관광 뉴스를 상시 수집해 매주 흐름과 시사점을 정리하고, 회원에게 뉴스레터로 전해드립니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="messages-square"></i></span>
-          <h3>환자 상담 창구</h3>
-          <p>진료 결정 전 단계부터 다국어로 응대하여 환자에게 맞는 회원 의료기관과 자격 코디네이터를 연결합니다.</p>
+          <h3 data-i18n="programs.h3.6">환자 상담 창구</h3>
+          <p data-i18n="programs.p.8">진료 결정 전 단계부터 다국어로 응대하여 환자에게 맞는 회원 의료기관과 자격 코디네이터를 연결합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="bar-chart-3"></i></span>
-          <h3>통계와 실적 관리</h3>
-          <p>회원 기관의 외국인환자 유치 실적을 모아 진료과·국가별 통계로 정리하고, 사업 계획의 근거로 제공합니다.</p>
+          <h3 data-i18n="programs.h3.7">통계와 실적 관리</h3>
+          <p data-i18n="programs.p.9">회원 기관의 외국인환자 유치 실적을 모아 진료과·국가별 통계로 정리하고, 사업 계획의 근거로 제공합니다.</p>
         </article>
 
         <article class="card">
           <span class="card-icon"><i data-lucide="handshake"></i></span>
-          <h3>회원 교류와 네트워킹</h3>
-          <p>정기 포럼과 실무 세미나로 기관·코디네이터·유치업체가 만나 사례와 노하우를 나누는 자리를 만듭니다.</p>
+          <h3 data-i18n="programs.h3.8">회원 교류와 네트워킹</h3>
+          <p data-i18n="programs.p.10">정기 포럼과 실무 세미나로 기관·코디네이터·유치업체가 만나 사례와 노하우를 나누는 자리를 만듭니다.</p>
         </article>
       </div>
     </div>
@@ -132,8 +132,8 @@
       <article class="program-brief" aria-label="K-의료관광 시장 스냅샷">
         <div class="program-brief-copy">
           <span class="program-label">2024 Market Snapshot</span>
-          <h3>성장의 속도보다 중요한 것은 신뢰의 구조입니다</h3>
-          <p>
+          <h3 data-i18n="programs.h3.9">성장의 속도보다 중요한 것은 신뢰의 구조입니다</h3>
+          <p data-i18n="programs.p.11">
             보건복지부와 한국보건산업진흥원 집계에 따르면 2024년 한국을 방문한 외국인환자는
             117만 명으로 2023년 대비 93.2% 증가했습니다. 2009년 외국인환자 유치사업이 시작된 이후
             누적 환자는 505만 명에 이르렀고, 방문 국가는 202개국으로 확대되었습니다. 이제 산업의 과제는
@@ -143,85 +143,85 @@
         </div>
 
         <div class="program-stat-grid" aria-label="2024년 외국인환자 유치 주요 지표">
-          <div class="program-stat">
+          <div data-i18n="programs.div.1" class="program-stat">
             <span>외국인환자</span>
             <strong>117만 명</strong>
             <em>전년 대비 93.2% 증가</em>
           </div>
-          <div class="program-stat">
+          <div data-i18n="programs.div.2" class="program-stat">
             <span>누적 환자</span>
             <strong>505만 명</strong>
             <em>2009년 유치사업 시작 이후</em>
           </div>
-          <div class="program-stat">
+          <div data-i18n="programs.div.3" class="program-stat">
             <span>방문 국가</span>
             <strong>202개국</strong>
             <em>일본·중국·미국·대만·태국 순</em>
           </div>
-          <div class="program-stat">
+          <div data-i18n="programs.div.4" class="program-stat">
             <span>주요 과제</span>
             <strong>질적 성장</strong>
             <em>신뢰·분산·사후관리 체계화</em>
           </div>
         </div>
 
-        <p class="program-source">
+        <p data-i18n="programs.p.12" class="program-source">
           자료: 보건복지부 「2024년 외국인 환자 유치 117만 명, 아시아 의료관광 중심국가 도약」,
           한국보건산업진흥원 「2024 외국인환자 유치실적 통계분석 보고서」
         </p>
       </article>
 
       <nav class="tabs" role="tablist" aria-label="주요업무 메뉴">
-        <button type="button" class="tab" id="tab-promotion" role="tab" data-tab="promotion" aria-controls="panel-promotion" aria-selected="true" tabindex="0">K-의료관광프로모션</button>
-        <button type="button" class="tab" id="tab-research" role="tab" data-tab="research" aria-controls="panel-research" aria-selected="false" tabindex="-1">K-의료관광정책연구</button>
-        <button type="button" class="tab" id="tab-capacity" role="tab" data-tab="capacity" aria-controls="panel-capacity" aria-selected="false" tabindex="-1">K-의료관광역량강화</button>
-        <button type="button" class="tab" id="tab-social" role="tab" data-tab="social" aria-controls="panel-social" aria-selected="false" tabindex="-1">K-의료복지사회공헌</button>
+        <button data-i18n="programs.button.1" type="button" class="tab" id="tab-promotion" role="tab" data-tab="promotion" aria-controls="panel-promotion" aria-selected="true" tabindex="0">K-의료관광프로모션</button>
+        <button data-i18n="programs.button.2" type="button" class="tab" id="tab-research" role="tab" data-tab="research" aria-controls="panel-research" aria-selected="false" tabindex="-1">K-의료관광정책연구</button>
+        <button data-i18n="programs.button.3" type="button" class="tab" id="tab-capacity" role="tab" data-tab="capacity" aria-controls="panel-capacity" aria-selected="false" tabindex="-1">K-의료관광역량강화</button>
+        <button data-i18n="programs.button.4" type="button" class="tab" id="tab-social" role="tab" data-tab="social" aria-controls="panel-social" aria-selected="false" tabindex="-1">K-의료복지사회공헌</button>
       </nav>
 
       <!-- ===== Panel 1 : K-의료관광프로모션 ===== -->
       <div class="tab-panel active" id="panel-promotion" data-panel="promotion" role="tabpanel" aria-labelledby="tab-promotion">
         <div class="program-subhead">
           <span class="program-label">Promotion</span>
-          <h3>국가별 수요를 신뢰 있는 상담과 방문으로 전환합니다</h3>
+          <h3 data-i18n="programs.h3.10">국가별 수요를 신뢰 있는 상담과 방문으로 전환합니다</h3>
         </div>
-        <p class="transparency-intro">
+        <p data-i18n="programs.p.13" class="transparency-intro">
           2024년 외국인환자 유치 실적은 동아시아, 미주, 동남아시아 수요가 빠르게 회복되고 있음을 보여줍니다.
           특히 일본과 중국은 전체 외국인환자의 60.0%를 차지했고, 대만은 전년 대비 550.6% 증가했습니다.
           동시에 미국 환자는 피부과뿐 아니라 내과통합, 검진센터 등 다양한 진료과를 이용하는 양상을 보였습니다.
           협회는 이처럼 국가별로 다른 수요와 의사결정 방식을 분석해 회원 의료기관의 강점이 정확한 언어와 채널로
           전달되도록 지원합니다.
         </p>
-        <div class="program-insight">
+        <div data-i18n="programs.div.5" class="program-insight">
           <strong>핵심 방향</strong>
           <span>무작위 노출보다 시장별 환자 여정에 맞춘 정보 설계, 신뢰 가능한 기관 매칭, 진료 전 상담 품질 관리가 중요합니다.</span>
         </div>
         <ul class="activity-list activity-list--wide">
           <li>
-            <div>
+            <div data-i18n="programs.div.6">
               <strong>국가별 시장 전략 수립</strong>
               <span>일본·대만·중국의 피부·성형·웰니스 수요, 미국의 검진·내과·복합진료 수요, 러시아·중앙아시아의 검진·치료 수요처럼 시장별 우선 진료 분야와 상담 메시지를 구분합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.7">
               <strong>신뢰 기반 콘텐츠 제작</strong>
               <span>의료진 전문성, 진료 프로세스, 예상 체류 기간, 통역 지원, 사후관리 방식 등 환자가 실제로 궁금해하는 정보를 다국어 콘텐츠로 정리합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.8">
               <strong>해외 로드쇼·B2B 매칭</strong>
               <span>해외 의료기관, 보험사, 여행사, 유치사업자, 공공기관과의 상담회를 운영하고 회원 기관이 적합한 파트너를 만날 수 있도록 지원합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.9">
               <strong>문의·상담 접점 고도화</strong>
               <span>홈페이지, SNS, 박람회, 현지 파트너를 통해 들어온 문의가 전문 상담, 진료 예약, 입국 준비로 이어지도록 초기 안내와 이관 기준을 정비합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.10">
               <strong>의료·웰니스·관광 연계</strong>
               <span>치료 전후 회복, 동반자 체류, 지역 관광 자원을 함께 고려해 환자와 보호자의 전체 체류 경험을 높이는 연계 모델을 발굴합니다.</span>
             </div>
@@ -233,46 +233,46 @@
       <div class="tab-panel" id="panel-research" data-panel="research" role="tabpanel" aria-labelledby="tab-research" hidden>
         <div class="program-subhead">
           <span class="program-label">Research &amp; Policy</span>
-          <h3>급성장한 시장을 지속가능한 산업으로 관리합니다</h3>
+          <h3 data-i18n="programs.h3.11">급성장한 시장을 지속가능한 산업으로 관리합니다</h3>
         </div>
-        <p class="transparency-intro">
+        <p data-i18n="programs.p.14" class="transparency-intro">
           정부는 2023년 「외국인환자 유치 활성화 전략」에서 출입국절차 개선, 지역·진료과 편중 완화,
           유치산업 경쟁력 강화, 한국 의료 글로벌 인지도 제고를 핵심 과제로 제시했습니다. 2024년에는
           2027년 목표였던 외국인환자 70만 명을 조기 초과 달성했지만, 서울 집중도 85.4%, 피부과 비중 56.6%,
           의원급 이용 82.0%라는 구조적 특징도 함께 드러났습니다. 협회는 이러한 데이터를 바탕으로 현장의
           과제를 정책 언어로 정리하고, 회원사가 변화에 선제적으로 대응할 수 있도록 돕습니다.
         </p>
-        <div class="program-insight">
+        <div data-i18n="programs.div.11" class="program-insight">
           <strong>핵심 방향</strong>
           <span>산업 확대와 국민 의료 접근성, 환자 안전, 지역 확산, 법·제도 정비가 균형 있게 다뤄져야 합니다.</span>
         </div>
         <ul class="activity-list activity-list--wide">
           <li>
-            <div>
+            <div data-i18n="programs.div.12">
               <strong>정기 시장 리포트 발간</strong>
               <span>국가별 환자 흐름, 진료과별 변화, 지역별 유치 현황, 기관 유형별 특성을 분석해 회원사와 정책 관계자가 함께 활용할 수 있는 자료를 제공합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.13">
               <strong>제도·규제 모니터링</strong>
               <span>의료해외진출법, 의료법, 개인정보보호, 표시·광고, 의료관광 비자, 유치기관 등록·보고 의무 등 실무에 영향을 주는 변화를 추적합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.14">
               <strong>환자 안전·서비스 품질 연구</strong>
               <span>진료 전 설명, 예상 비용 안내, 통역 품질, 동의서, 분쟁 예방, 사후관리 등 외국인환자 서비스의 신뢰 기준을 연구합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.15">
               <strong>지역·진료과 다변화 과제 발굴</strong>
               <span>서울과 특정 진료과에 집중된 수요를 지역 의료, 검진, 한방, 치과, 재활, 웰니스와 연결할 수 있는 모델을 제안합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.16">
               <strong>정책 간담회와 현장 제언</strong>
               <span>회원 의료기관, 유치사업자, 지자체, 전문가 의견을 모아 정부와 공공기관에 실무 기반의 개선 과제를 전달합니다.</span>
             </div>
@@ -284,45 +284,45 @@
       <div class="tab-panel" id="panel-capacity" data-panel="capacity" role="tabpanel" aria-labelledby="tab-capacity" hidden>
         <div class="program-subhead">
           <span class="program-label">Capacity Building</span>
-          <h3>환자가 체감하는 품질은 현장의 준비도에서 결정됩니다</h3>
+          <h3 data-i18n="programs.h3.12">환자가 체감하는 품질은 현장의 준비도에서 결정됩니다</h3>
         </div>
-        <p class="transparency-intro">
+        <p data-i18n="programs.p.15" class="transparency-intro">
           2024년 외국인환자 중 의원급 의료기관 이용 비중은 82.0%로 가장 높았습니다. 이는 짧은 외래 진료와
           미용·웰니스 수요가 빠르게 늘고 있음을 보여주는 동시에, 더 많은 현장에서 국제 환자 응대 표준이
           필요하다는 뜻이기도 합니다. 협회는 의료진, 국제진료센터, 코디네이터, 통역사, 상담 인력이 같은 기준으로
           움직일 수 있도록 교육과 진단 체계를 운영합니다.
         </p>
-        <div class="program-insight">
+        <div data-i18n="programs.div.17" class="program-insight">
           <strong>핵심 방향</strong>
           <span>좋은 진료 성과만으로는 충분하지 않습니다. 설명, 통역, 일정, 비용, 동의, 회복 안내까지 전 과정의 신뢰가 함께 관리되어야 합니다.</span>
         </div>
         <ul class="activity-list activity-list--wide">
           <li>
-            <div>
+            <div data-i18n="programs.div.18">
               <strong>의료관광 코디네이터 실무 과정</strong>
               <span>초기 상담, 진료 예약, 입국 전 안내, 병원 동선, 비용 설명, 보호자 응대, 귀국 후 팔로업까지 환자 여정 전반을 다룹니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.19">
               <strong>의료통역·문화 커뮤니케이션</strong>
               <span>단순 언어 전달을 넘어 질병 설명, 시술 위험, 동의 절차, 회복 주의사항이 오해 없이 전달되도록 전문 통역 역량을 강화합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.20">
               <strong>회원 기관 국제진료 준비도 진단</strong>
               <span>다국어 안내문, 표준 동의서, 상담 기록, 응급 연락 체계, 사후관리 프로토콜, 민원 대응 절차를 점검합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.21">
               <strong>유치기관 등록·보고 실무 교육</strong>
               <span>외국인환자 유치기관 등록 요건, 전년도 사업실적 보고, 개인정보 관리 등 법정 의무와 운영 실무를 이해하도록 지원합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.22">
               <strong>우수 사례와 표준 매뉴얼 확산</strong>
               <span>회원 기관의 현장 사례를 축적해 진료과·언어권·환자 유형별 응대 매뉴얼로 발전시키고 교육 자료로 공유합니다.</span>
             </div>
@@ -334,45 +334,45 @@
       <div class="tab-panel" id="panel-social" data-panel="social" role="tabpanel" aria-labelledby="tab-social" hidden>
         <div class="program-subhead">
           <span class="program-label">Social Contribution</span>
-          <h3>의료관광의 성장을 건강권과 공익적 가치로 확장합니다</h3>
+          <h3 data-i18n="programs.h3.13">의료관광의 성장을 건강권과 공익적 가치로 확장합니다</h3>
         </div>
-        <p class="transparency-intro">
+        <p data-i18n="programs.p.16" class="transparency-intro">
           의료관광은 의료와 관광이 결합된 고부가가치 산업이지만, 동시에 사람의 건강과 생명을 다루는 영역입니다.
           정부도 한국 의료의 국제 인지도 제고 과제로 나눔의료와 해외 의료인 연수를 제시해 왔습니다. 협회는 회원
           의료기관의 전문성을 모아 치료 기회가 부족한 이들에게 연결하고, 한국 의료가 산업적 성과와 사회적 신뢰를
           함께 쌓을 수 있도록 공익 프로그램을 운영합니다.
         </p>
-        <div class="program-insight">
+        <div data-i18n="programs.div.23" class="program-insight">
           <strong>핵심 방향</strong>
           <span>공익 활동은 일회성 후원이 아니라 의료 접근성, 교육, 예방, 회복 지원을 지속적으로 연결하는 체계가 되어야 합니다.</span>
         </div>
         <ul class="activity-list activity-list--wide">
           <li>
-            <div>
+            <div data-i18n="programs.div.24">
               <strong>국내외 의료나눔 연계</strong>
               <span>경제적·지리적 이유로 치료 접근성이 낮은 환자를 발굴하고, 회원 의료기관과 협력해 진료 상담과 치료 기회를 연결합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.25">
               <strong>해외 의료인 연수와 지식 교류</strong>
               <span>협력 국가의 의료진을 대상으로 연수, 세미나, 임상 경험 공유를 추진해 현지 보건 역량 강화에 기여합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.26">
               <strong>예방·검진·회복 캠페인</strong>
               <span>건강검진, 만성질환 예방, 재활, 정신건강, 웰니스 등 회원사의 전문성을 살린 캠페인을 공동 기획합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.27">
               <strong>국내 취약계층 지원</strong>
               <span>다문화 가정, 이주민, 외국인 노동자 등 의료 정보 접근이 어려운 대상에게 상담, 통역, 진료 연계 정보를 제공합니다.</span>
             </div>
           </li>
           <li>
-            <div>
+            <div data-i18n="programs.div.28">
               <strong>사회적 성과 보고</strong>
               <span>사회공헌 활동의 대상, 과정, 결과를 투명하게 기록하고 공개해 후원자와 회원사가 신뢰할 수 있는 공익 운영 체계를 만듭니다.</span>
             </div>
@@ -389,37 +389,37 @@
   <section id="history">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">History · 활동 연혁</span>
-        <h2>활동 연혁</h2>
-        <p class="desc">협회가 걸어온 길입니다.</p>
+        <span data-i18n="programs.span.2" class="eyebrow">History · 활동 연혁</span>
+        <h2 data-i18n="programs.h2.2">활동 연혁</h2>
+        <p data-i18n="programs.p.17" class="desc">협회가 걸어온 길입니다.</p>
       </div>
 
       <div class="history">
         <div class="history-year">
           <h3 class="history-year-label">2025</h3>
           <ul class="history-list">
-            <li><span class="history-date">8월 29일</span><span class="history-text">넬동물의료재단과 MOU 체결</span></li>
-            <li><span class="history-date">8월 20일</span><span class="history-text">유메디(U-Medi)와 MOU 체결</span></li>
-            <li><span class="history-date">6월 11일</span><span class="history-text">제2회 메디컨 페스티벌 개최</span></li>
-            <li><span class="history-date">4월 17일</span><span class="history-text">코리아타임즈와 MOU 체결</span></li>
+            <li data-i18n="programs.li.1"><span class="history-date">8월 29일</span><span class="history-text">넬동물의료재단과 MOU 체결</span></li>
+            <li data-i18n="programs.li.2"><span class="history-date">8월 20일</span><span class="history-text">유메디(U-Medi)와 MOU 체결</span></li>
+            <li data-i18n="programs.li.3"><span class="history-date">6월 11일</span><span class="history-text">제2회 메디컨 페스티벌 개최</span></li>
+            <li data-i18n="programs.li.4"><span class="history-date">4월 17일</span><span class="history-text">코리아타임즈와 MOU 체결</span></li>
           </ul>
         </div>
 
         <div class="history-year">
           <h3 class="history-year-label">2024</h3>
           <ul class="history-list">
-            <li><span class="history-date">12월 20일</span><span class="history-text">바이오플러스와 MOU 체결</span></li>
-            <li><span class="history-date">8월 28일</span><span class="history-text">한국의료관광 포럼 공동 개최</span></li>
-            <li><span class="history-date">6월 12일</span><span class="history-text">제1회 메디컨 페스티벌 개최</span></li>
-            <li><span class="history-date">3월 8일</span><span class="history-text">제1회 정기총회 개최</span></li>
+            <li data-i18n="programs.li.5"><span class="history-date">12월 20일</span><span class="history-text">바이오플러스와 MOU 체결</span></li>
+            <li data-i18n="programs.li.6"><span class="history-date">8월 28일</span><span class="history-text">한국의료관광 포럼 공동 개최</span></li>
+            <li data-i18n="programs.li.7"><span class="history-date">6월 12일</span><span class="history-text">제1회 메디컨 페스티벌 개최</span></li>
+            <li data-i18n="programs.li.8"><span class="history-date">3월 8일</span><span class="history-text">제1회 정기총회 개최</span></li>
           </ul>
         </div>
 
         <div class="history-year">
           <h3 class="history-year-label">2023</h3>
           <ul class="history-list">
-            <li><span class="history-date">11월 10일</span><span class="history-text">문화체육관광부 비영리 법인 설립 허가</span></li>
-            <li><span class="history-date">9월 22일</span><span class="history-text">중국 왕홍 설명회 개최</span></li>
+            <li data-i18n="programs.li.9"><span class="history-date">11월 10일</span><span class="history-text">문화체육관광부 비영리 법인 설립 허가</span></li>
+            <li data-i18n="programs.li.10"><span class="history-date">9월 22일</span><span class="history-text">중국 왕홍 설명회 개최</span></li>
           </ul>
         </div>
       </div>
@@ -430,10 +430,11 @@
   <div id="footer-mount"></div>
 
   <script src="../js/runtime-config.js?v=fa335a2f"></script>
-  <script src="../js/templates.js?v=4f9f1d6c"></script>
+  <script src="../js/templates.js?v=414ee8ca"></script>
   <script src="../js/components.js?v=85d5c6c1"></script>
   <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
-  <script src="../js/app.js?v=add67c40"></script>
-  <script src="../js/cms.js?v=04bce740"></script>
+  <script src="../js/app.js?v=55b8f734"></script>
+  <script src="../js/cms.js?v=7bf0c3ae"></script>
+  <script src="../js/i18n.js?v=624dcfea"></script>
 </body>
 </html>

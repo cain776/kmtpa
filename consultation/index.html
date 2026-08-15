@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="../css/layout.css?v=6a6181c9">
+  <link rel="stylesheet" href="../css/layout.css?v=10ed5a5a">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
   <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="../css/about.css?v=65b91c16">
@@ -21,88 +21,88 @@
   <link rel="stylesheet" href="../css/newsletter-detail.css?v=31525e4e">
   <link rel="stylesheet" href="../css/join.css?v=9b2875be">
 </head>
-<body class="is-join is-consultation">
+<body class="is-join is-consultation" data-i18n-page="consultation">
   <div id="header-mount"></div>
 
   <section class="journey-hero">
     <div class="container-narrow">
-      <span class="eyebrow">Contact · 상담 신청</span>
-      <h1>필요한 내용을 남겨주시면<br>담당 팀이 답변드리겠습니다</h1>
-      <p class="lede">회원가입 문의, 기관 협력, 교육·행사, 홍보 제안을 접수합니다. 상담 신청은 회원가입과 별도로 관리됩니다.</p>
+      <span data-i18n="consultation.span.1" class="eyebrow">Contact · 상담 신청</span>
+      <h1 data-i18n="consultation.h1.1">필요한 내용을 남겨주시면<br>담당 팀이 답변드리겠습니다</h1>
+      <p data-i18n="consultation.p.1" class="lede">회원가입 문의, 기관 협력, 교육·행사, 홍보 제안을 접수합니다. 상담 신청은 회원가입과 별도로 관리됩니다.</p>
     </div>
   </section>
 
   <section class="join-panel" data-consultation-view="form">
     <div class="container-narrow">
       <div class="join-panel-head">
-        <span class="step-tag">CONTACT<i aria-hidden="true"></i><em>상담 접수</em></span>
-        <h2>상담 신청서</h2>
-        <p class="desc">표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
+        <span data-i18n="consultation.span.2" class="step-tag">CONTACT<i aria-hidden="true"></i><em>상담 접수</em></span>
+        <h2 data-i18n="consultation.h2.1">상담 신청서</h2>
+        <p data-i18n="consultation.p.2" class="desc">표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
       </div>
 
       <form class="join-form" data-consultation-form novalidate>
-        <div class="form-legend">신청 구분</div>
+        <div data-i18n="consultation.div.1" class="form-legend">신청 구분</div>
         <div class="field-stack">
           <div class="field-set">
-            <span>신청자 유형 <span class="req">*</span></span>
+            <span data-i18n="consultation.span.3">신청자 유형 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="신청자 유형" value="personal" checked><span>개인</span></label>
-              <label class="chip"><input type="radio" name="신청자 유형" value="corp"><span>법인·기관</span></label>
+              <label data-i18n="consultation.label.1" class="chip"><input type="radio" name="신청자 유형" value="personal" checked><span>개인</span></label>
+              <label data-i18n="consultation.label.2" class="chip"><input type="radio" name="신청자 유형" value="corp"><span>법인·기관</span></label>
             </div>
           </div>
           <div class="field-set">
-            <span>상담 유형 <span class="req">*</span></span>
+            <span data-i18n="consultation.span.4">상담 유형 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="상담 유형" value="membership" checked><span>회원가입</span></label>
-              <label class="chip"><input type="radio" name="상담 유형" value="partnership"><span>기관 협력</span></label>
-              <label class="chip"><input type="radio" name="상담 유형" value="education_event"><span>교육·행사</span></label>
-              <label class="chip"><input type="radio" name="상담 유형" value="publicity"><span>홍보·미디어</span></label>
-              <label class="chip"><input type="radio" name="상담 유형" value="other"><span>기타</span></label>
+              <label data-i18n="consultation.label.3" class="chip"><input type="radio" name="상담 유형" value="membership" checked><span>회원가입</span></label>
+              <label data-i18n="consultation.label.4" class="chip"><input type="radio" name="상담 유형" value="partnership"><span>기관 협력</span></label>
+              <label data-i18n="consultation.label.5" class="chip"><input type="radio" name="상담 유형" value="education_event"><span>교육·행사</span></label>
+              <label data-i18n="consultation.label.6" class="chip"><input type="radio" name="상담 유형" value="publicity"><span>홍보·미디어</span></label>
+              <label data-i18n="consultation.label.7" class="chip"><input type="radio" name="상담 유형" value="other"><span>기타</span></label>
             </div>
           </div>
         </div>
 
-        <div class="form-legend">연락처</div>
+        <div data-i18n="consultation.div.2" class="form-legend">연락처</div>
         <div class="field-grid">
-          <label class="field">
+          <label data-i18n="consultation.label.8" class="field">
             <span>이름 <span class="req">*</span></span>
             <input type="text" name="이름" data-api="name" autocomplete="name" required>
           </label>
-          <label class="field" data-org-field hidden>
+          <label data-i18n="consultation.label.9" class="field" data-org-field hidden>
             <span>기관명 <span class="req">*</span></span>
             <input type="text" name="기관명" data-api="orgName" autocomplete="organization">
           </label>
-          <label class="field">
+          <label data-i18n="consultation.label.10" class="field">
             <span>이메일 <span class="req">*</span></span>
             <input type="email" name="이메일" data-api="email" autocomplete="email" required>
           </label>
-          <label class="field">
+          <label data-i18n="consultation.label.11" class="field">
             <span>연락처 <span class="req">*</span></span>
             <input type="tel" name="연락처" data-api="phone" autocomplete="tel" required>
           </label>
         </div>
 
-        <div class="form-legend">상담 내용</div>
+        <div data-i18n="consultation.div.3" class="form-legend">상담 내용</div>
         <div class="field-stack">
-          <label class="field">
+          <label data-i18n="consultation.label.12" class="field">
             <span>제목 <span class="req">*</span></span>
             <input type="text" name="제목" data-api="subject" maxlength="200" required>
           </label>
-          <label class="field">
+          <label data-i18n="consultation.label.13" class="field">
             <span>내용 <span class="req">*</span></span>
             <textarea name="내용" data-api="message" rows="7" maxlength="5000" placeholder="문의하거나 제안할 내용을 구체적으로 적어 주세요." required></textarea>
           </label>
           <div class="field-set">
-            <span>희망 답변 방법 <span class="req">*</span></span>
+            <span data-i18n="consultation.span.5">희망 답변 방법 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="답변 방법" value="email" checked><span>이메일</span></label>
-              <label class="chip"><input type="radio" name="답변 방법" value="phone"><span>전화</span></label>
+              <label data-i18n="consultation.label.14" class="chip"><input type="radio" name="답변 방법" value="email" checked><span>이메일</span></label>
+              <label data-i18n="consultation.label.15" class="chip"><input type="radio" name="답변 방법" value="phone"><span>전화</span></label>
             </div>
           </div>
         </div>
 
         <div class="terms-box">
-          <label class="term">
+          <label data-i18n="consultation.label.16" class="term">
             <input type="checkbox" name="개인정보 동의" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) 상담 답변을 위한 <a href="../privacy/index.html" target="_blank" rel="noopener">개인정보 수집·이용</a>에 동의합니다.</span>
@@ -111,8 +111,8 @@
 
         <p class="join-error" data-consultation-error hidden></p>
         <div class="join-actions">
-          <button type="submit" class="btn-solid">상담 신청</button>
-          <a class="btn-ghost" href="../join/index.html">회원가입 보기</a>
+          <button data-i18n="consultation.button.1" type="submit" class="btn-solid">상담 신청</button>
+          <a data-i18n="consultation.a.1" class="btn-ghost" href="../join/index.html">회원가입 보기</a>
         </div>
       </form>
     </div>
@@ -122,9 +122,9 @@
     <div class="container-narrow">
       <div class="join-done">
         <div class="join-done-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-        <h2>상담 신청이 접수되었습니다</h2>
-        <p data-consultation-done-message>담당 그룹·팀에서 확인 후 입력하신 연락처로 답변드리겠습니다.</p>
-        <div class="join-actions">
+        <h2 data-i18n="consultation.h2.2">상담 신청이 접수되었습니다</h2>
+        <p data-i18n="consultation.p.3" data-consultation-done-message>담당 그룹·팀에서 확인 후 입력하신 연락처로 답변드리겠습니다.</p>
+        <div data-i18n="consultation.div.4" class="join-actions">
           <a class="btn-solid" href="../index.html">첫 화면으로</a>
           <a class="btn-ghost" data-consultation-mail href="mailto:info@kmtpa.org">사무국에 메일 보내기</a>
         </div>
@@ -134,11 +134,12 @@
 
   <div id="footer-mount"></div>
   <script src="../js/runtime-config.js?v=fa335a2f"></script>
-  <script src="../js/templates.js?v=4f9f1d6c"></script>
+  <script src="../js/templates.js?v=414ee8ca"></script>
   <script src="../js/components.js?v=85d5c6c1"></script>
   <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
   <script src="../js/consultation.js?v=f9afa832"></script>
-  <script src="../js/app.js?v=add67c40"></script>
-  <script src="../js/cms.js?v=04bce740"></script>
+  <script src="../js/app.js?v=55b8f734"></script>
+  <script src="../js/cms.js?v=7bf0c3ae"></script>
+  <script src="../js/i18n.js?v=624dcfea"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="../css/layout.css?v=6a6181c9">
+  <link rel="stylesheet" href="../css/layout.css?v=10ed5a5a">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
   <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="../css/about.css?v=65b91c16">
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../css/legal.css?v=9b1df0da">
   <link rel="stylesheet" href="../css/newsletter-detail.css?v=31525e4e">
 </head>
-<body class="page-fullwidth">
+<body class="page-fullwidth" data-i18n-page="patient-journey">
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
@@ -40,8 +40,8 @@
     <div class="container-narrow hero-banner">
       <div class="hero-banner-copy">
         <span class="eyebrow">Visit Korea</span>
-        <h1>한국에서의 치료,<br>어떻게 진행되나요?</h1>
-        <p class="lede">
+        <h1 data-i18n="patient-journey.h1.1">한국에서의 치료,<br>어떻게 진행되나요?</h1>
+        <p data-i18n="patient-journey.p.1" class="lede">
           준비부터 귀국 후 케어까지 — 협회와 회원 의료기관이 단계별로 안내합니다.
           모든 절차는 검증된 의료기관과 협회 자격을 갖춘 코디네이터가 함께합니다.
         </p>
@@ -61,12 +61,12 @@
       <article class="journey-step">
         <div class="step-number">STEP 01</div>
         <div class="step-body">
-          <h2>준비 (Preparation)</h2>
-          <p class="step-lede">
+          <h2 data-i18n="patient-journey.h2.1">준비 (Preparation)</h2>
+          <p data-i18n="patient-journey.p.2" class="step-lede">
             치료를 결정하기 전에 의료기록을 한국 의료진과 사전에 공유하고, 진단·치료 방향에 대한 1차 의견을 받습니다.
             이 단계에서 진료 일정, 예상 비용, 동반자 정보, 의료비자 발급 절차까지 정리됩니다.
           </p>
-          <div class="step-support">
+          <div data-i18n="patient-journey.div.1" class="step-support">
             <strong>협회 지원</strong>
             환자에 맞는 회원 의료기관을 찾아 연결해드리고, 본국 의료기록의 사전 번역과 의료비자(C-3-3 단기 / G-1-10 장기 치료) 발급 절차를 함께 안내합니다.
           </div>
@@ -76,12 +76,12 @@
       <article class="journey-step">
         <div class="step-number">STEP 02</div>
         <div class="step-body">
-          <h2>도착 (Arrival)</h2>
-          <p class="step-lede">
+          <h2 data-i18n="patient-journey.h2.2">도착 (Arrival)</h2>
+          <p data-i18n="patient-journey.p.3" class="step-lede">
             인천·김포공항 도착부터 의료기관까지의 이동을 협회 자격 코디네이터가 동행 안내합니다.
             입국 절차, 환영 미팅, 숙소 체크인까지 안전하고 혼란 없이 진행됩니다.
           </p>
-          <div class="step-support">
+          <div data-i18n="patient-journey.div.2" class="step-support">
             <strong>협회 지원</strong>
             공항 도착 시 협회 자격을 갖춘 회원 코디네이터가 동행하며, 회원 의료기관 제휴 숙박처까지의 이동을 안내합니다. 응급 상황을 위한 24시간 핫라인은 협회와 회원 의료기관이 함께 운영합니다.
           </div>
@@ -91,12 +91,12 @@
       <article class="journey-step">
         <div class="step-number">STEP 03</div>
         <div class="step-body">
-          <h2>상담 (Consultation)</h2>
-          <p class="step-lede">
+          <h2 data-i18n="patient-journey.h2.3">상담 (Consultation)</h2>
+          <p data-i18n="patient-journey.p.4" class="step-lede">
             의료진과의 대면 진단을 통해 치료 계획이 확정됩니다. 진료의 모든 단계는 환자가 이해할 수 있는 언어로 번역되어
             제공되며, 치료 옵션·기간·비용·위험 요소가 서면으로 안내됩니다.
           </p>
-          <div class="step-support">
+          <div data-i18n="patient-journey.div.3" class="step-support">
             <strong>협회 지원</strong>
             영어·중국어·러시아어·아랍어 등 다국어 통역은 회원 의료기관과 협회 자격 코디네이터가 함께 지원합니다. 협회의 표준 동의서를 통해 치료 옵션·비용·위험이 분명히 전달되며, 필요 시 다른 회원 기관의 2차 소견도 협회가 연결합니다.
           </div>
@@ -106,12 +106,12 @@
       <article class="journey-step">
         <div class="step-number">STEP 04</div>
         <div class="step-body">
-          <h2>치료 (Treatment)</h2>
-          <p class="step-lede">
+          <h2 data-i18n="patient-journey.h2.4">치료 (Treatment)</h2>
+          <p data-i18n="patient-journey.p.5" class="step-lede">
             합의된 치료 계획에 따라 진료가 시작됩니다. 회원 의료기관은 협회 인증 기준에 따라 환자 안전·감염 관리·기록 보관의
             표준을 준수하며, 동반자와 협회 모두에게 진행 상황이 공유됩니다.
           </p>
-          <div class="step-support">
+          <div data-i18n="patient-journey.div.4" class="step-support">
             <strong>협회 지원</strong>
             인증을 받은 회원 의료기관은 협회의 표준 프로토콜에 따라 진료를 진행합니다. 협회는 환자의 권리가 지켜지고 있는지 별도로 모니터링하며, 분쟁이 생기면 공식 중재 절차를 통해 해결을 돕습니다.
           </div>
@@ -121,12 +121,12 @@
       <article class="journey-step">
         <div class="step-number">STEP 05</div>
         <div class="step-body">
-          <h2>회복 (Recovery)</h2>
-          <p class="step-lede">
+          <h2 data-i18n="patient-journey.h2.5">회복 (Recovery)</h2>
+          <p data-i18n="patient-journey.p.6" class="step-lede">
             입원 또는 외래 회복기 동안 의료진의 모니터링이 이어집니다. 회복 환경(숙소·식이·이동)과 후속 검사 일정이
             환자 상태에 맞게 조정됩니다.
           </p>
-          <div class="step-support">
+          <div data-i18n="patient-journey.div.5" class="step-support">
             <strong>협회 지원</strong>
             회원 의료기관이 회복 기간에 맞는 숙소·식이 정보를 안내하고, 후속 검사 일정도 미리 조정합니다. 함께 머무는 동반자에 대한 지원도 끊김 없이 이어집니다.
           </div>
@@ -136,12 +136,12 @@
       <article class="journey-step">
         <div class="step-number">STEP 06</div>
         <div class="step-body">
-          <h2>출국 (Departure)</h2>
-          <p class="step-lede">
+          <h2 data-i18n="patient-journey.h2.6">출국 (Departure)</h2>
+          <p data-i18n="patient-journey.p.7" class="step-lede">
             귀국 전 최종 진료 소견서·복약 안내·후속 진료 일정이 환자의 언어로 정리되어 전달됩니다.
             귀국 후에도 본국 의료진과의 원격 협진이 가능하도록 협회가 연결을 지원합니다.
           </p>
-          <div class="step-support">
+          <div data-i18n="patient-journey.div.6" class="step-support">
             <strong>협회 지원</strong>
             회원 의료기관이 영문 진료 요약서를 발급하며, 협회는 처방 의약품의 본국 반출 절차에 대한 표준 안내를 제공합니다. 귀국 이후 본국 의료진과의 원격 협진은 협회가 회원 의료기관과 연결합니다.
           </div>
@@ -155,61 +155,61 @@
   <section class="section-band">
     <div class="container-narrow">
       <div class="section-head">
-        <span class="eyebrow">Practical Info · 실용 정보</span>
-        <h2>한국 방문, 무엇을 준비해야 할까요?</h2>
-        <p class="desc">치료 외의 모든 부분 — 입국, 이동, 숙박, 언어. 협회와 회원 기관이 환자가 신경 쓸 일을 최소화합니다.</p>
+        <span data-i18n="patient-journey.span.1" class="eyebrow">Practical Info · 실용 정보</span>
+        <h2 data-i18n="patient-journey.h2.7">한국 방문, 무엇을 준비해야 할까요?</h2>
+        <p data-i18n="patient-journey.p.8" class="desc">치료 외의 모든 부분 — 입국, 이동, 숙박, 언어. 협회와 회원 기관이 환자가 신경 쓸 일을 최소화합니다.</p>
       </div>
 
       <div class="info-grid">
         <article class="info-card">
           <div class="info-head">
             <span class="info-icon"><i data-lucide="plane-landing"></i></span>
-            <h3>입국 & 이동</h3>
+            <h3 data-i18n="patient-journey.h3.1">입국 & 이동</h3>
           </div>
           <ul>
-            <li><strong>국제공항</strong>인천(ICN)·김포(GMP)·김해(PUS)·제주(CJU) 직항편 운항</li>
-            <li><strong>공항 픽업</strong>회원 의료기관·협회 자격 코디네이터 동행</li>
-            <li><strong>도시 이동</strong>KTX 고속철, 지하철·택시·전용 셔틀</li>
-            <li><strong>휠체어 지원</strong>공항·역·의료기관 무장애 이동 안내</li>
+            <li data-i18n="patient-journey.li.1"><strong>국제공항</strong>인천(ICN)·김포(GMP)·김해(PUS)·제주(CJU) 직항편 운항</li>
+            <li data-i18n="patient-journey.li.2"><strong>공항 픽업</strong>회원 의료기관·협회 자격 코디네이터 동행</li>
+            <li data-i18n="patient-journey.li.3"><strong>도시 이동</strong>KTX 고속철, 지하철·택시·전용 셔틀</li>
+            <li data-i18n="patient-journey.li.4"><strong>휠체어 지원</strong>공항·역·의료기관 무장애 이동 안내</li>
           </ul>
         </article>
 
         <article class="info-card">
           <div class="info-head">
             <span class="info-icon"><i data-lucide="bed"></i></span>
-            <h3>숙박 & 회복</h3>
+            <h3 data-i18n="patient-journey.h3.2">숙박 & 회복</h3>
           </div>
           <ul>
-            <li><strong>의료기관 인접 호텔</strong>회복 친화적 객실·식이 옵션</li>
-            <li><strong>서비스드 아파트먼트</strong>장기 체류·동반 가족에 적합</li>
-            <li><strong>한방 웰니스 리조트</strong>제주·강원 등 자연 환경 회복 코스</li>
-            <li><strong>회원 기관 제휴 요금</strong>회원 의료기관 환자 우대 적용</li>
+            <li data-i18n="patient-journey.li.5"><strong>의료기관 인접 호텔</strong>회복 친화적 객실·식이 옵션</li>
+            <li data-i18n="patient-journey.li.6"><strong>서비스드 아파트먼트</strong>장기 체류·동반 가족에 적합</li>
+            <li data-i18n="patient-journey.li.7"><strong>한방 웰니스 리조트</strong>제주·강원 등 자연 환경 회복 코스</li>
+            <li data-i18n="patient-journey.li.8"><strong>회원 기관 제휴 요금</strong>회원 의료기관 환자 우대 적용</li>
           </ul>
         </article>
 
         <article class="info-card">
           <div class="info-head">
             <span class="info-icon"><i data-lucide="languages"></i></span>
-            <h3>언어 & 응대</h3>
+            <h3 data-i18n="patient-journey.h3.3">언어 & 응대</h3>
           </div>
           <ul>
-            <li><strong>통역 언어</strong>영어·중국어·러시아어·아랍어·일본어·몽골어 등</li>
-            <li><strong>의료 코디네이터</strong>협회 자격 보유, 진료 동행</li>
-            <li><strong>다국어 동의서</strong>치료 옵션·비용·위험 서면 안내</li>
-            <li><strong>24시간 응급 연락망</strong>전담 핫라인·메신저</li>
+            <li data-i18n="patient-journey.li.9"><strong>통역 언어</strong>영어·중국어·러시아어·아랍어·일본어·몽골어 등</li>
+            <li data-i18n="patient-journey.li.10"><strong>의료 코디네이터</strong>협회 자격 보유, 진료 동행</li>
+            <li data-i18n="patient-journey.li.11"><strong>다국어 동의서</strong>치료 옵션·비용·위험 서면 안내</li>
+            <li data-i18n="patient-journey.li.12"><strong>24시간 응급 연락망</strong>전담 핫라인·메신저</li>
           </ul>
         </article>
 
         <article class="info-card">
           <div class="info-head">
             <span class="info-icon"><i data-lucide="info"></i></span>
-            <h3>실용 정보</h3>
+            <h3 data-i18n="patient-journey.h3.4">실용 정보</h3>
           </div>
           <ul>
-            <li><strong>의료비자</strong>C-3-3 (단기) · G-1-10 (장기 치료)</li>
-            <li><strong>화폐</strong>대한민국 원(KRW), 국제 카드 결제 가능</li>
-            <li><strong>기후</strong>사계절. 봄(3-5월)·가을(9-11월) 권장</li>
-            <li><strong>시차</strong>UTC+9 (한국 표준시)</li>
+            <li data-i18n="patient-journey.li.13"><strong>의료비자</strong>C-3-3 (단기) · G-1-10 (장기 치료)</li>
+            <li data-i18n="patient-journey.li.14"><strong>화폐</strong>대한민국 원(KRW), 국제 카드 결제 가능</li>
+            <li data-i18n="patient-journey.li.15"><strong>기후</strong>사계절. 봄(3-5월)·가을(9-11월) 권장</li>
+            <li data-i18n="patient-journey.li.16"><strong>시차</strong>UTC+9 (한국 표준시)</li>
           </ul>
         </article>
       </div>
@@ -222,9 +222,9 @@
       <div class="next-row">
         <div class="copy">
           <span class="eyebrow">What Comes Next</span>
-          <h2>귀국 후에도<br>케어는 이어집니다.</h2>
-          <p>치료가 끝났다고 협회의 역할이 끝나는 것은 아닙니다. 본국에서의 회복과 후속 진료까지 협회가 회원 의료기관과 함께 책임집니다.</p>
-          <a href="mailto:concierge@kmtpa.org" class="link-cta">
+          <h2 data-i18n="patient-journey.h2.8">귀국 후에도<br>케어는 이어집니다.</h2>
+          <p data-i18n="patient-journey.p.9">치료가 끝났다고 협회의 역할이 끝나는 것은 아닙니다. 본국에서의 회복과 후속 진료까지 협회가 회원 의료기관과 함께 책임집니다.</p>
+          <a data-i18n="patient-journey.a.1" href="mailto:concierge@kmtpa.org" class="link-cta">
             컨시어지에 문의하기
             <i data-lucide="arrow-right"></i>
           </a>
@@ -233,28 +233,28 @@
         <ul class="next-list">
           <li>
             <span class="check"><i data-lucide="check"></i></span>
-            <div class="text">
+            <div data-i18n="patient-journey.div.7" class="text">
               <strong>본국 의료진과의 원격 협진</strong>
               <span>치료를 담당했던 한국 의료진과 본국 주치의 간 텔레메디신 협진을 협회가 연결합니다.</span>
             </div>
           </li>
           <li>
             <span class="check"><i data-lucide="check"></i></span>
-            <div class="text">
+            <div data-i18n="patient-journey.div.8" class="text">
               <strong>처방 의약품 반출 안내</strong>
               <span>본국으로 반출 가능한 의약품 분류, 통관 서류, 필요 시 영문 처방전 발급을 지원합니다.</span>
             </div>
           </li>
           <li>
             <span class="check"><i data-lucide="check"></i></span>
-            <div class="text">
+            <div data-i18n="patient-journey.div.9" class="text">
               <strong>사후 진료 일정 관리</strong>
               <span>정기 follow-up, 재방문 일정, 화상 상담 예약은 회원 의료기관과 협회 자격 코디네이터가 함께 조율합니다.</span>
             </div>
           </li>
           <li>
             <span class="check"><i data-lucide="check"></i></span>
-            <div class="text">
+            <div data-i18n="patient-journey.div.10" class="text">
               <strong>분쟁 발생 시 중재</strong>
               <span>귀국 후 발생한 진료 관련 이슈에 대해 회원 의료기관과 환자 사이에서 협회가 공식 중재 절차를 제공합니다.</span>
             </div>
@@ -269,60 +269,60 @@
     <div class="container-narrow">
       <div class="section-head">
         <span class="eyebrow">FAQ</span>
-        <h2>자주 묻는 질문</h2>
+        <h2 data-i18n="patient-journey.h2.9">자주 묻는 질문</h2>
       </div>
 
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-documents">
+          <button data-i18n="patient-journey.button.1" class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-documents">
             <span>출국 전에 어떤 서류를 준비해야 하나요?</span>
             <i data-lucide="chevron-down" class="chev"></i>
           </button>
-          <div class="faq-a" id="faq-a-documents" role="region">
+          <div data-i18n="patient-journey.div.11" class="faq-a" id="faq-a-documents" role="region">
             여권, 의료비자(해당 시), 본국 의료기록(영문 또는 한국어 번역), 보험 증서 사본, 동반자 정보가 기본입니다.
             구체적 항목은 회원 의료기관별로 다소 다르며, 협회 코디네이터가 사전 체크리스트를 제공합니다.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-language">
+          <button data-i18n="patient-journey.button.2" class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-language">
             <span>다국어 의사소통은 가능한가요?</span>
             <i data-lucide="chevron-down" class="chev"></i>
           </button>
-          <div class="faq-a" id="faq-a-language" role="region">
+          <div data-i18n="patient-journey.div.12" class="faq-a" id="faq-a-language" role="region">
             협회 회원 의료기관은 영어, 중국어, 러시아어, 아랍어 등 주요 언어 통역을 제공합니다.
             희소 언어의 경우 협회 자격 코디네이터 풀에서 별도 매칭하여 지원합니다.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-companion">
+          <button data-i18n="patient-journey.button.3" class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-companion">
             <span>동반자가 함께 머물 수 있나요?</span>
             <i data-lucide="chevron-down" class="chev"></i>
           </button>
-          <div class="faq-a" id="faq-a-companion" role="region">
+          <div data-i18n="patient-journey.div.13" class="faq-a" id="faq-a-companion" role="region">
             네. 대부분의 회원 의료기관은 보호자 동반 입원이 가능하며, 외래 치료 시에도 협회 제휴 숙박 시설에 함께 체류할 수 있습니다.
             동반자의 비자·체류 절차 또한 코디네이터가 함께 안내합니다.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-stay">
+          <button data-i18n="patient-journey.button.4" class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-stay">
             <span>한국에서 얼마나 머물러야 하나요?</span>
             <i data-lucide="chevron-down" class="chev"></i>
           </button>
-          <div class="faq-a" id="faq-a-stay" role="region">
+          <div data-i18n="patient-journey.div.14" class="faq-a" id="faq-a-stay" role="region">
             치료 유형에 따라 다릅니다. 단기 검진·시술은 3~7일, 수술 및 회복이 필요한 경우 2~6주 이상이 일반적입니다.
             상담 단계에서 회원 의료기관이 정확한 일정 안내를 제공합니다.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-aftercare">
+          <button data-i18n="patient-journey.button.5" class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-aftercare">
             <span>귀국 후에도 케어를 받을 수 있나요?</span>
             <i data-lucide="chevron-down" class="chev"></i>
           </button>
-          <div class="faq-a" id="faq-a-aftercare" role="region">
+          <div data-i18n="patient-journey.div.15" class="faq-a" id="faq-a-aftercare" role="region">
             가능합니다. 영문 진료 요약과 처방 정보가 본국 의료진에게 전달되며, 필요 시 원격 협진(텔레메디신)을
             통한 후속 상담이 이어집니다. 협회는 본국 의료진과의 연결도 지원합니다.
           </div>
@@ -335,9 +335,9 @@
   <section>
     <div class="container-narrow">
       <div class="journey-cta">
-        <h2>다음 단계를 시작하시겠습니까?</h2>
-        <p>회원 의료기관을 찾거나 협회에 문의하여 본격적인 준비를 시작하세요.</p>
-        <div class="cta-row">
+        <h2 data-i18n="patient-journey.h2.10">다음 단계를 시작하시겠습니까?</h2>
+        <p data-i18n="patient-journey.p.10">회원 의료기관을 찾거나 협회에 문의하여 본격적인 준비를 시작하세요.</p>
+        <div data-i18n="patient-journey.div.16" class="cta-row">
           <a href="mailto:concierge@kmtpa.org?subject=KMTPA%20Member%20Institution%20Inquiry" class="link-cta">
             회원 의료기관 찾기
             <i data-lucide="arrow-right"></i>
@@ -355,10 +355,11 @@
   <div id="footer-mount"></div>
 
   <script src="../js/runtime-config.js?v=fa335a2f"></script>
-  <script src="../js/templates.js?v=4f9f1d6c"></script>
+  <script src="../js/templates.js?v=414ee8ca"></script>
   <script src="../js/components.js?v=85d5c6c1"></script>
   <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
-  <script src="../js/app.js?v=add67c40"></script>
-  <script src="../js/cms.js?v=04bce740"></script>
+  <script src="../js/app.js?v=55b8f734"></script>
+  <script src="../js/cms.js?v=7bf0c3ae"></script>
+  <script src="../js/i18n.js?v=624dcfea"></script>
 </body>
 </html>

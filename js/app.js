@@ -35,6 +35,10 @@
     NS.setupPubModal();     // 뉴스레터 모달 (.pub-trigger가 있는 페이지)
     NS.setupJoinFlow();     // 회원가입 3단계 흐름 (join 페이지에서만 작동)
 
+    // 문구 번역은 맨 마지막. 헤더·푸터·빵부스러기가 다 그려진 뒤라야
+    // 그 안의 data-i18n 까지 한 번에 잡힌다.
+    if (typeof NS.setupI18n === 'function') NS.setupI18n();
+
     // 주입된 헤더·푸터·모달의 아이콘까지 렌더
     if (window.lucide && window.lucide.createIcons) {
       window.lucide.createIcons();

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="../css/layout.css?v=6a6181c9">
+  <link rel="stylesheet" href="../css/layout.css?v=10ed5a5a">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
   <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="../css/about.css?v=65b91c16">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="../css/join.css?v=9b2875be">
   <link rel="stylesheet" href="../css/member.css?v=d2866e68">
 </head>
-<body class="is-join is-member">
+<body class="is-join is-member" data-i18n-page="mypage">
 
   <div id="header-mount"></div>
 
@@ -34,8 +34,8 @@
            화면 양끝에 흩어집니다. -->
       <div class="mypage-head">
         <div>
-          <span class="eyebrow">My Page · 마이페이지</span>
-          <h1>내 정보와 문의 답변</h1>
+          <span data-i18n="mypage.span.1" class="eyebrow">My Page · 마이페이지</span>
+          <h1 data-i18n="mypage.h1.1">내 정보와 문의 답변</h1>
           <p class="who" data-my-greeting></p>
         </div>
       </div>
@@ -47,7 +47,7 @@
       <div class="mypage-grid">
 
         <!-- 왼쪽: 메뉴. 해시(#info/#inquiries)로 오른쪽 패널을 전환합니다. -->
-        <nav class="my-nav" aria-label="마이페이지 메뉴">
+        <nav data-i18n="mypage.nav.1" class="my-nav" aria-label="마이페이지 메뉴">
           <a href="#info" data-my-nav="info" aria-current="page">내 정보</a>
           <a href="#inquiries" data-my-nav="inquiries">문의 <span class="count" data-my-count>0</span></a>
         </nav>
@@ -56,9 +56,9 @@
         <div class="my-panels">
 
           <div class="panel" data-my-panel="info">
-            <h2>내 정보</h2>
+            <h2 data-i18n="mypage.h2.1">내 정보</h2>
             <dl class="info-dl" data-my-info></dl>
-            <div class="panel-foot">
+            <div data-i18n="mypage.div.1" class="panel-foot">
               정보를 고치시려면 <a href="mailto:info@kmtpa.org?subject=%ED%9A%8C%EC%9B%90%20%EC%A0%95%EB%B3%B4%20%EB%B3%80%EA%B2%BD">사무국</a>으로
               알려주세요. 가입 신청 내용은 제출하신 기록이라 화면에서 바로 고치지 않습니다.
             </div>
@@ -66,27 +66,27 @@
             <section class="withdraw-card" aria-labelledby="withdraw-title">
               <div class="withdraw-intro">
                 <div>
-                  <h3 id="withdraw-title">회원 탈퇴</h3>
-                  <p>탈퇴 즉시 로그아웃되며 회원 기능을 이용할 수 없습니다. 등록 정보는 개인정보처리방침에 따라 최대 1년간 제한적으로 보관된 뒤 파기됩니다.</p>
+                  <h3 data-i18n="mypage.h3.1" id="withdraw-title">회원 탈퇴</h3>
+                  <p data-i18n="mypage.p.1">탈퇴 즉시 로그아웃되며 회원 기능을 이용할 수 없습니다. 등록 정보는 개인정보처리방침에 따라 최대 1년간 제한적으로 보관된 뒤 파기됩니다.</p>
                 </div>
-                <button type="button" class="btn-withdraw" data-withdraw-open aria-controls="withdraw-form"
+                <button data-i18n="mypage.button.1" type="button" class="btn-withdraw" data-withdraw-open aria-controls="withdraw-form"
                         aria-expanded="false">회원 탈퇴</button>
               </div>
 
               <form class="withdraw-form" id="withdraw-form" data-withdraw-form hidden novalidate>
-                <label class="field">
+                <label data-i18n="mypage.label.1" class="field">
                   <span>본인 확인 비밀번호 <span class="req">*</span></span>
                   <input type="password" name="password" autocomplete="current-password" required>
                 </label>
-                <label class="term withdraw-consent">
+                <label data-i18n="mypage.label.2" class="term withdraw-consent">
                   <input type="checkbox" name="confirmation" required>
                   <span class="term-box" aria-hidden="true"></span>
                   <span class="term-label">탈퇴 후 회원 기능을 이용할 수 없음을 확인했습니다.</span>
                 </label>
                 <p class="form-error" data-withdraw-error role="alert" tabindex="-1" hidden></p>
                 <div class="withdraw-actions">
-                  <button type="button" class="btn-ghost" data-withdraw-cancel>취소</button>
-                  <button type="submit" class="btn-withdraw-solid">탈퇴 확정</button>
+                  <button data-i18n="mypage.button.2" type="button" class="btn-ghost" data-withdraw-cancel>취소</button>
+                  <button data-i18n="mypage.button.3" type="submit" class="btn-withdraw-solid">탈퇴 확정</button>
                 </div>
               </form>
             </section>
@@ -94,42 +94,42 @@
 
           <div class="panel" data-my-panel="inquiries" hidden>
             <div class="my-panel-head">
-              <h2>문의 <span class="count" data-my-count>0</span></h2>
-              <button type="button" class="btn-solid my-inquiry-open"
+              <h2 data-i18n="mypage.h2.2">문의 <span class="count" data-my-count>0</span></h2>
+              <button data-i18n="mypage.button.4" type="button" class="btn-solid my-inquiry-open"
                       data-my-inquiry-open aria-expanded="false">문의하기</button>
             </div>
 
             <form class="my-inquiry-form" data-my-inquiry-form hidden novalidate>
               <div class="field-grid">
                 <label class="field">
-                  <span>문의 유형 <span class="req">*</span></span>
+                  <span data-i18n="mypage.span.2">문의 유형 <span class="req">*</span></span>
                   <select name="inquiryType" required>
-                    <option value="membership">회원가입</option>
-                    <option value="partnership">기관 협력</option>
-                    <option value="education_event">교육·행사</option>
-                    <option value="publicity">홍보·미디어</option>
-                    <option value="other">기타</option>
+                    <option data-i18n="mypage.option.1" value="membership">회원가입</option>
+                    <option data-i18n="mypage.option.2" value="partnership">기관 협력</option>
+                    <option data-i18n="mypage.option.3" value="education_event">교육·행사</option>
+                    <option data-i18n="mypage.option.4" value="publicity">홍보·미디어</option>
+                    <option data-i18n="mypage.option.5" value="other">기타</option>
                   </select>
                 </label>
-                <label class="field">
+                <label data-i18n="mypage.label.3" class="field">
                   <span>제목 <span class="req">*</span></span>
                   <input type="text" name="subject" maxlength="200" required>
                 </label>
               </div>
-              <label class="field">
+              <label data-i18n="mypage.label.4" class="field">
                 <span>문의 내용 <span class="req">*</span></span>
                 <textarea name="message" rows="6" maxlength="5000" required
                           placeholder="상담하거나 문의할 내용을 구체적으로 적어 주세요."></textarea>
               </label>
-              <label class="term my-inquiry-consent">
+              <label data-i18n="mypage.label.5" class="term my-inquiry-consent">
                 <input type="checkbox" name="privacyConsent" required>
                 <span class="term-box" aria-hidden="true"></span>
                 <span class="term-label">(필수) 문의 답변을 위한 개인정보 수집·이용에 동의합니다.</span>
               </label>
               <p class="form-error" data-my-inquiry-error role="alert" hidden></p>
               <div class="my-inquiry-actions">
-                <button type="button" class="btn-ghost" data-my-inquiry-close>취소</button>
-                <button type="submit" class="btn-solid">문의 등록</button>
+                <button data-i18n="mypage.button.5" type="button" class="btn-ghost" data-my-inquiry-close>취소</button>
+                <button data-i18n="mypage.button.6" type="submit" class="btn-solid">문의 등록</button>
               </div>
             </form>
 
@@ -145,10 +145,11 @@
   <div id="footer-mount"></div>
 
   <script src="../js/runtime-config.js?v=fa335a2f"></script>
-  <script src="../js/templates.js?v=4f9f1d6c"></script>
+  <script src="../js/templates.js?v=414ee8ca"></script>
   <script src="../js/components.js?v=85d5c6c1"></script>
   <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
-  <script src="../js/app.js?v=add67c40"></script>
+  <script src="../js/app.js?v=55b8f734"></script>
+  <script src="../js/i18n.js?v=624dcfea"></script>
   <script src="../js/member.js?v=2f87c2f5"></script>
 </body>
 </html>

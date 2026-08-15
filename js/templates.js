@@ -70,62 +70,62 @@ window.KMTPA = window.KMTPA || {};
         <a href="${page('')}" class="brand" aria-label="KMTPA 홈으로">
           <span class="brand-mark"><img src="${page('images_homepage/logo2.png')}" alt=""></span>
           <span class="brand-name">
-            <span class="ko">한국의료관광진흥협회</span>
-            <span class="en">Korean Medical Tourism Promotion Association</span>
+            <span class="ko" data-i18n="chrome.brand.ko">한국의료관광진흥협회</span>
+            <span class="en" data-i18n="chrome.brand.en">Korean Medical Tourism Promotion Association</span>
           </span>
         </a>
 
         <nav class="top-nav" id="top-nav" aria-label="주 메뉴">
           <div class="nav-item-with-dropdown">
-            <a href="${page('about/')}"${isAbout ? ' class="active" aria-current="page"' : ''}>협회 소개</a>
+            <a href="${page('about/')}"${isAbout ? ' class="active" aria-current="page"' : ''} data-i18n="nav.about">협회 소개</a>
             <div class="nav-dropdown nav-dropdown--mega" role="menu">
               <div class="dropdown-group">
-                <div class="dropdown-group-label">KMTPA는</div>
-                <a href="${page('about/#greeting')}" role="menuitem">인사말</a>
-                <a href="${page('about/#vision')}" role="menuitem">비전·미션</a>
-                <a href="${page('about/#values')}" role="menuitem">핵심 가치</a>
-                <a href="${page('directions/')}" role="menuitem">오시는 길</a>
+                <div class="dropdown-group-label" data-i18n="chrome.group.kmtpa">KMTPA는</div>
+                <a href="${page('about/#greeting')}" role="menuitem" data-i18n="chrome.menu.1">인사말</a>
+                <a href="${page('about/#vision')}" role="menuitem" data-i18n="chrome.menu.2">비전·미션</a>
+                <a href="${page('about/#values')}" role="menuitem" data-i18n="chrome.menu.3">핵심 가치</a>
+                <a href="${page('directions/')}" role="menuitem" data-i18n="chrome.menu.4">오시는 길</a>
               </div>
               <div class="dropdown-group">
-                <div class="dropdown-group-label">함께하는 사람들</div>
-                <a href="${page('about/#organization')}" role="menuitem">조직</a>
+                <div class="dropdown-group-label" data-i18n="chrome.group.people">함께하는 사람들</div>
+                <a href="${page('about/#organization')}" role="menuitem" data-i18n="chrome.menu.5">조직</a>
               </div>
             </div>
           </div>
           <div class="nav-item-with-dropdown">
-            <a href="${page('transparency/')}"${isTransparency ? ' class="active" aria-current="page"' : ''}>투명경영</a>
+            <a href="${page('transparency/')}"${isTransparency ? ' class="active" aria-current="page"' : ''} data-i18n="nav.transparency">투명경영</a>
             <div class="nav-dropdown" role="menu">
-              <a href="${page('transparency/')}" role="menuitem">지속가능경영</a>
-              <a href="${page('transparency/#finance')}" role="menuitem">재정 및 활동보고</a>
-              <a href="${page('transparency/#accountability')}" role="menuitem">투명성과 책무성</a>
+              <a href="${page('transparency/')}" role="menuitem" data-i18n="chrome.menu.6">지속가능경영</a>
+              <a href="${page('transparency/#finance')}" role="menuitem" data-i18n="chrome.menu.7">재정 및 활동보고</a>
+              <a href="${page('transparency/#accountability')}" role="menuitem" data-i18n="chrome.menu.8">투명성과 책무성</a>
             </div>
           </div>
           <div class="nav-item-with-dropdown">
-            <a href="${page('communications/')}"${isCommunications ? ' class="active" aria-current="page"' : ''}>커뮤니티</a>
+            <a href="${page('communications/')}"${isCommunications ? ' class="active" aria-current="page"' : ''} data-i18n="nav.community">커뮤니티</a>
             <!-- MEDICON('대표 브랜드' 그룹)을 걷어내면서 일반 드롭다운으로 되돌렸다.
                  한 그룹만 남은 620px 메가는 대부분이 빈 칸이고, 그룹 라벨('알림')도
                  나뉠 상대가 없으면 줄만 하나 더 먹는다. MEDICON 은 우측 날개 배너와
                  푸터에 그대로 있다. -->
             <div class="nav-dropdown" role="menu">
-              <a href="${page('communications/#press')}" role="menuitem">보도자료</a>
-              <a href="${page('communications/#notice')}" role="menuitem">공지사항</a>
-              <a href="${page('communications/#newsletter')}" role="menuitem">뉴스레터</a>
+              <a href="${page('communications/#press')}" role="menuitem" data-i18n="chrome.menu.9">보도자료</a>
+              <a href="${page('communications/#notice')}" role="menuitem" data-i18n="chrome.menu.10">공지사항</a>
+              <a href="${page('communications/#newsletter')}" role="menuitem" data-i18n="chrome.menu.11">뉴스레터</a>
             </div>
           </div>
           <div class="nav-item-with-dropdown">
-            <a href="${page('together/')}"${isTogether ? ' class="active" aria-current="page"' : ''}>함께하기</a>
+            <a href="${page('together/')}"${isTogether ? ' class="active" aria-current="page"' : ''} data-i18n="nav.together">함께하기</a>
             <div class="nav-dropdown" role="menu">
-              <a href="${page('together/')}" role="menuitem">회원 안내</a>
-              <a href="${page('join/')}" role="menuitem">회원가입 신청</a>
-              <a href="${page('consultation/')}" role="menuitem">상담 신청</a>
+              <a href="${page('together/')}" role="menuitem" data-i18n="chrome.menu.12">회원 안내</a>
+              <a href="${page('join/')}" role="menuitem" data-i18n="chrome.menu.13">회원가입 신청</a>
+              <a href="${page('consultation/')}" role="menuitem" data-i18n="chrome.menu.14">상담 신청</a>
             </div>
           </div>
-          <a href="${page('patient-journey/')}"${isVisitKorea ? ' class="active" aria-current="page"' : ''}>Visit Korea</a>
+          <a href="${page('patient-journey/')}"${isVisitKorea ? ' class="active" aria-current="page"' : ''} data-i18n="nav.visitkorea">Visit Korea</a>
           <div class="nav-item-with-dropdown">
-            <a href="${page('programs/')}"${isResources ? ' class="active" aria-current="page"' : ''}>활동·자료</a>
+            <a href="${page('programs/')}"${isResources ? ' class="active" aria-current="page"' : ''} data-i18n="nav.resources">활동·자료</a>
             <div class="nav-dropdown" role="menu">
-              <a href="${page('programs/')}" role="menuitem">주요업무</a>
-              <a href="${page('programs/#history')}" role="menuitem">활동 연혁</a>
+              <a href="${page('programs/')}" role="menuitem" data-i18n="chrome.menu.15">주요업무</a>
+              <a href="${page('programs/#history')}" role="menuitem" data-i18n="chrome.menu.16">활동 연혁</a>
             </div>
           </div>
         </nav>
@@ -133,7 +133,7 @@ window.KMTPA = window.KMTPA || {};
         <!-- 회원 로그인. 사무국 로그인은 공개 사이트에서 걷어냈습니다 — 방문자가
              누를 일이 없고, 눌러도 권한이 없어 되돌아옵니다. 사무국은 내부 주소로
              바로 들어갑니다. -->
-        <a href="${page('login/')}" class="header-cta">로그인</a>
+        <a href="${page('login/')}" class="header-cta" data-i18n="chrome.login">로그인</a>
 
         <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="메뉴 열기" aria-controls="top-nav" aria-expanded="false">
           <i data-lucide="menu"></i>
@@ -148,6 +148,12 @@ window.KMTPA = window.KMTPA || {};
 
      각 페이지는 <div id="breadcrumb-mount" data-depth1="transparency"> 하나만
      두면 되고, 목록은 여기 한 곳에서 관리합니다. ----- */
+  // DEPTH1 의 key 와 번역 키(nav.*)를 잇는 표. 주소는 영어라 그대로 못 쓴다.
+  const KEY_ALIAS = {
+    about: 'about', transparency: 'transparency', communications: 'community',
+    together: 'together', 'patient-journey': 'visitkorea', programs: 'resources',
+  };
+
   NS.DEPTH1 = [
     { key: 'about', label: '협회 소개', route: 'about/' },
     { key: 'transparency', label: '투명경영', route: 'transparency/' },
@@ -162,18 +168,18 @@ window.KMTPA = window.KMTPA || {};
     if (!current) return '';
     const siblings = NS.DEPTH1
       .filter(d => d.key !== currentKey)
-      .map(d => `<a href="${page(d.route)}" role="menuitem">${d.label}</a>`)
+      .map(d => `<a href="${page(d.route)}" role="menuitem" data-i18n="nav.${KEY_ALIAS[d.key]}">${d.label}</a>`)
       .join('');
     return `
       <nav class="breadcrumb" aria-label="현재 위치">
         <div class="container-narrow breadcrumb-inner">
           <ol>
-            <li><a href="${page('')}">홈</a></li>
-            <li aria-current="page">${current.label}</li>
+            <li><a href="${page('')}" data-i18n="chrome.home">홈</a></li>
+            <li aria-current="page" data-i18n="nav.${KEY_ALIAS[currentKey]}">${current.label}</li>
           </ol>
           <div class="breadcrumb-siblings">
             <button type="button" class="breadcrumb-toggle" aria-expanded="false" aria-haspopup="true">
-              다른 메뉴
+              <span data-i18n="chrome.otherMenu">다른 메뉴</span>
               <i data-lucide="chevron-down"></i>
             </button>
             <div class="breadcrumb-menu" role="menu" hidden>${siblings}</div>
@@ -190,11 +196,11 @@ window.KMTPA = window.KMTPA || {};
           <a href="${page('')}" class="brand" aria-label="KMTPA 홈으로">
             <span class="brand-mark"><img src="${page('images_homepage/logo2.png')}" alt=""></span>
             <span class="brand-name">
-              <span class="ko">(사)한국의료관광진흥협회</span>
-              <span class="en">Korean Medical Tourism Promotion Association</span>
+              <span class="ko" data-i18n="chrome.brand.footerKo">(사)한국의료관광진흥협회</span>
+              <span class="en" data-i18n="chrome.brand.en">Korean Medical Tourism Promotion Association</span>
             </span>
           </a>
-          <p class="footer-tagline">
+          <p class="footer-tagline" data-i18n="chrome.tagline">
             대한민국 의료관광의 신뢰를 만듭니다. 회원 의료기관과 전문가 네트워크의 공식 협회.
           </p>
 
@@ -210,33 +216,33 @@ window.KMTPA = window.KMTPA || {};
              (위치 기준 매칭) 어드민의 footer.columns 순서와 반드시 같아야 합니다. -->
         <div class="footer-cols">
           <div class="footer-col">
-            <h4>협회 소개</h4>
-            <a href="${page('about/#greeting')}">인사말</a>
-            <a href="${page('about/#vision')}">비전·미션</a>
-            <a href="${page('about/#organization')}">조직</a>
-            <a href="${page('transparency/')}">투명경영</a>
+            <h4 data-i18n="nav.about">협회 소개</h4>
+            <a href="${page('about/#greeting')}" data-i18n="chrome.footer.2">인사말</a>
+            <a href="${page('about/#vision')}" data-i18n="chrome.footer.3">비전·미션</a>
+            <a href="${page('about/#organization')}" data-i18n="chrome.footer.4">조직</a>
+            <a href="${page('transparency/')}" data-i18n="nav.transparency">투명경영</a>
           </div>
 
           <div class="footer-col">
-            <h4>활동·자료</h4>
-            <a href="${page('programs/')}">주요업무</a>
-            <a href="${page('programs/#history')}">활동 연혁</a>
-            <a href="${page('patient-journey/')}">VISIT KOREA 전체 안내</a>
+            <h4 data-i18n="nav.resources">활동·자료</h4>
+            <a href="${page('programs/')}" data-i18n="chrome.footer.6">주요업무</a>
+            <a href="${page('programs/#history')}" data-i18n="chrome.footer.7">활동 연혁</a>
+            <a href="${page('patient-journey/')}" data-i18n="chrome.footer.visitkorea">VISIT KOREA 전체 안내</a>
           </div>
 
           <div class="footer-col">
-            <h4>커뮤니티</h4>
-            <a href="${page('communications/#press')}">보도자료</a>
-            <a href="${page('communications/#notice')}">공지사항</a>
-            <a href="${page('communications/#newsletter')}">뉴스레터</a>
+            <h4 data-i18n="nav.community">커뮤니티</h4>
+            <a href="${page('communications/#press')}" data-i18n="chrome.footer.8">보도자료</a>
+            <a href="${page('communications/#notice')}" data-i18n="chrome.footer.9">공지사항</a>
+            <a href="${page('communications/#newsletter')}" data-i18n="chrome.footer.10">뉴스레터</a>
           </div>
 
           <div class="footer-col footer-col--contact">
-            <h4>문의·연결</h4>
-            <a href="${page('together/')}">함께하기</a>
-            <a href="${page('join/')}">회원가입</a>
-            <a href="${page('consultation/')}">상담 신청</a>
-            <a href="${page('directions/')}">오시는 길</a>
+            <h4 data-i18n="chrome.col.문의·연결">문의·연결</h4>
+            <a href="${page('together/')}" data-i18n="nav.together">함께하기</a>
+            <a href="${page('join/')}" data-i18n="chrome.footer.12">회원가입</a>
+            <a href="${page('consultation/')}" data-i18n="chrome.footer.13">상담 신청</a>
+            <a href="${page('directions/')}" data-i18n="chrome.footer.14">오시는 길</a>
           </div>
         </div>
       </div>
@@ -259,7 +265,7 @@ window.KMTPA = window.KMTPA || {};
       <div class="footer-authorities">
         <div class="container footer-authorities-inner">
           <div class="footer-authorities-marks">
-            <span class="footer-authorities-label">소관 부처 · 공시</span>
+            <span class="footer-authorities-label" data-i18n="chrome.authorities">소관 부처 · 공시</span>
             <a href="https://www.mcst.go.kr/" target="_blank" rel="noopener">
               <img src="${page('images_homepage/authority/mcst.png')}" alt="문화체육관광부" width="588" height="147" decoding="async">
             </a>
@@ -273,9 +279,9 @@ window.KMTPA = window.KMTPA || {};
             <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
           </div>
           <div class="footer-authorities-legal">
-            <span>© 2026 (사)한국의료관광진흥협회. All rights reserved.</span>
-            <a href="${page('privacy/')}">개인정보처리방침</a>
-            <a href="${page('terms/')}">이용약관</a>
+            <span data-i18n="chrome.copyright">© 2026 (사)한국의료관광진흥협회. All rights reserved.</span>
+            <a href="${page('privacy/')}" data-i18n="chrome.footer.15">개인정보처리방침</a>
+            <a href="${page('terms/')}" data-i18n="chrome.footer.16">이용약관</a>
           </div>
         </div>
       </div>
@@ -300,8 +306,8 @@ window.KMTPA = window.KMTPA || {};
           </g>
         </svg>
         <span>
-          <span class="ko">한국의료관광진흥협회</span>
-          <span class="en">Korean Medical Tourism Promotion Association</span>
+          <span class="ko" data-i18n="chrome.brand.ko">한국의료관광진흥협회</span>
+          <span class="en" data-i18n="chrome.brand.en">Korean Medical Tourism Promotion Association</span>
         </span>
       </a>
     </div>
@@ -328,35 +334,35 @@ window.KMTPA = window.KMTPA || {};
     <nav class="hero-quickbar" aria-label="바로가기">
       <a href="${page('about/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V10l7-5 7 5v11"></path><path d="M10 21v-6h4v6"></path></svg>
-        <span class="qb-label">협회소개</span>
+        <span class="qb-label" data-i18n="chrome.qb-label.협회소개">협회소개</span>
       </a>
       <a href="${page('patient-journey/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2c2.7 2.7 4 6.2 4 10s-1.3 7.3-4 10c-2.7-2.7-4-6.2-4-10s1.3-7.3 4-10z"></path></svg>
-        <span class="qb-label">Visit Korea</span>
+        <span class="qb-label" data-i18n="chrome.qb-label.Visit Korea">Visit Korea</span>
       </a>
       <a href="${page('communications/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        <span class="qb-label">커뮤니티</span>
+        <span class="qb-label" data-i18n="chrome.qb-label.커뮤니티">커뮤니티</span>
       </a>
       <a href="${page('communications/#notice')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-6v14L3 13z"></path><path d="M11.6 16.9a3 3 0 1 1-5.6-1.9"></path></svg>
-        <span class="qb-label">공지사항</span>
+        <span class="qb-label" data-i18n="chrome.qb-label.공지사항">공지사항</span>
       </a>
       <a href="${page('join/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="16" y1="11" x2="22" y2="11"></line></svg>
-        <span class="qb-label">회원가입 안내</span>
+        <span class="qb-label" data-i18n="chrome.qb-label.회원가입 안내">회원가입 안내</span>
       </a>
       <a href="${page('about/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.7" y2="16.7"></line></svg>
-        <span class="qb-label">회원기관 찾기</span>
+        <span class="qb-label" data-i18n="chrome.qb-label.회원기관 찾기">회원기관 찾기</span>
       </a>
       <a href="https://mymedicon.com/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"></path></svg>
-        <span class="qb-label">MEDICON</span>
+        <span class="qb-label" data-i18n="chrome.qb-label.MEDICON">MEDICON</span>
       </a>
       <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
-        <span class="qb-label">인스타그램</span>
+        <span class="qb-label" data-i18n="chrome.qb-label.인스타그램">인스타그램</span>
       </a>
     </nav>
   `;
@@ -366,23 +372,23 @@ window.KMTPA = window.KMTPA || {};
   NS.QUICK_BANNER_HTML = `
     <aside class="quick-banner" aria-label="빠른 링크">
       <a href="${page('join/')}" class="quick-link quick-link--primary">
-        <span class="quick-label">회원가입</span>
+        <span class="quick-label" data-i18n="chrome.quick-label.회원가입">회원가입</span>
         <span class="quick-icon"><i data-lucide="user-plus"></i></span>
       </a>
       <a href="${page('communications/#newsletter')}" class="quick-link">
-        <span class="quick-label">뉴스레터</span>
+        <span class="quick-label" data-i18n="chrome.quick-label.뉴스레터">뉴스레터</span>
         <span class="quick-icon"><i data-lucide="mail"></i></span>
       </a>
       <a href="https://mymedicon.com/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--flagship">
-        <span class="quick-label">MEDICON</span>
+        <span class="quick-label" data-i18n="chrome.quick-label.MEDICON">MEDICON</span>
         <span class="quick-icon"><i data-lucide="arrow-up-right"></i></span>
       </a>
       <a href="https://mymedicon.com/alliance/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--network">
-        <span class="quick-label">MEDICON Network</span>
+        <span class="quick-label" data-i18n="chrome.quick-label.MEDICON Network">MEDICON Network</span>
         <span class="quick-icon"><i data-lucide="network"></i></span>
       </a>
       <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--instagram">
-        <span class="quick-label">Instagram</span>
+        <span class="quick-label" data-i18n="chrome.quick-label.Instagram">Instagram</span>
         <span class="quick-icon"><i data-lucide="instagram"></i></span>
       </a>
     </aside>

@@ -806,6 +806,9 @@ window.KMTPA = window.KMTPA || {};
 
   NS.applyPublishedHomepageContent = async function () {
     const data = await readPublishedData();
+    // i18n.js 가 payload 의 translations 를 읽습니다 — 사무국이 고친 번역이
+    // 파일(i18n/*.json)보다 우선합니다.
+    NS.publishedData = data;
     const newsletter = normalizeNewsletter(findNewsletterSection(data));
     let didApply = false;
 

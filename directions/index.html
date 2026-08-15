@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="../css/layout.css?v=6a6181c9">
+  <link rel="stylesheet" href="../css/layout.css?v=10ed5a5a">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
   <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="../css/about.css?v=65b91c16">
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../css/legal.css?v=9b1df0da">
   <link rel="stylesheet" href="../css/newsletter-detail.css?v=31525e4e">
 </head>
-<body>
+<body data-i18n-page="directions">
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
@@ -38,9 +38,9 @@
   <!-- ============== Hero ============== -->
   <section class="journey-hero">
     <div class="container-narrow">
-      <span class="eyebrow">Visit Us · 오시는 길</span>
-      <h1>한국의료관광진흥협회<br>사무국 안내</h1>
-      <p class="lede">
+      <span data-i18n="directions.span.1" class="eyebrow">Visit Us · 오시는 길</span>
+      <h1 data-i18n="directions.h1.1">한국의료관광진흥협회<br>사무국 안내</h1>
+      <p data-i18n="directions.p.1" class="lede">
         협회를 방문하시는 회원 기관, 전문가, 그리고 협력 파트너 분들을 위한 위치 안내입니다.
         원활한 응대를 위해 방문 전 사전 연락을 부탁드립니다.
       </p>
@@ -52,14 +52,14 @@
     <div class="container-narrow">
       <div class="section-head">
         <span class="eyebrow">Address & Contact</span>
-        <h2>본부 위치 및 연락처</h2>
+        <h2 data-i18n="directions.h2.1">본부 위치 및 연락처</h2>
       </div>
       <div class="directions-row">
 
         <div class="address-block">
           <dl>
-            <dt>주소</dt>
-            <dd>
+            <dt data-i18n="directions.dt.1">주소</dt>
+            <dd data-i18n="directions.dd.1">
               서울특별시 서초구 강남대로 405<br>
               통영빌딩 11층<br>
               <span class="text-mini">(우편번호 06615)</span>
@@ -67,19 +67,19 @@
 
             <div class="address-divider"></div>
 
-            <dt>전화</dt>
+            <dt data-i18n="directions.dt.2">전화</dt>
             <dd><a href="tel:+82-2-735-8759">02-735-8759</a></dd>
 
-            <dt>이메일</dt>
-            <dd>
+            <dt data-i18n="directions.dt.3">이메일</dt>
+            <dd data-i18n="directions.dd.2">
               <a href="mailto:info@kmtpa.org">info@kmtpa.org</a> (일반 문의)<br>
               <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a> (Visit Korea)
             </dd>
 
             <div class="address-divider"></div>
 
-            <dt>운영시간</dt>
-            <dd>
+            <dt data-i18n="directions.dt.4">운영시간</dt>
+            <dd data-i18n="directions.dd.3">
               평일 09:00 – 18:00<br>
               <span class="text-mini">점심 12:00 – 13:00 / 토·일·공휴일 휴무</span>
             </dd>
@@ -95,7 +95,7 @@
               title="한국의료관광진흥협회 위치 — 서울특별시 서초구 강남대로 405 통영빌딩"
               allowfullscreen></iframe>
           </div>
-          <div class="map-caption">
+          <div data-i18n="directions.div.1" class="map-caption">
             <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C%20405%20%ED%86%B5%EC%98%81%EB%B9%8C%EB%94%A9%2011%EC%B8%B5/address/3zjHRP,2AJcPM,%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EA%B0%95%EB%82%A8%EB%8C%80%EB%A1%9C%20405?isCorrectAnswer=true" target="_blank" rel="noopener">
               네이버 지도에서 보기 →
             </a>
@@ -115,7 +115,7 @@
     <div class="container-narrow">
       <div class="section-head">
         <span class="eyebrow">Getting Here</span>
-        <h2>대중교통 · 주차 안내</h2>
+        <h2 data-i18n="directions.h2.2">대중교통 · 주차 안내</h2>
       </div>
 
       <div class="transit-grid">
@@ -123,24 +123,24 @@
         <article class="transit-card">
           <div class="info-head">
             <span class="info-icon"><i data-lucide="train"></i></span>
-            <h3>지하철</h3>
+            <h3 data-i18n="directions.h3.1">지하철</h3>
           </div>
           <ul>
-            <li><strong><span class="line-badge line-2">2</span>강남역</strong>10번 출구 도보 약 2분</li>
-            <li><strong><span class="line-badge line-sb">신</span>강남역</strong>신분당선 환승역 이용 가능</li>
+            <li data-i18n="directions.li.1"><strong><span class="line-badge line-2">2</span>강남역</strong>10번 출구 도보 약 2분</li>
+            <li data-i18n="directions.li.2"><strong><span class="line-badge line-sb">신</span>강남역</strong>신분당선 환승역 이용 가능</li>
           </ul>
         </article>
 
         <article class="transit-card">
           <div class="info-head">
             <span class="info-icon"><i data-lucide="bus"></i></span>
-            <h3>버스</h3>
+            <h3 data-i18n="directions.h3.2">버스</h3>
           </div>
           <ul>
-            <li>
+            <li data-i18n="directions.li.3">
               <strong>22012</strong>지하철2호선강남역(중) 정류장 — 논현역 방면 하차
             </li>
-            <li>
+            <li data-i18n="directions.li.4">
               <strong>22850</strong>강남역·서초초교앞 정류장 — 강남역 삼성전자 방면 하차
             </li>
           </ul>
@@ -149,11 +149,11 @@
         <article class="transit-card">
           <div class="info-head">
             <span class="info-icon"><i data-lucide="car"></i></span>
-            <h3>자가용 · 주차</h3>
+            <h3 data-i18n="directions.h3.3">자가용 · 주차</h3>
           </div>
           <ul>
-            <li><strong>건물 주차장</strong>통영빌딩 지하 주차장 (유료)</li>
-            <li><strong>유의 사항</strong>강남대로 혼잡 구간, 대중교통 권장</li>
+            <li data-i18n="directions.li.5"><strong>건물 주차장</strong>통영빌딩 지하 주차장 (유료)</li>
+            <li data-i18n="directions.li.6"><strong>유의 사항</strong>강남대로 혼잡 구간, 대중교통 권장</li>
           </ul>
         </article>
 
@@ -166,8 +166,8 @@
     <div class="container-narrow">
       <div class="visit-note">
         <div class="label">Before You Visit</div>
-        <h3>방문 전 안내드립니다</h3>
-        <p>
+        <h3 data-i18n="directions.h3.4">방문 전 안내드립니다</h3>
+        <p data-i18n="directions.p.2">
           협회 사무국은 회원 응대·정책 협의·국제 협력 업무로 외부 일정이 잦습니다.
           원활한 응대를 위해 방문 전 담당자와 일정을 사전에 조율해주시기 바랍니다.
           일반 문의는 <a href="mailto:info@kmtpa.org" class="inline-link">info@kmtpa.org</a> 또는 대표 전화로 연락 부탁드립니다.
@@ -180,10 +180,11 @@
   <div id="footer-mount"></div>
 
   <script src="../js/runtime-config.js?v=fa335a2f"></script>
-  <script src="../js/templates.js?v=4f9f1d6c"></script>
+  <script src="../js/templates.js?v=414ee8ca"></script>
   <script src="../js/components.js?v=85d5c6c1"></script>
   <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
-  <script src="../js/app.js?v=add67c40"></script>
-  <script src="../js/cms.js?v=04bce740"></script>
+  <script src="../js/app.js?v=55b8f734"></script>
+  <script src="../js/cms.js?v=7bf0c3ae"></script>
+  <script src="../js/i18n.js?v=624dcfea"></script>
 </body>
 </html>
