@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 로그인 — 한국의료관광진흥협회 KMTPA</title>
+  <meta name="description" content="한국의료관광진흥협회 회원 로그인. 내 정보와 문의 답변을 확인합니다.">
+  <meta name="theme-color" content="#020028">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="../images_homepage/logo2.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="../css/base.css?v=1926d33a">
+  <link rel="stylesheet" href="../css/layout.css?v=0114a817">
+  <link rel="stylesheet" href="../css/components.css?v=c7b6c43d">
+  <link rel="stylesheet" href="../css/pages.css?v=942c545e">
+  <!-- 폼 요소와 색 토큰은 join.css 것을 그대로 씁니다 -->
+  <link rel="stylesheet" href="../css/join.css?v=9b2875be">
+  <link rel="stylesheet" href="../css/member.css?v=063b815c">
+</head>
+<body class="is-join is-member">
+
+  <div id="header-mount"></div>
+
+  <main class="login-wrap">
+    <div class="login-card">
+
+      <p class="preview-note">
+        <b>화면 미리보기입니다.</b> 회원 인증이 아직 서버에 없어, 어떤 값을 넣어도
+        마이페이지 예시 화면으로 넘어갑니다. 실제 로그인은 인증이 붙은 뒤 동작합니다.
+      </p>
+
+      <span class="eyebrow">Member · 회원</span>
+      <h1>회원 로그인</h1>
+      <p class="lede">가입하신 이메일로 로그인하시면 내 정보와 문의 답변을 확인하실 수 있습니다.</p>
+
+      <form class="login-form" data-login-form novalidate>
+
+        <!-- 실패 요약. 화면을 못 보는 분께는 이쪽이 유일한 신호라 role=alert 을 답니다.
+             항목별 문구도 따로 남겨 어느 칸이 틀렸는지 알 수 있게 합니다. -->
+        <p class="form-error" data-login-error role="alert" tabindex="-1" hidden></p>
+
+        <label class="field">
+          <span>이메일</span>
+          <input id="login-email" name="email" type="email" autocomplete="email"
+                 placeholder="name@email.com" aria-describedby="login-email-error" required>
+          <span class="field-error" id="login-email-error" data-error-for="login-email" hidden></span>
+        </label>
+
+        <label class="field">
+          <span>비밀번호</span>
+          <input id="login-password" name="password" type="password" autocomplete="current-password"
+                 aria-describedby="login-password-error" required>
+          <span class="field-error" id="login-password-error" data-error-for="login-password" hidden></span>
+        </label>
+
+        <div class="login-actions">
+          <button type="submit" class="btn-solid" data-login-submit>로그인</button>
+        </div>
+      </form>
+
+      <div class="login-links">
+        <a href="../join/index.html">회원가입</a>
+        <span aria-hidden="true">·</span>
+        <a href="mailto:info@kmtpa.org?subject=%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%20%EC%B0%BE%EA%B8%B0">비밀번호를 잊으셨나요?</a>
+        <span aria-hidden="true">·</span>
+        <a href="../consultation/index.html">상담 신청</a>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <script src="../js/templates.js?v=c5e33e65"></script>
+  <script src="../js/components.js?v=727ff44e"></script>
+  <script src="../js/app.js?v=c23b9178"></script>
+  <script src="../js/member.js?v=5690e8e1"></script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+/* =========================================================================
+   member.css — 회원 로그인(login/) · 마이페이지(mypage/) 전용
+   (사)한국의료관광진흥협회 KMTPA 공개 홈페이지
+
+   폼 요소(.field · .btn-solid · .form-legend)와 색 토큰은 join.css 것을 그대로
+   씁니다. 그래서 두 화면은 <body class="is-join is-member"> 로 엽니다 —
+   consultation/ 이 이미 쓰는 방식입니다.
+
+   여기에는 이 두 화면에만 있는 것만 둡니다: 로그인 카드, 마이페이지 2단 배치,
+   문의·답변 아코디언.
+   base/layout/components/pages/join.css 다음에 로드하세요.
+   ========================================================================= */
+
+/* 로그인·마이페이지에서는 날개 배너의 회원가입 버튼을 감춥니다.
+   로그인 화면에는 이미 가입 링크가 있고, 마이페이지는 이미 회원입니다. */
+.is-member .quick-link--primary { display: none; }
+
+/* -------------------------------------------------------------------------
+   로그인 — 화면 가운데 카드 하나
+   ------------------------------------------------------------------------- */
+.login-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 72px 24px 120px;
+}
+.login-card {
+  width: 100%;
+  max-width: 420px;
+}
+.login-card h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--join-ink);
+}
+.login-card .lede {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--join-body);
+}
+.login-form { margin-top: 34px; }
+.login-form .field + .field { margin-top: 8px; }
+.login-actions { margin-top: 26px; }
+.login-actions .btn-solid { width: 100%; }
+
+/* 제출 중에는 버튼이 눌린 티가 나야 합니다 — 아무 반응이 없으면 다시 누릅니다. */
+.btn-solid[aria-busy="true"] {
+  opacity: 0.72;
+  cursor: progress;
+}
+
+.login-links {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--join-line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 14px;
+  color: var(--join-body);
+}
+.login-links a {
+  color: var(--join-ink);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.login-links a:hover { border-bottom-color: var(--join-ink); }
+
+/* -------------------------------------------------------------------------
+   오류 표시
+   폼 위 요약과 항목별 문구를 함께 둡니다. 요약만 있으면 어느 칸이 틀렸는지
+   모르고, 항목별만 있으면 화면을 못 보는 사람이 실패 자체를 놓칩니다.
+   ------------------------------------------------------------------------- */
+.form-error {
+  margin-bottom: 18px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(192, 57, 43, 0.28);
+  background: #FEF4F3;
+  color: #96271C;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.form-error[hidden] { display: none; }
+.form-error:focus { outline: 2px solid var(--join-required); outline-offset: 2px; }
+
+/* 오류 문구 자리를 미리 비워 둡니다.
+   문구가 나타나고 사라질 때마다 아래 것들이 밀리면, 고치는 도중에 버튼이
+   움직여 엉뚱한 곳을 누르게 됩니다. 자리는 늘 차지하되 글자만 나타납니다.
+   [hidden] 은 그대로 두어 화면 낭독기가 빈 줄을 읽지 않게 합니다. */
+.login-form .field {
+  position: relative;
+  padding-bottom: 22px;
+}
+.field-error {
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--join-required);
+}
+.field-error[hidden] { display: none; }
+
+.field input[aria-invalid="true"] {
+  border-color: var(--join-required);
+  background: #FEF7F6;
+}
+
+/* -------------------------------------------------------------------------
+   마이페이지 — 왼쪽 내 정보, 오른쪽 문의
+   ------------------------------------------------------------------------- */
+.mypage-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.mypage-head .who {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--join-body);
+}
+.mypage-head .who b { color: var(--join-ink); }
+
+.mypage-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .mypage-grid { grid-template-columns: 1fr; gap: 22px; }
+}
+
+.panel {
+  border: 1px solid var(--join-line);
+  border-radius: 14px;
+  background: #fff;
+  padding: 26px 26px 24px;
+}
+.panel > h2 {
+  margin: 0 0 18px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--join-ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.panel > h2 .count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--join-body);
+  background: var(--join-band);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+/* 내 정보 — 항목 이름과 값 */
+.info-dl {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 12px 14px;
+  margin: 0;
+  font-size: 14.5px;
+}
+.info-dl dt { color: var(--join-faint); font-weight: 500; }
+.info-dl dd { margin: 0; color: var(--join-ink); word-break: break-word; }
+
+.status-pill {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.status-approved { background: #E8F5EE; color: #1B6B45; }
+.status-pending  { background: var(--join-band); color: var(--join-body); }
+.status-rejected { background: #FDECEA; color: #96271C; }
+.status-withdrawn{ background: var(--join-band); color: var(--join-faint); }
+
+.panel-foot {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--join-line);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--join-faint);
+}
+.panel-foot a { color: var(--join-ink); font-weight: 600; }
+
+/* -------------------------------------------------------------------------
+   문의 목록 — 제목 줄을 누르면 내용과 답변이 펼쳐집니다
+   ------------------------------------------------------------------------- */
+.inquiry {
+  border: 1px solid var(--join-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.inquiry + .inquiry { margin-top: 12px; }
+
+.inquiry-summary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: #fff;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.inquiry-summary:hover { background: var(--join-band); }
+.inquiry-summary .title {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--join-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.inquiry-summary .date {
+  font-size: 13px;
+  color: var(--join-faint);
+  flex-shrink: 0;
+}
+.inquiry-summary .chev {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--join-faint);
+  transition: transform 0.2s;
+}
+.inquiry.is-open .chev { transform: rotate(180deg); }
+
+.inquiry-body {
+  padding: 0 18px 18px;
+  border-top: 1px solid var(--join-line);
+}
+.inquiry-body[hidden] { display: none; }
+
+.inquiry-block { padding-top: 16px; }
+.inquiry-block .who {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--join-eyebrow);
+  margin-bottom: 7px;
+}
+.inquiry-block p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--join-body);
+  white-space: pre-wrap;
+}
+
+/* 답변은 문의와 구별돼야 합니다 — 같은 모양이면 어느 쪽이 답인지 안 보입니다. */
+.inquiry-answer {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  background: var(--join-band);
+  border-left: 3px solid var(--join-gold);
+}
+.inquiry-answer .who { color: #B07E23; }
+.inquiry-answer p { color: var(--join-ink); }
+.inquiry-answer .when {
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: var(--join-faint);
+}
+
+/* 아직 답변이 없을 때 — 빈 자리로 두지 않고 다음에 무슨 일이 생기는지 적습니다. */
+.inquiry-waiting {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px dashed var(--join-line-strong);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--join-faint);
+}
+
+/* 문의가 하나도 없을 때 */
+.empty {
+  padding: 40px 20px;
+  text-align: center;
+}
+.empty svg {
+  width: 26px;
+  height: 26px;
+  color: var(--join-line-strong);
+}
+.empty p {
+  margin: 12px 0 0;
+  font-size: 14.5px;
+  color: var(--join-body);
+}
+.empty .btn-ghost-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--join-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--join-ink);
+}
+
+/* -------------------------------------------------------------------------
+   아직 서버에 안 붙었다는 표시
+   화면만 먼저 만든 상태라, 진짜로 로그인된 것처럼 보이면 안 됩니다.
+   ------------------------------------------------------------------------- */
+.preview-note {
+  margin: 0 auto 26px;
+  max-width: 1280px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: #FFF8E8;
+  border: 1px solid #F0D9A6;
+  color: #7A5B12;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+.preview-note b { color: #5C4409; }
+
+@media (prefers-reduced-motion: reduce) {
+  .inquiry-summary .chev { transition: none; }
+}
