@@ -43,6 +43,9 @@
 .journey-hero--banner {
   padding: 0;
   border-bottom: none;
+  /* 이미지가 띠 밖으로 나간 부분을 자른다. 마스크가 그 자리에서 이미
+     투명해서 자른 경계는 안 보인다. */
+  overflow: hidden;
 }
 .hero-banner {
   display: flex;
@@ -51,27 +54,51 @@
   /* 배너가 붙는 페이지도 같은 띠 높이를 쓴다 — 주요업무만 혼자 300px 이면
      메뉴를 옮길 때 그 페이지에서만 화면이 튄다. */
   min-height: var(--hero-band-h);
+  /* 절대 배치한 이미지가 뷰포트 끝이 아니라 컨테이너 오른쪽 끝에 맞도록 */
+  position: relative;
 }
 .hero-banner-copy {
   flex: 1 1 auto;
   min-width: 0;
   padding: 24px 0;
 }
+/* 이미지를 흐름에서 뺐으므로 글 폭은 따로 잡아 줘야 한다. 안 잡으면 컨테이너
+   폭을 다 써서 문장 끝이 사진 밑으로 들어가 안 읽힌다 — 실제로 주요업무에서
+   '…시대에 진입했습니다' 가 사진에 묻혔다. 이미지 상한과 합이 112% 인데,
+   겹치는 12% 는 이미지 왼쪽 흐린 구간이라 글을 가리지 않는다. */
+.journey-hero--banner .hero-banner-copy { max-width: 56%; }
 .hero-banner-art {
-  flex: 0 0 auto;
-  /* 띠 높이에서 위아래 숨통만 뺀 값. 이미지가 띠보다 크면 그 페이지만
-     띠가 늘어난다 — 실제로 주요업무만 300px 이었다. */
-  height: calc(var(--hero-band-h) - 24px);
+  /* 띠(224px)보다 크게 키우고 네 변을 흐리게 지운다.
+
+     흐름에서 빼고 절대 배치하는 이유: 플렉스 항목으로 두면 이미지가 커진
+     만큼 띠도 같이 늘어나 이 페이지만 다른 높이가 된다. 띠 밖으로 나간
+     부분은 .journey-hero--banner 의 overflow:hidden 이 자른다.
+
+     세로 마스크가 12% 에서 이미 투명한 것이 핵심이다. 이미지 296px 중
+     띠 밖으로 나가는 건 위아래 각 36px(=12.2%) 이라, 잘리는 자리에서
+     알파가 0 이면 자른 티가 안 난다. 높이를 바꾸면 이 12% 도 같이 바꾼다. */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  height: calc(var(--hero-band-h) + 72px);
   width: auto;
-  display: block;
-  object-fit: contain;
+  /* 가로 비율이 넓은 그림(커뮤니케이션 배너는 2.4:1)은 좁은 화면에서 글 자리를
+     다 먹는다. 폭에 상한을 두고, 넘치면 늘리는 대신 왼쪽을 잘라낸다 —
+     이런 배너는 왼쪽이 비어 있어서 잘라도 잃는 게 없다. */
+  max-width: 56%;
+  object-fit: cover;
   object-position: right center;
-  /* 좌우 가장자리를 흐리게 지워 흰 바탕과 이어지게 합니다.
-     사각형 경계가 그대로 보이면 사진이 얹힌 티가 납니다. */
-  -webkit-mask-image: linear-gradient(90deg,
-    transparent 0%, rgba(0, 0, 0, 0.35) 8%, #000 26%, #000 84%, transparent 100%);
-  mask-image: linear-gradient(90deg,
-    transparent 0%, rgba(0, 0, 0, 0.35) 8%, #000 26%, #000 84%, transparent 100%);
+  display: block;
+  pointer-events: none;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.18) 14%, #000 40%, #000 86%, transparent 100%),
+    linear-gradient(180deg, transparent 12%, #000 34%, #000 66%, transparent 88%);
+  mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.18) 14%, #000 40%, #000 86%, transparent 100%),
+    linear-gradient(180deg, transparent 12%, #000 34%, #000 66%, transparent 88%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
 @media (max-width: 1080px) {
@@ -88,7 +115,10 @@
     border-bottom: 1px solid var(--border-default);
   }
   .hero-banner { display: block; min-height: 0; }
+  /* 이미지가 빠지면 글이 폭을 다 쓴다. 56% 상한을 그대로 두면 줄 수가 늘어
+     이 페이지만 띠가 261px 이 된다(다른 페이지 224). */
   .hero-banner-copy { padding: 0; }
+  .journey-hero--banner .hero-banner-copy { max-width: none; }
   .hero-banner-art { display: none; }
 }
 .journey-hero .lede {
