@@ -417,67 +417,72 @@
 }
 
 /* -------------------------------------------------------------------------
-   Why Korea — 테두리로 묶은 4열 그리드
-   #why-korea / .section-head / .pillar-grid .pillar 구조는 관리자 CMS가
-   찾아 쓰는 계약이므로 클래스 이름을 바꾸지 마세요 (js/cms.js).
+   전체 화면 섹션 — 스크롤하면 한 장씩 걸린다
+
+   홈은 히어로와 `.home-full` 섹션이 각각 한 화면을 차지하고, 스크롤하면
+   그 경계에 딱 멈춘다. 높이는 히어로와 같은 값을 쓴다 (100vh / 최소 760px).
+
+   `mandatory` 가 아니라 `proximity` 다. mandatory 는 경계 근처가 아니어도
+   무조건 끌어당겨서, 조금만 굴려도 보던 자리에서 도로 튕겨 나간다
+   (400px 씩 여덟 번을 굴려도 히어로에 붙어 있었다). proximity 는 경계에
+   가까울 때만 붙어서, 걸리는 느낌은 남고 손이 끌려가지는 않는다.
+
+   `scroll-snap-stop: always` 도 쓰지 않는다. 한 번에 한 장씩만 넘어가게
+   막는 속성이라 빠르게 훑을 수 없다.
+
+   사이에 낀 짧은 섹션에도 스냅점을 준다. 스냅점 없는 섹션이 두 스냅점
+   사이에 있으면 브라우저가 그 위를 지나쳐 버린다 — 푸터도 같은 이유다.
+
+   높이는 `height` 가 아니라 `min-height` 다. 내용이 넘치면 잘리는 대신
+   섹션이 늘어나야 한다 (내용은 아직 채우는 중이다).
    ------------------------------------------------------------------------- */
-.is-home #why-korea {
-  background: #fff;
-  padding: 120px 0 110px;
+html:has(body.is-home) {
+  scroll-snap-type: y proximity;
+  /* 스냅이 붙을 때와 앵커 이동이 같은 속도로 움직이게 한다 */
+  scroll-behavior: smooth;
 }
-.is-home #why-korea .section-head .eyebrow {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: var(--home-eyebrow);
-  text-transform: uppercase;
+
+.is-home > section,
+.is-home #footer-mount {
+  scroll-snap-align: start;
 }
-.is-home #why-korea .section-head h2 {
-  margin: 18px 0 0;
-  font-size: 38px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--home-heading);
+.is-home #footer-mount { scroll-snap-align: end; }
+
+.is-home .home-full {
+  min-height: 100vh;
+  min-height: 100dvh;   /* 모바일 주소창이 접혔다 펴져도 한 화면 */
+  display: flex;
+  align-items: center;
+  /* 고정 헤더(72px)가 내용을 덮지 않도록. 위아래를 같이 줘서 가운데 정렬을
+     유지한다 — 위쪽만 주면 내용이 아래로 밀린다. */
+  padding: 72px 0;
 }
-.is-home #why-korea .section-head .desc {
-  margin: 16px 0 0;
-  font-size: 16px;
-  color: var(--home-body);
+@supports not (min-height: 100dvh) {
+  .is-home .home-full { min-height: 760px; }
 }
-.is-home #why-korea .pillar-grid {
-  margin-top: 54px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  border: 1px solid var(--home-line);
-  border-radius: 10px;
-  background: #fff;
-  overflow: hidden;
+.is-home .home-full > .container { width: 100%; }
+
+/* 들어올 때 살짝 떠오른다.
+
+   JS 없이 스크롤 타임라인으로 그린다 — components.js 는 이미 734줄이라
+   여기에 IntersectionObserver 를 더 얹고 싶지 않았다.
+
+   `@supports` 로 감싼 이유: 이 기능이 없는 브라우저에서는 규칙 전체가
+   무시되어 내용이 그냥 보인다. 감싸지 않으면 opacity:0 만 남아
+   **화면이 비어 보인다.** */
+@supports (animation-timeline: view()) {
+  .is-home .home-full > .container {
+    animation: home-rise linear both;
+    animation-timeline: view();
+    /* 아래에서 35% 들어왔을 때 시작해 화면 한가운데서 끝난다.
+       cover 100% 까지 끌면 나갈 때 다시 흐려져 산만하다. */
+    animation-range: entry 15% cover 45%;
+  }
 }
-.is-home #why-korea .pillar {
-  padding: 36px 30px;
-  border-right: 1px solid var(--home-line);
-  background: none;
-}
-.is-home #why-korea .pillar:last-child { border-right: none; }
-.is-home #why-korea .pillar-num {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #2A2A5C;
-}
-.is-home #why-korea .pillar h3 {
-  margin: 18px 0 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--home-heading);
-}
-.is-home #why-korea .pillar p {
-  margin: 14px 0 0;
-  font-size: 14.5px;
-  line-height: 1.75;
-  color: var(--home-body);
-  text-wrap: pretty;
+
+@keyframes home-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* -------------------------------------------------------------------------
@@ -487,9 +492,6 @@
   .hero-headline { font-size: 50px; }
   .hero-quickbar a { height: 112px; }
   .hero-quickbar .qb-label { font-size: 13px; }
-  .is-home #why-korea .pillar-grid { grid-template-columns: repeat(2, 1fr); }
-  .is-home #why-korea .pillar:nth-child(2n) { border-right: none; }
-  .is-home #why-korea .pillar:nth-child(-n+2) { border-bottom: 1px solid var(--home-line); }
 }
 
 @media (max-width: 900px) {
@@ -503,6 +505,16 @@
   }
   .hero-stage { height: auto; min-height: 0; display: block; }
   .hero-topbar { display: none; }
+
+  /* 스냅은 데스크톱에서만. 히어로가 여기서 height:auto 로 풀리기 때문에
+     기준이 되는 한 화면이 사라지고, 손가락 스크롤에 강제 스냅이 걸리면
+     읽던 자리에서 튕겨 나간다. */
+  html:has(body.is-home) { scroll-snap-type: none; }
+  .is-home .home-full {
+    min-height: 0;
+    display: block;
+    padding: 56px 0;
+  }
 
   /* 사진은 정사각형으로 고정합니다. 예전에는 카피·인디케이터·바로가기 높이를
      모두 합친 만큼 사진이 세로로 늘어나, 바로가기 박스가 첫 화면 밖으로
@@ -548,17 +560,12 @@
   .hero-quickbar a { height: 96px; }
   .hero-quickbar a:nth-child(4n) { border-right: none; }
   .hero-quickbar a:nth-child(-n+4) { border-bottom: 1px solid rgba(255, 255, 255, 0.10); }
-  .is-home #why-korea { padding: 72px 0 64px; }
-  .is-home #why-korea .section-head h2,
 }
 
 @media (max-width: 600px) {
   .hero-quickbar { grid-template-columns: repeat(2, 1fr); }
   .hero-quickbar a:nth-child(2n) { border-right: none; }
   .hero-quickbar a:nth-child(-n+6) { border-bottom: 1px solid rgba(255, 255, 255, 0.10); }
-  .is-home #why-korea .pillar-grid { grid-template-columns: 1fr; }
-  .is-home #why-korea .pillar { border-right: none; border-bottom: 1px solid var(--home-line); }
-  .is-home #why-korea .pillar:last-child { border-bottom: none; }
 }
 
 /* 모션 최소화 설정 존중 — 자동 전환과 확대는 JS에서도 함께 끕니다. */
@@ -568,4 +575,13 @@
   .hero-topbar, .hero-copy { animation: none; }
   .hero-mouse span { animation: none; }
   .is-home .site-header { transition: none; }
+
+  /* 떠오르는 연출과 스냅 애니메이션을 끈다. animation:none 만 주면
+     opacity:0 인 첫 프레임에 멈춰 내용이 안 보이므로 값을 되돌린다. */
+  .is-home .home-full > .container {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  html:has(body.is-home) { scroll-behavior: auto; }
 }
