@@ -239,19 +239,6 @@ window.KMTPA = window.KMTPA || {};
           <span class="en">Korean Medical Tourism Promotion Association</span>
         </span>
       </a>
-      <div class="hero-lang" data-lang-select>
-        <button type="button" class="hero-lang-toggle" aria-haspopup="listbox" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.4 3.6 5.6 3.6 9s-1.2 6.6-3.6 9c-2.4-2.4-3.6-5.6-3.6-9s1.2-6.6 3.6-9z"></path></svg>
-          <span class="hero-lang-current">한국어</span>
-          <svg class="hero-lang-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <ul class="hero-lang-menu" role="listbox" aria-label="언어 선택" hidden>
-          <li role="option" aria-selected="true" class="is-current">한국어</li>
-          <li role="option" aria-selected="false" aria-disabled="true">English<span class="hero-lang-soon">준비중</span></li>
-          <li role="option" aria-selected="false" aria-disabled="true">中文<span class="hero-lang-soon">준비중</span></li>
-          <li role="option" aria-selected="false" aria-disabled="true">日本語<span class="hero-lang-soon">준비중</span></li>
-        </ul>
-      </div>
     </div>
   `;
 
@@ -264,34 +251,37 @@ window.KMTPA = window.KMTPA || {};
       <a href="https://mymedicon.com/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"></path></svg>
         <span class="qb-label">MEDICON</span>
-      </a>
-      <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
-        <span class="qb-label">인스타그램</span>
-      </a>
-      <a href="${page('about/')}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-2"></path><path d="M10 7h4M10 11h4M10 15h4"></path></svg>
-        <span class="qb-label">협회 소개</span>
-      </a>
-      <a href="${page('communications/')}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-6v14L3 13z"></path><path d="M11.6 16.9a3 3 0 1 1-5.6-1.9"></path></svg>
-        <span class="qb-label">커뮤니케이션</span>
+        <span class="qb-sub">바로가기</span>
       </a>
       <a href="${page('patient-journey/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2c2.7 2.7 4 6.2 4 10s-1.3 7.3-4 10c-2.7-2.7-4-6.2-4-10s1.3-7.3 4-10z"></path></svg>
         <span class="qb-label">Visit Korea</span>
-      </a>
-      <a href="${page('programs/')}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-        <span class="qb-label">활동·자료</span>
-      </a>
-      <a href="${page('consultation/')}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        <span class="qb-label">상담 신청</span>
+        <span class="qb-sub">바로가기</span>
       </a>
       <a href="${page('join/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="16" y1="11" x2="22" y2="11"></line></svg>
-        <span class="qb-label">회원가입</span>
+        <span class="qb-label">회원가입 안내</span>
+      </a>
+      <a href="${page('communications/')}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-6v14L3 13z"></path><path d="M11.6 16.9a3 3 0 1 1-5.6-1.9"></path></svg>
+        <span class="qb-label">공지사항</span>
+      </a>
+      <a href="${page('programs/')}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        <span class="qb-label">자료실</span>
+      </a>
+      <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+        <span class="qb-label">인스타그램</span>
+        <span class="qb-sub">바로가기</span>
+      </a>
+      <a href="${page('consultation/')}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span class="qb-label">문의하기</span>
+      </a>
+      <a href="${page('about/')}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.7" y2="16.7"></line></svg>
+        <span class="qb-label">회원기관 찾기</span>
       </a>
     </nav>
   `;
