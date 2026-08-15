@@ -643,41 +643,6 @@
   height: 12px;
 }
 
-/* ---------- 이사회 (Board of Directors) ---------- */
-.board-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-}
-.board-member {
-  background: #fff;
-  border: 1px solid var(--border-default);
-  border-radius: 8px;
-  padding: 24px 24px 22px;
-  display: flex;
-  flex-direction: column;
-}
-.board-member .member-role {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--navy-700);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.board-member h3 {
-  font-size: 18px;
-  color: var(--text-heading);
-  margin-bottom: 6px;
-  letter-spacing: 0.04em;
-}
-.board-member .member-org {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.55;
-  margin-top: auto;
-  padding-top: 12px;
-}
 
 /* =========================================================================
    Patient Journey Page

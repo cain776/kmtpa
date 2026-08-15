@@ -563,16 +563,8 @@ window.KMTPA = window.KMTPA || {};
     return Boolean(contact || Array.isArray(page.transitCards));
   }
 
-  function applyAbout(page) {
-    if (!isRecord(page) || !Array.isArray(page.boardMembers)) return false;
-    const members = Array.from(document.querySelectorAll('#panel-board .board-member'));
-    page.boardMembers.slice(0, members.length).forEach((item, index) => {
-      setText(members[index].querySelector('.role'), item.role);
-      setText(members[index].querySelector('.name'), item.name);
-      setText(members[index].querySelector('.org'), item.org);
-    });
-    return true;
-  }
+  // applyAbout(이사회 명단 적용)은 이사회 섹션과 함께 지웠습니다.
+  // CMS 데이터에 boardMembers 가 남아 있어도 그냥 무시됩니다.
 
   function applyPageContent(data) {
     const pages = getPages(data);
@@ -586,7 +578,6 @@ window.KMTPA = window.KMTPA || {};
     didApply = applyPrograms(page) || didApply;
     didApply = applyCommunications(page) || didApply;
     didApply = applyDirections(page) || didApply;
-    didApply = applyAbout(page) || didApply;
     return didApply;
   }
 
