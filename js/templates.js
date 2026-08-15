@@ -173,7 +173,6 @@ window.KMTPA = window.KMTPA || {};
           <a href="${page('about/#greeting')}">인사말</a>
           <a href="${page('about/#vision')}">비전·미션</a>
           <a href="${page('about/#organization')}">조직</a>
-          <a href="${page('about/#board')}">이사회</a>
           <a href="${page('about/#transparency')}">투명경영</a>
         </div>
 
