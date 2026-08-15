@@ -77,6 +77,10 @@
     return request('/member/inquiries', { method: 'POST', body: payload });
   }
 
+  async function withdraw(password) {
+    return request('/member/withdraw', { method: 'POST', body: { password } });
+  }
+
   /* =======================================================================
      로그인 화면
      ======================================================================= */
@@ -111,8 +115,15 @@
     if (!form) return;
 
     const summary = form.querySelector('[data-login-error]');
+    const notice = document.querySelector('[data-login-notice]');
     const submit = form.querySelector('[data-login-submit]');
     const inputs = Array.from(form.querySelectorAll('input'));
+
+    if (notice && new URLSearchParams(window.location.search).get('withdrawn') === '1') {
+      notice.textContent = '회원 탈퇴가 완료되었습니다.';
+      notice.hidden = false;
+      window.history.replaceState({}, '', window.location.pathname);
+    }
 
     // 칸을 벗어날 때 확인합니다. 제출할 때만 알려주면 다 채우고 나서야 틀린 걸 압니다.
     inputs.forEach(input => input.addEventListener('blur', () => validate(input)));
@@ -292,6 +303,66 @@
     });
   }
 
+  function setupWithdrawal() {
+    const form = document.querySelector('[data-withdraw-form]');
+    const openButton = document.querySelector('[data-withdraw-open]');
+    const cancelButton = document.querySelector('[data-withdraw-cancel]');
+    if (!form || !openButton || !cancelButton) return;
+    const error = form.querySelector('[data-withdraw-error]');
+    const submit = form.querySelector('[type="submit"]');
+
+    function setOpen(open) {
+      form.hidden = !open;
+      openButton.setAttribute('aria-expanded', String(open));
+      if (open) form.password.focus();
+      else {
+        form.reset();
+        error.hidden = true;
+      }
+    }
+
+    openButton.addEventListener('click', () => setOpen(form.hidden));
+    cancelButton.addEventListener('click', () => setOpen(false));
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!form.password.value) {
+        error.textContent = '본인 확인을 위해 비밀번호를 입력해 주세요.';
+        error.hidden = false;
+        form.password.focus();
+        return;
+      }
+      if (!form.confirmation.checked) {
+        error.textContent = '탈퇴 안내를 확인해 주세요.';
+        error.hidden = false;
+        form.confirmation.focus();
+        return;
+      }
+
+      const original = submit.textContent;
+      submit.disabled = true;
+      submit.setAttribute('aria-busy', 'true');
+      submit.textContent = '처리 중…';
+      error.hidden = true;
+      try {
+        await withdraw(form.password.value);
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.replace('../login/index.html?withdrawn=1');
+      } catch (requestError) {
+        if (requestError.status === 401) {
+          sessionStorage.removeItem(SESSION_KEY);
+          window.location.replace('../login/index.html');
+          return;
+        }
+        error.textContent = requestError.message || '회원 탈퇴를 처리하지 못했습니다.';
+        error.hidden = false;
+        error.focus();
+        submit.disabled = false;
+        submit.removeAttribute('aria-busy');
+        submit.textContent = original;
+      }
+    });
+  }
+
   /* 왼쪽 메뉴 ↔ 오른쪽 패널. 주소 해시(#info/#inquiries)가 기준이라
      뒤로가기와 링크 공유가 그대로 동작합니다. */
   function setupMyNav() {
@@ -332,6 +403,7 @@
       greeting.innerHTML = `<b>${esc(member.name || '회원')}</b>님, 안녕하세요.`;
       renderInfo(member);
       renderInquiries(data.consultations || []);
+      setupWithdrawal();
       setupInquiryComposer(async () => {
         const refreshed = await loadMe();
         renderInquiries(refreshed.consultations || []);

@@ -42,6 +42,12 @@ window.KMTPA = window.KMTPA || {};
       document.body.insertAdjacentHTML('beforeend', NS.QUICK_BANNER_HTML);
     }
 
+    // Depth1 네비게이터 — 자리를 둔 페이지에만 그립니다.
+    const crumbMount = document.getElementById('breadcrumb-mount');
+    if (crumbMount) {
+      crumbMount.outerHTML = NS.breadcrumbHtml(crumbMount.dataset.depth1);
+    }
+
     // 헤더 버튼은 로그인 상태를 따라갑니다 — 로그인 중이면 '로그아웃'.
     // 키는 member.js 의 SESSION_KEY 와 같아야 합니다(그 파일은 로그인·마이페이지
     // 에서만 로드되므로 여기서 직접 읽습니다).
@@ -240,6 +246,61 @@ window.KMTPA = window.KMTPA || {};
   };
 
   /* ----- 탭 (메인 + 각 패널 내부 sub-tab을 일반화) ----- */
+  /* 빵부스러기의 '다른 메뉴' 열고 닫기. */
+  NS.setupBreadcrumb = function () {
+    const root = document.querySelector('.breadcrumb-siblings');
+    if (!root) return;
+    const toggle = root.querySelector('.breadcrumb-toggle');
+    const menu = root.querySelector('.breadcrumb-menu');
+    if (!toggle || !menu) return;
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+    }
+    toggle.addEventListener('click', e => { e.stopPropagation(); setOpen(menu.hidden); });
+    document.addEventListener('click', e => { if (!root.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !menu.hidden) { setOpen(false); toggle.focus(); }
+    });
+  };
+
+  /* 상위 탭 없이 하위 탭만 있는 화면 (투명경영처럼 독립 페이지로 나온 경우).
+     setupTabs 는 .tabs 를 전제로 하므로 그쪽에서는 처리되지 않습니다. */
+  NS.setupStandaloneSubTabs = function () {
+    if (document.querySelector('.tabs [data-tab]')) return;   // 상위 탭이 있으면 setupTabs 담당
+    const chips = Array.from(document.querySelectorAll('.sub-tabs [data-sub-tab]'));
+    const panels = Array.from(document.querySelectorAll('[data-sub-panel]'));
+    if (!chips.length || !panels.length) return;
+
+    const valid = chips.map(c => c.dataset.subTab);
+
+    function activate(name, pushHash = true) {
+      if (!valid.includes(name)) return;
+      chips.forEach(c => {
+        const on = c.dataset.subTab === name;
+        c.classList.toggle('current', on);
+        c.setAttribute('aria-selected', String(on));
+      });
+      panels.forEach(p => {
+        const on = p.dataset.subPanel === name;
+        p.classList.toggle('active', on);
+        if (on) p.removeAttribute('hidden');
+        else p.setAttribute('hidden', '');
+      });
+      // 첫 항목은 기본값이라 해시를 붙이지 않습니다 — 주소가 깔끔해집니다.
+      if (pushHash) {
+        history.replaceState(null, '', name === valid[0] ? location.pathname : '#' + name);
+      }
+    }
+
+    chips.forEach(c => c.addEventListener('click', () => activate(c.dataset.subTab)));
+    window.addEventListener('hashchange', () => {
+      activate(valid.includes(location.hash.slice(1)) ? location.hash.slice(1) : valid[0], false);
+    });
+    activate(valid.includes(location.hash.slice(1)) ? location.hash.slice(1) : valid[0], false);
+  };
+
   NS.setupTabs = function () {
     const tabs = document.querySelectorAll('.tabs [data-tab]');
     const panels = document.querySelectorAll('.tab-panel[data-panel]');

@@ -536,9 +536,31 @@
   width: 100%;
 }
 
+/* 소관 부처·공시처 로고. 원본이 흰 배경 로고라 어두운 푸터에서는 그대로
+   두면 흰 판이 뜹니다. 흰색으로 빼서 배경에 얹고, hover 때만 제 색을 냅니다. */
+.footer-authorities {
+  margin-top: 44px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.footer-authorities img {
+  height: 30px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.65;
+  transition: opacity 0.15s, filter 0.15s;
+}
+.footer-authorities a:hover img {
+  filter: none;
+  opacity: 1;
+}
+
 .footer-bottom {
   border-top: 1px solid var(--footer-line);
-  margin-top: 40px;
+  margin-top: 24px;
   padding: 18px 0 22px;
   display: flex;
   justify-content: space-between;

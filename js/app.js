@@ -27,6 +27,8 @@
     NS.setupHeroVideo();    // 구 히어로 영상 (.hero-video가 남아있는 페이지용)
     NS.setupMobileNav();    // 모바일 햄버거 메뉴
     NS.setupTabs();         // 탭 + 서브탭 (about·communications·programs 등)
+    NS.setupStandaloneSubTabs(); // 상위 탭 없이 서브탭만 있는 화면 (transparency)
+    NS.setupBreadcrumb();   // Depth1 네비게이터의 '다른 메뉴' 드롭다운
     NS.setupFaq();          // FAQ 아코디언
     NS.setupPubModal();     // 뉴스레터 모달 (.pub-trigger가 있는 페이지)
     NS.setupJoinFlow();     // 회원가입 3단계 흐름 (join 페이지에서만 작동)

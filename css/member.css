@@ -87,6 +87,19 @@
 .form-error[hidden] { display: none; }
 .form-error:focus { outline: 2px solid var(--join-required); outline-offset: 2px; }
 
+.form-success {
+  margin: 24px 0 0;
+  padding: 12px 15px;
+  border: 1px solid rgba(27, 107, 69, 0.24);
+  border-radius: 10px;
+  background: #E8F5EE;
+  color: #1B6B45;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.form-success[hidden] { display: none; }
+.form-success + .login-form { margin-top: 18px; }
+
 /* 오류 문구 자리를 미리 비워 둡니다.
    문구가 나타나고 사라질 때마다 아래 것들이 밀리면, 고치는 도중에 버튼이
    움직여 엉뚱한 곳을 누르게 됩니다. 자리는 늘 차지하되 글자만 나타납니다.
@@ -304,6 +317,79 @@
   color: var(--join-faint);
 }
 .panel-foot a { color: var(--join-ink); font-weight: 600; }
+
+/* 회원 탈퇴 — 정보 확인과 실수 방지를 위해 패널 안에서 한 번 더 펼칩니다. */
+.withdraw-card {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--join-line);
+}
+.withdraw-intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.withdraw-intro h3 {
+  margin: 0;
+  color: var(--join-ink);
+  font-size: 15px;
+  font-weight: 800;
+}
+.withdraw-intro p {
+  max-width: 540px;
+  margin: 7px 0 0;
+  color: var(--join-faint);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+.btn-withdraw,
+.btn-withdraw-solid {
+  flex: 0 0 auto;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-withdraw {
+  padding: 9px 14px;
+  border: 1px solid #C0392B;
+  background: #fff;
+  color: #96271C;
+}
+.btn-withdraw:hover { background: #FEF4F3; }
+.withdraw-form {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid rgba(192, 57, 43, 0.24);
+  border-radius: 12px;
+  background: #FEF7F6;
+}
+.withdraw-form[hidden] { display: none; }
+.withdraw-form .field { max-width: 420px; }
+.withdraw-consent { margin-top: 14px; }
+.withdraw-form .form-error { margin: 16px 0 0; background: #fff; }
+.withdraw-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+.btn-withdraw-solid {
+  min-width: 104px;
+  padding: 10px 18px;
+  border: 1px solid #96271C;
+  background: #96271C;
+  color: #fff;
+}
+.btn-withdraw-solid:hover { background: #7F2018; }
+.btn-withdraw-solid:disabled { opacity: 0.65; cursor: progress; }
+
+@media (max-width: 640px) {
+  .withdraw-intro { flex-direction: column; gap: 14px; }
+  .btn-withdraw { width: 100%; }
+}
 
 /* -------------------------------------------------------------------------
    문의 목록 — 제목 줄을 누르면 내용과 답변이 펼쳐집니다

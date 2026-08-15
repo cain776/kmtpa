@@ -47,6 +47,7 @@ window.KMTPA = window.KMTPA || {};
   const page = (route) => localUrl(new URL(normalizeRoute(route), siteRoot));
   const flags = {
     isAbout: path === 'about/' || path === 'about/index.html',
+    isTransparency: path === 'transparency/' || path === 'transparency/index.html',
     isVisitKorea: path === 'patient-journey/' || path === 'patient-journey/index.html',
     isCommunications: path === 'communications/' || path === 'communications/index.html',
     isPrograms: path === 'programs/' || path === 'programs/index.html'
@@ -59,7 +60,7 @@ window.KMTPA = window.KMTPA || {};
   NS.sitePath = sitePath;
   NS.makePageUrl = page;
 
-  const { isAbout, isVisitKorea, isCommunications, isResources } = flags;
+  const { isAbout, isTransparency, isVisitKorea, isCommunications, isResources } = flags;
 
   /* ----- Header markup (모든 페이지 공통) ----- */
   NS.HEADER_HTML = `
@@ -88,12 +89,14 @@ window.KMTPA = window.KMTPA || {};
                 <div class="dropdown-group-label">함께하는 사람들</div>
                 <a href="${page('about/#organization')}" role="menuitem">조직</a>
               </div>
-              <div class="dropdown-group">
-                <div class="dropdown-group-label">투명경영</div>
-                <a href="${page('about/#transparency')}" role="menuitem">지속가능경영</a>
-                <a href="${page('about/#transparency-finance')}" role="menuitem">재정 및 활동보고</a>
-                <a href="${page('about/#transparency-accountability')}" role="menuitem">투명성과 책무성</a>
-              </div>
+            </div>
+          </div>
+          <div class="nav-item-with-dropdown">
+            <a href="${page('transparency/')}"${isTransparency ? ' class="active" aria-current="page"' : ''}>투명경영</a>
+            <div class="nav-dropdown" role="menu">
+              <a href="${page('transparency/')}" role="menuitem">지속가능경영</a>
+              <a href="${page('transparency/#finance')}" role="menuitem">재정 및 활동보고</a>
+              <a href="${page('transparency/#accountability')}" role="menuitem">투명성과 책무성</a>
             </div>
           </div>
           <div class="nav-item-with-dropdown">
@@ -136,6 +139,45 @@ window.KMTPA = window.KMTPA || {};
     </header>
   `;
 
+  /* ----- Depth1 네비게이터 (빵부스러기 + 형제 메뉴) -----
+     헤더 드롭다운은 마우스를 올려야 보입니다. 페이지에 들어온 뒤 '내가 어디에
+     있는지' 와 '옆에 뭐가 있는지' 를 항상 보이게 두는 것이 이 줄의 역할입니다.
+
+     각 페이지는 <div id="breadcrumb-mount" data-depth1="transparency"> 하나만
+     두면 되고, 목록은 여기 한 곳에서 관리합니다. ----- */
+  NS.DEPTH1 = [
+    { key: 'about', label: '협회 소개', route: 'about/' },
+    { key: 'transparency', label: '투명경영', route: 'transparency/' },
+    { key: 'communications', label: '커뮤니케이션', route: 'communications/' },
+    { key: 'patient-journey', label: 'Visit Korea', route: 'patient-journey/' },
+    { key: 'programs', label: '활동·자료', route: 'programs/' },
+  ];
+
+  NS.breadcrumbHtml = function (currentKey) {
+    const current = NS.DEPTH1.find(d => d.key === currentKey);
+    if (!current) return '';
+    const siblings = NS.DEPTH1
+      .filter(d => d.key !== currentKey)
+      .map(d => `<a href="${page(d.route)}" role="menuitem">${d.label}</a>`)
+      .join('');
+    return `
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <div class="container-narrow breadcrumb-inner">
+          <ol>
+            <li><a href="${page('')}">홈</a></li>
+            <li aria-current="page">${current.label}</li>
+          </ol>
+          <div class="breadcrumb-siblings">
+            <button type="button" class="breadcrumb-toggle" aria-expanded="false" aria-haspopup="true">
+              다른 메뉴
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="breadcrumb-menu" role="menu" hidden>${siblings}</div>
+          </div>
+        </div>
+      </nav>`;
+  };
+
   /* ----- Footer markup ----- */
   NS.FOOTER_HTML = `
     <footer class="site-footer">
@@ -168,7 +210,7 @@ window.KMTPA = window.KMTPA || {};
             <a href="${page('about/#greeting')}">인사말</a>
             <a href="${page('about/#vision')}">비전·미션</a>
             <a href="${page('about/#organization')}">조직</a>
-            <a href="${page('about/#transparency')}">투명경영</a>
+            <a href="${page('transparency/')}">투명경영</a>
           </div>
 
           <div class="footer-col">
@@ -198,6 +240,17 @@ window.KMTPA = window.KMTPA || {};
             <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
           </div>
         </div>
+      </div>
+
+      <!-- 소관 부처와 공시처. 협회가 문화체육관광부 산하 공익법인이라는 것과
+           국세청 공시가 열려 있다는 것이 신뢰의 근거라 푸터에 둡니다. -->
+      <div class="container footer-authorities">
+        <a href="https://www.mcst.go.kr/" target="_blank" rel="noopener">
+          <img src="${page('images_homepage/authority/mcst.png')}" alt="문화체육관광부" loading="lazy">
+        </a>
+        <a href="https://www.hometax.go.kr/" target="_blank" rel="noopener">
+          <img src="${page('images_homepage/authority/nts.png')}" alt="국세청" loading="lazy">
+        </a>
       </div>
 
       <div class="container footer-bottom">
@@ -297,9 +350,17 @@ window.KMTPA = window.KMTPA || {};
         <span class="quick-label">회원가입</span>
         <span class="quick-icon"><i data-lucide="user-plus"></i></span>
       </a>
+      <a href="${page('communications/#newsletter')}" class="quick-link">
+        <span class="quick-label">뉴스레터</span>
+        <span class="quick-icon"><i data-lucide="mail"></i></span>
+      </a>
       <a href="https://mymedicon.com/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--flagship">
         <span class="quick-label">MEDICON</span>
         <span class="quick-icon"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+      <a href="https://mymedicon.com/alliance/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--network">
+        <span class="quick-label">MEDICON Network</span>
+        <span class="quick-icon"><i data-lucide="network"></i></span>
       </a>
       <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--instagram">
         <span class="quick-label">Instagram</span>

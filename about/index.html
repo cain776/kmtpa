@@ -23,11 +23,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="../css/base.css?v=3591fec1">
-  <link rel="stylesheet" href="../css/layout.css?v=9a99d0a6">
+  <link rel="stylesheet" href="../css/layout.css?v=95e74523">
   <link rel="stylesheet" href="../css/components.css?v=5e914f58">
   <link rel="stylesheet" href="../css/communications.css?v=a3dca2c2">
   <link rel="stylesheet" href="../css/about.css?v=65b91c16">
-  <link rel="stylesheet" href="../css/page-hero.css?v=5a2a33d0">
+  <link rel="stylesheet" href="../css/page-hero.css?v=5febba49">
   <link rel="stylesheet" href="../css/patient-journey.css?v=d88a584f">
   <link rel="stylesheet" href="../css/directions.css?v=a741e809">
   <link rel="stylesheet" href="../css/legal.css?v=9b1df0da">
@@ -54,6 +54,9 @@
     </div>
   </section>
 
+  <!-- Depth1 네비게이터 (components.js 가 주입) -->
+  <div id="breadcrumb-mount" data-depth1="about"></div>
+
   <!-- ============== Tabs ============== -->
   <section class="section--tight-top">
     <div class="container-narrow">
@@ -63,7 +66,6 @@
         <button type="button" class="tab" id="tab-vision" role="tab" data-tab="vision" aria-controls="panel-vision" aria-selected="false" tabindex="-1">비전·미션</button>
         <button type="button" class="tab" id="tab-values" role="tab" data-tab="values" aria-controls="panel-values" aria-selected="false" tabindex="-1">핵심 가치</button>
         <button type="button" class="tab" id="tab-organization" role="tab" data-tab="organization" aria-controls="panel-organization" aria-selected="false" tabindex="-1">조직</button>
-        <button type="button" class="tab" id="tab-transparency" role="tab" data-tab="transparency" aria-controls="panel-transparency" aria-selected="false" tabindex="-1">투명경영</button>
       </nav>
 
       <!-- ===== Panel 1 : 인사말 ===== -->
@@ -232,215 +234,6 @@
       </div>
 
       <!-- ===== Panel 5 : 투명경영 ===== -->
-      <div class="tab-panel" id="panel-transparency" data-panel="transparency" role="tabpanel" aria-labelledby="tab-transparency" hidden>
-        <div class="section-head">
-          <span class="eyebrow">Transparency · 투명경영</span>
-          <h2>투명경영</h2>
-          <p class="desc">KMTPA는 후원자님의 소중한 마음을 투명하고 공정하게 전달합니다.</p>
-        </div>
-
-        <nav class="sub-tabs" role="tablist" aria-label="투명경영 하위 메뉴">
-          <button type="button" class="sub-chip current" data-sub-tab="sustainable" aria-selected="true">지속가능경영</button>
-          <button type="button" class="sub-chip" data-sub-tab="finance" aria-selected="false">재정 및 활동보고</button>
-          <button type="button" class="sub-chip" data-sub-tab="accountability" aria-selected="false">투명성과 책무성</button>
-        </nav>
-
-        <!-- ===== Sub-panel: 지속가능경영 ===== -->
-        <div class="sub-tab-panel active" data-sub-panel="sustainable">
-          <p class="transparency-intro">
-            한국의료관광진흥협회(KMTPA)는 공공성과 산업 발전을 기반으로 지속가능경영을 실천하고 있습니다.
-            투명한 거버넌스 확립과 신뢰 있는 책무성, 다각적 이해관계자의 참여를 통해
-            회복력 있고 지속가능한 대한민국 의료관광 생태계 조성에 기여하고 있습니다.
-          </p>
-
-          <article class="transparency-block">
-            <h3>경영철학과 미션</h3>
-            <p>
-              KMTPA는 의료관광 산업이 단순한 경제 활동을 넘어, 공공성과 신뢰를 기반으로 사회적 가치를
-              창출해야 한다는 철학을 바탕으로 운영됩니다. 투명한 산업 환경 조성과 책임 있는 운영을 통해
-              글로벌 수준의 의료관광 생태계를 구축하고, 국민 건강 증진과 국가 경쟁력 강화에 기여하고자 합니다.
-            </p>
-            <div class="see-also">
-              <a href="#vision" class="see-also-link">
-                <i data-lucide="arrow-up-right"></i>
-                KMTPA 기관 비전과 미션 살펴보기
-              </a>
-              <a href="#greeting" class="see-also-link">
-                <i data-lucide="arrow-up-right"></i>
-                KMTPA 리더십 만나보기
-              </a>
-            </div>
-          </article>
-
-          <article class="transparency-block">
-            <h3>거버넌스와 운영전략</h3>
-            <p>
-              KMTPA는 책임성과 투명성을 기반으로 한 거버넌스 체계를 통해 공정하고 신뢰받는 운영을 지향합니다.
-              사단법인으로서 유관 법령에 따른 사원총회와 이사회 중심의 의사결정 구조를 바탕으로, 주요 정책과
-              사업 방향을 체계적으로 수립·추진하고 있습니다. 또한 관리 시스템을 통해 대한민국 의료관광 및
-              유관 산업의 건전한 발전과 글로벌 경쟁력 강화를 위한 전략을 실행하며, K-의료관광 산업의 신뢰를
-              기반으로 국내외 협력 네트워크를 확대하는 등 공익성과 산업 발전이 조화를 이루는 지속가능한
-              운영을 실천하고 있습니다.
-            </p>
-            <div class="see-also">
-              <a href="#organization" class="see-also-link">
-                <i data-lucide="arrow-up-right"></i>
-                KMTPA 조직 살펴보기
-              </a>
-            </div>
-          </article>
-
-          <article class="transparency-block">
-            <h3>이해관계자 참여와 사회적 임팩트</h3>
-            <p>
-              KMTPA는 의료기관, 의료관광객, 정부, 지역사회 등 다양한 이해관계자와의 소통과 협력을 통해
-              정책과 사업에 현장의 의견을 반영하고 있습니다. 이를 통해 의료관광 산업의 질적 성장을
-              도모하는 동시에, 환자 중심의 서비스 환경 조성과 취약계층 지원 등 공익적 역할을 수행하고
-              있습니다. 나아가 산업 활성화를 통한 경제적 파급효과와 사회적 가치 창출을 동시에 실현하며,
-              지속가능한 의료관광 생태계 구축에 기여하고 있습니다.
-            </p>
-            <div class="see-also">
-              <a href="../programs/index.html" class="see-also-link">
-                <i data-lucide="arrow-up-right"></i>
-                KMTPA의 주요업무
-              </a>
-              <a href="../programs/index.html#history" class="see-also-link">
-                <i data-lucide="arrow-up-right"></i>
-                KMTPA 주요 활동
-              </a>
-            </div>
-          </article>
-        </div>
-
-        <!-- ===== Sub-panel: 재정 및 활동보고 ===== -->
-        <div class="sub-tab-panel" data-sub-panel="finance" hidden>
-          <p class="transparency-intro">
-            한국의료관광진흥협회(KMTPA)는 공익적 목적을 수행하는 비영리법인으로서, 재정 운영 전반에 있어
-            투명성과 책임성을 최우선 가치로 삼고 있습니다. 모든 재원은 관련 법령과 내부 규정에 따라 체계적으로
-            관리되며, 예산 수립부터 집행, 결산에 이르기까지의 전 과정을 공개하고 있습니다. 이를 통해
-            이해관계자의 신뢰를 제고하고, 공공성과 건전성을 기반으로 한 지속가능한 운영을 실천하고 있습니다.
-          </p>
-
-          <article class="transparency-block">
-            <h3>재무(결산)보고</h3>
-            <p>
-              KMTPA의 연간 재정 운영 결과를 투명하게 공개합니다. 수입과 지출, 사업별 집행 내역을 통해
-              재원의 사용 현황을 확인하실 수 있습니다.
-            </p>
-            <div class="see-also">
-              <a href="mailto:info@kmtpa.org?subject=KMTPA%20%EA%B2%B0%EC%82%B0%EC%9E%AC%EB%AC%B4%EC%9E%AC%ED%91%9C%20%EC%9E%90%EB%A3%8C%20%EB%AC%B8%EC%9D%98" class="see-also-link">
-                <i data-lucide="mail"></i>
-                KMTPA 결산재무재표 자료 문의하기
-              </a>
-              <a href="mailto:info@kmtpa.org?subject=KMTPA%20%EA%B0%90%EC%82%AC%EB%B3%B4%EA%B3%A0%EC%84%9C%20%EC%9E%90%EB%A3%8C%20%EB%AC%B8%EC%9D%98" class="see-also-link">
-                <i data-lucide="mail"></i>
-                KMTPA 감사보고서 자료 문의하기
-              </a>
-            </div>
-          </article>
-
-          <article class="transparency-block">
-            <h3>예산보고</h3>
-            <p>
-              KMTPA의 연간 예산 수립 내역과 주요 사업별 재원 배분 계획을 안내합니다. 계획된 재정 운영
-              방향과 우선순위를 확인하실 수 있습니다.
-            </p>
-            <div class="see-also">
-              <a href="mailto:info@kmtpa.org?subject=KMTPA%20%EC%98%88%EC%82%B0%EA%B3%84%ED%9A%8D%20%EC%9E%90%EB%A3%8C%20%EB%AC%B8%EC%9D%98" class="see-also-link">
-                <i data-lucide="mail"></i>
-                KMTPA 예산계획 자료 문의하기
-              </a>
-              <a href="../index.html#about" class="see-also-link">
-                <i data-lucide="arrow-up-right"></i>
-                KMTPA 주요 사업과 활동 살펴보기
-              </a>
-            </div>
-          </article>
-
-          <article class="transparency-block">
-            <h3>기부금 및 후원금 현황</h3>
-            <p>
-              KMTPA는 기부금과 후원금의 조성 및 사용 내역을 공개합니다. 공익 목적에 따른 투명한 집행과
-              관리 현황을 확인하실 수 있습니다.
-            </p>
-            <div class="see-also">
-              <a href="mailto:info@kmtpa.org?subject=KMTPA%20%EB%AA%A8%EA%B8%88%EC%95%A1%20%EB%B0%8F%20%ED%99%9C%EC%9A%A9%EC%8B%A4%EC%A0%81%20%EC%9E%90%EB%A3%8C%20%EB%AC%B8%EC%9D%98" class="see-also-link">
-                <i data-lucide="mail"></i>
-                KMTPA 모금액 및 활용실적 자료 문의하기
-              </a>
-              <a href="https://www.nts.go.kr/" target="_blank" rel="noopener" class="see-also-link">
-                <i data-lucide="external-link"></i>
-                KMTPA 국세청 공익법인 결산서류 등 공시 바로가기
-              </a>
-            </div>
-          </article>
-        </div>
-
-        <!-- ===== Sub-panel: 투명성과 책무성 ===== -->
-        <div class="sub-tab-panel" data-sub-panel="accountability" hidden>
-          <p class="transparency-intro">
-            한국의료관광진흥협회(KMTPA)는 공익적 목적을 수행하는 비영리법인으로서, 조직 운영 전반에 걸쳐
-            투명성과 책무성을 핵심 원칙으로 삼고 있습니다. 협회는 재정, 사업, 의사결정 과정에 대한 정보를
-            성실히 공개하고, 그 결과에 대해 책임 있는 자세로 임하고 있습니다. 이를 통해 이해관계자의
-            신뢰를 바탕으로 지속가능한 의료관광 산업 환경 조성에 기여하고자 합니다.
-          </p>
-
-          <article class="transparency-block">
-            <h3>글로벌 추세와 규준</h3>
-            <p>
-              국제사회에서는 비영리기구의 역할과 영향력이 확대됨에 따라, 투명성과 책무성에 대한 요구가
-              지속적으로 강화되고 있습니다. 특히 United Nations Global Compact, Global Reporting Initiative
-              등의 국제 기준은 조직의 운영과 성과를 공개하고 이해관계자와의 신뢰를 구축하기 위한 중요한
-              지침으로 활용되고 있습니다. 또한 2006년 국제 NGO들이 공동으로 채택한
-              INGO Accountability Charter는 비영리 부문의 책임성과 투명성을 강화하기 위한 초기 글로벌
-              공동 기준으로 평가되며, 이후 다양한 국제 프레임워크로 확산되었습니다.
-            </p>
-            <div class="see-also">
-              <a href="mailto:info@kmtpa.org?subject=INGO%20Accountability%20Charter%20%EC%9E%90%EB%A3%8C%20%EB%AC%B8%EC%9D%98" class="see-also-link">
-                <i data-lucide="mail"></i>
-                INGO Accountability Charter 자료 문의하기
-              </a>
-            </div>
-          </article>
-
-          <article class="transparency-block">
-            <h3>한국 비영리 단체와 국제개발</h3>
-            <p>
-              국내에서도 비영리단체의 공공성과 책임성에 대한 사회적 요구가 높아지면서, 재정 공개와 사업
-              성과에 대한 투명한 관리가 중요한 기준으로 자리 잡고 있습니다. 특히 국제개발 및 의료·보건
-              분야에서는 글로벌 기준에 부합하는 운영과 보고 체계를 도입하는 흐름이 확대되고 있으며,
-              이해관계자 참여와 사회적 영향에 대한 관리가 강조되고 있습니다. 이러한 변화 속에서 협회는
-              국제적 흐름에 부합하는 투명경영을 실천하고, 국내 의료관광 산업의 신뢰성과 지속가능성을
-              높이는 데 기여하고자 합니다.
-            </p>
-            <div class="see-also">
-              <a href="mailto:info@kmtpa.org?subject=KCOC%20%EA%B5%AD%EC%A0%9C%EA%B0%9C%EB%B0%9C%ED%98%91%EB%A0%A5NGO%20%EC%B1%85%EB%AC%B4%EC%84%B1%20%EC%9E%90%EA%B0%80%EC%A7%84%EB%8B%A8%EC%84%9C%20%EC%9E%90%EB%A3%8C%20%EB%AC%B8%EC%9D%98" class="see-also-link">
-                <i data-lucide="mail"></i>
-                KCOC 국제개발협력NGO 책무성 자가진단서 자료 문의하기
-              </a>
-            </div>
-          </article>
-
-          <article class="transparency-block">
-            <h3>윤리·책무성 공익제보</h3>
-            <p>
-              KMTPA는 투명하고 책임 있는 운영을 위해 의견 및 제보 채널을 운영하고 있습니다.
-              운영과 관련한 개선 사항이나 부적절한 사례가 있을 경우 제보해 주시면, 관련 절차에 따라
-              성실히 검토하고 조치하겠습니다.
-            </p>
-            <div class="see-also">
-              <a href="https://www.nts.go.kr/" target="_blank" rel="noopener" class="see-also-link">
-                <i data-lucide="external-link"></i>
-                국세청 탈세제보 바로가기
-              </a>
-              <a href="https://www.acrc.go.kr/" target="_blank" rel="noopener" class="see-also-link">
-                <i data-lucide="external-link"></i>
-                국민권익위원회 부패·공익신고 바로가기
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
 
     </div>
   </section>
@@ -469,9 +262,9 @@
   <div id="footer-mount"></div>
 
   <script src="../js/runtime-config.js?v=fa335a2f"></script>
-  <script src="../js/templates.js?v=e3672f91"></script>
-  <script src="../js/components.js?v=40653210"></script>
-  <script src="../js/app.js?v=c23b9178"></script>
-  <script src="../js/cms.js?v=9bb8401e"></script>
+  <script src="../js/templates.js?v=38bae647"></script>
+  <script src="../js/components.js?v=1f2a4b28"></script>
+  <script src="../js/app.js?v=0b927145"></script>
+  <script src="../js/cms.js?v=04bce740"></script>
 </body>
 </html>
