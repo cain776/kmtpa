@@ -393,21 +393,13 @@
   background: var(--hero-gold);
   color: var(--hero-ink);
 }
-/* 8칸 모두 한 줄 라벨이라 아이콘·글자가 저절로 같은 높이에 놓입니다. */
+/* 8칸 모두 아이콘 하나 + 라벨 한 줄. 그래서 justify-content: center 만으로
+   아이콘과 글자가 어느 칸에서나 같은 높이에 놓입니다. 여기에 보조문구를
+   다시 붙이면 그 칸만 위로 밀리므로, 붙일 거면 여덟 칸 전부에 붙입니다. */
 .hero-quickbar .qb-label {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
-}
-
-/* 외부 채널 칸에만 붙는 보조문구. 라벨보다 작고 흐리게 둬서
-   8칸의 세로 리듬을 흐트러뜨리지 않습니다. */
-.hero-quickbar .qb-sub {
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.2;
-  margin-top: -6px;
-  opacity: 0.72;
 }
 .hero-quickbar svg {
   width: 26px;
