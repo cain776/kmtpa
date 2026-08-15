@@ -43,6 +43,39 @@
   font-weight: 600;
 }
 
+/* 컨테이너를 1600 으로 넓히자 구분선은 1552 를 다 쓰는데 단계 본문은
+   1032 에서 끊겨, 오른쪽 700px 이 통째로 비어 보였다. 제목을 왼쪽 열로
+   빼고 설명과 지원 박스를 오른쪽 끝에 붙여서 구분선 양 끝에 내용이 닿게
+   한다 — 투명경영·인사말과 같은 방식이다.
+
+   .step-body 안에서 다시 나누는 이유: 제목(h2)이 .step-body 안에 있어서
+   바깥 그리드로는 STEP 번호 옆으로 못 뺀다. display:contents 로 풀 수도
+   있지만 그러면 번호·제목·설명이 모두 같은 격자에 놓여 행이 엇갈린다.
+
+   .page-fullwidth 를 붙인 이유는 특정도뿐이다 — base.css 의 읽기 폭
+   규칙이 같은 선택자를 (0,2,0) 으로 잡고 있어서, 그냥 .step-lede 로
+   쓰면 736 에 진다.
+
+   폭은 800 이다. 인사말·투명경영과 맞춰 880 으로 뒀다가 재 보니 한 줄이
+   89자였다 — 같은 880 이라도 이 문단은 글자가 작아 더 들어간다. 800 으로
+   줄여 80자 아래로 내렸다.
+
+   1400 부터인 이유: 제목 열이 400 은 되어야 '치료 (Treatment · 회복)'
+   같은 제목이 한 줄에 들어간다. 1400 화면에서 1352 - 80 - 32 - 64 - 880
+   = 296 이라 조금 좁지만 두 줄 안에 든다. */
+@media (min-width: 1400px) {
+  .step-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 800px);
+    column-gap: 64px;
+    align-items: start;
+  }
+  .step-body > h2 { grid-column: 1; margin-bottom: 0; }
+  .step-body > :not(h2) { grid-column: 2; }
+  .page-fullwidth .step-lede,
+  .page-fullwidth .step-support { max-width: 800px; }
+}
+
 @media (max-width: 720px) {
   .journey-step { grid-template-columns: 1fr; gap: 8px; }
   .step-number { padding-top: 0; }
