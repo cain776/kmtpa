@@ -140,7 +140,7 @@ window.KMTPA = window.KMTPA || {};
   NS.FOOTER_HTML = `
     <footer class="site-footer">
       <div class="container">
-        <div>
+        <div class="footer-brand-block">
           <a href="${page('')}" class="brand" aria-label="KMTPA 홈으로">
             <span class="brand-mark"><img src="${page('images_homepage/logo2.png')}" alt=""></span>
             <span class="brand-name">
@@ -152,14 +152,6 @@ window.KMTPA = window.KMTPA || {};
             대한민국 의료관광의 신뢰를 만듭니다. 회원 의료기관과 전문가 네트워크의 공식 협회.
           </p>
 
-          <div class="footer-brand-extras">
-            <div class="footer-brand-label">Our Flagship Brand</div>
-            <a href="https://mymedicon.com/" target="_blank" rel="noopener" class="footer-brand-link">
-              MEDICON
-              <i data-lucide="arrow-up-right"></i>
-            </a>
-          </div>
-
           <div class="footer-social" aria-label="SNS">
             <a href="mailto:info@kmtpa.org?subject=KMTPA%20LinkedIn%20Channel%20Inquiry" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
             <a href="mailto:info@kmtpa.org?subject=KMTPA%20YouTube%20Channel%20Inquiry" aria-label="YouTube"><i data-lucide="youtube"></i></a>
@@ -168,40 +160,43 @@ window.KMTPA = window.KMTPA || {};
           </div>
         </div>
 
-        <div class="footer-col">
-          <h4>협회 소개</h4>
-          <a href="${page('about/#greeting')}">인사말</a>
-          <a href="${page('about/#vision')}">비전·미션</a>
-          <a href="${page('about/#organization')}">조직</a>
-          <a href="${page('about/#transparency')}">투명경영</a>
-        </div>
+        <!-- 컬럼 넷. cms.js 의 applyFooter 가 이 순서대로 CMS 데이터를 덮어쓰므로
+             (위치 기준 매칭) 어드민의 footer.columns 순서와 반드시 같아야 합니다. -->
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>협회 소개</h4>
+            <a href="${page('about/#greeting')}">인사말</a>
+            <a href="${page('about/#vision')}">비전·미션</a>
+            <a href="${page('about/#organization')}">조직</a>
+            <a href="${page('about/#transparency')}">투명경영</a>
+          </div>
 
-        <div class="footer-col">
-          <h4>커뮤니케이션</h4>
-          <a href="${page('communications/#press')}">보도자료</a>
-          <a href="${page('communications/#notice')}">공지사항</a>
-          <a href="${page('communications/#newsletter')}">뉴스레터</a>
-        </div>
+          <div class="footer-col">
+            <h4>활동·자료</h4>
+            <a href="${page('programs/')}">주요업무</a>
+            <a href="${page('programs/#history')}">활동 연혁</a>
+            <a href="${page('patient-journey/')}">VISIT KOREA 전체 안내</a>
+          </div>
 
-        <div class="footer-col">
-          <h4>Visit Korea</h4>
-          <a href="${page('patient-journey/')}">전체 안내</a>
-        </div>
+          <div class="footer-col">
+            <h4>커뮤니케이션</h4>
+            <a href="${page('communications/#press')}">보도자료</a>
+            <a href="${page('communications/#notice')}">공지사항</a>
+            <a href="${page('communications/#newsletter')}">뉴스레터</a>
+          </div>
 
-        <div class="footer-col">
-          <h4>활동·자료</h4>
-          <a href="${page('programs/')}">주요업무</a>
-          <a href="${page('programs/#history')}">활동 연혁</a>
-        </div>
-
-        <div class="footer-col">
-          <h4>문의·연결</h4>
-          <a href="${page('join/')}">회원가입</a>
-          <a href="${page('consultation/')}">상담 신청</a>
-          <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
-          <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
-          <a href="${page('directions/')}">오시는 길</a>
-          <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
+          <!-- 연락처 앞의 구분선은 CSS 가 첫 mailto 링크에 긋습니다. 감싸는
+               div 를 두면 CMS 가 게시할 때 링크를 전부 지우고 컬럼 바로 밑에
+               다시 붙여서 그 div 만 빈 채로 남습니다. -->
+          <div class="footer-col footer-col--contact">
+            <h4>문의·연결</h4>
+            <a href="${page('join/')}">회원가입</a>
+            <a href="${page('consultation/')}">상담 신청</a>
+            <a href="${page('directions/')}">오시는 길</a>
+            <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
+            <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
+            <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
+          </div>
         </div>
       </div>
 

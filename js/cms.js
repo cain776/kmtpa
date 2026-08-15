@@ -306,9 +306,10 @@ window.KMTPA = window.KMTPA || {};
     // 덮어쓰지 않습니다. 덮어쓰면 CMS 를 한 번이라도 게시한 순간 버튼 이름이
     // '관리자 로그인' 으로 되돌아갑니다.
     document.querySelectorAll('.footer-tagline').forEach(el => setText(el, brand.footerTagline));
-    document.querySelectorAll('.footer-brand-label').forEach(el => setText(el, brand.flagshipLabel));
+    // 푸터의 'Our Flagship Brand / MEDICON' 블록은 새 푸터 디자인에서 빠졌습니다.
+    // MEDICON 진입점은 날개 배너에 그대로 있으므로 그쪽만 계속 CMS 로 바꿉니다.
     // 날개 배너는 회원가입 링크가 앞에 붙어 순서가 바뀌므로 위치 대신 클래스로 집습니다.
-    document.querySelectorAll('.footer-brand-link, .quick-link--flagship').forEach(el => {
+    document.querySelectorAll('.quick-link--flagship').forEach(el => {
       setText(el.childNodes[0], brand.flagshipName);
       setHref(el, brand.flagshipUrl);
     });
