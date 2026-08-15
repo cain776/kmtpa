@@ -101,7 +101,7 @@ window.KMTPA = window.KMTPA || {};
             </div>
           </div>
           <div class="nav-item-with-dropdown">
-            <a href="${page('communications/')}"${isCommunications ? ' class="active" aria-current="page"' : ''}>커뮤니케이션</a>
+            <a href="${page('communications/')}"${isCommunications ? ' class="active" aria-current="page"' : ''}>커뮤니티</a>
             <!-- MEDICON('대표 브랜드' 그룹)을 걷어내면서 일반 드롭다운으로 되돌렸다.
                  한 그룹만 남은 620px 메가는 대부분이 빈 칸이고, 그룹 라벨('알림')도
                  나뉠 상대가 없으면 줄만 하나 더 먹는다. MEDICON 은 우측 날개 배너와
@@ -151,7 +151,7 @@ window.KMTPA = window.KMTPA || {};
   NS.DEPTH1 = [
     { key: 'about', label: '협회 소개', route: 'about/' },
     { key: 'transparency', label: '투명경영', route: 'transparency/' },
-    { key: 'communications', label: '커뮤니케이션', route: 'communications/' },
+    { key: 'communications', label: '커뮤니티', route: 'communications/' },
     { key: 'together', label: '함께하기', route: 'together/' },
     { key: 'patient-journey', label: 'Visit Korea', route: 'patient-journey/' },
     { key: 'programs', label: '활동·자료', route: 'programs/' },
@@ -225,7 +225,7 @@ window.KMTPA = window.KMTPA || {};
           </div>
 
           <div class="footer-col">
-            <h4>커뮤니케이션</h4>
+            <h4>커뮤니티</h4>
             <a href="${page('communications/#press')}">보도자료</a>
             <a href="${page('communications/#notice')}">공지사항</a>
             <a href="${page('communications/#newsletter')}">뉴스레터</a>
@@ -247,22 +247,30 @@ window.KMTPA = window.KMTPA || {};
         </div>
       </div>
 
-      <!-- 소관 부처와 공시처. 협회가 문화체육관광부 산하 공익법인이라는 것과
-           국세청 공시가 열려 있다는 것이 신뢰의 근거라 푸터에 둡니다. -->
-      <div class="container footer-authorities">
-        <a href="https://www.mcst.go.kr/" target="_blank" rel="noopener">
-          <img src="${page('images_homepage/authority/mcst.png')}" alt="문화체육관광부" loading="lazy">
-        </a>
-        <a href="https://www.hometax.go.kr/" target="_blank" rel="noopener">
-          <img src="${page('images_homepage/authority/nts.png')}" alt="국세청" loading="lazy">
-        </a>
-      </div>
-
       <div class="container footer-bottom">
         <div>© 2026 (사)한국의료관광진흥협회. All rights reserved.</div>
         <div class="footer-legal-links">
           <a href="${page('privacy/')}">개인정보처리방침</a>
           <a href="${page('terms/')}">이용약관</a>
+        </div>
+      </div>
+
+      <!-- 소관 부처와 공시처. 협회가 문화체육관광부 산하 공익법인이라는 것과
+           국세청 공시가 열려 있다는 것이 신뢰의 근거라 푸터에 둡니다.
+
+           푸터 맨 아래 흰 띠에 넣습니다. 두 로고 PNG 는 알파가 없어 배경이
+           꽉 찬 이미지라, 어두운 푸터 위에 얹고 흰색으로 뒤집으면 로고가
+           아니라 회색 사각형 두 개로 보였습니다. 흰 바탕에서는 그 배경이
+           그대로 묻히고 원래 색이 나옵니다. -->
+      <div class="footer-authorities">
+        <div class="container footer-authorities-inner">
+          <span class="footer-authorities-label">소관 부처 · 공시</span>
+          <a href="https://www.mcst.go.kr/" target="_blank" rel="noopener">
+            <img src="${page('images_homepage/authority/mcst.png')}" alt="문화체육관광부" loading="lazy">
+          </a>
+          <a href="https://www.hometax.go.kr/" target="_blank" rel="noopener">
+            <img src="${page('images_homepage/authority/nts.png')}" alt="국세청" loading="lazy">
+          </a>
         </div>
       </div>
     </footer>
@@ -294,7 +302,7 @@ window.KMTPA = window.KMTPA || {};
   `;
 
   /* ----- 히어로 하단 바로가기 바 (홈 전용) -----
-     상단에 있던 대메뉴(협회 소개·커뮤니케이션·Visit Korea·활동·자료)를
+     상단에 있던 대메뉴(협회 소개·커뮤니티·Visit Korea·활동·자료)를
      이 바로 합쳐 첫 화면의 진입점을 한 줄로 모았습니다.
 
      8칸 모두 아이콘 하나 + 라벨 한 줄입니다. 예전에는 외부 채널 3칸에만
@@ -305,7 +313,7 @@ window.KMTPA = window.KMTPA || {};
      것끼리 붙어 있습니다.
 
        협회 알아보기   협회소개 · Visit Korea
-       소식            커뮤니케이션 · 공지사항
+       소식            커뮤니티 · 공지사항
        회원            회원가입 안내 · 회원기관 찾기
        외부 채널       MEDICON · 인스타그램
 
@@ -322,7 +330,7 @@ window.KMTPA = window.KMTPA || {};
       </a>
       <a href="${page('communications/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        <span class="qb-label">커뮤니케이션</span>
+        <span class="qb-label">커뮤니티</span>
       </a>
       <a href="${page('communications/#notice')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-6v14L3 13z"></path><path d="M11.6 16.9a3 3 0 1 1-5.6-1.9"></path></svg>
@@ -374,7 +382,7 @@ window.KMTPA = window.KMTPA || {};
     </aside>
   `;
 
-  /* ----- Newsletter Modal markup (커뮤니케이션·홈에서 공유) ----- */
+  /* ----- Newsletter Modal markup (커뮤니티·홈에서 공유) ----- */
   NS.PUB_MODAL_HTML = `
     <div id="pub-modal" class="pub-modal" role="dialog" aria-modal="true" aria-labelledby="pub-modal-title" hidden>
       <div class="pub-modal-backdrop" data-modal-close></div>

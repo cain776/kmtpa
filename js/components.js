@@ -426,7 +426,7 @@ window.KMTPA = window.KMTPA || {};
     });
   };
 
-  /* ----- Newsletter Modal — 커뮤니케이션·홈 등 .pub-trigger가 있는 모든 페이지에서 작동
+  /* ----- Newsletter Modal — 커뮤니티·홈 등 .pub-trigger가 있는 모든 페이지에서 작동
      <a class="pub-trigger">는 별도 페이지로 이동(예: newsletter-vol25.html)하고,
      <button class="pub-trigger">만 모달을 띄웁니다. ----- */
   NS.setupPubModal = function () {
