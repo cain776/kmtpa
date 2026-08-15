@@ -1,0 +1,99 @@
+/* =========================================================================
+   transparency.css — 투명경영
+
+   about.css 가 609줄이 되어 화면 단위로 떼어 냈다.
+
+   about.css 안에서 이 규칙들은 두 덩어리로 흩어져 있었다 — 서브탭·인트로가
+   위쪽(331~378), 블록 본문이 아래쪽(543~582). 사이에 활동·자료 규칙이
+   끼어 있었을 뿐 서로 겹치지는 않지만, .transparency-intro 가 양쪽에서
+   한 번씩 선언되어 순서에 기댄다. 그래서 원래 순서 그대로 이어 붙였다.
+   ========================================================================= */
+
+/* ---------- 투명경영 (Transparency) ---------- */
+.transparency-intro {
+  font-size: 16px;
+  color: var(--text-body);
+  line-height: 1.8;
+  max-width: 880px;
+  margin-bottom: 8px;
+}
+
+.sub-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 24px 0 40px;
+}
+.sub-tabs .sub-chip {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border: 1px solid var(--border-default);
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.sub-tabs .sub-chip:hover {
+  color: var(--text-heading);
+  border-color: var(--border-strong);
+}
+.sub-tabs .sub-chip.current {
+  color: #fff;
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+}
+.sub-tabs .sub-chip:focus-visible {
+  outline: 2px solid var(--navy-700);
+  outline-offset: 2px;
+}
+
+.sub-tab-panel { display: none; }
+.sub-tab-panel.active {
+  display: block;
+  animation: tabFadeIn 0.22s ease;
+}
+
+.transparency-block {
+  padding: 32px 0;
+  border-top: 1px solid var(--border-default);
+}
+.transparency-block:first-of-type {
+  border-top: none;
+  padding-top: 8px;
+}
+.transparency-block h3 {
+  font-size: 20px;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.transparency-block p {
+  font-size: 16px;
+  color: var(--text-body);
+  line-height: 1.8;
+  max-width: 880px;
+}
+/* 구분선은 컨테이너를 다 쓰는데 본문은 880 에서 끊겨, 1600 에서는 오른쪽
+   절반이 통째로 비어 보였다. 제목을 왼쪽 열로 빼고 본문을 오른쪽 끝에
+   붙여서 구분선의 양 끝에 내용이 닿게 한다.
+
+   인트로 문단도 margin-left:auto 로 같은 오른쪽 끝에 맞춘다 — 안 맞추면
+   인트로만 왼쪽에서 시작해 본문 열과 어긋난다.
+
+   1400 부터인 이유: 제목 열이 최소 400 은 되어야 '이해관계자 참여와 사회적
+   임팩트' 가 두 줄 안에 들어간다. 1400 화면에서 1352 - 64 - 880 = 408. */
+@media (min-width: 1400px) {
+  .transparency-block {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 880px);
+    column-gap: 64px;
+    align-items: start;
+  }
+  .transparency-block > h3 { grid-column: 1; margin-bottom: 0; }
+  .transparency-block > :not(h3) { grid-column: 2; }
+  .transparency-intro { margin-left: auto; }
+}
