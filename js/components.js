@@ -48,13 +48,16 @@ window.KMTPA = window.KMTPA || {};
     const memberSession = sessionStorage.getItem('kmtpa.member.preview.v1');
     const headerCta = document.querySelector('.header-cta');
     if (memberSession && headerCta) {
-      // 로그아웃 버튼 왼쪽에 누가 로그인했는지 표시합니다.
-      // 이름은 세션에서 오므로 textContent 로만 넣습니다(HTML 해석 금지).
+      // 로그아웃 버튼 왼쪽에 누가 로그인했는지 표시합니다. 이름을 누르면
+      // 마이페이지(내 정보)로 갑니다. 이름은 세션에서 오므로 textContent 로만
+      // 넣습니다(HTML 해석 금지).
       try {
         const name = (JSON.parse(memberSession) || {}).name;
         if (name) {
-          const who = document.createElement('span');
+          const who = document.createElement('a');
           who.className = 'header-user';
+          // 버튼 href 가 '<루트>/login/index.html' 이므로 그 자리만 바꿉니다.
+          who.href = headerCta.href.replace(/login\/index\.html.*$/, 'mypage/index.html');
           const strong = document.createElement('b');
           strong.textContent = name;
           who.append(strong, '님');

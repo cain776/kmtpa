@@ -170,13 +170,16 @@
   transform: translate(2px, -2px);
 }
 
-/* 로그인 중일 때 로그아웃 버튼 왼쪽에 붙는 사용자명 (components.js 가 삽입) */
+/* 로그인 중일 때 로그아웃 버튼 왼쪽에 붙는 사용자명 (components.js 가 삽입).
+   누르면 마이페이지로 갑니다. */
 .header-user {
   font-size: 13.5px;
   color: var(--text-body);
   white-space: nowrap;
+  text-decoration: none;
 }
 .header-user b { color: var(--text-heading); font-weight: 700; }
+.header-user:hover b { text-decoration: underline; text-underline-offset: 3px; }
 
 .header-cta {
   font-size: 13px;
