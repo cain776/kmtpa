@@ -41,6 +41,22 @@ window.KMTPA = window.KMTPA || {};
     if (!document.querySelector('.quick-banner')) {
       document.body.insertAdjacentHTML('beforeend', NS.QUICK_BANNER_HTML);
     }
+
+    // 헤더 버튼은 로그인 상태를 따라갑니다 — 로그인 중이면 '로그아웃'.
+    // 키는 member.js 의 SESSION_KEY 와 같아야 합니다(그 파일은 로그인·마이페이지
+    // 에서만 로드되므로 여기서 직접 읽습니다).
+    const memberSession = sessionStorage.getItem('kmtpa.member.preview.v1');
+    const headerCta = document.querySelector('.header-cta');
+    if (memberSession && headerCta) {
+      headerCta.textContent = '로그아웃';
+      headerCta.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.removeItem('kmtpa.member.preview.v1');
+        // 로그아웃 후에는 홈으로. href 가 '<루트>/login/index.html' 이므로
+        // 그 자리를 index.html 로 바꾸면 어느 배포 경로에서도 루트가 됩니다.
+        window.location.href = headerCta.href.replace(/login\/index\.html.*$/, 'index.html');
+      });
+    }
   };
 
   /* ----- Hero 배경 영상 재생 (playlist 순환 + 속도 조절) ----- */

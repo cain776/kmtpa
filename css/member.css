@@ -365,23 +365,6 @@
   border-bottom: 1px solid var(--join-ink);
 }
 
-/* -------------------------------------------------------------------------
-   아직 서버에 안 붙었다는 표시
-   화면만 먼저 만든 상태라, 진짜로 로그인된 것처럼 보이면 안 됩니다.
-   ------------------------------------------------------------------------- */
-.preview-note {
-  margin: 0 auto 26px;
-  max-width: 1280px;
-  padding: 12px 18px;
-  border-radius: 10px;
-  background: #FFF8E8;
-  border: 1px solid #F0D9A6;
-  color: #7A5B12;
-  font-size: 13.5px;
-  line-height: 1.7;
-}
-.preview-note b { color: #5C4409; }
-
 @media (prefers-reduced-motion: reduce) {
   .inquiry-summary .chev { transition: none; }
 }

@@ -286,6 +286,13 @@
   async function setupMyPage() {
     const greeting = document.querySelector('[data-my-greeting]');
     if (!greeting) return;
+
+    // 로그인 없이 직접 열면 로그인 화면으로 보냅니다. 이게 없으면
+    // 헤더는 '로그인'인데 화면에는 회원 정보가 떠서 상태가 어긋납니다.
+    if (!sessionStorage.getItem(SESSION_KEY)) {
+      window.location.replace('../login/index.html');
+      return;
+    }
     setupMyNav();
 
     try {
@@ -296,11 +303,6 @@
       renderInquiries(data.consultations || []);
     } catch (error) {
       greeting.textContent = error.message || '정보를 불러오지 못했습니다.';
-    }
-
-    const logout = document.querySelector('[data-logout]');
-    if (logout) {
-      logout.addEventListener('click', () => sessionStorage.removeItem(SESSION_KEY));
     }
   }
 
