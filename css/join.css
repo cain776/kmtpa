@@ -336,7 +336,8 @@
   color: var(--join-faint);
 }
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   font: inherit;
   font-size: 15px;
   color: var(--join-ink);
@@ -351,7 +352,8 @@
 .field input::placeholder,
 .field textarea::placeholder { color: #B3B9C6; }
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   border-color: var(--join-gold);
   background: #fff;
   box-shadow: 0 0 0 3px rgba(232, 163, 61, 0.14);

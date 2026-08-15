@@ -494,12 +494,15 @@ window.KMTPA = window.KMTPA || {};
      유형 선택 → 정보 입력 → 신청 완료. 모든 단계가 한 페이지에 있고
      data-join-view 패널을 번갈아 보여줍니다.
 
-     협회에는 아직 공개 폼을 받는 서버가 없어, 제출 시 입력값을 신청서
-     본문으로 조립해 사무국 메일(info@kmtpa.org)로 보내도록 mailto를 엽니다.
-     메일 앱이 열리지 않는 환경을 위해 완료 화면에 같은 본문을 그대로 두고
-     복사 버튼을 답니다. 서버 접수창구가 생기면 sendApplication()만
-     fetch(POST)로 바꾸면 됩니다. ----- */
+     제출은 POST /api/members로 갑니다. 다만 이 사이트는 GitHub Pages로도
+     배포되고 그쪽에는 백엔드가 없습니다. 그래서 요청이 실패하면 예전처럼
+     사무국 메일(info@kmtpa.org)을 여는 방식으로 떨어집니다 — 접수 창구가
+     없다고 신청 자체를 잃는 것보다 낫습니다.
+
+     완료 화면에는 두 경우 모두 신청서 본문과 복사 버튼을 남깁니다. ----- */
   const JOIN_MAIL_TO = 'info@kmtpa.org';
+  const JOIN_API_BASE = window.KMTPA_API_BASE
+    || (window.location.protocol === 'file:' ? 'http://127.0.0.1:5500/api' : '/api');
 
   NS.setupJoinFlow = function () {
     const stepsRoot = document.querySelector('[data-join-steps]');
@@ -514,9 +517,17 @@ window.KMTPA = window.KMTPA || {};
 
     // 단계 표시에서 각 화면이 몇 번째 칸에 해당하는지
     const RANK = { select: 0, personal: 1, corp: 1, done: 2 };
+    // 접수된 경우와, 서버에 닿지 못해 메일로 돌린 경우는 다음에 할 일이 달라서
+    // 안내 문구도 갈라 둡니다.
     const DONE_MSG = {
-      personal: '작성하신 내용으로 사무국 앞 신청 메일을 준비했습니다. 메일을 보내주시면 확인 후 가입 처리해 드리며, 상담 연계가 필요한 경우 담당 코디네이터가 3일 내 연락드립니다.',
-      corp: '작성하신 내용으로 사무국 앞 신청 메일을 준비했습니다. 필수 서류를 첨부해 보내주시면 검토 후 영업일 기준 5일 내에 담당자 이메일로 승인 결과와 회비를 안내드립니다.'
+      posted: {
+        personal: '가입 신청이 접수되었습니다. 사무국 확인 후 입력하신 이메일로 승인 결과를 알려드립니다.',
+        corp: '가입 신청이 접수되었습니다. 필수 서류를 info@kmtpa.org로 보내주시면 검토 후 영업일 기준 5일 내에 담당자 이메일로 승인 결과와 회비를 안내드립니다.'
+      },
+      mailed: {
+        personal: '지금은 접수 서버에 연결할 수 없어 사무국 앞 신청 메일을 대신 준비했습니다. 메일을 보내주시면 확인 후 가입 처리해 드립니다.',
+        corp: '지금은 접수 서버에 연결할 수 없어 사무국 앞 신청 메일을 대신 준비했습니다. 필수 서류를 첨부해 보내주시면 검토 후 결과를 안내드립니다.'
+      }
     };
 
     function showView(view, opts) {
@@ -560,21 +571,101 @@ window.KMTPA = window.KMTPA || {};
       return Array.from(form.elements).find(el => el.willValidate && !el.checkValidity()) || null;
     }
 
-    function sendApplication(form, kind) {
-      const typeLabel = kind === 'corp' ? '법인고객' : '개인고객';
+    /* 폼을 API 계약(backend/docs/members-api.md)으로 옮깁니다.
+
+       입력의 name은 한글이라 메일 본문에 그대로 쓰기 좋지만 API 필드명은 아닙니다.
+       매핑을 JS에 표로 두면 필드를 더할 때 두 곳이 어긋나므로, 마크업의
+       data-api / data-consent 속성이 짝을 들고 있습니다. */
+    function buildPayload(form, kind) {
+      const payload = { memberType: kind, consents: {} };
+      const multi = new Set(['expertise', 'specialties']);
+
+      Array.from(form.elements).forEach(el => {
+        const consentKind = el.dataset && el.dataset.consent;
+        if (consentKind) {
+          // 미체크 항목도 false로 보내야 '거부'가 이력에 남습니다.
+          payload.consents[consentKind] = el.checked;
+          return;
+        }
+
+        const key = el.dataset && el.dataset.api;
+        if (!key || el.disabled) return;
+        if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+
+        const value = (el.value || '').trim();
+        if (multi.has(key)) {
+          payload[key] = (payload[key] || []).concat(value ? [value] : []);
+        } else if (value) {
+          payload[key] = value;
+        }
+      });
+
+      multi.forEach(key => { if (!payload[key]) payload[key] = []; });
+      return payload;
+    }
+
+    function buildMailto(form, typeLabel, kind) {
       const body = buildSummary(form, typeLabel);
       const who = kind === 'corp'
         ? (form.elements['기관명(국문)'] || {}).value
         : (form.elements['이름(국문)'] || {}).value;
       const subject = `[KMTPA 회원가입] ${typeLabel}${who ? ` — ${who.trim()}` : ''}`;
-      const href = `mailto:${JOIN_MAIL_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      return {
+        body,
+        href: `mailto:${JOIN_MAIL_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      };
+    }
 
-      if (summaryEl) summaryEl.textContent = body;
-      if (mailtoEl) mailtoEl.href = href;
-      if (doneMsgEl) doneMsgEl.textContent = DONE_MSG[kind] || DONE_MSG.personal;
+    function finish(kind, mail, mode) {
+      if (summaryEl) summaryEl.textContent = mail.body;
+      if (mailtoEl) mailtoEl.href = mail.href;
+      if (doneMsgEl) doneMsgEl.textContent = (DONE_MSG[mode] || DONE_MSG.mailed)[kind]
+        || DONE_MSG.mailed.personal;
+
+      // 접수된 경우 완료 화면의 메일 버튼은 서류 문의용으로 성격이 바뀝니다.
+      const copyBox = document.querySelector('.join-copy');
+      if (copyBox) copyBox.hidden = mode === 'posted';
+      if (mailtoEl) mailtoEl.textContent = mode === 'posted' ? '사무국에 메일 보내기' : '메일 앱 다시 열기';
 
       showView('done', { scroll: true });
-      window.location.href = href;
+      if (mode !== 'posted') window.location.href = mail.href;
+    }
+
+    async function sendApplication(form, kind, submitBtn, errorEl) {
+      const typeLabel = kind === 'corp' ? '법인회원' : '개인회원';
+      const mail = buildMailto(form, typeLabel, kind);
+
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.busy = '1'; }
+      try {
+        const response = await fetch(`${JOIN_API_BASE}/members`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(buildPayload(form, kind))
+        });
+
+        if (response.ok) {
+          finish(kind, mail, 'posted');
+          return;
+        }
+
+        // 400/409/422만 실제 입력 문제다. 정적 배포에는 /api가 없어 404/405가
+        // 오므로 그 경우는 아래 catch에서 메일 접수로 전환한다.
+        if ([400, 409, 422].includes(response.status)) {
+          const detail = await response.json().catch(() => null);
+          throw Object.assign(new Error((detail && detail.error) || '입력을 다시 확인해 주세요.'),
+            { userFacing: true });
+        }
+        throw new Error(`서버 오류 ${response.status}`);
+      } catch (error) {
+        if (error.userFacing) {
+          if (errorEl) { errorEl.textContent = error.message; errorEl.hidden = false; }
+          return;
+        }
+        // API가 없는 정적 배포(404/405), 네트워크 실패, 5xx는 메일로 돌립니다.
+        finish(kind, mail, 'mailed');
+      } finally {
+        if (submitBtn) { submitBtn.disabled = false; delete submitBtn.dataset.busy; }
+      }
     }
 
     // 유형 카드 → 해당 폼으로
@@ -611,7 +702,7 @@ window.KMTPA = window.KMTPA || {};
         }
 
         if (errorEl) errorEl.hidden = true;
-        sendApplication(form, form.dataset.joinForm);
+        sendApplication(form, form.dataset.joinForm, form.querySelector('button[type=submit]'), errorEl);
       });
     });
 

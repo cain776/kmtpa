@@ -199,6 +199,7 @@ window.KMTPA = window.KMTPA || {};
         <div class="footer-col">
           <h4>문의·연결</h4>
           <a href="${page('join/')}">회원가입</a>
+          <a href="${page('consultation/')}">상담 신청</a>
           <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
           <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
           <a href="${page('directions/')}">오시는 길</a>
@@ -284,9 +285,9 @@ window.KMTPA = window.KMTPA || {};
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
         <span class="qb-label">활동·자료</span>
       </a>
-      <a href="mailto:info@kmtpa.org">
+      <a href="${page('consultation/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        <span class="qb-label">문의하기</span>
+        <span class="qb-label">상담 신청</span>
       </a>
       <a href="${page('join/')}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="16" y1="11" x2="22" y2="11"></line></svg>

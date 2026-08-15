@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입 — 한국의료관광진흥협회 KMTPA</title>
-  <meta name="description" content="(사)한국의료관광진흥협회 회원가입 안내. 개인고객·법인고객 유형별 신청 서식과 제출 서류, 심사 절차를 안내합니다.">
+  <meta name="description" content="(사)한국의료관광진흥협회 회원가입 안내. 개인회원·법인회원 유형별 신청 서식과 제출 서류, 심사 절차를 안내합니다.">
   <meta name="theme-color" content="#020028">
 
   <link rel="icon" type="image/png" href="../images_homepage/logo2.png">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ko_KR">
   <meta property="og:title" content="회원가입 — (사)한국의료관광진흥협회 KMTPA">
-  <meta property="og:description" content="개인고객·법인고객 유형별 회원가입 신청. 회원기관 디렉터리 등재, 교육 과정, 해외 로드쇼 참여 혜택.">
+  <meta property="og:description" content="개인회원·법인회원 유형별 회원가입 신청. 회원기관 디렉터리 등재, 교육 과정, 해외 로드쇼 참여 혜택.">
   <meta property="og:image" content="../images_homepage/logo2.png">
   <meta property="og:url" content="https://kmtpa.org/join/">
   <meta name="twitter:card" content="summary">
@@ -37,7 +37,7 @@
       <span class="eyebrow">Membership · 회원가입</span>
       <h1>협회와 함께할<br>회원을 기다립니다</h1>
       <p class="lede">
-        치료·검진을 준비하는 개인 회원부터 의료기관·유치업 에이전시 등 법인 회원까지,
+      국제의료 분야에서 활동하는 개인 회원부터 의료기관·유치업 에이전시 등 법인 회원까지,
         가입 유형에 따라 제출 서류와 제공 혜택이 다릅니다. 유형을 먼저 선택해 주세요.
       </p>
     </div>
@@ -78,12 +78,12 @@
             </span>
             <span class="type-no">TYPE 01</span>
           </span>
-          <h3>개인고객</h3>
-          <p>치료·검진을 계획하는 환자, 의료 코디네이터, 통역사 등 개인 회원. 상담 연계와 교육 과정 신청이 가능합니다.</p>
+          <h3>개인회원</h3>
+          <p>의료 코디네이터, 통역사, 연구·교육 전문가 등 국제의료 분야에서 활동하는 개인 회원입니다.</p>
           <span class="type-perks">
-            <span>회원기관 진료 상담 연계</span>
+            <span>전문가 네트워크 참여</span>
             <span>코디네이터 자격 과정 신청</span>
-            <span>본인 확인만으로 즉시 가입</span>
+            <span>협회 교육·행사 안내</span>
           </span>
           <span class="type-cta">
             개인 회원가입 하기
@@ -98,7 +98,7 @@
             </span>
             <span class="type-no">TYPE 02</span>
           </span>
-          <h3>법인고객</h3>
+          <h3>법인회원</h3>
           <p>의료기관, 유치업 등록 에이전시, 유관기관 단체 회원. 협회 사업 참여와 공동 마케팅 대상이 됩니다.</p>
           <span class="type-perks">
             <span>회원기관 디렉터리 등재</span>
@@ -110,6 +110,14 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </span>
         </button>
+      </div>
+
+      <div class="join-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg>
+        <span>
+          회원가입 전 문의, 협력 제안, 교육·행사 문의는 회원가입과 별도로
+          <a href="../consultation/index.html"><strong>상담 신청</strong></a>을 이용해 주세요.
+        </span>
       </div>
 
       <div class="join-note">
@@ -128,7 +136,7 @@
   <section class="join-panel" data-join-view="personal" hidden>
     <div class="container-narrow">
       <div class="join-panel-head">
-        <span class="step-tag">STEP 02<i aria-hidden="true"></i><em>개인고객</em></span>
+        <span class="step-tag">STEP 02<i aria-hidden="true"></i><em>개인회원</em></span>
         <h2>개인 회원가입</h2>
         <p class="desc">본인 확인 후 가입 처리됩니다. 표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
       </div>
@@ -138,90 +146,80 @@
         <div class="field-grid">
           <label class="field">
             <span>이름 (국문) <span class="req">*</span></span>
-            <input type="text" name="이름(국문)" placeholder="홍길동" autocomplete="name" required>
+            <input type="text" name="이름(국문)" data-api="name" placeholder="홍길동" autocomplete="name" required>
           </label>
           <label class="field">
             <span>이름 (영문) <span class="req">*</span></span>
-            <input type="text" name="이름(영문)" placeholder="HONG GILDONG" required>
+            <input type="text" name="이름(영문)" data-api="nameEn" placeholder="HONG GILDONG" required>
           </label>
           <label class="field">
             <span>생년월일 <span class="req">*</span></span>
-            <input type="text" name="생년월일" placeholder="1990-01-01" inputmode="numeric" required>
+            <input type="date" name="생년월일" data-api="birthDate" max="2026-08-15" required>
           </label>
           <label class="field">
             <span>국적 <span class="req">*</span></span>
-            <input type="text" name="국적" placeholder="대한민국 / Korea" required>
+            <input type="text" name="국적" data-api="nationality" placeholder="대한민국 / Korea" required>
           </label>
           <label class="field">
             <span>이메일 <span class="req">*</span></span>
-            <input type="email" name="이메일" placeholder="name@email.com" autocomplete="email" required>
+            <input type="email" name="이메일" data-api="email" placeholder="name@email.com" autocomplete="email" required>
           </label>
           <label class="field">
             <span>휴대전화 <span class="req">*</span></span>
-            <input type="tel" name="휴대전화" placeholder="+82 10-0000-0000" autocomplete="tel" required>
+            <input type="tel" name="휴대전화" data-api="phone" placeholder="+82 10-0000-0000" autocomplete="tel" required>
           </label>
         </div>
 
-        <div class="form-legend">가입 목적</div>
+        <div class="form-legend">활동 정보</div>
         <div class="field-stack">
           <div class="field-set">
-            <span>회원 구분 <span class="req">*</span></span>
+            <span>활동 분야 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="회원 구분" value="환자 · 본인 치료" checked><span>환자 · 본인 치료</span></label>
-              <label class="chip"><input type="radio" name="회원 구분" value="보호자 · 가족 동반"><span>보호자 · 가족 동반</span></label>
-              <label class="chip"><input type="radio" name="회원 구분" value="의료 코디네이터"><span>의료 코디네이터</span></label>
-              <label class="chip"><input type="radio" name="회원 구분" value="통역사 · 기타 종사자"><span>통역사 · 기타 종사자</span></label>
+              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료 코디네이터" checked><span>의료 코디네이터</span></label>
+              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료 통역사"><span>의료 통역사</span></label>
+              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="의료관광 · 국제의료 종사자"><span>의료관광 · 국제의료 종사자</span></label>
+              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="연구 · 교육 전문가"><span>연구 · 교육 전문가</span></label>
+              <label class="chip"><input type="radio" name="활동 분야" data-api="professionalRole" value="기타"><span>기타</span></label>
             </div>
           </div>
 
           <div class="field-set">
-            <span>관심 진료 분야 <span class="hint">(복수 선택)</span></span>
+            <span>전문 분야 <span class="hint">(복수 선택)</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="checkbox" name="관심 진료 분야" value="건강검진"><span>건강검진</span></label>
-              <label class="chip"><input type="checkbox" name="관심 진료 분야" value="피부 · 미용성형"><span>피부 · 미용성형</span></label>
-              <label class="chip"><input type="checkbox" name="관심 진료 분야" value="치과"><span>치과</span></label>
-              <label class="chip"><input type="checkbox" name="관심 진료 분야" value="정형 · 재활"><span>정형 · 재활</span></label>
-              <label class="chip"><input type="checkbox" name="관심 진료 분야" value="한방"><span>한방</span></label>
-              <label class="chip"><input type="checkbox" name="관심 진료 분야" value="암 · 중증질환"><span>암 · 중증질환</span></label>
-              <label class="chip"><input type="checkbox" name="관심 진료 분야" value="난임"><span>난임</span></label>
+              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="국제환자 유치"><span>국제환자 유치</span></label>
+              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="의료 코디네이션"><span>의료 코디네이션</span></label>
+              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="통역 · 번역"><span>통역 · 번역</span></label>
+              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="해외 마케팅"><span>해외 마케팅</span></label>
+              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="연구 · 교육"><span>연구 · 교육</span></label>
+              <label class="chip"><input type="checkbox" name="전문 분야" data-api="expertise" value="관광 · MICE"><span>관광 · MICE</span></label>
             </div>
           </div>
 
           <div class="field-grid">
             <label class="field">
-              <span>희망 방문 시기</span>
-              <input type="text" name="희망 방문 시기" placeholder="2026년 하반기 / 미정">
+              <span>소속</span>
+              <input type="text" name="소속" data-api="affiliation" placeholder="기관명 또는 프리랜서">
             </label>
             <label class="field">
-              <span>상담 희망 언어</span>
-              <input type="text" name="상담 희망 언어" placeholder="한국어 / English">
+              <span>직위</span>
+              <input type="text" name="직위" data-api="position" placeholder="팀장 / 코디네이터">
             </label>
           </div>
-
-          <label class="field">
-            <span>문의 내용</span>
-            <textarea name="문의 내용" rows="4" placeholder="필요한 치료나 궁금한 점을 적어 주세요."></textarea>
-          </label>
         </div>
 
         <div class="terms-box">
           <label class="term">
-            <input type="checkbox" name="동의" value="협회 회원 약관" required>
+            <input type="checkbox" name="동의" value="협회 회원 약관" data-consent="terms" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) <a href="../terms/index.html" target="_blank" rel="noopener">협회 회원 약관</a>에 동의합니다.</span>
           </label>
           <label class="term">
-            <input type="checkbox" name="동의" value="개인정보 수집·이용" required>
+            <input type="checkbox" name="동의" value="개인정보 수집·이용" data-consent="privacy" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) <a href="../privacy/index.html" target="_blank" rel="noopener">개인정보 수집·이용</a>에 동의합니다.</span>
           </label>
           <label class="term">
-            <input type="checkbox" name="동의" value="상담 연계 정보 제공">
-            <span class="term-box" aria-hidden="true"></span>
-            <span class="term-label">(선택) 회원 의료기관 상담 연계를 위한 정보 제공에 동의합니다.</span>
-          </label>
-          <label class="term">
-            <input type="checkbox" name="동의" value="소식·교육 안내 수신">
+            <input type="checkbox" name="동의" value="소식·교육 안내 수신" data-consent="newsletter">
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(선택) 협회 소식·교육 안내 수신에 동의합니다.</span>
           </label>
@@ -243,7 +241,7 @@
   <section class="join-panel" data-join-view="corp" hidden>
     <div class="container-narrow">
       <div class="join-panel-head">
-        <span class="step-tag">STEP 02<i aria-hidden="true"></i><em>법인고객</em></span>
+        <span class="step-tag">STEP 02<i aria-hidden="true"></i><em>법인회원</em></span>
         <h2>법인 회원가입</h2>
         <p class="desc">서류 심사 후 영업일 기준 5일 내 승인 결과를 안내드립니다. 표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
       </div>
@@ -254,56 +252,56 @@
           <div class="field-set">
             <span>기관 유형 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="기관 유형" value="의료기관" checked><span>의료기관</span></label>
-              <label class="chip"><input type="radio" name="기관 유형" value="유치업 에이전시"><span>유치업 에이전시</span></label>
-              <label class="chip"><input type="radio" name="기관 유형" value="숙박 · 관광 사업자"><span>숙박 · 관광 사업자</span></label>
-              <label class="chip"><input type="radio" name="기관 유형" value="유관기관 · 단체"><span>유관기관 · 단체</span></label>
+              <label class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="의료기관" checked><span>의료기관</span></label>
+              <label class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="유치업 에이전시"><span>유치업 에이전시</span></label>
+              <label class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="숙박 · 관광 사업자"><span>숙박 · 관광 사업자</span></label>
+              <label class="chip"><input type="radio" name="기관 유형" data-api="orgType" value="유관기관 · 단체"><span>유관기관 · 단체</span></label>
             </div>
           </div>
 
           <div class="field-grid">
             <label class="field">
               <span>기관명 (국문) <span class="req">*</span></span>
-              <input type="text" name="기관명(국문)" placeholder="○○병원 / ○○에이전시" required>
+              <input type="text" name="기관명(국문)" data-api="orgName" placeholder="○○병원 / ○○에이전시" required>
             </label>
             <label class="field">
               <span>기관명 (영문) <span class="req">*</span></span>
-              <input type="text" name="기관명(영문)" placeholder="OO Hospital" required>
+              <input type="text" name="기관명(영문)" data-api="orgNameEn" placeholder="OO Hospital" required>
             </label>
             <label class="field">
               <span>사업자등록번호 <span class="req">*</span></span>
-              <input type="text" name="사업자등록번호" placeholder="000-00-00000" inputmode="numeric" required>
+              <input type="text" name="사업자등록번호" data-api="bizRegNo" placeholder="000-00-00000" inputmode="numeric" required>
             </label>
             <label class="field">
               <span>의료 해외진출·유치업 등록번호</span>
-              <input type="text" name="유치업 등록번호" placeholder="등록 기관만 입력">
+              <input type="text" name="유치업 등록번호" data-api="promotionRegNo" placeholder="등록 기관만 입력">
             </label>
             <label class="field">
               <span>대표자명 <span class="req">*</span></span>
-              <input type="text" name="대표자명" placeholder="홍길동" required>
+              <input type="text" name="대표자명" data-api="ceoName" placeholder="홍길동" required>
             </label>
             <label class="field">
               <span>홈페이지</span>
-              <input type="text" name="홈페이지" placeholder="https://">
+              <input type="text" name="홈페이지" data-api="website" placeholder="https://">
             </label>
           </div>
 
           <label class="field">
             <span>기관 주소 <span class="req">*</span></span>
-            <input type="text" name="기관 주소" placeholder="서울특별시 ○○구 ○○로 00" required>
+            <input type="text" name="기관 주소" data-api="address" placeholder="서울특별시 ○○구 ○○로 00" required>
           </label>
 
           <div class="field-set">
             <span>주요 진료 과목 <span class="hint">(복수 선택)</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" value="건강검진"><span>건강검진</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" value="피부 · 미용성형"><span>피부 · 미용성형</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" value="치과"><span>치과</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" value="정형 · 재활"><span>정형 · 재활</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" value="한방"><span>한방</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" value="암 · 중증질환"><span>암 · 중증질환</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" value="난임"><span>난임</span></label>
-              <label class="chip"><input type="checkbox" name="주요 진료 과목" value="심혈관"><span>심혈관</span></label>
+              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="건강검진"><span>건강검진</span></label>
+              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="피부 · 미용성형"><span>피부 · 미용성형</span></label>
+              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="치과"><span>치과</span></label>
+              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="정형 · 재활"><span>정형 · 재활</span></label>
+              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="한방"><span>한방</span></label>
+              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="암 · 중증질환"><span>암 · 중증질환</span></label>
+              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="난임"><span>난임</span></label>
+              <label class="chip"><input type="checkbox" name="주요 진료 과목" data-api="specialties" value="심혈관"><span>심혈관</span></label>
             </div>
           </div>
         </div>
@@ -312,19 +310,19 @@
         <div class="field-grid">
           <label class="field">
             <span>담당자명 <span class="req">*</span></span>
-            <input type="text" name="담당자명" placeholder="홍길동" autocomplete="name" required>
+            <input type="text" name="담당자명" data-api="contactName" placeholder="홍길동" autocomplete="name" required>
           </label>
           <label class="field">
             <span>부서 / 직위</span>
-            <input type="text" name="부서 / 직위" placeholder="국제의료센터 · 팀장">
+            <input type="text" name="부서 / 직위" data-api="contactDept" placeholder="국제의료센터 · 팀장">
           </label>
           <label class="field">
             <span>담당자 이메일 <span class="req">*</span></span>
-            <input type="email" name="담당자 이메일" placeholder="name@hospital.co.kr" autocomplete="email" required>
+            <input type="email" name="담당자 이메일" data-api="email" placeholder="name@hospital.co.kr" autocomplete="email" required>
           </label>
           <label class="field">
             <span>담당자 연락처 <span class="req">*</span></span>
-            <input type="tel" name="담당자 연락처" placeholder="02-0000-0000" autocomplete="tel" required>
+            <input type="tel" name="담당자 연락처" data-api="phone" placeholder="02-0000-0000" autocomplete="tel" required>
           </label>
         </div>
 
@@ -333,9 +331,9 @@
           <div class="field-set">
             <span>신청 등급 <span class="req">*</span></span>
             <div class="chip-row">
-              <label class="chip"><input type="radio" name="신청 등급" value="정회원" checked><span>정회원</span></label>
-              <label class="chip"><input type="radio" name="신청 등급" value="준회원"><span>준회원</span></label>
-              <label class="chip"><input type="radio" name="신청 등급" value="특별회원"><span>특별회원</span></label>
+              <label class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="정회원" checked><span>정회원</span></label>
+              <label class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="준회원"><span>준회원</span></label>
+              <label class="chip"><input type="radio" name="신청 등급" data-api="membershipGrade" value="특별회원"><span>특별회원</span></label>
             </div>
           </div>
 
@@ -354,17 +352,17 @@
 
         <div class="terms-box">
           <label class="term">
-            <input type="checkbox" name="동의" value="협회 정관 및 회원 규정" required>
+            <input type="checkbox" name="동의" value="협회 정관 및 회원 규정" data-consent="terms" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) <a href="../terms/index.html" target="_blank" rel="noopener">협회 정관 및 회원 규정</a>에 동의합니다.</span>
           </label>
           <label class="term">
-            <input type="checkbox" name="동의" value="사업자 정보 및 담당자 개인정보 수집·이용" required>
+            <input type="checkbox" name="동의" value="사업자 정보 및 담당자 개인정보 수집·이용" data-consent="privacy" required>
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(필수) 사업자 정보 및 담당자 <a href="../privacy/index.html" target="_blank" rel="noopener">개인정보 수집·이용</a>에 동의합니다.</span>
           </label>
           <label class="term">
-            <input type="checkbox" name="동의" value="디렉터리 및 해외 홍보물 등재">
+            <input type="checkbox" name="동의" value="디렉터리 및 해외 홍보물 등재" data-consent="directory">
             <span class="term-box" aria-hidden="true"></span>
             <span class="term-label">(선택) 회원기관 디렉터리 및 해외 홍보물 등재에 동의합니다.</span>
           </label>

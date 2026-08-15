@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상담 신청 — 한국의료관광진흥협회 KMTPA</title>
+  <meta name="description" content="한국의료관광진흥협회 회원가입, 협력, 교육·행사, 홍보 관련 상담을 신청합니다.">
+  <meta name="theme-color" content="#020028">
+  <link rel="icon" type="image/png" href="../images_homepage/logo2.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  <link rel="stylesheet" href="../css/join.css">
+</head>
+<body class="is-join is-consultation">
+  <div id="header-mount"></div>
+
+  <section class="journey-hero">
+    <div class="container-narrow">
+      <span class="eyebrow">Contact · 상담 신청</span>
+      <h1>필요한 내용을 남겨주시면<br>담당 팀이 답변드리겠습니다</h1>
+      <p class="lede">회원가입 문의, 기관 협력, 교육·행사, 홍보 제안을 접수합니다. 상담 신청은 회원가입과 별도로 관리됩니다.</p>
+    </div>
+  </section>
+
+  <section class="join-panel" data-consultation-view="form">
+    <div class="container-narrow">
+      <div class="join-panel-head">
+        <span class="step-tag">CONTACT<i aria-hidden="true"></i><em>상담 접수</em></span>
+        <h2>상담 신청서</h2>
+        <p class="desc">표시된 항목(<span class="req">*</span>)은 필수입니다.</p>
+      </div>
+
+      <form class="join-form" data-consultation-form novalidate>
+        <div class="form-legend">신청 구분</div>
+        <div class="field-stack">
+          <div class="field-set">
+            <span>신청자 유형 <span class="req">*</span></span>
+            <div class="chip-row">
+              <label class="chip"><input type="radio" name="신청자 유형" value="personal" checked><span>개인</span></label>
+              <label class="chip"><input type="radio" name="신청자 유형" value="corp"><span>법인·기관</span></label>
+            </div>
+          </div>
+          <div class="field-set">
+            <span>상담 유형 <span class="req">*</span></span>
+            <div class="chip-row">
+              <label class="chip"><input type="radio" name="상담 유형" value="membership" checked><span>회원가입</span></label>
+              <label class="chip"><input type="radio" name="상담 유형" value="partnership"><span>기관 협력</span></label>
+              <label class="chip"><input type="radio" name="상담 유형" value="education_event"><span>교육·행사</span></label>
+              <label class="chip"><input type="radio" name="상담 유형" value="publicity"><span>홍보·미디어</span></label>
+              <label class="chip"><input type="radio" name="상담 유형" value="other"><span>기타</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-legend">연락처</div>
+        <div class="field-grid">
+          <label class="field">
+            <span>이름 <span class="req">*</span></span>
+            <input type="text" name="이름" data-api="name" autocomplete="name" required>
+          </label>
+          <label class="field" data-org-field hidden>
+            <span>기관명 <span class="req">*</span></span>
+            <input type="text" name="기관명" data-api="orgName" autocomplete="organization">
+          </label>
+          <label class="field">
+            <span>이메일 <span class="req">*</span></span>
+            <input type="email" name="이메일" data-api="email" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span>연락처 <span class="req">*</span></span>
+            <input type="tel" name="연락처" data-api="phone" autocomplete="tel" required>
+          </label>
+        </div>
+
+        <div class="form-legend">상담 내용</div>
+        <div class="field-stack">
+          <label class="field">
+            <span>제목 <span class="req">*</span></span>
+            <input type="text" name="제목" data-api="subject" maxlength="200" required>
+          </label>
+          <label class="field">
+            <span>내용 <span class="req">*</span></span>
+            <textarea name="내용" data-api="message" rows="7" maxlength="5000" placeholder="문의하거나 제안할 내용을 구체적으로 적어 주세요." required></textarea>
+          </label>
+          <div class="field-set">
+            <span>희망 답변 방법 <span class="req">*</span></span>
+            <div class="chip-row">
+              <label class="chip"><input type="radio" name="답변 방법" value="email" checked><span>이메일</span></label>
+              <label class="chip"><input type="radio" name="답변 방법" value="phone"><span>전화</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="terms-box">
+          <label class="term">
+            <input type="checkbox" name="개인정보 동의" required>
+            <span class="term-box" aria-hidden="true"></span>
+            <span class="term-label">(필수) 상담 답변을 위한 <a href="../privacy/index.html" target="_blank" rel="noopener">개인정보 수집·이용</a>에 동의합니다.</span>
+          </label>
+        </div>
+
+        <p class="join-error" data-consultation-error hidden></p>
+        <div class="join-actions">
+          <button type="submit" class="btn-solid">상담 신청</button>
+          <a class="btn-ghost" href="../join/index.html">회원가입 보기</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="join-panel" data-consultation-view="done" hidden>
+    <div class="container-narrow">
+      <div class="join-done">
+        <div class="join-done-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <h2>상담 신청이 접수되었습니다</h2>
+        <p data-consultation-done-message>담당 그룹·팀에서 확인 후 입력하신 연락처로 답변드리겠습니다.</p>
+        <div class="join-actions">
+          <a class="btn-solid" href="../index.html">첫 화면으로</a>
+          <a class="btn-ghost" data-consultation-mail href="mailto:info@kmtpa.org">사무국에 메일 보내기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+  <script src="../js/templates.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/consultation.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/cms.js"></script>
+</body>
+</html>
