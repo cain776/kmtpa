@@ -571,7 +571,7 @@ window.KMTPA = window.KMTPA || {};
       return Array.from(form.elements).find(el => el.willValidate && !el.checkValidity()) || null;
     }
 
-    /* 폼을 API 계약(backend/docs/members-api.md)으로 옮깁니다.
+    /* 폼을 API 계약(docs/plan/14-erd.html 의 members)으로 옮깁니다.
 
        입력의 name은 한글이라 메일 본문에 그대로 쓰기 좋지만 API 필드명은 아닙니다.
        매핑을 JS에 표로 두면 필드를 더할 때 두 곳이 어긋나므로, 마크업의
