@@ -45,9 +45,6 @@ window.KMTPA = window.KMTPA || {};
   }
 
   const page = (route) => localUrl(new URL(normalizeRoute(route), siteRoot));
-  // 내부 시스템 로그인. frontend/ 가 shared/·workspace/·admin/ 으로 분리되면서
-  // 진입점이 shared/login.html 로 바뀌었습니다.
-  const adminUrl = localUrl(new URL('../shared/login.html', siteRoot));
   const flags = {
     isAbout: path === 'about/' || path === 'about/index.html',
     isVisitKorea: path === 'patient-journey/' || path === 'patient-journey/index.html',
@@ -128,7 +125,10 @@ window.KMTPA = window.KMTPA || {};
           </div>
         </nav>
 
-        <a href="${adminUrl}" class="header-cta">관리자 로그인</a>
+        <!-- 회원 로그인. 사무국 로그인은 공개 사이트에서 걷어냈습니다 — 방문자가
+             누를 일이 없고, 눌러도 권한이 없어 되돌아옵니다. 사무국은 내부 주소로
+             바로 들어갑니다. -->
+        <a href="${page('login/')}" class="header-cta">로그인</a>
 
         <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="메뉴 열기" aria-controls="top-nav" aria-expanded="false">
           <i data-lucide="menu"></i>

@@ -355,7 +355,9 @@ window.KMTPA = window.KMTPA || {};
       if (src) img.setAttribute('src', src);
       img.setAttribute('alt', brand.koName || 'KMTPA');
     });
-    document.querySelectorAll('.header-cta').forEach(el => setText(el, brand.adminLabel));
+    // .header-cta 는 이제 회원 로그인이라 brand.adminLabel(관리자 로그인)로
+    // 덮어쓰지 않습니다. 덮어쓰면 CMS 를 한 번이라도 게시한 순간 버튼 이름이
+    // '관리자 로그인' 으로 되돌아갑니다.
     document.querySelectorAll('.footer-tagline').forEach(el => setText(el, brand.footerTagline));
     document.querySelectorAll('.footer-brand-label').forEach(el => setText(el, brand.flagshipLabel));
     // 날개 배너는 회원가입 링크가 앞에 붙어 순서가 바뀌므로 위치 대신 클래스로 집습니다.

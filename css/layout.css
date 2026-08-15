@@ -110,12 +110,19 @@
 }
 
 /* Mega dropdown — 가로 3컬럼 카테고리 그룹 */
+/* 메가 드롭다운은 620px 라, 오른쪽에 있는 메뉴에서 왼쪽 기준으로 펼치면 화면
+   밖으로 나간다. 숨어 있어도(visibility:hidden) 자리는 차지해서 페이지 전체에
+   가로 스크롤이 111px 생기고 있었다.
+
+   그래서 메뉴의 오른쪽에 붙여 왼쪽으로 펼친다. 대메뉴는 헤더 오른쪽에 모여
+   있으므로 이 방향이면 어느 항목에서도 화면 안에 들어온다. */
 .nav-dropdown--mega {
   min-width: 620px;
   padding: 20px 0;
   display: flex;
   gap: 0;
-  left: -16px;
+  left: auto;
+  right: -16px;
 }
 .dropdown-group {
   flex: 1;
