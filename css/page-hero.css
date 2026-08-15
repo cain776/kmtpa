@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
   border-bottom: 1px solid var(--border-default);
 }
 /* 안쪽 컨테이너는 폭을 다 쓴다.
@@ -28,6 +29,35 @@
    꺼 버려서, 컨테이너가 1280 이 아니라 가장 넓은 자식(설명문 720px)에 맞춰
    768px 로 쪼그라들었다. 그러면 머리띠 글이 본문보다 오른쪽으로 밀린다. */
 .journey-hero > * { width: 100%; }
+
+/* ---------- 사선 ----------
+   흰 띠만 있으면 밋밋해서, 오른쪽 위에서 왼쪽 아래로 떨어지는 사선을 깐다.
+
+   두 겹이다 — 또렷한 선 하나(#3a3865, 알파 .30)가 축을 만들고, 그 뒤로
+   46px 간격의 아주 옅은 반복선(.085)이 결을 준다. 반복선만 쓰면 벽지 같고,
+   선 하나만 쓰면 그어 놓은 티가 난다.
+
+   마스크가 오른쪽 위 모서리에서 왼쪽 아래로 사라지게 잡혀 있다. 글은 왼쪽에
+   있으므로 사선이 글자를 가로지르지 않는다 — 특히 약관·개인정보처리방침은
+   page-fullwidth 라 설명문이 1,232px 까지 가는데, 그쪽으로 갈수록 선이
+   옅어져 겹쳐도 읽는 데 지장이 없다.
+
+   배너가 있는 페이지에서는 사진이 위에 얹혀(z-index 1) 사선을 가리고,
+   사진 왼쪽 흐린 구간으로만 비쳐 보인다. 글과 사진 사이의 빈 곳을 메운다.
+
+   .journey-hero 에 overflow:hidden 을 준 것은 이 사선이 띠 밖으로 새지 않게
+   하기 위해서다. 배너 변형은 이미 같은 이유로 갖고 있었다. */
+.journey-hero { position: relative; }
+.journey-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(160deg, transparent calc(50% - .7px), rgba(58,56,101,.30) 50%, transparent calc(50% + .7px)),
+    repeating-linear-gradient(160deg, rgba(2,0,40,.085) 0 1px, transparent 1px 46px);
+  -webkit-mask-image: linear-gradient(to bottom left, #000 8%, rgba(0,0,0,.5) 34%, transparent 62%);
+  mask-image: linear-gradient(to bottom left, #000 8%, rgba(0,0,0,.5) 34%, transparent 62%);
+}
+/* 글과 사진을 사선 위로 올린다. 안 올리면 ::before 가 나중에 칠해져 덮는다. */
+.journey-hero > *, .journey-hero .hero-banner { position: relative; z-index: 1; }
 
 /* 띠 높이를 실제로 정하는 건 제목 줄 수다. 전역 h1 은 최대 48px 이라 한 줄에
    55px, 두 줄이면 110px 을 먹는다. 머리띠 안에서만 한 단계 줄인다 —
