@@ -23,8 +23,12 @@ window.KMTPA = window.KMTPA || {};
   const LANGS = [
     { code: 'ko', label: '한국어' },
     { code: 'en', label: 'English' },
-    { code: 'zh', label: '中文' },
+    // 중국어는 본토(간체)와 대만(번체)을 나눕니다. 글자만이 아니라 단어도
+    // 갈립니다 — 건강검진이 본토는 体检, 대만은 健檢입니다.
+    { code: 'zh', label: '简体中文' },
+    { code: 'zh-TW', label: '繁體中文' },
     { code: 'ja', label: '日本語' },
+    { code: 'mn', label: 'Монгол' },
     { code: 'es', label: 'Español' },
   ];
   NS.LANGS = LANGS;
@@ -93,6 +97,11 @@ window.KMTPA = window.KMTPA || {};
     });
   }
 
+  // 사전 한 줄 조회. 화면이 스스로 다시 그리는 곳(히어로 슬라이드처럼)에서 쓴다.
+  NS.t = function (key) {
+    return dict && typeof dict[key] === 'string' && dict[key] ? dict[key] : null;
+  };
+
   NS.applyI18n = function (root) {
     if (!dict) return;
     applyTo(root || document, dict);
@@ -144,6 +153,8 @@ window.KMTPA = window.KMTPA || {};
 
     dict = await ensureDict(NS.currentLang);
     NS.applyI18n(document);
+    // 스스로 다시 그리는 화면은 사전이 준비된 뒤 한 번 더 그려야 한다.
+    if (typeof NS.refreshHeroCopy === 'function') NS.refreshHeroCopy();
 
     // <title> 과 검색용 설명도 함께 바꾼다
     const page = document.body.dataset.i18nPage;

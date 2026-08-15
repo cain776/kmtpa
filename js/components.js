@@ -133,10 +133,14 @@ window.KMTPA = window.KMTPA || {};
     // <em>은 금색 강조입니다.
     // 슬라이드를 추가하면 아래 예비 문구를 살려 쓰세요.
     //   '<em>환자 안전과 진료 품질</em>,<br>협회가 기준을 세웁니다.'
+    // 슬라이드 문구. 6 초마다 headline 을 다시 쓰므로, 번역을 한 번 적용해도
+    // 다음 회전에서 원문으로 되돌아간다. 그래서 그릴 때마다 사전을 본다.
     const COPY = [
       '세계가 신뢰하는 <em>K-의료관광</em>을<br>만들어갑니다.',
       '치료를 넘어, <em>한국을 경험하는 여정</em>을<br>함께 만듭니다.'
     ];
+    const COPY_KEYS = ['home.hero.1', 'home.hero.2'];
+    const copyAt = i => (NS.t && NS.t(COPY_KEYS[i])) || COPY[i];
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const INTERVAL = 6000;
@@ -151,7 +155,7 @@ window.KMTPA = window.KMTPA || {};
         el.classList.toggle('is-active', i === index);
         el.setAttribute('aria-selected', i === index ? 'true' : 'false');
       });
-      if (headline && COPY[index]) headline.innerHTML = COPY[index];
+      if (headline && COPY[index]) headline.innerHTML = copyAt(index);
       if (counter) counter.textContent = `${pad(index + 1)} / ${pad(total)}`;
     }
 
@@ -184,6 +188,8 @@ window.KMTPA = window.KMTPA || {};
 
     render();
     restart();
+    // 사전은 나중에 도착한다. i18n.js 가 다 적용한 뒤 한 번 더 그린다.
+    NS.refreshHeroCopy = render;
 
     /* ----- 히어로를 지나면 고정 헤더 노출 ----- */
     const header = document.querySelector('.site-header');
