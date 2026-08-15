@@ -239,21 +239,6 @@ window.KMTPA = window.KMTPA || {};
             <a href="${page('directions/')}">오시는 길</a>
           </div>
         </div>
-
-        <!-- 연락처 한 줄. 컬럼 안에 세로로 쌓여 있던 것을 밖으로 빼 눕혔습니다.
-
-             컬럼 폭이 158px 인데 concierge@kmtpa.org 한 줄이 161px 이라
-             컬럼 안에서는 눕힐 수가 없습니다.
-
-             .footer-col 밖이라 CMS 가 건드리지 않습니다 — applyFooter 는
-             .footer-col 안의 <a> 를 전부 지우고 다시 붙이므로, 컬럼 안에
-             두면 감싼 요소만 빈 채로 남습니다. 대신 이 세 개는 관리자
-             화면에서 못 고치고 여기서 직접 고칩니다. -->
-        <div class="footer-contact-row">
-          <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
-          <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
-          <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
-        </div>
       </div>
 
       <!-- 푸터 맨 아래 흰 띠 한 줄. 왼쪽에 소관 부처·공시 로고, 오른쪽에
@@ -281,6 +266,11 @@ window.KMTPA = window.KMTPA || {};
             <a href="https://www.hometax.go.kr/" target="_blank" rel="noopener">
               <img src="${page('images_homepage/authority/nts.png')}" alt="국세청" width="380" height="136" decoding="async">
             </a>
+          </div>
+          <div class="footer-authorities-contact">
+            <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
+            <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
+            <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
           </div>
           <div class="footer-authorities-legal">
             <span>© 2026 (사)한국의료관광진흥협회. All rights reserved.</span>
