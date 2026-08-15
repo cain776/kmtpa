@@ -58,33 +58,6 @@ window.KMTPA = window.KMTPA || {};
     return readLocalPublishedData();
   }
 
-  function findWhyKoreaSection(data) {
-    if (!isRecord(data)) return null;
-
-    if (isRecord(data.whyKorea)) return data.whyKorea;
-    if (isRecord(data.homepage) && isRecord(data.homepage.whyKorea)) return data.homepage.whyKorea;
-    if (isRecord(data.sections) && isRecord(data.sections.whyKorea)) return data.sections.whyKorea;
-    if (isRecord(data.sections) && isRecord(data.sections['why-korea'])) return data.sections['why-korea'];
-
-    if (Array.isArray(data.sections)) {
-      const section = data.sections.find(item => {
-        if (!isRecord(item)) return false;
-        return ['whyKorea', 'why-korea'].includes(item.id)
-          || ['whyKorea', 'why-korea'].includes(item.key)
-          || ['whyKorea', 'why-korea'].includes(item.slug)
-          || ['whyKorea', 'why-korea'].includes(item.sectionId);
-      });
-
-      if (isRecord(section)) {
-        if (isRecord(section.content)) return section.content;
-        if (isRecord(section.data)) return section.data;
-        return section;
-      }
-    }
-
-    return null;
-  }
-
   function findNewsletterSection(data) {
     if (!isRecord(data)) return null;
 
@@ -122,31 +95,6 @@ window.KMTPA = window.KMTPA || {};
     }
 
     return null;
-  }
-
-  function normalizeWhyKorea(section) {
-    if (!isRecord(section)) return null;
-
-    const eyebrow = getCleanText(section.eyebrow);
-    const title = getCleanText(section.title);
-    const description = getCleanText(section.description);
-    const rawCards = Array.isArray(section.pillars) ? section.pillars : section.cards;
-
-    if (!eyebrow || !title || !description || !Array.isArray(rawCards) || rawCards.length < 4) {
-      return null;
-    }
-
-    const cards = rawCards.slice(0, 4).map(card => {
-      if (!isRecord(card)) return null;
-      return {
-        title: getCleanText(card.title),
-        description: getCleanText(card.description) || getCleanText(card.desc)
-      };
-    });
-
-    if (cards.some(card => !card || !card.title || !card.description)) return null;
-
-    return { eyebrow, title, description, cards };
   }
 
   function pickText(record, keys) {
@@ -723,43 +671,6 @@ window.KMTPA = window.KMTPA || {};
     return items.length ? items : null;
   }
 
-  function getWhyKoreaDom() {
-    const root = document.getElementById('why-korea');
-    if (!root) return null;
-
-    const eyebrow = root.querySelector('.section-head .eyebrow');
-    const title = root.querySelector('.section-head h2');
-    const description = root.querySelector('.section-head .desc');
-    const pillars = Array.from(root.querySelectorAll('.pillar-grid .pillar')).slice(0, 4);
-
-    if (!eyebrow || !title || !description || pillars.length < 4) return null;
-
-    const cards = pillars.map(pillar => ({
-      title: pillar.querySelector('h3'),
-      description: pillar.querySelector('p')
-    }));
-
-    if (cards.some(card => !card.title || !card.description)) return null;
-
-    return { eyebrow, title, description, cards };
-  }
-
-  function applyWhyKorea(content) {
-    const dom = getWhyKoreaDom();
-    if (!dom) return false;
-
-    dom.eyebrow.textContent = content.eyebrow;
-    dom.title.textContent = content.title;
-    dom.description.textContent = content.description;
-
-    content.cards.forEach((card, index) => {
-      dom.cards[index].title.textContent = card.title;
-      dom.cards[index].description.textContent = card.description;
-    });
-
-    return true;
-  }
-
   function createNewsletterCard(item) {
     const article = document.createElement('article');
     article.className = 'pub';
@@ -904,14 +815,12 @@ window.KMTPA = window.KMTPA || {};
 
   NS.applyPublishedHomepageContent = async function () {
     const data = await readPublishedData();
-    const whyKorea = normalizeWhyKorea(findWhyKoreaSection(data));
     const newsletter = normalizeNewsletter(findNewsletterSection(data));
     let didApply = false;
 
     didApply = applySiteSettings(data) || didApply;
     didApply = applyPageContent(data) || didApply;
     didApply = applySectionControls(data) || didApply;
-    if (whyKorea) didApply = applyWhyKorea(whyKorea) || didApply;
     if (newsletter) didApply = applyNewsletter(newsletter) || didApply;
 
     return didApply;

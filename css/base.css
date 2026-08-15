@@ -11,7 +11,7 @@
 :root {
   --navy-900: #020028;   /* primary — 업로드 색상 */
   --navy-800: #1a1845;   /* hover · 살짝 밝게 */
-  --navy-700: #3a3865;   /* secondary 액센트 · pillar 넘버 등 */
+  --navy-700: #3a3865;   /* secondary 액센트 */
   --navy-100: #e9e9f2;   /* 라이트 틴트 · 배지 배경 */
 
   --text-heading:  #0f172a;
