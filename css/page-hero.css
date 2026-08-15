@@ -275,6 +275,10 @@
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.15s;
+  /* 15px 이라 AA(24px)에 못 미쳤다. 줄 높이를 바꾸지 않도록 inline-block +
+     위아래 여백만 준다. */
+  display: inline-block;
+  padding: 5px 0;
 }
 .breadcrumb a:hover { color: var(--navy-900); }
 .breadcrumb li[aria-current="page"] {

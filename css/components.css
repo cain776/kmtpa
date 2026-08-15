@@ -20,7 +20,9 @@
 .link-cta:hover { gap: 10px; color: var(--navy-800); }
 .link-cta svg { width: 14px; height: 14px; }
 
+/* 22px 이라 AA(24px)에 못 미쳤다. */
 .link-cta-muted {
+  padding: 4px 0;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -493,7 +495,7 @@ body.modal-open { overflow: hidden; }
 }
 .pub-modal-section:first-of-type { margin-top: 0; }
 .pub-modal-section h3 {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-heading);
   margin-bottom: 12px;
@@ -506,7 +508,7 @@ body.modal-open { overflow: hidden; }
   margin: 16px 0 6px;
 }
 .pub-modal-section p {
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--text-body);
   line-height: 1.75;
   margin: 0 0 12px;
@@ -545,7 +547,7 @@ body.modal-open { overflow: hidden; }
 .pub-modal-list li strong {
   grid-column: 2;
   display: block;
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-heading);
   margin-bottom: 4px;
@@ -553,7 +555,7 @@ body.modal-open { overflow: hidden; }
 .pub-modal-list li span {
   grid-column: 2;
   display: block;
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--text-muted);
   line-height: 1.65;
 }
@@ -646,7 +648,7 @@ body.modal-open { overflow: hidden; }
   text-align: left;
 }
 .pub-modal-placeholder p {
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--text-muted);
   line-height: 1.7;
   margin: 0 0 12px;

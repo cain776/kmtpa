@@ -51,6 +51,9 @@
   color: var(--text-body);
   text-decoration: none;
   line-height: 1.7;
+  /* 16px 이라 AA(24px)에 못 미쳤다. 목차는 조항으로 건너뛰는 주 동선이다. */
+  display: inline-block;
+  padding: 4px 0;
 }
 .legal-body .toc ol li a:hover { color: var(--navy-700); }
 
@@ -89,7 +92,7 @@
   margin: 8px 0 4px;
 }
 .legal-body ol.clause-list ol.subclause-list > li {
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--text-body);
   line-height: 1.75;
   margin-bottom: 4px;
@@ -105,7 +108,7 @@
 }
 .legal-body ol.bullet-list > li,
 .legal-body ul.bullet-list > li {
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--text-body);
   line-height: 1.75;
   margin-bottom: 4px;

@@ -207,7 +207,7 @@
 }
 .panel > h2 {
   margin: 0 0 18px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--join-ink);
   display: flex;
@@ -235,7 +235,7 @@
   align-items: center;
   gap: 10px;
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--join-ink);
 }
@@ -291,7 +291,7 @@
   gap: 12px 14px;
   margin: 0;
   max-width: 560px;
-  font-size: 14.5px;
+  font-size: 14px;
 }
 .info-dl dt { color: var(--join-faint); font-weight: 500; }
 .info-dl dd { margin: 0; color: var(--join-ink); word-break: break-word; }
@@ -312,7 +312,7 @@
   margin-top: 22px;
   padding-top: 18px;
   border-top: 1px solid var(--join-line);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.7;
   color: var(--join-faint);
 }
@@ -340,7 +340,7 @@
   max-width: 540px;
   margin: 7px 0 0;
   color: var(--join-faint);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.7;
 }
 .btn-withdraw,
@@ -348,7 +348,7 @@
   flex: 0 0 auto;
   border-radius: 8px;
   font: inherit;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -454,7 +454,7 @@
 }
 .inquiry-block p {
   margin: 0;
-  font-size: 14.5px;
+  font-size: 14px;
   line-height: 1.8;
   color: var(--join-body);
   white-space: pre-wrap;
@@ -482,7 +482,7 @@
   padding: 14px 18px;
   border-radius: 10px;
   border: 1px dashed var(--join-line-strong);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.7;
   color: var(--join-faint);
 }
@@ -499,7 +499,7 @@
 }
 .empty p {
   margin: 12px 0 0;
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--join-body);
 }
 .empty .btn-ghost-link {

@@ -175,7 +175,7 @@
 /* 로그인 중일 때 로그아웃 버튼 왼쪽에 붙는 사용자명 (components.js 가 삽입).
    누르면 마이페이지로 갑니다. */
 .header-user {
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--text-body);
   white-space: nowrap;
   text-decoration: none;
@@ -592,6 +592,8 @@
   font-weight: 500;
   text-decoration: none;
   transition: color 0.15s;
+  /* 19px 이라 AA(24px)에 못 미쳤다. */
+  padding: 4px 0;
 }
 .footer-authorities-contact a:hover {
   color: var(--navy-900);
@@ -616,6 +618,8 @@
   color: var(--text-body);
   font-weight: 500;
   text-decoration: none;
+  /* 19px 이라 AA(24px)에 못 미쳤다. */
+  padding: 4px 0;
 }
 .footer-authorities-legal a:hover {
   color: var(--navy-900);

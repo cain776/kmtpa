@@ -16,7 +16,10 @@
 
   --text-heading:  #0f172a;
   --text-body:     #475569;
-  --text-muted:    #94a3b8;
+  /* #94a3b8 이었다. 흰 배경에서 2.6:1, --bg-subtle 위에서 2.5:1 로 AA(4.5:1)에
+     한참 못 미쳐 탭·출처 표기·인용 번역 등 87곳이 걸렸다. #64748b 는 같은
+     slate 계열이면서 4.8:1 / 4.5:1 로 통과한다. */
+  --text-muted:    #64748b;
 
   --border-default: #e5e7eb;
   --border-strong:  #cbd5e1;

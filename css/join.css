@@ -11,7 +11,9 @@
   --join-ink: #141432;        /* 제목 · 선택된 칩 배경 */
   --join-gold: #E8A33D;       /* 액센트 — 홈 히어로와 같은 금색 */
   --join-body: #5A6072;
-  --join-faint: #8A90A0;
+  /* #8A90A0 은 흰 카드 위에서 3.2:1 이라 AA 미달이었다. 안내 문구·보조
+     설명에 쓰이는 색이라 읽혀야 한다. --text-muted 와 같은 값으로 맞춘다. */
+  --join-faint: #64748b;
   --join-line: #E6E8EF;
   --join-line-strong: #DFE3EC;
   --join-band: #F6F7FA;
@@ -60,9 +62,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 700;
-  color: #9AA0B0;
+  /* #9AA0B0 은 흰 바탕에서 2.6:1 이었다. 아직 지나지 않은 단계라 흐린 것이
+     맞지만, 몇 단계 중 몇 번째인지는 읽혀야 한다. */
+  color: var(--text-muted);
   background: #fff;
   border: 1.5px solid var(--join-line-strong);
   transition: background 0.3s, border-color 0.3s, color 0.3s;
@@ -70,7 +74,7 @@
 .join-step-label {
   font-size: 14px;
   font-weight: 500;
-  color: #9AA0B0;
+  color: var(--text-muted);
   transition: color 0.3s;
 }
 .join-step.is-active .join-step-num {
@@ -136,7 +140,7 @@
 .join-panel-head h2 { margin-top: 16px; color: var(--join-ink); }
 .join-panel-head .desc {
   margin-top: 14px;
-  font-size: 15.5px;
+  font-size: 16px;
   color: var(--join-body);
 }
 .req { color: var(--join-required); }
@@ -208,11 +212,13 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: #C9CEDC;
+  /* #C9CEDC 는 흰 카드 위에서 1.6:1 이라 거의 안 보였다. 카드 번호는 장식이
+     아니라 '개인/법인 중 어느 쪽인지' 를 가리키는 라벨이라 읽혀야 한다. */
+  color: var(--text-muted);
 }
 .type-card h3 {
   margin-top: 26px;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 800;
   color: var(--join-ink);
 }
@@ -258,7 +264,7 @@
   background: var(--join-band);
   border: 1px solid var(--join-line);
   border-radius: 12px;
-  font-size: 14.5px;
+  font-size: 14px;
   line-height: 1.7;
   color: var(--join-body);
 }
@@ -286,7 +292,7 @@
   margin-top: 46px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--join-line);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--join-ink);
   display: flex;
@@ -463,7 +469,7 @@
   outline: 2px solid var(--join-gold);
   outline-offset: 2px;
 }
-.term-label { font-size: 14.5px; color: #41475A; }
+.term-label { font-size: 14px; color: #41475A; }
 .term-label a { color: var(--join-ink); }
 .join-form.is-validated .term input:invalid + .term-box { border-color: var(--join-required); }
 
@@ -477,9 +483,9 @@
   border-radius: 12px;
   background: var(--join-field);
 }
-.doc-box .doc-title { font-size: 14.5px; font-weight: 700; color: var(--join-ink); }
+.doc-box .doc-title { font-size: 14px; font-weight: 700; color: var(--join-ink); }
 .doc-box .doc-list { font-size: 14px; line-height: 1.9; color: var(--join-body); }
-.doc-box .doc-how { font-size: 13.5px; line-height: 1.8; color: var(--join-faint); }
+.doc-box .doc-how { font-size: 14px; line-height: 1.8; color: var(--join-faint); }
 .doc-box .doc-how a { color: var(--join-ink); }
 
 /* ----- 액션 버튼 ----- */
@@ -525,7 +531,7 @@
 
 .join-error {
   margin-top: 18px;
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--join-required);
 }
 .join-error[hidden] { display: none; }
@@ -583,7 +589,7 @@
   gap: 12px;
   padding: 14px 18px;
   border-bottom: 1px solid var(--join-line);
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--join-body);
 }
 .join-copy-head button {
