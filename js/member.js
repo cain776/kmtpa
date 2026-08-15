@@ -203,9 +203,9 @@
 
   function renderInquiries(list) {
     const wrap = document.querySelector('[data-my-inquiries]');
-    const count = document.querySelector('[data-my-count]');
     if (!wrap) return;
-    if (count) count.textContent = list.length;
+    // 건수는 왼쪽 메뉴 배지와 패널 제목 두 곳에 표시됩니다.
+    document.querySelectorAll('[data-my-count]').forEach(el => { el.textContent = list.length; });
 
     if (!list.length) {
       // 빈 화면으로 두지 않고 다음에 할 일을 함께 둡니다.
@@ -262,9 +262,31 @@
     });
   }
 
+  /* 왼쪽 메뉴 ↔ 오른쪽 패널. 주소 해시(#info/#inquiries)가 기준이라
+     뒤로가기와 링크 공유가 그대로 동작합니다. */
+  function setupMyNav() {
+    const links = document.querySelectorAll('[data-my-nav]');
+    const panels = document.querySelectorAll('[data-my-panel]');
+    if (!links.length || !panels.length) return;
+
+    function apply() {
+      const raw = (window.location.hash || '').slice(1);
+      const key = ['info', 'inquiries'].includes(raw) ? raw : 'info';
+      panels.forEach(p => { p.hidden = p.dataset.myPanel !== key; });
+      links.forEach(a => {
+        if (a.dataset.myNav === key) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    }
+
+    window.addEventListener('hashchange', apply);
+    apply();
+  }
+
   async function setupMyPage() {
     const greeting = document.querySelector('[data-my-greeting]');
     if (!greeting) return;
+    setupMyNav();
 
     try {
       const data = await loadMe();

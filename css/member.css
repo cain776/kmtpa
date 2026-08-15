@@ -6,8 +6,8 @@
    씁니다. 그래서 두 화면은 <body class="is-join is-member"> 로 엽니다 —
    consultation/ 이 이미 쓰는 방식입니다.
 
-   여기에는 이 두 화면에만 있는 것만 둡니다: 로그인 카드, 마이페이지 2단 배치,
-   문의·답변 아코디언.
+   여기에는 이 두 화면에만 있는 것만 둡니다: 로그인 카드, 마이페이지의
+   왼쪽 메뉴 + 패널 전환, 문의·답변 아코디언.
    base/layout/components/pages/join.css 다음에 로드하세요.
    ========================================================================= */
 
@@ -111,7 +111,8 @@
 }
 
 /* -------------------------------------------------------------------------
-   마이페이지 — 왼쪽 내 정보, 오른쪽 문의
+   마이페이지 — 왼쪽 메뉴, 오른쪽에 선택한 패널 하나
+   두 패널을 나란히 두면 각각이 반 폭이라 좁아 보여, 메뉴로 전환합니다.
    ------------------------------------------------------------------------- */
 .mypage-head {
   display: flex;
@@ -130,12 +131,56 @@
 .mypage-grid {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  grid-template-columns: 200px minmax(0, 1fr);
   gap: 28px;
   align-items: start;
 }
+
+/* 왼쪽 메뉴 */
+.my-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* 문의가 길어져도 메뉴는 따라 내려옵니다. 97px = 고정 헤더 73px + 여유 */
+  position: sticky;
+  top: 97px;
+}
+.my-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--join-body);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.my-nav a:hover { background: var(--join-band); color: var(--join-ink); }
+.my-nav a[aria-current="page"] {
+  background: var(--join-band);
+  color: var(--join-ink);
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 var(--join-gold);
+}
+.my-nav .count {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--join-body);
+  background: #fff;
+  border: 1px solid var(--join-line);
+  border-radius: 999px;
+  padding: 1px 9px;
+}
+
 @media (max-width: 900px) {
   .mypage-grid { grid-template-columns: 1fr; gap: 22px; }
+  /* 좁은 화면에서는 메뉴를 위에 가로로 폅니다 */
+  .my-nav { position: static; flex-direction: row; }
+  .my-nav a { flex: 1; justify-content: center; }
+  .my-nav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--join-gold); }
 }
 
 .panel {
@@ -162,12 +207,13 @@
   padding: 2px 10px;
 }
 
-/* 내 정보 — 항목 이름과 값 */
+/* 내 정보 — 항목 이름과 값. 패널이 넓어져도 표는 읽기 좋은 폭까지만 씁니다. */
 .info-dl {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
   gap: 12px 14px;
   margin: 0;
+  max-width: 560px;
   font-size: 14.5px;
 }
 .info-dl dt { color: var(--join-faint); font-weight: 500; }
