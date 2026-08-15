@@ -225,7 +225,10 @@
      아래가 잘리는 게 아니라 min-height 라 늘어나기만 하지만, 굳이 260 을
      비워 둘 이유도 없다. */
   .journey-hero { --hero-band-h: 200px; }
-  .journey-hero .lede { font-size: 16px; }
+  /* 여기는 원래 15px 이었는데 글자 척도를 정리하며 16(기본값)으로 병합돼
+     한 단계 내리는 효과가 사라졌다. 그 바람에 600px 폭에서 개인정보처리방침만
+     설명이 네 줄이 되어 띠가 208px 로 혼자 튀었다. 척도 안의 14 로 되돌린다. */
+  .journey-hero .lede { font-size: 14px; }
   /* 좁아지면 글이 띠 폭을 다 써서 오른쪽 무리가 문장 위로 올라온다.
      대비는 충분하지만 산만해서 톤을 낮춘다. */
   .journey-hero::before { opacity: .45; }

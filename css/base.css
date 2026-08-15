@@ -74,7 +74,18 @@ p  { margin: 0; }
   padding: 0 24px;
 }
 
-/* 페이지 전체가 1280 풀폭을 활용하도록 내부 max-width 캡 해제 */
+/* ---------- 읽기 폭 ----------
+
+   page-fullwidth 는 페이지가 컨테이너 폭을 다 쓰라는 표시다. 그런데 그게
+   그리드·카드·표뿐 아니라 산문에까지 적용돼서, 약관 조항이 한 줄에 131자,
+   개인정보처리방침 본문이 127자가 됐다. 한글은 40~50자가 편한 범위이고
+   그 두 배가 넘으면 눈이 다음 줄 첫머리를 놓친다.
+
+   그래서 폭을 쓰는 건 레이아웃까지로 두고, 글줄은 여기서 다시 잡는다.
+   rem 으로 두어 글자 크기가 다른 문단들이 오른쪽 끝을 공유한다 — 12px 주석과
+   16px 본문이 같은 선에서 끝나야 단이 하나로 보인다. */
+:root { --measure: 46rem; }
+
 .page-fullwidth .journey-hero .lede,
 .page-fullwidth .step-lede,
 .page-fullwidth .step-support,
@@ -82,8 +93,14 @@ p  { margin: 0; }
 .page-fullwidth .faq-a,
 .page-fullwidth .transparency-intro,
 .page-fullwidth .transparency-block p,
-.page-fullwidth .section-head .desc {
-  max-width: none;
+.page-fullwidth .section-head .desc,
+.page-fullwidth .lead,
+.page-fullwidth .clause-list > li,
+.page-fullwidth .subclause-list > li,
+.page-fullwidth .bullet-list > li,
+.page-fullwidth .program-brief-copy > p,
+.page-fullwidth .program-source {
+  max-width: var(--measure);
 }
 
 section { padding: 80px 0; }
