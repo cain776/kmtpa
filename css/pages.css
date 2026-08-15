@@ -683,10 +683,28 @@
    Patient Journey Page
    ========================================================================= */
 
+/* 페이지 머리띠 — 모든 하위 페이지가 같은 높이로 선다.
+   전에는 패딩 80/64 를 그냥 주고 말아서, 제목이 한 줄인 페이지(협회 소개
+   313px)와 두 줄인 페이지(오시는 길·회원가입 368px)의 띠 높이가 55px 이나
+   차이 났다. 메뉴를 옮겨 다닐 때마다 본문 시작 위치가 위아래로 덜컹거린다.
+
+   그래서 높이를 고정하고 내용을 그 안에서 가운데에 놓는다. 패딩은 최소
+   숨통이고, 실제 높이는 --hero-band-h 가 정한다. 값 하나만 고치면 모든
+   페이지가 같이 따라온다. */
 .journey-hero {
-  padding: 80px 0 64px;
+  --hero-band-h: 264px;
+  min-height: var(--hero-band-h);
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border-bottom: 1px solid var(--border-default);
 }
+/* 안쪽 컨테이너는 폭을 다 쓴다.
+   .container-narrow 의 `margin: 0 auto` 가 플렉스 아이템에서는 가로 stretch 를
+   꺼 버려서, 컨테이너가 1280 이 아니라 가장 넓은 자식(설명문 720px)에 맞춰
+   768px 로 쪼그라들었다. 그러면 머리띠 글이 본문보다 오른쪽으로 밀린다. */
+.journey-hero > * { width: 100%; }
 
 /* ---------- 배너 이미지가 붙는 페이지 히어로 ----------
    이미지를 배경(background-image)이 아니라 <img> 로 둡니다.
@@ -701,16 +719,20 @@
   display: flex;
   align-items: center;
   gap: 32px;
-  min-height: 300px;
+  /* 배너가 붙는 페이지도 같은 띠 높이를 쓴다 — 주요업무만 혼자 300px 이면
+     메뉴를 옮길 때 그 페이지에서만 화면이 튄다. */
+  min-height: var(--hero-band-h);
 }
 .hero-banner-copy {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 32px 0;
+  padding: 24px 0;
 }
 .hero-banner-art {
   flex: 0 0 auto;
-  height: 300px;
+  /* 띠 높이에서 위아래 숨통만 뺀 값. 이미지가 띠보다 크면 그 페이지만
+     띠가 늘어난다 — 실제로 주요업무만 300px 이었다. */
+  height: calc(var(--hero-band-h) - 24px);
   width: auto;
   display: block;
   object-fit: contain;
@@ -725,7 +747,7 @@
 
 @media (max-width: 1080px) {
   .hero-banner { min-height: 260px; gap: 24px; }
-  .hero-banner-art { height: 260px; }
+  .hero-banner-art { height: calc(var(--hero-band-h) - 24px); }
 }
 /* 나란히 놓을 폭이 없어지면 이미지를 내리고 글만 남깁니다. */
 @media (max-width: 820px) {
@@ -738,18 +760,21 @@
   .hero-banner-art { display: none; }
 }
 .journey-hero .lede {
-  margin-top: 20px;
-  font-size: 17px;
+  margin-top: 14px;
+  font-size: 16px;
   color: var(--text-body);
   max-width: 720px;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 @media (max-width: 720px) {
-  .journey-hero { padding: 56px 0 40px; }
+  /* 좁아지면 설명이 세 줄, 네 줄로 늘어난다. 고정 높이를 그대로 들고 가면
+     아래가 잘리는 게 아니라 min-height 라 늘어나기만 하지만, 굳이 260 을
+     비워 둘 이유도 없다. */
+  .journey-hero { --hero-band-h: 200px; }
   .journey-hero .lede { font-size: 15px; }
 }
 @media (max-width: 480px) {
-  .journey-hero { padding: 44px 0 32px; }
+  .journey-hero { --hero-band-h: 176px; padding: 20px 0; }
 }
 
 .journey-step {
