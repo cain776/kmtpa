@@ -384,7 +384,7 @@ window.KMTPA = window.KMTPA || {};
         <span class="quick-icon"><i data-lucide="arrow-up-right"></i></span>
       </a>
       <a href="https://mymedicon.com/alliance/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--network">
-        <span class="quick-label" data-i18n="chrome.quick-label.MEDICON Network">MEDICON Network</span>
+        <span class="quick-label" data-i18n="chrome.quick-label.MEDICON Network">메디넷</span>
         <span class="quick-icon"><i data-lucide="network"></i></span>
       </a>
       <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--instagram">

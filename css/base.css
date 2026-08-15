@@ -62,16 +62,27 @@ p  { margin: 0; }
   margin-bottom: 16px;
 }
 
-/* ---------- Layout ---------- */
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
+/* ---------- Layout ----------
+
+   컨테이너 폭. 1280 이었고 1600 으로 넓혔다 — 회원 기관 목록·통계표·활동
+   카드처럼 옆으로 늘어놓는 것이 많은 사이트라, 1280 에서는 카드가 한 줄에
+   네 개 들어가고 남는 폭이 그냥 여백으로 버려지고 있었다.
+
+   넓힌다고 글줄까지 길어지지는 않는다 — 산문은 위의 --measure 가 잡는다.
+   1600 미만 화면에서는 예전과 완전히 같이 보인다. max-width 라 좁은 쪽은
+   건드리지 않는다.
+
+   여백 24 → 40: 폭이 넓어지면 가장자리 여백도 같이 커져야 글이 화면 끝에
+   붙어 보이지 않는다. 좁은 화면에서는 아래 미디어 쿼리로 24 를 유지한다. */
+.container,
 .container-narrow {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 40px;
+}
+@media (max-width: 1024px) {
+  .container,
+  .container-narrow { padding: 0 24px; }
 }
 
 /* ---------- 읽기 폭 ----------
