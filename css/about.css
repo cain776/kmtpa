@@ -86,6 +86,19 @@
   gap: 64px;
   align-items: start;
 }
+/* 컨테이너를 1600 으로 넓히자 글이 760 에서 멈춰 오른쪽에 328px 이 비었다.
+   사진과 글을 각각 양쪽 끝에 붙이고, 남는 폭은 사진을 키우는 데 쓴다.
+   글 폭은 880 까지만 — 이 사이트 본문의 기존 읽기 폭이고, 더 늘리면
+   한 줄이 90자를 넘는다.
+
+   1400 부터인 이유: 사진 400 + 간격 64 + 글 880 = 1344 가 들어가야 한다.
+   그 아래에서는 예전 그대로 400 + 나머지로 둔다. */
+@media (min-width: 1400px) {
+  .greeting-row {
+    grid-template-columns: minmax(400px, 480px) minmax(0, 880px);
+    justify-content: space-between;
+  }
+}
 
 .greeting-photo {
   position: relative;
@@ -134,6 +147,11 @@
 }
 
 .greeting { max-width: 760px; }
+/* 위 .greeting-row 미디어 쿼리와 짝이다. 여기에 두는 이유는 순서뿐 —
+   같은 특정도라 760 보다 뒤에 와야 이긴다. */
+@media (min-width: 1400px) {
+  .greeting { max-width: 880px; }
+}
 .greeting p {
   font-size: 16px;
   color: var(--text-body);
@@ -541,6 +559,26 @@
   color: var(--text-body);
   line-height: 1.8;
   max-width: 880px;
+}
+/* 구분선은 컨테이너를 다 쓰는데 본문은 880 에서 끊겨, 1600 에서는 오른쪽
+   절반이 통째로 비어 보였다. 제목을 왼쪽 열로 빼고 본문을 오른쪽 끝에
+   붙여서 구분선의 양 끝에 내용이 닿게 한다.
+
+   인트로 문단도 margin-left:auto 로 같은 오른쪽 끝에 맞춘다 — 안 맞추면
+   인트로만 왼쪽에서 시작해 본문 열과 어긋난다.
+
+   1400 부터인 이유: 제목 열이 최소 400 은 되어야 '이해관계자 참여와 사회적
+   임팩트' 가 두 줄 안에 들어간다. 1400 화면에서 1352 - 64 - 880 = 408. */
+@media (min-width: 1400px) {
+  .transparency-block {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 880px);
+    column-gap: 64px;
+    align-items: start;
+  }
+  .transparency-block > h3 { grid-column: 1; margin-bottom: 0; }
+  .transparency-block > :not(h3) { grid-column: 2; }
+  .transparency-intro { margin-left: auto; }
 }
 
 .see-also {
