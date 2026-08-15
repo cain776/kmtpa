@@ -5,8 +5,7 @@
   const form = document.querySelector('[data-consultation-form]');
   if (!form) return;
 
-  const API_BASE = window.KMTPA_API_BASE
-    || (window.location.protocol === 'file:' ? 'http://127.0.0.1:5500/api' : '/api');
+  const API_BASE = window.KMTPA_API_BASE || '/api';   // 판단은 runtime-config.js 한 곳에서 한다
   const errorEl = document.querySelector('[data-consultation-error]');
   const orgField = document.querySelector('[data-org-field]');
   const orgInput = orgField && orgField.querySelector('input');

@@ -12,8 +12,7 @@
   // components.js 의 헤더 로그인 표시와 같은 키를 쓴다. 기존 키 이름은
   // 배포된 화면과의 호환 때문에 유지하지만 내용은 실제 서버 세션이다.
   const SESSION_KEY = 'kmtpa.member.preview.v1';
-  const API_BASE = window.KMTPA_API_BASE
-    || (window.location.protocol === 'file:' ? 'http://127.0.0.1:5500/api' : '/api');
+  const API_BASE = window.KMTPA_API_BASE || '/api';   // 판단은 runtime-config.js 한 곳에서 한다
 
   const INQUIRY_LABEL = {
     membership: '회원가입', partnership: '기관 협력',

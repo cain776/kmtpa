@@ -12,8 +12,7 @@ window.KMTPA = window.KMTPA || {};
   'use strict';
 
   const STORAGE_KEY = 'kmtpa.homepage.published.v1';
-  const API_BASE = window.KMTPA_API_BASE
-    || (window.location.protocol === 'file:' ? 'http://127.0.0.1:5500/api' : '/api');
+  const API_BASE = window.KMTPA_API_BASE || '/api';   // 판단은 runtime-config.js 한 곳에서 한다
 
   function isRecord(value) {
     return value !== null && typeof value === 'object' && !Array.isArray(value);
