@@ -231,19 +231,28 @@ window.KMTPA = window.KMTPA || {};
             <a href="${page('communications/#newsletter')}">뉴스레터</a>
           </div>
 
-          <!-- 연락처 앞의 구분선은 CSS 가 첫 mailto 링크에 긋습니다. 감싸는
-               div 를 두면 CMS 가 게시할 때 링크를 전부 지우고 컬럼 바로 밑에
-               다시 붙여서 그 div 만 빈 채로 남습니다. -->
           <div class="footer-col footer-col--contact">
             <h4>문의·연결</h4>
             <a href="${page('together/')}">함께하기</a>
             <a href="${page('join/')}">회원가입</a>
             <a href="${page('consultation/')}">상담 신청</a>
             <a href="${page('directions/')}">오시는 길</a>
-            <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
-            <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
-            <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
           </div>
+        </div>
+
+        <!-- 연락처 한 줄. 컬럼 안에 세로로 쌓여 있던 것을 밖으로 빼 눕혔습니다.
+
+             컬럼 폭이 158px 인데 concierge@kmtpa.org 한 줄이 161px 이라
+             컬럼 안에서는 눕힐 수가 없습니다.
+
+             .footer-col 밖이라 CMS 가 건드리지 않습니다 — applyFooter 는
+             .footer-col 안의 <a> 를 전부 지우고 다시 붙이므로, 컬럼 안에
+             두면 감싼 요소만 빈 채로 남습니다. 대신 이 세 개는 관리자
+             화면에서 못 고치고 여기서 직접 고칩니다. -->
+        <div class="footer-contact-row">
+          <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
+          <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
+          <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
         </div>
       </div>
 

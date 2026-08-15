@@ -531,15 +531,45 @@
 
    :first-of-type 은 못 씁니다 — 그건 'a 중 첫째'라 회원가입에 걸립니다.
    mailto 가 아닌 링크 바로 뒤에 오는 mailto 를 집어야 첫 연락처가 됩니다. */
-.footer-col--contact a:not([href^="mailto:"]) + a[href^="mailto:"] {
-  margin-top: 8px;
-  padding-top: 16px;
+/* 연락처 한 줄 — 컬럼 밖, 컬럼들 바로 아래.
+
+   세로로 쌓으면 세 줄을 먹는데 글이 짧아 공간이 아깝다. 그렇다고 컬럼 안에서
+   눕힐 수는 없다 — 컬럼이 158px 인데 concierge@kmtpa.org 하나가 161px 이다.
+   그래서 컬럼 밖으로 빼서 푸터 폭을 다 쓴다.
+
+   .footer-col 밖이라 CMS(applyFooter)가 건드리지 않는다. 컬럼 안에 두면
+   그쪽이 <a> 를 전부 지우고 다시 붙여서 감싼 요소만 빈 채로 남는다. */
+.footer-contact-row {
+  /* 상위가 flex-wrap 이라 폭을 안 주면 내용 크기로 줄어 브랜드 칼럼 아래에만
+     걸린다. 푸터 폭을 다 쓰게 100% 를 준다. */
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 10px;
+  margin-top: 28px;
+  padding-top: 20px;
   border-top: 1px solid var(--footer-line);
-  width: 100%;
+}
+.footer-contact-row a {
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+.footer-contact-row a:hover { color: var(--footer-gold); }
+.footer-contact-row a + a::before {
+  content: '·';
+  margin-right: 10px;
+  color: rgba(255, 255, 255, 0.38);
+}
+@media (max-width: 560px) {
+  /* 폭이 모자라면 가운뎃점만 줄 끝에 남아 어색하다. 그냥 쌓는다. */
+  .footer-contact-row { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .footer-contact-row a + a::before { content: none; }
 }
 
-/* 소관 부처·공시처 로고. 원본이 흰 배경 로고라 어두운 푸터에서는 그대로
-   두면 흰 판이 뜹니다. 흰색으로 빼서 배경에 얹고, hover 때만 제 색을 냅니다. */
 /* 소관 부처 · 공시 + 저작권 — 푸터 맨 아래 흰 띠 한 줄.
    왼쪽에 로고, 오른쪽에 저작권·약관. 둘 다 법적 표기라 한 줄로 묶었다.
 
