@@ -247,30 +247,37 @@ window.KMTPA = window.KMTPA || {};
         </div>
       </div>
 
-      <div class="container footer-bottom">
-        <div>© 2026 (사)한국의료관광진흥협회. All rights reserved.</div>
-        <div class="footer-legal-links">
-          <a href="${page('privacy/')}">개인정보처리방침</a>
-          <a href="${page('terms/')}">이용약관</a>
-        </div>
-      </div>
+      <!-- 푸터 맨 아래 흰 띠 한 줄. 왼쪽에 소관 부처·공시 로고, 오른쪽에
+           저작권과 약관.
 
-      <!-- 소관 부처와 공시처. 협회가 문화체육관광부 산하 공익법인이라는 것과
-           국세청 공시가 열려 있다는 것이 신뢰의 근거라 푸터에 둡니다.
+           예전에는 저작권이 어두운 띠에, 로고가 흰 띠에 있어 줄이 둘이었다.
+           둘 다 '법적 표기' 성격이라 한 줄로 합치는 편이 읽기도 낫고 푸터도
+           짧아진다.
 
-           푸터 맨 아래 흰 띠에 넣습니다. 두 로고 PNG 는 알파가 없어 배경이
-           꽉 찬 이미지라, 어두운 푸터 위에 얹고 흰색으로 뒤집으면 로고가
-           아니라 회색 사각형 두 개로 보였습니다. 흰 바탕에서는 그 배경이
-           그대로 묻히고 원래 색이 나옵니다. -->
+           로고 PNG 두 장은 알파가 없어 배경이 꽉 찬 이미지다. 어두운 바탕에
+           얹고 흰색으로 뒤집으면 로고가 아니라 회색 사각형 두 개가 된다 —
+           흰 바탕이라야 그 배경이 묻히고 원래 색이 나온다.
+
+           loading="lazy" 를 뺐다. 둘 합쳐 20KB 도 안 되는데, 지연 로딩이면
+           푸터까지 스크롤해야 뜬다 — 짧은 페이지에서 처음부터 푸터가 보일 때
+           빈 자리로 남아 깨져 보였다. width/height 는 그대로 두어 로드 전에도
+           자리를 잡는다. -->
       <div class="footer-authorities">
         <div class="container footer-authorities-inner">
-          <span class="footer-authorities-label">소관 부처 · 공시</span>
-          <a href="https://www.mcst.go.kr/" target="_blank" rel="noopener">
-            <img src="${page('images_homepage/authority/mcst.png')}" alt="문화체육관광부" loading="lazy">
-          </a>
-          <a href="https://www.hometax.go.kr/" target="_blank" rel="noopener">
-            <img src="${page('images_homepage/authority/nts.png')}" alt="국세청" loading="lazy">
-          </a>
+          <div class="footer-authorities-marks">
+            <span class="footer-authorities-label">소관 부처 · 공시</span>
+            <a href="https://www.mcst.go.kr/" target="_blank" rel="noopener">
+              <img src="${page('images_homepage/authority/mcst.png')}" alt="문화체육관광부" width="588" height="147" decoding="async">
+            </a>
+            <a href="https://www.hometax.go.kr/" target="_blank" rel="noopener">
+              <img src="${page('images_homepage/authority/nts.png')}" alt="국세청" width="380" height="136" decoding="async">
+            </a>
+          </div>
+          <div class="footer-authorities-legal">
+            <span>© 2026 (사)한국의료관광진흥협회. All rights reserved.</span>
+            <a href="${page('privacy/')}">개인정보처리방침</a>
+            <a href="${page('terms/')}">이용약관</a>
+          </div>
         </div>
       </div>
     </footer>

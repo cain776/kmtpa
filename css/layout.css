@@ -540,64 +540,75 @@
 
 /* 소관 부처·공시처 로고. 원본이 흰 배경 로고라 어두운 푸터에서는 그대로
    두면 흰 판이 뜹니다. 흰색으로 빼서 배경에 얹고, hover 때만 제 색을 냅니다. */
-/* 소관 부처 · 공시 — 푸터 맨 아래 흰 띠.
-   두 로고 PNG 는 알파가 없어 배경이 꽉 찬 이미지다. 어두운 푸터 위에 얹고
-   brightness(0) invert(1) 로 흰색을 만들면 로고가 아니라 회색 사각형 두 개가
-   된다 — 실제로 그렇게 보이고 있었다. 흰 바탕에서는 그 배경이 묻히고 원래
-   색이 그대로 나오므로 필터를 걷어냈다. */
+/* 소관 부처 · 공시 + 저작권 — 푸터 맨 아래 흰 띠 한 줄.
+   왼쪽에 로고, 오른쪽에 저작권·약관. 둘 다 법적 표기라 한 줄로 묶었다.
+
+   로고 PNG 는 알파가 없어 배경이 꽉 찬 이미지다. 어두운 바탕에서
+   brightness(0) invert(1) 로 흰색을 만들면 배경까지 하얘져 회색 사각형이
+   된다 — 흰 바탕에 두고 필터를 걷어내야 원래 색이 나온다. */
 .footer-authorities {
   background: #ffffff;
+  margin-top: 44px;
 }
 .footer-authorities-inner {
   display: flex;
   align-items: center;
-  gap: 32px;
+  justify-content: space-between;
+  gap: 24px 40px;
   flex-wrap: wrap;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.footer-authorities-marks {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
 }
 .footer-authorities-label {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--text-muted);
-  margin-right: 4px;
 }
+/* 로고 안에 기관명이 작게 들어 있어 28px 에서는 그 줄이 뭉갰다.
+   height 만 주고 width:auto 로 두면 비율이 유지된다 — 마크업의 width/height
+   속성은 로드 전 자리를 잡아 레이아웃이 흔들리지 않게 하는 용도다. */
 .footer-authorities img {
-  height: 28px;
+  height: 36px;
   width: auto;
   display: block;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: opacity 0.15s;
 }
 .footer-authorities a:hover img { opacity: 1; }
-@media (max-width: 600px) {
-  .footer-authorities-inner { gap: 20px; }
-  .footer-authorities img { height: 24px; }
+
+.footer-authorities-legal {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.footer-authorities-legal a {
+  color: var(--text-body);
+  font-weight: 500;
+  text-decoration: none;
+}
+.footer-authorities-legal a:hover {
+  color: var(--navy-900);
+  text-decoration: underline;
 }
 
-.footer-bottom {
-  border-top: 1px solid var(--footer-line);
-  margin-top: 44px;
-  padding: 18px 0 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+@media (max-width: 720px) {
+  .footer-authorities-inner {
+    justify-content: flex-start;
+    gap: 16px 28px;
+  }
+  .footer-authorities img { height: 30px; }
+  .footer-authorities-legal { font-size: 12px; gap: 14px; }
 }
-.footer-legal-links {
-  display: flex;
-  gap: 28px;
-}
-.footer-legal-links a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.footer-legal-links a:hover { color: var(--footer-gold); }
 
 /* 컬럼은 auto-fit minmax 가 알아서 접습니다. 좁아질 때 여백만 줄입니다. */
 @media (max-width: 760px) {
@@ -606,5 +617,4 @@
 }
 @media (max-width: 520px) {
   .footer-brand-block { max-width: none; }
-  .footer-bottom { justify-content: flex-start; gap: 14px; }
 }
