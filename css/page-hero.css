@@ -15,6 +15,14 @@
    페이지가 같이 따라온다. */
 .journey-hero {
   --hero-band-h: 224px;
+  /* 다크 머리띠 — claude.ai/design 의 Hero 시안을 옮겼다.
+     배경과 글자색·사선만 가져오고 높이(224px)와 사진 처리는 기존 것을 지킨다. */
+  --band-bg:   var(--navy-900);   /* #020028 */
+  --band-ink:  #ffffff;
+  --band-body: #b9b8c9;
+  --band-gold: #f1a439;
+  background: var(--band-bg);
+  color: var(--band-ink);
   min-height: var(--hero-band-h);
   /* 제목 두 줄 + 설명 두 줄(184px)이 들어가고도 220 을 안 넘는 값. */
   padding: 18px 0;
@@ -22,7 +30,7 @@
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  border-bottom: 1px solid var(--border-default);
+  /* 다크 바탕이 그 자체로 경계라 밑줄이 필요 없다. */
 }
 /* 안쪽 컨테이너는 폭을 다 쓴다.
    .container-narrow 의 `margin: 0 auto` 가 플렉스 아이템에서는 가로 stretch 를
@@ -31,39 +39,91 @@
 .journey-hero > * { width: 100%; }
 
 /* ---------- 사선 ----------
-   흰 띠만 있으면 밋밋해서, 오른쪽 위에서 왼쪽 아래로 떨어지는 사선을 깐다.
+   claude.ai/design 의 Hero 시안을 옮겼다. 세로 막대 열일곱 개를 깔고 층
+   전체를 32도 돌린다 — 막대마다 굵기(1~3px)와 알파가 달라서, 반복
+   그라디언트 하나로는 나오지 않는 불규칙한 결이 생긴다.
 
-   두 겹이다 — 또렷한 선 하나(#3a3865, 알파 .30)가 축을 만들고, 그 뒤로
-   46px 간격의 아주 옅은 반복선(.085)이 결을 준다. 반복선만 쓰면 벽지 같고,
-   선 하나만 쓰면 그어 놓은 티가 난다.
+   무리가 셋이다: 왼쪽(1.5~16.5%)이 가장 촘촘하고 진하며, 가운데(38~47%)는
+   아주 옅고, 오른쪽(1.5~15%)이 다시 진해진다. 글은 왼쪽 위에 오므로 사선이
+   글자 뒤로 지나가지만, 다크 바탕에 알파가 낮아 읽는 데 지장이 없다.
 
-   마스크가 오른쪽 위 모서리에서 왼쪽 아래로 사라지게 잡혀 있다. 글은 왼쪽에
-   있으므로 사선이 글자를 가로지르지 않는다 — 특히 약관·개인정보처리방침은
-   page-fullwidth 라 설명문이 1,232px 까지 가는데, 그쪽으로 갈수록 선이
-   옅어져 겹쳐도 읽는 데 지장이 없다.
-
-   배너가 있는 페이지에서는 사진이 위에 얹혀(z-index 1) 사선을 가리고,
-   사진 왼쪽 흐린 구간으로만 비쳐 보인다. 글과 사진 사이의 빈 곳을 메운다.
-
-   .journey-hero 에 overflow:hidden 을 준 것은 이 사선이 띠 밖으로 새지 않게
-   하기 위해서다. 배너 변형은 이미 같은 이유로 갖고 있었다. */
+   층을 inset 으로 위아래로 키운 것은 기울이면 모서리가 비기 때문이다.
+   띠 밖으로 나간 부분은 .journey-hero 의 overflow:hidden 이 자른다. */
 .journey-hero { position: relative; }
 .journey-hero::before {
-  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  content: '';
+  position: absolute;
+  /* rotate 가 아니라 skewX 다. 층을 통째로 돌리면 left 1.5% 같은 가로 위치가
+     회전과 함께 밀려나 왼쪽 무리가 화면 밖으로 나간다. skewX 는 세로 위치에
+     비례해 가로로만 밀어서, 무리의 x 위치가 시안 그대로 남는다. */
+  inset: -24% -8%;
+  transform: skewX(-32deg);
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: no-repeat;
   background-image:
-    linear-gradient(160deg, transparent calc(50% - .7px), rgba(58,56,101,.30) 50%, transparent calc(50% + .7px)),
-    repeating-linear-gradient(160deg, rgba(2,0,40,.085) 0 1px, transparent 1px 46px);
-  -webkit-mask-image: linear-gradient(to bottom left, #000 8%, rgba(0,0,0,.5) 34%, transparent 62%);
-  mask-image: linear-gradient(to bottom left, #000 8%, rgba(0,0,0,.5) 34%, transparent 62%);
+    linear-gradient(to bottom, transparent 4%, rgba(241,164,57,.85), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.42), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.28), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(241,164,57,.55), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.50), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.22), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(241,164,57,.40), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.16), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(241,164,57,.30), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.24), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.12), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.30), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(241,164,57,.50), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.45), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.20), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(241,164,57,.75), transparent 96%),
+    linear-gradient(to bottom, transparent 4%, rgba(255,255,255,.35), transparent 96%);
+  background-size:
+    3px 100%,
+    2px 100%,
+    1px 100%,
+    2px 100%,
+    2px 100%,
+    1px 100%,
+    1px 100%,
+    1px 100%,
+    1px 100%,
+    2px 100%,
+    1px 100%,
+    1px 100%,
+    2px 100%,
+    2px 100%,
+    1px 100%,
+    3px 100%,
+    2px 100%;
+  background-position:
+    left 1.5% top,
+    left 4.0% top,
+    left 6.5% top,
+    left 9.0% top,
+    left 11.5% top,
+    left 14.0% top,
+    left 16.5% top,
+    left 38.0% top,
+    left 41.0% top,
+    left 44.0% top,
+    left 47.0% top,
+    right 15.0% top,
+    right 12.0% top,
+    right 9.0% top,
+    right 6.5% top,
+    right 4.0% top,
+    right 1.5% top;
 }
-/* 글과 사진을 사선 위로 올린다. 안 올리면 ::before 가 나중에 칠해져 덮는다. */
+/* 글과 사진을 사선 위로 올린다. 안 올리면 나중에 칠해지는 ::before 가 덮는다. */
 .journey-hero > *, .journey-hero .hero-banner { position: relative; z-index: 1; }
 
 /* 띠 높이를 실제로 정하는 건 제목 줄 수다. 전역 h1 은 최대 48px 이라 한 줄에
    55px, 두 줄이면 110px 을 먹는다. 머리띠 안에서만 한 단계 줄인다 —
    본문 h1 은 그대로 둔다. */
-.journey-hero h1 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
-.journey-hero .eyebrow { margin-bottom: 10px; }
+.journey-hero h1 { font-size: clamp(1.75rem, 3vw, 2.5rem); color: var(--band-ink); }
+.journey-hero .eyebrow { margin-bottom: 10px; color: var(--band-gold); letter-spacing: .18em; }
 
 /* ---------- 배너 이미지가 붙는 페이지 히어로 ----------
    이미지를 배경(background-image)이 아니라 <img> 로 둡니다.
@@ -145,7 +205,6 @@
     /* 이미지가 빠지면 다른 페이지와 똑같은 머리띠가 된다. 패딩도 같은 값을
        쓴다 — 56/40 이 박혀 있어서 600px 폭에서 241px 대 200px 로 벌어졌다. */
     padding: 18px 0;
-    border-bottom: 1px solid var(--border-default);
   }
   .hero-banner { display: block; min-height: 0; }
   /* 이미지가 빠지면 글이 폭을 다 쓴다. 56% 상한을 그대로 두면 줄 수가 늘어
@@ -157,7 +216,7 @@
 .journey-hero .lede {
   margin-top: 10px;
   font-size: 16px;
-  color: var(--text-body);
+  color: var(--band-body);
   max-width: 720px;
   line-height: 1.5;
 }
@@ -167,6 +226,9 @@
      비워 둘 이유도 없다. */
   .journey-hero { --hero-band-h: 200px; }
   .journey-hero .lede { font-size: 15px; }
+  /* 좁아지면 글이 띠 폭을 다 써서 오른쪽 무리가 문장 위로 올라온다.
+     대비는 충분하지만 산만해서 톤을 낮춘다. */
+  .journey-hero::before { opacity: .45; }
 }
 @media (max-width: 480px) {
   /* 폰에서는 설명문이 3~5줄로 벌어져 페이지마다 높이가 67px 까지 차이 났다.
