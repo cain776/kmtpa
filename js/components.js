@@ -533,8 +533,7 @@ window.KMTPA = window.KMTPA || {};
 
      완료 화면에는 두 경우 모두 신청서 본문과 복사 버튼을 남깁니다. ----- */
   const JOIN_MAIL_TO = 'info@kmtpa.org';
-  const JOIN_API_BASE = window.KMTPA_API_BASE
-    || (window.location.protocol === 'file:' ? 'http://127.0.0.1:5500/api' : '/api');
+  const JOIN_API_BASE = window.KMTPA_API_BASE || '/api';   // 판단은 runtime-config.js 한 곳에서 한다
 
   NS.setupJoinFlow = function () {
     const stepsRoot = document.querySelector('[data-join-steps]');
@@ -549,17 +548,9 @@ window.KMTPA = window.KMTPA || {};
 
     // 단계 표시에서 각 화면이 몇 번째 칸에 해당하는지
     const RANK = { select: 0, personal: 1, corp: 1, done: 2 };
-    // 접수된 경우와, 서버에 닿지 못해 메일로 돌린 경우는 다음에 할 일이 달라서
-    // 안내 문구도 갈라 둡니다.
     const DONE_MSG = {
-      posted: {
-        personal: '가입 신청이 접수되었습니다. 사무국 확인 후 입력하신 이메일로 승인 결과를 알려드립니다.',
-        corp: '가입 신청이 접수되었습니다. 필수 서류를 info@kmtpa.org로 보내주시면 검토 후 영업일 기준 5일 내에 담당자 이메일로 승인 결과와 회비를 안내드립니다.'
-      },
-      mailed: {
-        personal: '지금은 접수 서버에 연결할 수 없어 사무국 앞 신청 메일을 대신 준비했습니다. 메일을 보내주시면 확인 후 가입 처리해 드립니다.',
-        corp: '지금은 접수 서버에 연결할 수 없어 사무국 앞 신청 메일을 대신 준비했습니다. 필수 서류를 첨부해 보내주시면 검토 후 결과를 안내드립니다.'
-      }
+      personal: '가입 신청이 접수되었습니다. 사무국 확인 후 입력하신 이메일로 승인 결과를 알려드립니다.',
+      corp: '가입 신청이 접수되었습니다. 필수 서류를 info@kmtpa.org로 보내주시면 검토 후 영업일 기준 5일 내에 담당자 이메일로 승인 결과와 회비를 안내드립니다.'
     };
 
     function showView(view, opts) {
@@ -648,24 +639,20 @@ window.KMTPA = window.KMTPA || {};
       };
     }
 
-    function finish(kind, mail, mode) {
+    function finish(kind, mail) {
       if (summaryEl) summaryEl.textContent = mail.body;
-      if (mailtoEl) mailtoEl.href = mail.href;
-      if (doneMsgEl) doneMsgEl.textContent = (DONE_MSG[mode] || DONE_MSG.mailed)[kind]
-        || DONE_MSG.mailed.personal;
+      // 완료 화면의 메일 버튼은 서류 문의용입니다 — 신청 내용이 본문에 담겨 갑니다.
+      if (mailtoEl) { mailtoEl.href = mail.href; mailtoEl.textContent = '사무국에 메일 보내기'; }
+      if (doneMsgEl) doneMsgEl.textContent = DONE_MSG[kind] || DONE_MSG.personal;
 
-      // 접수된 경우 완료 화면의 메일 버튼은 서류 문의용으로 성격이 바뀝니다.
       const copyBox = document.querySelector('.join-copy');
-      if (copyBox) copyBox.hidden = mode === 'posted';
-      if (mailtoEl) mailtoEl.textContent = mode === 'posted' ? '사무국에 메일 보내기' : '메일 앱 다시 열기';
+      if (copyBox) copyBox.hidden = true;
 
       showView('done', { scroll: true });
-      if (mode !== 'posted') window.location.href = mail.href;
     }
 
     async function sendApplication(form, kind, submitBtn, errorEl) {
       const typeLabel = kind === 'corp' ? '법인회원' : '개인회원';
-      const mail = buildMailto(form, typeLabel, kind);
 
       if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.busy = '1'; }
       try {
@@ -676,25 +663,23 @@ window.KMTPA = window.KMTPA || {};
         });
 
         if (response.ok) {
-          finish(kind, mail, 'posted');
+          finish(kind, buildMailto(form, typeLabel, kind));
           return;
         }
 
-        // 400/409/422만 실제 입력 문제다. 정적 배포에는 /api가 없어 404/405가
-        // 오므로 그 경우는 아래 catch에서 메일 접수로 전환한다.
+        // 400/409/422 는 입력 문제라 서버 문구를 그대로 보여준다.
         if ([400, 409, 422].includes(response.status)) {
           const detail = await response.json().catch(() => null);
-          throw Object.assign(new Error((detail && detail.error) || '입력을 다시 확인해 주세요.'),
-            { userFacing: true });
+          throw new Error((detail && detail.error) || '입력을 다시 확인해 주세요.');
         }
-        throw new Error(`서버 오류 ${response.status}`);
+        throw new Error(`서버 오류(${response.status})가 발생했습니다. 잠시 후 다시 시도해 주세요.`);
       } catch (error) {
-        if (error.userFacing) {
-          if (errorEl) { errorEl.textContent = error.message; errorEl.hidden = false; }
-          return;
-        }
-        // API가 없는 정적 배포(404/405), 네트워크 실패, 5xx는 메일로 돌립니다.
-        finish(kind, mail, 'mailed');
+        // 서버에 닿지 못해도 메일 접수로 돌리지 않는다. 메일로 온 신청은
+        // 비밀번호 계정이 만들어지지 않아 회원 데이터가 갈라진다.
+        const message = error instanceof TypeError
+          ? '접수 서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.'
+          : (error.message || '신청을 접수하지 못했습니다. 잠시 후 다시 시도해 주세요.');
+        if (errorEl) { errorEl.textContent = message; errorEl.hidden = false; errorEl.focus?.(); }
       } finally {
         if (submitBtn) { submitBtn.disabled = false; delete submitBtn.dataset.busy; }
       }
