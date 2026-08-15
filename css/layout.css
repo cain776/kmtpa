@@ -170,6 +170,14 @@
   transform: translate(2px, -2px);
 }
 
+/* 로그인 중일 때 로그아웃 버튼 왼쪽에 붙는 사용자명 (components.js 가 삽입) */
+.header-user {
+  font-size: 13.5px;
+  color: var(--text-body);
+  white-space: nowrap;
+}
+.header-user b { color: var(--text-heading); font-weight: 700; }
+
 .header-cta {
   font-size: 13px;
   color: var(--text-body);
@@ -198,7 +206,7 @@
     background: #fff;
     backdrop-filter: none;
   }
-  .top-nav, .header-cta { display: none; }
+  .top-nav, .header-cta, .header-user { display: none; }
   .mobile-toggle { display: inline-flex; }
   .top-nav.open {
     display: flex;

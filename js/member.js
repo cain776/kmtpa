@@ -83,7 +83,11 @@
     if (PREVIEW) {
       // 아직 인증이 없어 실제로 확인하지 않습니다. 어떤 값이든 통과시키되
       // 통과했다는 사실을 기록해, 마이페이지가 직접 열렸을 때와 구분합니다.
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ email, at: Date.now() }));
+      // name 은 헤더가 "OO님"을 표시하는 데 씁니다(components.js). 실제
+      // 인증이 붙으면 로그인 응답의 이름을 여기 담으면 됩니다.
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+        email, name: SAMPLE.member.name, at: Date.now(),
+      }));
       return { ok: true };
     }
     // 인증이 붙으면:

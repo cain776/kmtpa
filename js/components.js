@@ -48,6 +48,19 @@ window.KMTPA = window.KMTPA || {};
     const memberSession = sessionStorage.getItem('kmtpa.member.preview.v1');
     const headerCta = document.querySelector('.header-cta');
     if (memberSession && headerCta) {
+      // 로그아웃 버튼 왼쪽에 누가 로그인했는지 표시합니다.
+      // 이름은 세션에서 오므로 textContent 로만 넣습니다(HTML 해석 금지).
+      try {
+        const name = (JSON.parse(memberSession) || {}).name;
+        if (name) {
+          const who = document.createElement('span');
+          who.className = 'header-user';
+          const strong = document.createElement('b');
+          strong.textContent = name;
+          who.append(strong, '님');
+          headerCta.before(who);
+        }
+      } catch (ignored) { /* 세션이 깨져 있으면 이름만 생략합니다 */ }
       headerCta.textContent = '로그아웃';
       headerCta.addEventListener('click', (e) => {
         e.preventDefault();
