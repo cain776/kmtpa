@@ -71,9 +71,22 @@ window.KMTPA = window.KMTPA || {};
         }
       } catch (ignored) { /* 세션이 깨져 있으면 이름만 생략합니다 */ }
       headerCta.textContent = '로그아웃';
-      headerCta.addEventListener('click', (e) => {
+      headerCta.addEventListener('click', async (e) => {
         e.preventDefault();
+        let token = '';
+        try { token = (JSON.parse(memberSession) || {}).token || ''; }
+        catch (ignored) { /* 손상된 로컬 세션은 로컬에서만 정리합니다 */ }
         sessionStorage.removeItem('kmtpa.member.preview.v1');
+        if (token) {
+          try {
+            await fetch(`${window.KMTPA_API_BASE || '/api'}/member/logout`, {
+              method: 'POST',
+              headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
+              cache: 'no-store',
+              keepalive: true,
+            });
+          } catch (ignored) { /* 네트워크가 끊겨도 브라우저 세션은 종료합니다 */ }
+        }
         // 로그아웃 후에는 홈으로. href 가 '<루트>/login/index.html' 이므로
         // 그 자리를 index.html 로 바꾸면 어느 배포 경로에서도 루트가 됩니다.
         window.location.href = headerCta.href.replace(/login\/index\.html.*$/, 'index.html');

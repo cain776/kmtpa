@@ -12,9 +12,9 @@
 
   var host = window.location.hostname;
 
-  // GitHub Pages 로 배포된 운영 도메인들. 커스텀 도메인을 붙이기 전에는
-  // *.github.io 로도 접속되므로 둘 다 적습니다.
-  var PROD = ['kmtpa.org', 'www.kmtpa.org', 'cain776.github.io'];
+  // github.io 는 계정 내 모든 Pages 저장소가 같은 Origin 을 공유하므로 운영
+  // API의 기본 신뢰 출처로 쓰지 않습니다. 커스텀 도메인에서만 운영 API를 봅니다.
+  var PROD = ['kmtpa.org', 'www.kmtpa.org'];
 
   if (PROD.indexOf(host) !== -1) {
     window.KMTPA_API_BASE = 'https://api.kmtpa.org/api';
