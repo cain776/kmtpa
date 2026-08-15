@@ -1,59 +1,19 @@
 /* =========================================================================
    member.js — 회원 로그인(login/) · 마이페이지(mypage/)
 
-   화면만 먼저 만든 상태입니다. 회원 인증이 서버에 없어서(members 테이블에
-   비밀번호 컬럼이 없습니다) 지금은 아래 예시 데이터로 그립니다.
-
-   인증이 붙으면 고칠 곳은 두 군데뿐입니다.
-     signIn()   → POST /api/member/login 으로 바꾸고 세션 저장
-     loadMe()   → GET  /api/member/me 로 바꿔 응답을 그대로 넘김
-   나머지(그리기·검증·아코디언)는 그대로 씁니다.
-
-   응답 모양은 지금 DB 를 그대로 따랐습니다 — members(내 정보) +
-   consultations(문의). 답변 필드(answer)만 아직 DB 에 없어, 그 자리를
-   비워 두면 '답변 준비 중'으로 그려집니다.
+   Java 회원 세션으로 로그인하고, 본인 정보와 본인이 작성한 문의만 읽습니다.
+   문의를 등록하면 관리자 상담 관리에 들어가며 관리자 답변은 같은 목록에
+   표시됩니다.
    ========================================================================= */
 
 (function () {
   'use strict';
 
-  // 화면만 먼저 만든 단계라는 표시. 인증이 붙으면 이 상수를 지웁니다.
-  const PREVIEW = true;
+  // components.js 의 헤더 로그인 표시와 같은 키를 쓴다. 기존 키 이름은
+  // 배포된 화면과의 호환 때문에 유지하지만 내용은 실제 서버 세션이다.
   const SESSION_KEY = 'kmtpa.member.preview.v1';
-
-  /* ----- 예시 데이터 -----
-     실제 응답과 같은 모양이라, 인증이 붙으면 이 덩어리만 걷어내면 됩니다. */
-  const SAMPLE = {
-    member: {
-      name: '이수진',
-      memberType: 'corp',
-      status: 'approved',
-      email: 'sujin@smc.example',
-      phone: '02-1234-5678',
-      createdAt: '2026-07-02T09:12:00+09:00',
-      approvedAt: '2026-07-04T14:30:00+09:00',
-      newsletterConsent: true,
-      detail: { orgName: '서울메디컬센터', contactDept: '국제진료센터 · 팀장', membershipGrade: '정회원' },
-    },
-    consultations: [
-      {
-        id: 'c-1', subject: '해외 로드쇼 공동 참여 문의',
-        inquiryType: 'partnership', status: 'completed',
-        createdAt: '2026-08-04T10:20:00+09:00',
-        message: '하반기 동남아 로드쇼에 저희 기관이 공동 참여할 수 있을지 문의드립니다.\n참가 조건과 비용 분담 기준을 알고 싶습니다.',
-        answer: '안녕하세요, 이수진 팀장님.\n\n하반기 로드쇼는 9월 중순 베트남·태국 2개국으로 예정되어 있으며, 회원기관은 부스 비용의 50%를 협회가 지원합니다.\n참가 신청서를 이번 달 말까지 보내주시면 배정 순서에 포함해 드리겠습니다.',
-        answeredAt: '2026-08-06T15:40:00+09:00',
-        answeredBy: '사업팀',
-      },
-      {
-        id: 'c-2', subject: '코디네이터 교육 단체 수강',
-        inquiryType: 'education_event', status: 'in_progress',
-        createdAt: '2026-08-12T16:05:00+09:00',
-        message: '직원 12명이 함께 수강할 수 있는지, 단체 할인이 있는지 궁금합니다.',
-        answer: '', answeredAt: '', answeredBy: '',
-      },
-    ],
-  };
+  const API_BASE = window.KMTPA_API_BASE
+    || (window.location.protocol === 'file:' ? 'http://127.0.0.1:5500/api' : '/api');
 
   const INQUIRY_LABEL = {
     membership: '회원가입', partnership: '기관 협력',
@@ -75,35 +35,47 @@
     return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
   }
 
-  /* =======================================================================
-     서버에 붙을 자리 — 인증이 생기면 여기 둘만 바꿉니다
-     ======================================================================= */
+  function readSession() {
+    try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)) || null; }
+    catch { return null; }
+  }
+
+  async function request(path, options = {}) {
+    const headers = Object.assign({ Accept: 'application/json' }, options.headers || {});
+    const session = readSession();
+    if (session && session.token) headers.Authorization = `Bearer ${session.token}`;
+    if (Object.prototype.hasOwnProperty.call(options, 'body')) {
+      headers['Content-Type'] = 'application/json';
+    }
+    const response = await fetch(`${API_BASE}${path}`, {
+      method: options.method || 'GET', headers, cache: 'no-store',
+      body: Object.prototype.hasOwnProperty.call(options, 'body')
+        ? JSON.stringify(options.body) : undefined,
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const error = new Error(payload.error || '요청을 처리하지 못했습니다.');
+      error.status = response.status;
+      throw error;
+    }
+    return payload;
+  }
 
   async function signIn(email, password) {
-    if (PREVIEW) {
-      // 아직 인증이 없어 실제로 확인하지 않습니다. 어떤 값이든 통과시키되
-      // 통과했다는 사실을 기록해, 마이페이지가 직접 열렸을 때와 구분합니다.
-      // name 은 헤더가 "OO님"을 표시하는 데 씁니다(components.js). 실제
-      // 인증이 붙으면 로그인 응답의 이름을 여기 담으면 됩니다.
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify({
-        email, name: SAMPLE.member.name, at: Date.now(),
-      }));
-      return { ok: true };
-    }
-    // 인증이 붙으면:
-    // const r = await fetch('/api/member/login', { method:'POST', headers:{'Content-Type':'application/json'},
-    //                                              body: JSON.stringify({ email, password }) });
-    // if (!r.ok) throw new Error((await r.json()).error || '로그인하지 못했습니다.');
-    // return r.json();
-    throw new Error('아직 준비되지 않았습니다.');
+    const session = await request('/member/login', {
+      method: 'POST', body: { email, password },
+    });
+    session.name = session.member && session.member.name;
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    return session;
   }
 
   async function loadMe() {
-    if (PREVIEW) return SAMPLE;
-    // const r = await fetch('/api/member/me', { headers: { Authorization: `Bearer ${token()}` } });
-    // if (!r.ok) throw new Error('내 정보를 불러오지 못했습니다.');
-    // return r.json();
-    throw new Error('아직 준비되지 않았습니다.');
+    return request('/member/me');
+  }
+
+  async function createInquiry(payload) {
+    return request('/member/inquiries', { method: 'POST', body: payload });
   }
 
   /* =======================================================================
@@ -220,7 +192,7 @@
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
           <p>아직 남기신 문의가 없습니다.</p>
-          <a class="btn-ghost-link" href="../consultation/index.html">상담 신청하기</a>
+          <button type="button" class="btn-ghost-link" data-my-inquiry-empty-open>문의하기</button>
         </div>`;
       return;
     }
@@ -243,13 +215,12 @@
           </div>
           ${answered ? `
           <div class="inquiry-answer">
-            <div class="who">협회 답변${item.answeredBy ? ` · ${esc(item.answeredBy)}` : ''}</div>
+            <div class="who">협회 답변${item.answeredByName || item.answeredBy ? ` · ${esc(item.answeredByName || item.answeredBy)}` : ''}</div>
             <p>${esc(item.answer)}</p>
             ${item.answeredAt ? `<div class="when">${esc(formatDate(item.answeredAt))}</div>` : ''}
           </div>` : `
           <div class="inquiry-waiting">
-            담당 팀이 확인하고 있습니다. 답변이 등록되면 이 자리에 표시되고,
-            가입하신 이메일로도 알려드립니다.
+            담당 팀이 확인하고 있습니다. 답변이 등록되면 이 자리에 표시됩니다.
           </div>`}
         </div>
       </div>`;
@@ -263,6 +234,62 @@
         body.hidden = !open;
         button.setAttribute('aria-expanded', String(open));
       });
+    });
+  }
+
+  function setupInquiryComposer(onSaved) {
+    const form = document.querySelector('[data-my-inquiry-form]');
+    const openButton = document.querySelector('[data-my-inquiry-open]');
+    const closeButton = document.querySelector('[data-my-inquiry-close]');
+    if (!form || !openButton) return;
+    const error = form.querySelector('[data-my-inquiry-error]');
+
+    function setOpen(open) {
+      form.hidden = !open;
+      openButton.setAttribute('aria-expanded', String(open));
+      if (open) form.querySelector('[name="subject"]').focus();
+    }
+
+    openButton.addEventListener('click', () => setOpen(form.hidden));
+    const emptyButton = document.querySelector('[data-my-inquiry-empty-open]');
+    if (emptyButton) emptyButton.addEventListener('click', () => setOpen(true));
+    if (closeButton) closeButton.addEventListener('click', () => setOpen(false));
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const invalid = Array.from(form.elements).find(el => el.willValidate && !el.checkValidity());
+      if (invalid) {
+        error.textContent = invalid.type === 'checkbox'
+          ? '개인정보 수집·이용 동의를 확인해 주세요.'
+          : '문의 제목과 내용을 입력해 주세요.';
+        error.hidden = false;
+        invalid.focus();
+        return;
+      }
+      const submit = form.querySelector('[type="submit"]');
+      submit.disabled = true;
+      error.hidden = true;
+      try {
+        await createInquiry({
+          inquiryType: form.inquiryType.value,
+          subject: form.subject.value.trim(),
+          message: form.message.value.trim(),
+          privacyConsent: form.privacyConsent.checked,
+        });
+        form.reset();
+        setOpen(false);
+        window.location.hash = 'inquiries';
+        await onSaved();
+      } catch (requestError) {
+        if (requestError.status === 401) {
+          sessionStorage.removeItem(SESSION_KEY);
+          window.location.replace('../login/index.html');
+          return;
+        }
+        error.textContent = requestError.message || '문의를 등록하지 못했습니다.';
+        error.hidden = false;
+      } finally {
+        submit.disabled = false;
+      }
     });
   }
 
@@ -293,7 +320,8 @@
 
     // 로그인 없이 직접 열면 로그인 화면으로 보냅니다. 이게 없으면
     // 헤더는 '로그인'인데 화면에는 회원 정보가 떠서 상태가 어긋납니다.
-    if (!sessionStorage.getItem(SESSION_KEY)) {
+    const session = readSession();
+    if (!session || !session.token) {
       window.location.replace('../login/index.html');
       return;
     }
@@ -305,7 +333,16 @@
       greeting.innerHTML = `<b>${esc(member.name || '회원')}</b>님, 안녕하세요.`;
       renderInfo(member);
       renderInquiries(data.consultations || []);
+      setupInquiryComposer(async () => {
+        const refreshed = await loadMe();
+        renderInquiries(refreshed.consultations || []);
+      });
     } catch (error) {
+      if (error.status === 401 || error.status === 403) {
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.replace('../login/index.html');
+        return;
+      }
       greeting.textContent = error.message || '정보를 불러오지 못했습니다.';
     }
   }
