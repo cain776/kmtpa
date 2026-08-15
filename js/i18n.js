@@ -108,10 +108,7 @@ window.KMTPA = window.KMTPA || {};
   };
 
   /* ----- 언어 선택 상자 ----- */
-  function mountSelect() {
-    const header = document.querySelector('.site-header .container');
-    if (!header || header.querySelector('.lang-select')) return;
-
+  function buildSelect() {
     const wrap = document.createElement('label');
     wrap.className = 'lang-select';
 
@@ -129,10 +126,24 @@ window.KMTPA = window.KMTPA || {};
     });
     select.addEventListener('change', () => NS.setLang(select.value));
     wrap.append(sr, select);
+    return wrap;
+  }
 
-    // 로그인 버튼 왼쪽에 둔다. 없으면 맨 뒤.
-    const cta = header.querySelector('.header-cta');
-    if (cta) cta.before(wrap); else header.appendChild(wrap);
+  function mountSelect() {
+    // 공용 헤더 — 로그인 버튼 왼쪽에 둔다. 없으면 맨 뒤.
+    const header = document.querySelector('.site-header .container');
+    if (header && !header.querySelector('.lang-select')) {
+      const wrap = buildSelect();
+      const cta = header.querySelector('.header-cta');
+      if (cta) cta.before(wrap); else header.appendChild(wrap);
+    }
+
+    // 홈 히어로 — 첫 화면에서는 공용 헤더가 숨어 있어 여기에도 따로 둔다.
+    // 언어를 바꾸면 페이지를 새로 여니 두 상자를 맞출 필요는 없다.
+    const heroMount = document.querySelector('[data-hero-lang]');
+    if (heroMount && !heroMount.querySelector('.lang-select')) {
+      heroMount.appendChild(buildSelect());
+    }
   }
 
   NS.setLang = async function (lang) {

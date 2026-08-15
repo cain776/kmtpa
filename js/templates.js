@@ -310,6 +310,9 @@ window.KMTPA = window.KMTPA || {};
           <span class="en" data-i18n="chrome.brand.en">Korean Medical Tourism Promotion Association</span>
         </span>
       </a>
+      <!-- 언어 선택 자리. 브랜드가 가운데 정렬이라 이것만 절대 위치로 우측에 띄웁니다.
+           상자는 i18n.js 가 채웁니다 — 언어 목록이 그쪽에 있습니다. -->
+      <div class="hero-lang" data-hero-lang></div>
     </div>
   `;
 

@@ -95,38 +95,7 @@ window.KMTPA = window.KMTPA || {};
   };
 
   /* ----- Hero 배경 영상 재생 (playlist 순환 + 속도 조절) ----- */
-  /* ----- 언어 선택 드롭다운 (홈 히어로) -----
-     지금은 한국어만 활성이라 실제 전환은 없고 열고 닫기만 합니다.
-     번역 페이지가 생기면 목록 항목에 링크를 달아 주세요. */
-  NS.setupLangSelect = function () {
-    const root = document.querySelector('[data-lang-select]');
-    if (!root) return;
-
-    const toggle = root.querySelector('.hero-lang-toggle');
-    const menu = root.querySelector('.hero-lang-menu');
-    if (!toggle || !menu) return;
-
-    function setOpen(open) {
-      toggle.setAttribute('aria-expanded', String(open));
-      menu.hidden = !open;
-    }
-
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      setOpen(menu.hidden);
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!root.contains(e.target)) setOpen(false);
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !menu.hidden) {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-  };
+  /* 히어로 언어 선택은 i18n.js 의 mountSelect() 가 [data-hero-lang] 자리에 그립니다. */
 
   /* ----- 홈 히어로 슬라이더 -----
      배경 3장을 교차 전환하고, 슬라이드마다 헤드라인을 바꿉니다.
