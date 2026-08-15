@@ -41,6 +41,16 @@
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
+/* 카드는 여덟 장이라 4열 두 줄로 서야 한다. auto-fit 은 폭이 남으면 열을
+   늘리는데, 컨테이너를 1600 으로 넓히자 5열이 되면서 둘째 줄이 5+3 으로
+   어긋났다. 한 칸 최소 폭을 키워서 막을 수는 없다 — 1232 폭에서 4열이
+   되려면 최소 폭이 290 이하여야 하고, 그 값이면 1552 폭에서는 5열이 된다.
+   그래서 열 수를 그냥 못박는다. 랜딩도 같은 이유로 home.css 에서 4열을
+   고정해 두었다. 1080 은 auto-fit 이 스스로 4열이 되는 지점이라, 이 아래는
+   예전처럼 3·2·1 열로 접힌다. */
+@media (min-width: 1080px) {
+  .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 .card {
   background: #fff;
   border: 1px solid var(--border-default);
