@@ -54,6 +54,30 @@ window.KMTPA = window.KMTPA || {};
     } catch (error) {
       /* Offline/file preview fallback. */
     }
+
+    /* API 가 없는 곳을 위한 정적 사본. 이 사이트는 GitHub Pages·Vercel 로
+       나가는데 그쪽에는 /api 가 없어서 위 요청이 404 를 받는다. 그러면 배포한
+       내용 대신 HTML 에 박혀 있던 옛 샘플이 그대로 보인다.
+       서버가 배포할 때마다 같은 JSON 을 data/published.json 으로 남긴다. */
+    try {
+      const path = typeof NS.makePageUrl === 'function'
+        ? NS.makePageUrl('data/published.json')
+        : '../data/published.json';
+      const response = await fetch(path, { cache: 'no-store' });
+      if (response.ok) {
+        const parsed = await response.json();
+        if (isRecord(parsed)) {
+          try {
+            window.localStorage && window.localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+          } catch (error) {
+            /* best-effort browser cache */
+          }
+          return parsed;
+        }
+      }
+    } catch (error) {
+      /* 파일도 없으면 마지막으로 브라우저 캐시를 본다. */
+    }
     return readLocalPublishedData();
   }
 
