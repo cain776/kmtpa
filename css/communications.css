@@ -149,3 +149,35 @@
   #panel-newsletter .pub-grid { gap: 32px 20px; }
   #panel-newsletter .pub-title { font-size: 16px; }
 }
+
+/* 표지 이미지가 붙은 카드. 그림이 없는 카드와 같은 상자를 써야 격자가
+   흐트러지지 않으므로 비율(16:10)은 위에서 정한 것을 그대로 쓴다. */
+#panel-newsletter .pub-thumb--image {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  background: var(--navy-900);
+}
+#panel-newsletter .pub-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+#panel-newsletter .pub:hover .pub-cover { transform: scale(1.04); }
+/* 호수는 그림 위에 얹는다. 밝은 그림에서도 읽히도록 아래쪽에 어두운 층을 깐다. */
+#panel-newsletter .pub-thumb-label {
+  position: relative;
+  align-self: flex-end;
+  width: 100%;
+  padding: 34px 20px 16px;
+  background: linear-gradient(to top, rgba(2, 0, 40, 0.72), rgba(2, 0, 40, 0));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

@@ -740,6 +740,8 @@ window.KMTPA = window.KMTPA || {};
         return {
           title,
           thumb: makeIssueText(item),
+          // 표지 이미지. 게시본이 들고 오면 카드가 글자 대신 그림을 쓴다.
+          cover: resolveSiteHref(pickText(item, ['cover', 'coverImage', 'thumbnail', 'image'])),
           meta: makeMetaText(item),
           summary: pickText(item, ['summary', 'previewText', 'lede', 'description']),
           lede: pickText(item, ['lede', 'summary', 'previewText', 'description']),
@@ -775,9 +777,25 @@ window.KMTPA = window.KMTPA || {};
     }
     if (item.download) trigger.dataset.download = item.download;
 
+    // 표지가 있으면 그림을, 없으면 지금까지처럼 호수 글자를 쓴다. 둘 다 같은
+    // .pub-thumb 상자를 쓰므로 섞여 있어도 카드 높이가 어긋나지 않는다.
     const thumb = document.createElement('span');
-    thumb.className = 'pub-thumb';
-    thumb.textContent = item.thumb;
+    thumb.className = item.cover ? 'pub-thumb pub-thumb--image' : 'pub-thumb';
+    if (item.cover) {
+      const cover = document.createElement('img');
+      cover.className = 'pub-cover';
+      cover.src = item.cover;
+      cover.alt = '';           // 제목이 바로 아래에 있어 읽어 줄 것이 없다
+      cover.loading = 'lazy';
+      cover.decoding = 'async';
+      thumb.appendChild(cover);
+      const label = document.createElement('span');
+      label.className = 'pub-thumb-label';
+      label.textContent = item.thumb;
+      thumb.appendChild(label);
+    } else {
+      thumb.textContent = item.thumb;
+    }
 
     const body = document.createElement('span');
     body.className = 'pub-body';
