@@ -1,0 +1,80 @@
+/* =========================================================================
+   layout-lang.css — 언어 선택 상자와 그것이 만든 헤더 보정
+
+   i18n.js 가 헤더에 넣는 선택 상자. 이 상자가 자리를 차지하면서 560px
+   아래에서 헤더를 두 줄로 나눠야 했기 때문에, 그 보정도 여기 함께 둔다.
+   layout.css 가 600줄을 넘어 뗐다. 넷을 아래 순서로 이어 붙이면 예전 한
+   파일과 같다 — CSS 는 순서가 곧 규칙이라 구역을 재배치하지 않았다.
+
+   로드 순서: layout.css -> layout-hero.css -> layout-footer.css
+              -> layout-lang.css
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   언어 선택 — 헤더 로그인 버튼 왼쪽 (i18n.js 가 삽입)
+   ------------------------------------------------------------------------- */
+.lang-select { display: inline-flex; align-items: center; flex: none; }
+.lang-select select {
+  font: inherit;
+  font-size: 13px;
+  color: var(--text-body);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 7px 26px 7px 10px;
+  cursor: pointer;
+  /* 기본 화살표를 지우고 직접 그린다 — 브라우저마다 크기가 달라 헤더 높이가 흔들린다 */
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  transition: border-color 0.15s, color 0.15s;
+}
+.lang-select select:hover { border-color: var(--navy-900); color: var(--navy-900); }
+.lang-select select:focus-visible { outline: 2px solid var(--navy-700); outline-offset: 2px; }
+
+/* 화면 낭독기에만 읽히는 라벨 */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 960px) {
+  /* 모바일에서는 햄버거 왼쪽에 남긴다 — 언어는 메뉴보다 먼저 필요할 수 있다 */
+  .lang-select { margin-left: auto; }
+  .lang-select select { padding: 6px 24px 6px 8px; font-size: 12px; }
+}
+
+/* 좁은 화면에서는 헤더를 두 줄로 — 로고 한 줄, 언어·메뉴 한 줄.
+
+   한 줄에 다 넣으면 언어 선택(82px)과 햄버거(36px)가 자리를 차지해서
+   브랜드 글자에 남는 폭이 390px 화면에서 81px, 360px 에서 59px 밖에
+   안 된다. 그 폭에서 영문 이름이 네댓 줄로 접혀 글자 덩어리가 107px 이
+   되고, 헤더 높이 73px 을 넘겨 위로 잘려 나갔다.
+
+   560 부터인 이유: 그 위로는 영문이 한 줄에 들어가서 두 줄로 나눌 이유가
+   없다. 데스크톱은 건드리지 않는다.
+
+   height 대신 min-height 로 바꾼다 — 고정 높이면 둘째 줄이 들어갈 자리가
+   없어 그대로 잘린다. */
+@media (max-width: 560px) {
+  .site-header .container {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 72px;
+    align-content: center;
+    gap: 8px 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .site-header .brand { flex: 1 0 100%; }
+  /* 언어 선택과 햄버거 둘 다 margin-left:auto 를 갖고 있어서, 줄이 나뉘자
+     둘째 줄의 남는 공간을 106px 씩 나눠 갖고 가운데에 흩어졌다. 햄버거의
+     auto 를 풀어 언어 선택 하나만 밀도록 한다 — 둘이 오른쪽에 붙는다. */
+  .site-header .mobile-toggle { margin-left: 0; }
+}

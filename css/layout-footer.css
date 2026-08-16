@@ -1,0 +1,253 @@
+/* =========================================================================
+   layout-footer.css — 푸터
+
+   짙은 네이비 본문 + 맨 아래 흰 띠(소관 부처 로고 · 연락처 · 법적 표기).
+   layout.css 가 600줄을 넘어 뗐다. 넷을 아래 순서로 이어 붙이면 예전 한
+   파일과 같다 — CSS 는 순서가 곧 규칙이라 구역을 재배치하지 않았다.
+
+   로드 순서: layout.css -> layout-hero.css -> layout-footer.css
+              -> layout-lang.css
+   ========================================================================= */
+
+/* ---------- Footer ---------- */
+/* -------------------------------------------------------------------------
+   푸터 — claude.ai/design Footer.dc.html 적용
+
+   짙은 네이비 위에 금색 제목 + 흰 본문. 예전에는 링크가 rgba(255,255,255,0.65)
+   라 어두운 배경에서 읽기 힘들었고 제목과 링크의 위계도 흐렸습니다.
+   ------------------------------------------------------------------------- */
+.site-footer {
+  /* #F1A439 였다. 히어로·회원가입은 #E8A33D 라 금색이 두 벌이었는데, 눈으로는
+     구별이 안 되는 차이라 base.css 의 --gold 하나로 모았다. */
+  --footer-gold: var(--gold);
+  --footer-line: rgba(255, 255, 255, 0.09);
+  background: var(--navy-900);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 44px 0 0;
+  margin-top: 0;
+}
+
+/* 브랜드 한 덩어리 + 링크 컬럼 묶음. 컬럼 쪽이 넓게 가져갑니다. */
+.site-footer > .container:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 64px;
+  align-items: flex-start;
+}
+.footer-brand-block {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 300px;
+  min-width: 280px;
+  max-width: 420px;
+}
+.footer-cols {
+  flex: 2.4 1 560px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 40px 48px;
+  align-items: start;
+}
+
+.site-footer .brand .brand-mark {
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px;
+}
+.site-footer .brand .ko {
+  color: var(--footer-gold);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.site-footer .brand .en { color: rgba(255, 255, 255, 0.6); }
+.footer-tagline {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #fff;
+  max-width: 330px;
+  text-wrap: pretty;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 26px;
+}
+.footer-social a {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s;
+}
+.footer-social a:hover {
+  color: var(--footer-gold);
+  border-color: var(--footer-gold);
+}
+.footer-social svg { width: 15px; height: 15px; }
+
+.footer-col { display: flex; flex-direction: column; }
+.footer-col h2 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--footer-gold);
+  margin-bottom: 18px;
+  text-transform: none;
+}
+.footer-col a {
+  width: fit-content;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 0.15s;
+}
+.footer-col a:hover { color: var(--footer-gold); }
+
+/* 연락처는 위의 이동 링크와 성격이 달라 선으로 끊습니다. 감싸는 div 대신
+   첫 mailto 링크에 선을 그어, CMS 가 링크를 다시 그려도 살아남게 합니다.
+
+   :first-of-type 은 못 씁니다 — 그건 'a 중 첫째'라 회원가입에 걸립니다.
+   mailto 가 아닌 링크 바로 뒤에 오는 mailto 를 집어야 첫 연락처가 됩니다. */
+/* 푸터 맨 아래 흰 띠 — 소관 부처 로고 · 연락처 · 저작권을 한 줄에 모았다.
+
+   셋 다 '작은 글씨' 성격이라 흰 띠 하나로 몰면 어두운 영역은 메뉴만 남아
+   정리된다. 연락처는 원래 문의·연결 컬럼에 세로로 쌓여 세 줄을 먹었고,
+   컬럼(158px)이 좁아 거기서는 눕힐 수 없었다.
+
+   로고 PNG 는 알파가 없어 배경이 꽉 찬 이미지다. 어두운 바탕에서
+   brightness(0) invert(1) 로 흰색을 만들면 배경까지 하얘져 회색 사각형이
+   된다 — 흰 바탕에 두고 필터를 걷어내야 원래 색이 나온다. */
+.footer-authorities {
+  background: var(--bg-white);
+  margin-top: 44px;
+  /* 푸터는 어두워서 포커스 링이 흰색인데(base.css), 이 띠는 흰 바탕이다.
+     흰 링은 여기서 안 보이므로 네이비로 되돌린다. */
+  --focus-ring: var(--navy-900);
+}
+.footer-authorities-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* 세로 24 / 가로 24. 가로를 40 으로 두면 세 묶음(합 1,183px)이 컨테이너
+     1,232px 에 들어가고도 간격 80px 때문에 접혔다 — 내용이 아니라 간격이
+     넘긴 경우라 실측 전에는 못 알아챈다. */
+  gap: 24px 24px;
+  flex-wrap: wrap;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.footer-authorities-marks {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.footer-authorities-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+/* 아주 좁은 화면에서는 라벨을 윗줄로 뺀다.
+
+   한 줄에 다 넣으려면 여백 24 + 라벨 81 + 간격 28 + 문체부 120 + 간격 28
+   + 국세청 84 + 여백 24 = 389px 이 필요하다. 그 아래에서는 국세청만 다음
+   줄로 떨어져 두 로고의 수평이 어긋났다.
+
+   라벨이 한 줄을 통째로 쓰면 로고 둘은 120 + 24 + 84 = 228 이라 320px
+   화면에서도 나란히 선다. 389 아래에서만 걸어 390·412 같은 흔한 폭은
+   지금처럼 한 줄로 둔다. */
+@media (max-width: 389px) {
+  .footer-authorities-marks { gap: 12px 24px; }
+  .footer-authorities-label { flex: 0 0 100%; }
+}
+/* 로고 안에 기관명이 작게 들어 있어 28px 에서는 그 줄이 뭉갰다.
+   height 만 주고 width:auto 로 두면 비율이 유지된다 — 마크업의 width/height
+   속성은 로드 전 자리를 잡아 레이아웃이 흔들리지 않게 하는 용도다. */
+.footer-authorities img {
+  height: 36px;
+  width: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.15s;
+}
+.footer-authorities a:hover img { opacity: 1; }
+
+.footer-authorities-contact {
+  display: flex;
+  align-items: center;
+  gap: 0 10px;
+  flex-wrap: wrap;
+}
+.footer-authorities-contact a {
+  font-size: 13px;
+  color: var(--text-body);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s;
+  /* 19px 이라 AA(24px)에 못 미쳤다. */
+  padding: 4px 0;
+}
+.footer-authorities-contact a:hover {
+  color: var(--navy-900);
+  text-decoration: underline;
+}
+.footer-authorities-contact a + a::before {
+  content: '·';
+  margin-right: 10px;
+  color: var(--border-strong);
+  text-decoration: none;
+}
+
+.footer-authorities-legal {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.footer-authorities-legal a {
+  color: var(--text-body);
+  font-weight: 500;
+  text-decoration: none;
+  /* 19px 이라 AA(24px)에 못 미쳤다. */
+  padding: 4px 0;
+}
+.footer-authorities-legal a:hover {
+  color: var(--navy-900);
+  text-decoration: underline;
+}
+
+@media (max-width: 1100px) {
+  /* 셋을 한 줄에 못 담는 폭. 줄바꿈에 맡기되 왼쪽으로 모은다. */
+  .footer-authorities-inner { justify-content: flex-start; gap: 14px 32px; }
+}
+@media (max-width: 720px) {
+  .footer-authorities img { height: 30px; }
+  .footer-authorities-legal,
+  .footer-authorities-contact a { font-size: 12px; }
+  .footer-authorities-legal { gap: 14px; }
+}
+@media (max-width: 560px) {
+  /* 가운뎃점만 줄 끝에 남는 것을 막는다. */
+  .footer-authorities-contact { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .footer-authorities-contact a + a::before { content: none; }
+}
+
+/* 컬럼은 auto-fit minmax 가 알아서 접습니다. 좁아질 때 여백만 줄입니다. */
+@media (max-width: 760px) {
+  .site-footer > .container:first-child { gap: 36px 40px; }
+  .footer-cols { gap: 32px 32px; }
+}
+@media (max-width: 520px) {
+  .footer-brand-block { max-width: none; }
+}
