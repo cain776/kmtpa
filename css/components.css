@@ -139,10 +139,15 @@
   line-height: 1.45;
   transition: color 0.15s;
 }
+/* 날짜는 보조 정보가 아니다. 보도자료 목록에서는 '언제 나온 기사인가'가
+   제목만큼 중요해서 --text-muted(#64748b) 로 흐리게 두지 않는다.
+   제목과 같은 짙은 색에 굵기를 주되, 크기는 제목보다 작게 두어 제목이
+   먼저 읽히는 순서는 유지한다. */
 .u-date {
   flex-shrink: 0;
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-heading);
   font-variant-numeric: tabular-nums;
 }
 
