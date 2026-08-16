@@ -142,9 +142,37 @@ window.KMTPA = window.KMTPA || {};
      화면 문구·색·푸터처럼 사무국이 자주 손대는 것과는 성격이 다르다.
      그래서 이 자리는 코드가 갖는다. 게시본에 nav 가 남아 있어도 무시한다. */
 
+  /* 푸터 링크의 번역 키 표 — '한국어 문구 → data-i18n 키'.
+
+     아래 applyFooter 는 링크를 지우고 새로 그린다. 예전에는 새 <a> 에 키를
+     안 붙여서, 푸터 컬럼만 언어를 바꿔도 한국어로 남아 있었다 (제목은 기존
+     요소에 글자만 넣으므로 키가 살아남아 잘 바뀌었다).
+
+     자리 순서로 맞추면 안 된다. 게시본의 '문의·연결' 칸은 링크가 여섯인데
+     (연락처 셋이 뒤에 붙는다) 원본은 넷이라, 순서로 대면 '회원가입' 에
+     '함께하기' 키가 붙어 엉뚱하게 번역된다. 그래서 문구로 찾는다 — 사무국이
+     순서를 바꾸거나 링크를 끼워 넣어도 어긋나지 않는다.
+
+     표는 templates.js 의 원본 마크업에서 만든다. 화면에서 읽으면 i18n 이
+     먼저 돈 경우 이미 번역된 글자를 집게 된다. <template> 은 안이 비활성이라
+     로고 이미지를 받지 않는다. */
+  let footerKeyByLabel = null;
+  function footerI18nKeys() {
+    if (footerKeyByLabel) return footerKeyByLabel;
+    footerKeyByLabel = new Map();
+    const holder = document.createElement('template');
+    holder.innerHTML = NS.FOOTER_HTML || '';
+    holder.content.querySelectorAll('.footer-col a[data-i18n]').forEach(el => {
+      const label = el.textContent.trim();
+      if (label && !footerKeyByLabel.has(label)) footerKeyByLabel.set(label, el.dataset.i18n);
+    });
+    return footerKeyByLabel;
+  }
+
   function applyFooter(settings) {
     if (!isRecord(settings) || !isRecord(settings.footer) || !Array.isArray(settings.footer.columns)) return false;
     const columns = Array.from(document.querySelectorAll('.site-footer .footer-col'));
+    const keys = footerI18nKeys();
     settings.footer.columns.filter(isRecord).slice(0, columns.length).forEach((column, index) => {
       const target = columns[index];
       const heading = target.querySelector('h2');
@@ -153,8 +181,13 @@ window.KMTPA = window.KMTPA || {};
       target.querySelectorAll('a').forEach(el => el.remove());
       links.forEach(item => {
         const link = document.createElement('a');
-        link.textContent = item.label || '링크';
+        const label = item.label || '링크';
+        link.textContent = label;
         link.href = resolveSiteHref(item.href) || '#';
+        // 원본에 있던 문구면 번역 키를 되붙인다. 메일 주소처럼 원본에 없는
+        // 것은 키가 없고, 그대로 두는 것이 맞다 — 번역할 말이 아니다.
+        const key = keys.get(label.trim());
+        if (key) link.dataset.i18n = key;
         if (/^https?:/i.test(item.href || '')) {
           link.target = '_blank';
           link.rel = 'noopener';
@@ -511,6 +544,12 @@ window.KMTPA = window.KMTPA || {};
 
     // 게시본이 없어도 정적 목록을 세어 '총 ○○건' 자리표시자를 채웁니다.
     NS.syncUpdateCounts();
+
+    // 여기서 다시 그린 자리에 번역을 입힌다. 지금은 이 파일이 i18n.js 보다
+    // 먼저 돌지만(로드 순서), 둘 다 같은 게시본 약속을 기다리므로 순서가
+    // 뒤집히면 방금 그린 것만 한국어로 남는다. 사전이 없으면(한국어이거나
+    // 아직 안 왔으면) applyI18n 은 아무 일도 안 하므로 불러도 무해하다.
+    if (typeof NS.applyI18n === 'function') NS.applyI18n(document);
 
     return didApply;
   };
