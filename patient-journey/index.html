@@ -19,24 +19,30 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
-  <link rel="stylesheet" href="../css/base.css?v=e16d7365">
-  <link rel="stylesheet" href="../css/layout.css?v=c925d03b">
-  <link rel="stylesheet" href="../css/components.css?v=8b39fb26">
-  <link rel="stylesheet" href="../css/newsletter-modal.css?v=61211e90">
+  <link rel="stylesheet" href="../css/base.css?v=ce124a3d">
+  <link rel="stylesheet" href="../css/layout.css?v=c7fe7a46">
+  <link rel="stylesheet" href="../css/components.css?v=ce6dbd4f">
+  <link rel="stylesheet" href="../css/newsletter-modal.css?v=ee3b1cb9">
   <link rel="stylesheet" href="../css/communications.css?v=2eea800e">
-  <link rel="stylesheet" href="../css/about.css?v=67f9c96b">
+  <link rel="stylesheet" href="../css/about.css?v=3095582d">
   <link rel="stylesheet" href="../css/transparency.css?v=8f7aea14">
   <link rel="stylesheet" href="../css/programs.css?v=2cf5aada">
-  <link rel="stylesheet" href="../css/page-hero.css?v=ebe3648e">
+  <link rel="stylesheet" href="../css/page-hero.css?v=fef69713">
   <link rel="stylesheet" href="../css/patient-journey.css?v=01e13590">
   <link rel="stylesheet" href="../css/directions.css?v=ca59bfd2">
   <link rel="stylesheet" href="../css/legal.css?v=6683f450">
-  <link rel="stylesheet" href="../css/newsletter-detail.css?v=a5322878">
+  <link rel="stylesheet" href="../css/newsletter-detail.css?v=5995d89a">
 </head>
 <body class="page-fullwidth" data-i18n-page="patient-journey">
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
+
+  <!-- 본문은 <main> 안에 둡니다. 이게 없으면 화면 낭독기 사용자가
+       "본문으로 건너뛰기" 를 할 수 없고, 헤더 링크를 매번 다 지나야
+       합니다. header-mount·footer-mount 가 각각 banner·contentinfo 를
+       그리므로 그 사이가 main 입니다. -->
+  <main id="main-content">
 
   <!-- ============== Journey Hero ============== -->
   <section class="journey-hero journey-hero--banner">
@@ -355,11 +361,13 @@
   </section>
 
   <!-- ============== Footer (app.js에서 주입) ============== -->
+  </main>
+
   <div id="footer-mount"></div>
 
   <script src="../js/runtime-config.js?v=26206d20"></script>
   <script src="../js/templates.js?v=4370a4ce"></script>
-  <script src="../js/components.js?v=6f003932"></script>
+  <script src="../js/components.js?v=fe3b4e9c"></script>
   <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
   <script src="../js/app.js?v=00b88128"></script>
   <script src="../js/cms.js?v=2670094d"></script>

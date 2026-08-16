@@ -27,16 +27,17 @@
   font-size: 13px;
   color: var(--text-muted);
   text-decoration: none;
-  transition: color 0.15s, gap 0.18s;
+  transition: color 0.15s;
 }
-.newsletter-breadcrumb a:hover {
-  color: var(--navy-900);
-  gap: 10px;
-}
+.newsletter-breadcrumb a:hover { color: var(--navy-900); }
+/* gap 을 애니메이션했었다. 레이아웃 속성이라 매 프레임 리플로가 돈다 —
+   화살표만 transform 으로 민다 (components.css 의 .link-cta 와 같은 이유). */
 .newsletter-breadcrumb svg {
   width: 13px;
   height: 13px;
+  transition: transform 0.18s;
 }
+.newsletter-breadcrumb a:hover svg { transform: translateX(4px); }
 
 /* ----- 팝업 카드 (모달 다이얼로그와 시각적으로 동일) ----- */
 .pub-card {

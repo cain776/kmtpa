@@ -135,7 +135,10 @@ window.KMTPA = window.KMTPA || {};
       slides.forEach((el, i) => el.classList.toggle('is-active', i === index));
       dots.forEach((el, i) => {
         el.classList.toggle('is-active', i === index);
-        el.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        // tab/aria-selected 였다. 가리키는 tabpanel 이 없어 버튼 무리로 바꿨고,
+        // 현재 것은 aria-current 로 알린다.
+        if (i === index) el.setAttribute('aria-current', 'true');
+        else el.removeAttribute('aria-current');
       });
       if (headline && COPY[index]) headline.innerHTML = copyAt(index);
       if (counter) counter.textContent = `${pad(index + 1)} / ${pad(total)}`;
@@ -147,11 +150,35 @@ window.KMTPA = window.KMTPA || {};
       restart();
     }
 
-    function restart() {
+    // 마우스가 히어로 위에 있거나 안의 버튼에 포커스가 있는 동안은 돌리지
+    // 않는다. 읽고 있는데 6초마다 바뀌면 못 읽고, 자동 회전을 멈출 방법이
+    // 없는 것은 접근성 기준(WCAG 2.2.2)에 걸린다. 벗어나면 다시 돈다.
+    let held = false;
+
+    function stop() {
       if (timer) clearInterval(timer);
-      if (reduceMotion) return;              // 모션 최소화 설정이면 자동 전환 안 함
+      timer = null;
+    }
+
+    function restart() {
+      stop();
+      if (reduceMotion || held) return;      // 모션 최소화 설정이거나 잡혀 있으면 안 돎
       timer = setInterval(() => go(index + 1), INTERVAL);
     }
+
+    function hold()    { held = true;  stop(); }
+    function release() { held = false; restart(); }
+
+    // 마우스일 때만. 터치는 enter 가 한 번 오고 leave 가 안 와서, 한 번
+    // 만지면 영영 멈춘 채로 남는다.
+    stage.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hold(); });
+    stage.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') release(); });
+    stage.addEventListener('focusin', hold);
+    // 포커스가 히어로 밖으로 나갈 때만 푼다. 안에서 버튼 사이를 옮길 때는
+    // focusout → focusin 이 연달아 오는데, relatedTarget 이 안쪽이면 나간 게 아니다.
+    stage.addEventListener('focusout', (e) => {
+      if (!stage.contains(e.relatedTarget)) release();
+    });
 
     stage.querySelector('.hero-arrow--prev')?.addEventListener('click', () => go(index - 1));
     stage.querySelector('.hero-arrow--next')?.addEventListener('click', () => go(index + 1));
@@ -164,7 +191,7 @@ window.KMTPA = window.KMTPA || {};
 
     // 탭이 가려져 있는 동안에는 타이머를 돌리지 않습니다.
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) { if (timer) clearInterval(timer); }
+      if (document.hidden) stop();
       else restart();
     });
 

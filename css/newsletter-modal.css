@@ -284,15 +284,15 @@ body.modal-open { overflow: hidden; }
   color: var(--text-body);
   text-decoration: none;
   line-height: 1.6;
-  transition: color 0.15s, gap 0.18s;
+  transition: color 0.15s;
 }
-.pub-modal-refs li a:hover {
-  color: var(--navy-900);
-  gap: 10px;
-}
+.pub-modal-refs li a:hover { color: var(--navy-900); }
+/* gap 대신 transform (components.css 의 .link-cta 와 같은 이유) */
+.pub-modal-refs li a:hover svg { transform: translateX(4px); }
 .pub-modal-refs li a svg {
   width: 12px;
   height: 12px;
+  transition: transform 0.18s;
   color: var(--text-muted);
   flex-shrink: 0;
 }

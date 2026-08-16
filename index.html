@@ -25,21 +25,21 @@
   <!-- Lucide icons (pinned) -->
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 
-  <link rel="stylesheet" href="css/base.css?v=e16d7365">
-  <link rel="stylesheet" href="css/layout.css?v=c925d03b">
-  <link rel="stylesheet" href="css/components.css?v=8b39fb26">
-  <link rel="stylesheet" href="css/newsletter-modal.css?v=61211e90">
+  <link rel="stylesheet" href="css/base.css?v=ce124a3d">
+  <link rel="stylesheet" href="css/layout.css?v=c7fe7a46">
+  <link rel="stylesheet" href="css/components.css?v=ce6dbd4f">
+  <link rel="stylesheet" href="css/newsletter-modal.css?v=ee3b1cb9">
   <link rel="stylesheet" href="css/communications.css?v=2eea800e">
-  <link rel="stylesheet" href="css/about.css?v=67f9c96b">
+  <link rel="stylesheet" href="css/about.css?v=3095582d">
   <link rel="stylesheet" href="css/transparency.css?v=8f7aea14">
   <link rel="stylesheet" href="css/programs.css?v=2cf5aada">
-  <link rel="stylesheet" href="css/page-hero.css?v=ebe3648e">
+  <link rel="stylesheet" href="css/page-hero.css?v=fef69713">
   <link rel="stylesheet" href="css/patient-journey.css?v=01e13590">
   <link rel="stylesheet" href="css/directions.css?v=ca59bfd2">
   <link rel="stylesheet" href="css/legal.css?v=6683f450">
-  <link rel="stylesheet" href="css/newsletter-detail.css?v=a5322878">
+  <link rel="stylesheet" href="css/newsletter-detail.css?v=5995d89a">
   <!-- 홈 전용 (전면 히어로 슬라이더 등) — 반드시 마지막 -->
-  <link rel="stylesheet" href="css/home.css?v=60e36151">
+  <link rel="stylesheet" href="css/home.css?v=bda9f649">
 
   <!-- 첫 화면 배경은 LCP 요소이므로 미리 받아둡니다 -->
   <link rel="preload" as="image" href="images_homepage/hero/hero-1.avif" type="image/avif">
@@ -48,6 +48,12 @@
 
   <!-- ============== Header (app.js에서 주입) ============== -->
   <div id="header-mount"></div>
+
+  <!-- 본문은 <main> 안에 둡니다. 이게 없으면 화면 낭독기 사용자가
+       "본문으로 건너뛰기" 를 할 수 없고, 헤더 링크를 매번 다 지나야
+       합니다. header-mount·footer-mount 가 각각 banner·contentinfo 를
+       그리므로 그 사이가 main 입니다. -->
+  <main id="main-content">
 
   <!-- ============== Hero (전면 이미지 슬라이더) ==============
        상단 바·하단 바로가기 바는 templates.js에서 주입되고,
@@ -67,7 +73,9 @@
     <!-- 바깥은 위치 잡기, 안쪽은 등장 애니메이션 (transform 이 서로 덮어쓰지 않도록 분리) -->
     <div class="hero-copy">
       <div class="hero-copy-inner">
-        <h1 data-i18n="home.h1.1" class="hero-headline" aria-live="polite">
+        <!-- aria-live 를 뗐다. 6초마다 문구가 바뀌는 h1 에 live 를 두면 화면
+             낭독기가 페이지 어디를 읽고 있든 6초마다 헤드라인으로 끊는다. -->
+        <h1 data-i18n="home.h1.1" class="hero-headline">
           세계가 신뢰하는 <em>K-의료관광</em>을<br>만들어갑니다.
         </h1>
       </div>
@@ -85,10 +93,13 @@
       <span class="hero-mouse" aria-hidden="true"><span></span></span>
     </button>
 
-    <div class="hero-pager" role="tablist" aria-label="히어로 슬라이드">
-      <span class="hero-counter">01 / 02</span>
-      <button type="button" class="hero-dot is-active" role="tab" aria-selected="true"  aria-label="1번 슬라이드"></button>
-      <button type="button" class="hero-dot"           role="tab" aria-selected="false" aria-label="2번 슬라이드"></button>
+    <!-- tablist/tab 이었는데 가리키는 tabpanel 이 없었다(슬라이드는 aria-hidden).
+         그냥 버튼 무리로 둔다. 현재 슬라이드는 aria-current 로 표시하고
+         components.js 가 갱신한다. -->
+    <div class="hero-pager" role="group" aria-label="히어로 슬라이드 선택">
+      <span class="hero-counter" aria-hidden="true">01 / 02</span>
+      <button type="button" class="hero-dot is-active" aria-current="true" aria-label="1번 슬라이드"></button>
+      <button type="button" class="hero-dot"                                aria-label="2번 슬라이드"></button>
     </div>
 
     <div id="hero-quickbar-mount"></div>
@@ -103,6 +114,10 @@
         <p data-i18n="home.p.1" class="desc">회원의 전문성과 환자의 신뢰를 동시에 지키기 위한 여덟 가지 사업 영역.</p>
       </div>
 
+      <!-- 여덟 장이 같은 크기로 4×2 에 서 있었다. 그러면 뭐가 중요한지 화면이
+           말해주지 않는다. 협회의 근간인 넷(인증·양성·연구·국제협력)은 카드로
+           크게, 뒤의 넷은 아래에 한 줄 목록으로 내린다. 문구와 번역 키는
+           그대로다 — 마크업만 바뀌었다. -->
       <div class="card-grid">
         <article class="card">
           <span class="card-icon"><i data-lucide="badge-check"></i></span>
@@ -127,34 +142,41 @@
           <h3 data-i18n="home.h3.4">국제 협력</h3>
           <p data-i18n="home.p.5">해외 정부·의료기관·보험사와의 파트너십을 통해 한국 의료의 해외 진출과 외국인환자 유치를 지원합니다.</p>
         </article>
-
-        <!-- 아래 넷은 제안입니다. 협회가 실제로 하는 일과 다르면 문구만 바꾸면 됩니다.
-             앞의 둘(산업 동향 · 상담 창구)은 이미 시스템이 하고 있는 일이라
-             화면이 없는 약속을 하지 않습니다. -->
-        <article class="card">
-          <span class="card-icon"><i data-lucide="newspaper"></i></span>
-          <h3 data-i18n="home.h3.5">산업 동향 발간</h3>
-          <p data-i18n="home.p.6">국내외 의료관광 뉴스를 상시 수집해 매주 흐름과 시사점을 정리하고, 회원에게 뉴스레터로 전해드립니다.</p>
-        </article>
-
-        <article class="card">
-          <span class="card-icon"><i data-lucide="messages-square"></i></span>
-          <h3 data-i18n="home.h3.6">환자 상담 창구</h3>
-          <p data-i18n="home.p.7">진료 결정 전 단계부터 다국어로 응대하여 환자에게 맞는 회원 의료기관과 자격 코디네이터를 연결합니다.</p>
-        </article>
-
-        <article class="card">
-          <span class="card-icon"><i data-lucide="bar-chart-3"></i></span>
-          <h3 data-i18n="home.h3.7">통계와 실적 관리</h3>
-          <p data-i18n="home.p.8">회원 기관의 외국인환자 유치 실적을 모아 진료과·국가별 통계로 정리하고, 사업 계획의 근거로 제공합니다.</p>
-        </article>
-
-        <article class="card">
-          <span class="card-icon"><i data-lucide="handshake"></i></span>
-          <h3 data-i18n="home.h3.8">회원 교류와 네트워킹</h3>
-          <p data-i18n="home.p.9">정기 포럼과 실무 세미나로 기관·코디네이터·유치업체가 만나 사례와 노하우를 나누는 자리를 만듭니다.</p>
-        </article>
       </div>
+
+      <!-- 아래 넷은 제안입니다. 협회가 실제로 하는 일과 다르면 문구만 바꾸면 됩니다.
+           앞의 둘(산업 동향 · 상담 창구)은 이미 시스템이 하고 있는 일이라
+           화면이 없는 약속을 하지 않습니다. -->
+      <ul class="home-activities">
+        <li>
+          <div class="home-activities__head">
+            <i data-lucide="newspaper" aria-hidden="true"></i>
+            <h3 data-i18n="home.h3.5">산업 동향 발간</h3>
+          </div>
+          <p data-i18n="home.p.6">국내외 의료관광 뉴스를 상시 수집해 매주 흐름과 시사점을 정리하고, 회원에게 뉴스레터로 전해드립니다.</p>
+        </li>
+        <li>
+          <div class="home-activities__head">
+            <i data-lucide="messages-square" aria-hidden="true"></i>
+            <h3 data-i18n="home.h3.6">환자 상담 창구</h3>
+          </div>
+          <p data-i18n="home.p.7">진료 결정 전 단계부터 다국어로 응대하여 환자에게 맞는 회원 의료기관과 자격 코디네이터를 연결합니다.</p>
+        </li>
+        <li>
+          <div class="home-activities__head">
+            <i data-lucide="bar-chart-3" aria-hidden="true"></i>
+            <h3 data-i18n="home.h3.7">통계와 실적 관리</h3>
+          </div>
+          <p data-i18n="home.p.8">회원 기관의 외국인환자 유치 실적을 모아 진료과·국가별 통계로 정리하고, 사업 계획의 근거로 제공합니다.</p>
+        </li>
+        <li>
+          <div class="home-activities__head">
+            <i data-lucide="handshake" aria-hidden="true"></i>
+            <h3 data-i18n="home.h3.8">회원 교류와 네트워킹</h3>
+          </div>
+          <p data-i18n="home.p.9">정기 포럼과 실무 세미나로 기관·코디네이터·유치업체가 만나 사례와 노하우를 나누는 자리를 만듭니다.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -220,11 +242,13 @@
   </section>
 
   <!-- ============== Footer (app.js에서 주입) ============== -->
+  </main>
+
   <div id="footer-mount"></div>
 
   <script src="js/runtime-config.js?v=26206d20"></script>
   <script src="js/templates.js?v=4370a4ce"></script>
-  <script src="js/components.js?v=6f003932"></script>
+  <script src="js/components.js?v=fe3b4e9c"></script>
   <script src="js/nav-dropdown.js?v=66d1ced0"></script>
   <script src="js/app.js?v=00b88128"></script>
   <script src="js/cms.js?v=2670094d"></script>

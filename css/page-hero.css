@@ -20,7 +20,7 @@
   --band-bg:   var(--navy-900);   /* #020028 */
   --band-ink:  #ffffff;
   --band-body: #b9b8c9;
-  --band-gold: #f1a439;
+  --band-gold: var(--gold);   /* 금색은 사이트에 하나다 (base.css) */
   background: var(--band-bg);
   color: var(--band-ink);
   min-height: var(--hero-band-h);

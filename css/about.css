@@ -177,7 +177,9 @@
   border-radius: 0 4px 4px 0;
 }
 .greeting-quote .quote-en {
-  font-family: Georgia, "Times New Roman", serif;
+  /* Georgia 였다. 제목이 명조(Noto Serif KR)로 바뀌면서 라틴 세리프도 그쪽에
+     맡긴다 — 서체 계열이 넷(고딕·명조·Georgia·송명)에서 둘로 준다. */
+  font-family: var(--font-display);
   font-size: 20px;
   font-style: italic;
   color: var(--navy-900);
@@ -203,9 +205,12 @@
   margin-bottom: 4px;
 }
 .greeting-sign .sign-name {
-  font-family: 'Song Myung', 'Pretendard', serif;
+  /* 송명(Song Myung)이었다. 그 하나 때문에 세 페이지가 Google Fonts 를 한 번 더
+     받았고 CSS 에서는 여기 말고 안 썼다. 제목 명조로 통일한다. 600 이 받아 둔
+     가장 가벼운 굵기다 — 서명이라 무겁지 않게. */
+  font-family: var(--font-display);
   font-size: 28px;
-  font-weight: 400;
+  font-weight: 600;
   color: var(--text-heading);
   letter-spacing: 0.1em;
   line-height: 1.1;

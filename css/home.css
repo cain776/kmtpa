@@ -9,13 +9,10 @@
 
 .is-home {
   --hero-ink: #0E0E2C;
-  --hero-gold: #E8A33D;
-  --home-heading: #141432;
-  --home-body: #5A6072;
-  --home-line: #E6E8EF;
-  --home-line-strong: #DDE0E8;
-  --home-band: #F6F7FA;
-  --home-eyebrow: #5A6BC0;
+  --hero-gold: var(--gold);   /* 금색은 사이트에 하나다 (base.css) */
+  /* --home-heading · --home-body · --home-line · --home-band · --home-eyebrow 가
+     여기 있었다. 정의만 있고 한 곳도 안 썼는데, base.css 의 --text-heading ·
+     --text-body 와 역할이 같으면서 값이 달라 팔레트가 두 벌로 보였다. 지웠다. */
   /* 고정 헤더 높이. 한 화면짜리 섹션의 위 여백이 이 값을 따라간다 —
      헤더 높이를 바꾸면 제목이 헤더에 가리지 않게 여기도 같이 고친다. */
   --home-header-h: 73px;
@@ -103,17 +100,22 @@
   inset: 0;
   z-index: 1;
   background:
-    /* 헤드라인 뒤쪽만 살짝 눌러 흰 글자가 뜨게 합니다 */
-    radial-gradient(56% 40% at 50% 30%,
-      rgba(9, 9, 30, 0.26) 0%,
-      rgba(9, 9, 30, 0.12) 55%,
+    /* 헤드라인 뒤를 누른다. 0.26 이었는데 그건 지금 사진 두 장에 맞춘 값이라,
+       사무국이 밝은 사진으로 갈아끼우면 그날 흰 글자가 안 읽힌다. 가운데를
+       0.55 까지 올려 사진과 무관하게 최소한의 바닥을 둔다. 사진 대부분은
+       여전히 보인다 — 어두워지는 건 헤드라인 자리뿐이다.
+       그래도 사진을 고를 때 헤드라인 뒤에 흰 하늘·흰 벽이 오는 것은 피한다.
+       스크림만으로 4.5:1 을 보장하려면 0.8 이 넘어야 하고 그러면 사진이 죽는다. */
+    radial-gradient(60% 46% at 50% 32%,
+      rgba(9, 9, 30, 0.55) 0%,
+      rgba(9, 9, 30, 0.30) 55%,
       rgba(9, 9, 30, 0) 100%),
     /* 위아래 가장자리만 정리하고 가운데는 사진을 그대로 보여줍니다 */
     linear-gradient(180deg,
-      rgba(11, 11, 36, 0.26) 0%,
-      rgba(13, 13, 43, 0.06) 32%,
-      rgba(13, 13, 43, 0.04) 58%,
-      rgba(9, 9, 30, 0.34) 100%);
+      rgba(11, 11, 36, 0.30) 0%,
+      rgba(13, 13, 43, 0.10) 32%,
+      rgba(13, 13, 43, 0.06) 58%,
+      rgba(9, 9, 30, 0.38) 100%);
 }
 
 /* ----- 히어로 안쪽 상단 바 (투명 헤더) ----- */
@@ -219,9 +221,12 @@
   color: #fff;
   font-size: 64px;
   line-height: 1.26;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  /* 배경 어둡기를 줄인 대신 글자 그림자로 대비를 확보합니다 */
+  /* h1 이라 base.css 에서 명조(--font-display)를 받는다. 800 이었는데 명조는
+     700 까지만 받아 두었고 64px 에서 700 이면 충분히 무겁다. 자간도 명조에
+     맞춰 0 — 고딕용 -0.02em 을 물려받으면 획이 붙는다. */
+  font-weight: 700;
+  letter-spacing: 0;
+  /* 스크림이 헤드라인 뒤를 누르고(위 .hero-scrim), 그림자가 가장자리를 세운다 */
   text-shadow: 0 3px 20px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.4);
   text-wrap: pretty;
   /* 한국어는 어절 중간에서 끊기면 안 되므로 keep-all.
@@ -428,16 +433,51 @@ html:has(body.is-home) {
 }
 .is-home .home-full > .container { width: 100%; }
 
-/* 카드는 2행 4열로 고정한다. 공용 .card-grid 는 auto-fit 이라 화면이 넓으면
-   5열로 벌어져 2행이 깨진다 — 한 화면 안에 딱 두 줄로 서야 한다. */
+/* 카드는 한 줄 4열로 고정한다. 공용 .card-grid 는 auto-fit 이라 화면이 넓으면
+   5열로 벌어진다. 여덟 장 2행이었을 때 4열을 못박은 이유와 같다. */
 .is-home .home-full .card-grid {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
-/* 8칸이 한 화면에 들어가려면 카드가 조금 눌려야 한다. */
-.is-home .home-full .card { padding: 22px; }
+.is-home .home-full .card { padding: 24px; }
 .is-home .home-full .card h3 { font-size: 16px; }
 .is-home .home-full .card p { font-size: 14px; line-height: 1.7; }
+
+/* 뒤의 넷 — 카드 아래 한 줄 목록. 카드(테두리·아이콘 타일·긴 본문)와 급이
+   다르게 보여야 위계가 선다: 위에 가는 선 하나, 아이콘은 제목 옆에 인라인,
+   본문은 흐린 색으로 한 단계 내린다. */
+.home-activities {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 32px;
+  border-top: 1px solid var(--border-default);
+}
+.home-activities li { padding-top: 20px; }
+.home-activities__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.home-activities__head svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--navy-700);
+}
+.home-activities h3 { font-size: 15px; line-height: 1.35; }
+.home-activities p {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* 사진 위 조작 요소들의 포커스. base.css 가 .hero-stage 안에서 링을 흰색으로
+   두지만, 도트는 4px 높이라 링이 글자보다 커 보인다 — offset 을 조금 더 준다. */
+.hero-dot:focus-visible { outline-offset: 4px; }
 
 /* 들어올 때 살짝 떠오른다.
 
@@ -501,7 +541,9 @@ html:has(body.is-home) {
     padding: 56px 0;
   }
   /* 좁은 화면에서 4열을 고집하면 카드가 글자 한 줄 폭이 된다. */
-  .is-home .home-full .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .is-home .home-full .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-activities { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+  .home-activities li { padding-bottom: 4px; }
 
   /* 사진은 정사각형으로 고정합니다. 예전에는 카피·인디케이터·바로가기 높이를
      모두 합친 만큼 사진이 세로로 늘어나, 바로가기 박스가 첫 화면 밖으로
@@ -553,7 +595,9 @@ html:has(body.is-home) {
   .hero-quickbar { grid-template-columns: repeat(2, 1fr); }
   .hero-quickbar a:nth-child(2n) { border-right: none; }
   .hero-quickbar a:nth-child(-n+6) { border-bottom: 1px solid rgba(255, 255, 255, 0.10); }
-  .is-home .home-full .card-grid { grid-template-columns: 1fr; }
+  .is-home .home-full .card-grid { grid-template-columns: minmax(0, 1fr); }
+  .home-activities { grid-template-columns: minmax(0, 1fr); }
+  .home-activities li + li { border-top: 1px solid var(--border-default); margin-top: 16px; }
 }
 
 /* 모션 최소화 설정 존중 — 자동 전환과 확대는 JS에서도 함께 끕니다. */

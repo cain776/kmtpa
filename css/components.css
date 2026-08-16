@@ -4,7 +4,11 @@
    로드 순서: base → layout → components → pages
    ========================================================================= */
 
-/* ---------- Text Link CTA (IABC 시그니처) ---------- */
+/* ---------- Text Link CTA (IABC 시그니처) ----------
+   화살표가 밀리는 연출은 gap 을 애니메이션했었다. gap 은 레이아웃 속성이라
+   매 프레임 리플로가 돌고, 목록이 긴 보도자료 화면에서 걸리는 게 보였다.
+   화살표 자체를 transform 으로 밀면 합성만 하고 끝난다. 아래 .pub-cta ·
+   .see-also-link · .update-item 도 같은 이유로 바꿨다. */
 .link-cta {
   display: inline-flex;
   align-items: center;
@@ -15,10 +19,11 @@
   text-decoration: none;
   padding: 4px 0;
   border-bottom: 1px solid var(--navy-900);
-  transition: gap 0.18s, color 0.15s;
+  transition: color 0.15s;
 }
-.link-cta:hover { gap: 10px; color: var(--navy-800); }
-.link-cta svg { width: 14px; height: 14px; }
+.link-cta:hover { color: var(--navy-800); }
+.link-cta svg { width: 14px; height: 14px; transition: transform 0.18s; }
+.link-cta:hover svg { transform: translateX(4px); }
 
 /* 22px 이라 AA(24px)에 못 미쳤다. */
 .link-cta-muted {
@@ -30,10 +35,11 @@
   font-weight: 500;
   color: var(--text-heading);
   text-decoration: none;
-  transition: gap 0.18s, color 0.15s;
+  transition: color 0.15s;
 }
-.link-cta-muted:hover { gap: 10px; color: var(--navy-900); }
-.link-cta-muted svg { width: 14px; height: 14px; }
+.link-cta-muted:hover { color: var(--navy-900); }
+.link-cta-muted svg { width: 14px; height: 14px; transition: transform 0.18s; }
+.link-cta-muted:hover svg { transform: translateX(4px); }
 
 /* ---------- Activity Cards (4-col grid) ---------- */
 .card-grid {
@@ -56,7 +62,8 @@
   border: 1px solid var(--border-default);
   border-radius: 8px;
   padding: 28px;
-  transition: border-color 0.15s, transform 0.15s;
+  /* transform 도 트랜지션에 있었는데 hover 에 transform 이 없다. 지운다. */
+  transition: border-color 0.15s;
 }
 .card:hover { border-color: var(--navy-700); }
 .card .card-icon {
@@ -83,9 +90,11 @@
   border-bottom: 1px solid var(--border-default);
   text-decoration: none;
   color: inherit;
-  transition: padding 0.15s;
 }
-.update-item:hover { padding-left: 6px; }
+/* 줄 전체를 밀지 않고 안의 것만 민다 — 줄을 밀면 밑줄(border-bottom)까지
+   같이 움직여 오른쪽 끝이 컨테이너 밖으로 6px 삐져나온다. */
+.update-item > * { transition: transform 0.15s; }
+.update-item:hover > * { transform: translateX(6px); }
 /* 오른쪽 고정 퀵배너(layout.css)가 화면 오른쪽 124px 을 차지한다. 목록의
    날짜는 컨테이너 오른쪽 끝에 붙어 있어서 그 아래로 들어가 가려졌다 —
    1600 미만 화면에서는 100px 이 통째로 겹친다.
@@ -231,13 +240,11 @@
   font-size: 13px;
   font-weight: 500;
   color: var(--text-heading);
-  transition: color 0.15s, gap 0.18s;
+  transition: color 0.15s;
 }
-.pub-cta svg { width: 13px; height: 13px; }
-.pub:hover .pub-cta {
-  color: var(--navy-900);
-  gap: 10px;
-}
+.pub-cta svg { width: 13px; height: 13px; transition: transform 0.18s; }
+.pub:hover .pub-cta { color: var(--navy-900); }
+.pub:hover .pub-cta svg { transform: translateX(4px); }
 
 /* ---------- Events ---------- */
 /* ---------- Partners ---------- */
@@ -391,16 +398,15 @@
   color: var(--navy-700);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.15s, gap 0.18s;
+  transition: color 0.15s;
 }
-.see-also-link:hover {
-  color: var(--navy-900);
-  gap: 10px;
-}
+.see-also-link:hover { color: var(--navy-900); }
 .see-also-link svg {
   width: 12px;
   height: 12px;
+  transition: transform 0.18s;
 }
+.see-also-link:hover svg { transform: translateX(4px); }
 
 /* 더보기 — 목록 아래 한 줄. 게시본이 이미 들고 온 항목을 펼치기만 하므로
    기다림이 없다. 그래서 로딩 표시도 두지 않는다. */

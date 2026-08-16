@@ -197,7 +197,9 @@
   padding: 8px 14px;
   border: 1px solid var(--border-strong);
   border-radius: 6px;
-  transition: all 0.15s;
+  /* all 이었다. 그러면 outline 까지 0.15s 에 걸쳐 나타나서 키보드로 온 사람이
+     첫 프레임에 링을 못 본다. 바뀌는 속성만 적는다. */
+  transition: border-color 0.15s, color 0.15s;
 }
 .header-cta:hover { border-color: var(--navy-900); color: var(--navy-900); }
 
@@ -441,7 +443,9 @@
    라 어두운 배경에서 읽기 힘들었고 제목과 링크의 위계도 흐렸습니다.
    ------------------------------------------------------------------------- */
 .site-footer {
-  --footer-gold: #F1A439;
+  /* #F1A439 였다. 히어로·회원가입은 #E8A33D 라 금색이 두 벌이었는데, 눈으로는
+     구별이 안 되는 차이라 base.css 의 --gold 하나로 모았다. */
+  --footer-gold: var(--gold);
   --footer-line: rgba(255, 255, 255, 0.09);
   background: var(--navy-900);
   color: rgba(255, 255, 255, 0.75);
@@ -515,7 +519,7 @@
 .footer-social svg { width: 15px; height: 15px; }
 
 .footer-col { display: flex; flex-direction: column; }
-.footer-col h4 {
+.footer-col h2 {
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -548,8 +552,11 @@
    brightness(0) invert(1) 로 흰색을 만들면 배경까지 하얘져 회색 사각형이
    된다 — 흰 바탕에 두고 필터를 걷어내야 원래 색이 나온다. */
 .footer-authorities {
-  background: #ffffff;
+  background: var(--bg-white);
   margin-top: 44px;
+  /* 푸터는 어두워서 포커스 링이 흰색인데(base.css), 이 띠는 흰 바탕이다.
+     흰 링은 여기서 안 보이므로 네이비로 되돌린다. */
+  --focus-ring: var(--navy-900);
 }
 .footer-authorities-inner {
   display: flex;

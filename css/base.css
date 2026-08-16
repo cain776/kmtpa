@@ -8,11 +8,19 @@
    로드 순서: base → layout → components → pages
    ========================================================================= */
 
+/* 제목용 명조. HTML 이 서른두 장이고 그중 열셋은 Java 가 찍어내는 공지라
+   <link> 로 하나씩 넣는 대신 여기서 한 번 받는다. @import 는 이 파일이
+   내려온 뒤에야 요청이 나가 한 왕복 늦지만, display=swap 이라 그동안은
+   Pretendard 로 그려지고 도착하면 바뀐다. 제목에만 쓰니 그 정도는 된다.
+   굵기는 h2(600)·h1(700) 둘만 받는다 — 한글 서체는 굵기 하나가 수백 KB 다. */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap");
+
 :root {
   --navy-900: #020028;   /* primary — 업로드 색상 */
   --navy-800: #1a1845;   /* hover · 살짝 밝게 */
   --navy-700: #3a3865;   /* secondary 액센트 */
   --navy-100: #e9e9f2;   /* 라이트 틴트 · 배지 배경 */
+  --gold:     #E8A33D;   /* 강조 한 색. 히어로 강조어·회원가입·푸터 제목이 같이 쓴다 */
 
   --text-heading:  #0f172a;
   --text-body:     #475569;
@@ -26,17 +34,47 @@
 
   --bg-white:   #ffffff;
   --bg-subtle:  #f8fafc;
+
+  /* 서체 둘. 제목은 명조, 본문은 고딕 — 같은 고딕을 굵기만 달리 쓰면
+     제목과 본문이 한 덩어리로 읽혀 화면이 평평했다. h3 아래는 16px 안팎이라
+     명조를 얹으면 획이 뭉개져서 고딕에 둔다. */
+  --font-display: "Noto Serif KR", "Apple Myungjo", "Nanum Myeongjo", serif;
+  --font-body:    "Pretendard", "Apple SD Gothic Neo", system-ui, sans-serif;
+
+  /* 간격 척도 (4pt). 예전에는 18·22·26·46 같은 값이 파일마다 맨값으로 있어서
+     새 화면을 만들 때마다 옆 화면을 열어 재야 했다. 이름을 두면 고를 수 있다.
+     기존 값을 전부 옮기지는 않았다 — 새로 쓰는 곳부터 이걸 쓴다. */
+  --space-2xs: 4px;
+  --space-xs:  8px;
+  --space-sm:  12px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+
+  /* 포커스 링. 밝은 바탕에서는 네이비, 어두운 바탕(푸터·히어로·머리띠)에서는
+     흰색 — 그 위에서 네이비 링은 안 보인다. 어두운 영역은 자기 색을 덮어쓴다. */
+  --focus-ring: var(--navy-900);
 }
 
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
+/* 가로 스크롤 방어. 메가 드롭다운이 숨은 채로 111px 삐져나와 페이지 전체에
+   가로 스크롤을 만든 적이 있다(layout.css 참고). 그때는 드롭다운만 고쳤는데,
+   다음 것이 또 나오지 않게 뿌리에서 자른다.
+   hidden 이 아니라 clip 이다 — hidden 은 스크롤 컨테이너를 만들어 자식의
+   position: sticky 를 죽인다. 홈 헤더가 sticky 다. */
+html, body { overflow-x: clip; }
+
 body {
   margin: 0;
   background: var(--bg-white);
   color: var(--text-body);
-  font-family: "Pretendard", "Apple SD Gothic Neo", system-ui, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -47,10 +85,36 @@ body {
 
 /* ---------- Typography ---------- */
 h1, h2, h3, h4 { color: var(--text-heading); margin: 0; font-weight: 600; letter-spacing: -0.01em; }
+/* 명조는 같은 크기의 고딕보다 가늘어 보인다. h2 를 600 으로 두면 본문 위에서
+   가라앉아서 h1·h2 둘 다 700 이다. 자간은 고딕용(-0.01em)을 물려받으면
+   명조 획이 붙어 보여 0 으로 되돌린다. */
+h1, h2 { font-family: var(--font-display); font-weight: 700; letter-spacing: 0; }
 h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; }
 h2 { font-size: clamp(1.625rem, 2.5vw, 2rem); line-height: 1.25; }
 h3 { font-size: 1.125rem; line-height: 1.4; }
 p  { margin: 0; }
+
+/* ---------- 포커스 ----------
+   눌러서 온 사람에게는 안 보이고(:focus-visible), 키보드로 온 사람에게만
+   보이는 링. 사이트 전체 CSS 열일곱 장 중 열 장에 focus-visible 이 하나도
+   없어 상단 메뉴·푸터·퀵배너가 브라우저 기본 링에 맡겨져 있었다. 기본 링은
+   브라우저마다 다르고 네이비 푸터 위에서는 거의 안 보인다.
+
+   각 파일에서 따로 지정한 링(모달·회원가입 등)이 있으면 그쪽이 더 구체적이라
+   이긴다. 여기 것은 바닥이다. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+/* 어두운 영역은 링을 흰색으로. 그 위에서 네이비 링은 배경과 같은 색이다. */
+.site-footer, .journey-hero, .hero-stage { --focus-ring: #ffffff; }
+
+/* 움직임을 줄여 달라는 설정. 부드러운 스크롤은 홈에서만 껐고(home.css) 다른
+   화면은 그대로 미끄러졌다. 페이지 이동·앵커 점프가 전부 이 값을 타므로
+   여기서 한 번에 끈다. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 .eyebrow {
   display: inline-block;
