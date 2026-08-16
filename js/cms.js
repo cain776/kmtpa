@@ -366,51 +366,19 @@ window.KMTPA = window.KMTPA || {};
     return true;
   }
 
-  function createNavLink(item, active) {
-    const link = document.createElement('a');
-    link.href = resolveSiteHref(item.href) || '#';
-    link.textContent = item.label || '메뉴';
-    if (active) {
-      link.className = 'active';
-      link.setAttribute('aria-current', 'page');
-    }
-    return link;
-  }
+  /* 대메뉴는 게시본이 건드리지 않는다 — templates.js 가 정답이다.
 
-  function applyNav(settings) {
-    if (!isRecord(settings) || !Array.isArray(settings.nav)) return false;
-    const nav = document.getElementById('top-nav');
-    if (!nav) return false;
+     예전에는 게시본의 siteSettings.nav 가 #top-nav 를 통째로 갈아끼웠다.
+     그런데 어드민에는 메뉴를 더하고 빼는 화면이 없다. 그래서 게시본의 메뉴가
+     한 번 어긋나면 사무국이 스스로 고칠 방법이 없었다.
 
-    const currentPage = getCurrentPageKey();
-    nav.replaceChildren(...settings.nav.filter(isRecord).map(item => {
-      const children = Array.isArray(item.children) ? item.children.filter(isRecord) : [];
-      const active = String(item.href || '').includes(currentPage.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`));
-      if (!children.length) return createNavLink(item, active);
+     실제로 투명경영과 함께하기가 통째로 빠진 채 남아 있었고, 라이브가 게시본을
+     읽기 시작하자 회원가입·상담 신청으로 가는 메뉴 경로가 사라졌다. 갈 곳이
+     없는 항목 셋(#resources·#events·#awards)도 함께 실려 있었다.
 
-      const wrap = document.createElement('div');
-      wrap.className = 'nav-item-with-dropdown';
-      wrap.appendChild(createNavLink(item, active));
-      const dropdown = document.createElement('div');
-      dropdown.className = children.length > 3 ? 'nav-dropdown nav-dropdown--mega' : 'nav-dropdown';
-      dropdown.setAttribute('role', 'menu');
-      const group = document.createElement('div');
-      group.className = 'dropdown-group';
-      const label = document.createElement('div');
-      label.className = 'dropdown-group-label';
-      label.textContent = item.label || '메뉴';
-      group.appendChild(label);
-      children.forEach(child => {
-        const childLink = createNavLink(child, false);
-        childLink.setAttribute('role', 'menuitem');
-        group.appendChild(childLink);
-      });
-      dropdown.appendChild(group);
-      wrap.appendChild(dropdown);
-      return wrap;
-    }));
-    return true;
-  }
+     메뉴는 페이지가 생기고 없어질 때만 바뀐다. 그때는 어차피 코드를 고친다.
+     화면 문구·색·푸터처럼 사무국이 자주 손대는 것과는 성격이 다르다.
+     그래서 이 자리는 코드가 갖는다. 게시본에 nav 가 남아 있어도 무시한다. */
 
   function applyFooter(settings) {
     if (!isRecord(settings) || !isRecord(settings.footer) || !Array.isArray(settings.footer.columns)) return false;
@@ -464,7 +432,6 @@ window.KMTPA = window.KMTPA || {};
     let didApply = false;
     didApply = applyDesign(settings) || didApply;
     didApply = applyBrand(settings) || didApply;
-    didApply = applyNav(settings) || didApply;
     didApply = applyFooter(settings) || didApply;
     didApply = applySeo(settings, pages) || didApply;
     return didApply;
