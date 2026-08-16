@@ -1,0 +1,281 @@
+/* =========================================================================
+   join-form.css — 신청서 폼 (STEP 2)
+
+   칸·칩·약관 동의·제출 서류 안내·액션 버튼. 회원가입과 상담 신청이 같은
+   폼 부품을 쓴다.
+
+   join.css 가 600줄을 넘어 뗐다. 원래 순서를 그대로 지킨다 —
+   join.css -> join-form.css -> join-done.css 로 이어 붙이면 예전 한 파일과
+   글자까지 같다. 순서가 어긋나면 캐스케이드가 조용히 바뀐다.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   STEP 2 — 폼
+   ------------------------------------------------------------------------- */
+.join-form { max-width: 920px; }
+
+.form-legend {
+  margin-top: 46px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--join-line);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--join-ink);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.form-legend::before {                /* 금색 마름모 불릿 */
+  content: "";
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  background: var(--join-gold);
+  border-radius: 2.5px;
+  transform: rotate(45deg);
+}
+.join-form > .form-legend:first-child { margin-top: 0; }
+
+.field-grid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 26px;
+}
+.field-grid--single { grid-template-columns: 1fr; }
+.field-stack {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.field-stack .field-grid { margin-top: 0; }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.field > span,
+.field-set > span {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--join-ink);
+}
+.field .hint,
+.field-set .hint {
+  font-weight: 400;
+  color: var(--join-faint);
+}
+.field input,
+.field textarea,
+.field select {
+  font: inherit;
+  font-size: 16px;
+  color: var(--join-ink);
+  padding: 13px 15px;
+  border: 1px solid var(--join-line-strong);
+  border-radius: 11px;
+  background: var(--join-field);
+  /* 평소에도 투명한 링을 그려 둔다. 포커스 때 색만 바뀌므로 칸이 안 밀린다.
+     outline: none 이었다 — 그러면 아래 금색 테두리(2.16:1)와 14% 글로우가
+     포커스 표시의 전부라, 있어도 없는 것과 같았다. */
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.field textarea { resize: vertical; min-height: 108px; }
+.field input::placeholder,
+.field textarea::placeholder { color: #B3B9C6; }
+/* 마우스로 눌러도(:focus) 금색 테두리·글로우는 켜지고, 짙은 링은
+   키보드로 왔을 때(:focus-visible)만 얹힌다. */
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--join-gold);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(232, 163, 61, 0.14);
+}
+.field input:focus-visible,
+.field textarea:focus-visible,
+.field select:focus-visible {
+  outline-color: var(--focus-ring);
+}
+/* 제출을 눌러 검증이 한 번 돈 뒤에만 빨간 테두리를 보여줍니다. */
+.join-form.is-validated .field input:invalid,
+.join-form.is-validated .field textarea:invalid {
+  border-color: var(--join-required);
+  background: #FEF7F6;
+}
+
+/* ----- 칩(라디오·체크박스) ----- */
+.field-set {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chip { display: inline-flex; }
+.chip input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.chip span {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--join-body);
+  background: #fff;
+  border: 1px solid #D5D9E2;
+  border-radius: 999px;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: color 0.18s, background 0.18s, border-color 0.18s;
+}
+.chip span:hover { border-color: var(--join-ink); color: var(--join-ink); }
+.chip input:checked + span {
+  font-weight: 700;
+  color: #fff;
+  background: var(--join-ink);
+  border-color: var(--join-ink);
+}
+.chip input:focus-visible + span {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ----- 약관 동의 ----- */
+.terms-box {
+  margin-top: 44px;
+  padding: 26px 28px;
+  background: var(--join-band);
+  border: 1px solid var(--join-line);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.term {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.term input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.term-box {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid #C9CEDC;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, border-color 0.18s;
+}
+.term-box::after {                    /* 체크 표시 */
+  content: "";
+  width: 5px;
+  height: 9px;
+  margin-top: -2px;
+  border: solid #fff;
+  border-width: 0 2.4px 2.4px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s;
+}
+.term input:checked + .term-box {
+  background: var(--join-ink);
+  border-color: var(--join-ink);
+}
+.term input:checked + .term-box::after { transform: rotate(45deg) scale(1); }
+.term input:focus-visible + .term-box {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.term-label { font-size: 14px; color: #41475A; }
+.term-label a { color: var(--join-ink); }
+.join-form.is-validated .term input:invalid + .term-box { border-color: var(--join-required); }
+
+/* ----- 제출 서류 안내 ----- */
+.doc-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 28px;
+  border: 1px dashed #C9CEDC;
+  border-radius: 12px;
+  background: var(--join-field);
+}
+.doc-box .doc-title { font-size: 14px; font-weight: 700; color: var(--join-ink); }
+.doc-box .doc-list { font-size: 14px; line-height: 1.9; color: var(--join-body); }
+.doc-box .doc-how { font-size: 14px; line-height: 1.8; color: var(--join-faint); }
+.doc-box .doc-how a { color: var(--join-ink); }
+
+/* ----- 액션 버튼 ----- */
+.join-actions {
+  margin-top: 34px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.btn-solid,
+.btn-ghost {
+  font: inherit;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.btn-solid {
+  font-weight: 700;
+  color: #fff;
+  background: var(--join-ink);
+  border: 1px solid var(--join-ink);
+  padding: 17px 40px;
+}
+.btn-solid:hover {
+  background: var(--join-gold);
+  border-color: var(--join-gold);
+  color: #0E0E2C;
+}
+.btn-ghost {
+  font-weight: 600;
+  color: var(--join-body);
+  background: #fff;
+  border: 1px solid #D5D9E2;
+  padding: 17px 30px;
+}
+.btn-ghost:hover { color: var(--join-ink); border-color: var(--join-ink); }
+
+.join-error {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--join-required);
+}
+.join-error[hidden] { display: none; }
+
+@media (max-width: 720px) {
+  .join-panel { padding: 32px 0 72px; }
+  .field-grid { grid-template-columns: 1fr; }
+  .terms-box { padding: 20px 20px; }
+  .btn-solid, .btn-ghost { flex: 1 1 100%; padding: 15px 24px; }
+}

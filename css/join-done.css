@@ -1,0 +1,98 @@
+/* =========================================================================
+   join-done.css — 신청 완료 화면 (STEP 3)
+
+   회원가입만이 아니라 상담 신청도 이 화면을 쓴다. 그래서 폼과 따로 둔다.
+
+   join.css 가 600줄을 넘어 뗐다. 반드시 join-form.css 다음에 싣는다.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   STEP 3 — 신청 완료
+   ------------------------------------------------------------------------- */
+.join-done {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 96px 0 120px;
+  text-align: center;
+}
+.join-done-mark {
+  width: 74px;
+  height: 74px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #F0A32F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.join-done-mark svg { width: 34px; height: 34px; }
+.join-done h2 { margin-top: 32px; font-size: 32px; font-weight: 800; color: var(--join-ink); }
+.join-done p {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--join-body);
+}
+.join-done .join-actions { justify-content: center; }
+
+/* 메일 앱이 열리지 않은 경우를 위한 신청서 원문 */
+.join-copy {
+  margin-top: 40px;
+  text-align: left;
+  border: 1px solid var(--join-line);
+  border-radius: 12px;
+  background: var(--join-band);
+  overflow: hidden;
+}
+.join-copy-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--join-line);
+  font-size: 14px;
+  color: var(--join-body);
+}
+.join-copy-head button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--join-ink);
+  background: #fff;
+  border: 1px solid #D5D9E2;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.join-copy-head button:hover { border-color: var(--join-ink); }
+.join-copy pre {
+  margin: 0;
+  padding: 18px;
+  max-height: 320px;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: #41475A;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media (max-width: 720px) {
+  .join-done { padding: 60px 0 80px; }
+  .join-done h2 { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .type-card,
+  .chip span,
+  .term-box,
+  .term-box::after,
+  .join-step-num,
+  .join-step-label,
+  .join-step + .join-step::before { transition: none; }
+  .type-card:hover { transform: none; }
+}
