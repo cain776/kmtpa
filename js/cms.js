@@ -769,11 +769,9 @@ window.KMTPA = window.KMTPA || {};
     trigger.className = item.href ? 'pub-trigger pub-trigger--link' : 'pub-trigger';
 
     if (item.href) {
+      // 주소가 있으면 그 페이지로 간다. 발송본과 웹이 같은 양식이어야 하므로
+      // 팝업으로 가로채지 않는다 — 팝업은 페이지가 아직 없는 호에만 쓴다.
       trigger.setAttribute('href', item.href);
-      // 주소는 남겨 둔다 — 새 탭·공유·검색엔진은 그대로 페이지로 간다.
-      // 평범한 왼쪽 클릭만 모달이 가로챈다.
-      trigger.setAttribute('data-pub-modal', '');
-      trigger.setAttribute('aria-haspopup', 'dialog');
     } else {
       trigger.setAttribute('type', 'button');
       trigger.setAttribute('aria-haspopup', 'dialog');
