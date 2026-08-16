@@ -677,5 +677,6 @@
   "@서울특별시 ○○구 ○○로 00": "首尔特别市 ○○区 ○○路 00",
   "home.hero.1": "打造世界信赖的<br><em>K-医疗观光</em>。",
   "home.hero.2": "超越治疗，<em>共同创造体验韩国的旅程</em>。",
-  "chrome.count.total": "共 {n} 条"
+  "chrome.count.total": "共 {n} 条",
+  "chrome.more": "查看更多 ({n})"
 }

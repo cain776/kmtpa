@@ -677,5 +677,6 @@
   "chrome.col.about": "About Us",
   "home.hero.1": "Building <em>K-medical tourism</em><br>the world can trust.",
   "home.hero.2": "Beyond treatment — <em>a journey through Korea</em><br>we create together.",
-  "chrome.count.total": "{n} total"
+  "chrome.count.total": "{n} total",
+  "chrome.more": "Show more ({n})"
 }

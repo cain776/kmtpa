@@ -396,3 +396,23 @@
   width: 12px;
   height: 12px;
 }
+
+/* 더보기 — 목록 아래 한 줄. 게시본이 이미 들고 온 항목을 펼치기만 하므로
+   기다림이 없다. 그래서 로딩 표시도 두지 않는다. */
+.updates-more {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 0;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-heading);
+  background: #fff;
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.updates-more:hover { border-color: var(--navy-900); color: var(--navy-900); }
+.updates-more:focus-visible { outline: 2px solid var(--navy-700); outline-offset: 2px; }

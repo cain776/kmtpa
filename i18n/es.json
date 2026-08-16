@@ -677,5 +677,6 @@
   "@서울특별시 ○○구 ○○로 00": "00 OO-ro, distrito OO, Seúl",
   "home.hero.1": "Construimos un <em>turismo médico coreano</em><br>en el que el mundo puede confiar.",
   "home.hero.2": "Más allá del tratamiento: <em>un viaje por Corea</em><br>que creamos juntos.",
-  "chrome.count.total": "{n} en total"
+  "chrome.count.total": "{n} en total",
+  "chrome.more": "Ver más ({n})"
 }

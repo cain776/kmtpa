@@ -509,8 +509,15 @@ window.KMTPA = window.KMTPA || {};
      정적 목록을 세어 채우므로 자리표시자가 그대로 남지 않습니다.
      이 자리는 data-i18n 을 달지 않습니다 — 사전이 덮어쓰면 숫자가 다시
      '총 ○○건' 으로 돌아갑니다. 대신 템플릿 키를 직접 조회합니다. */
+  function labelMore(button) {
+    if (!button) return;
+    const template = (NS.t && NS.t('chrome.more')) || '더보기 ({n})';
+    button.textContent = template.replace('{n}', button.dataset.rest || '');
+  }
+
   function syncUpdateCount(root) {
     if (!root) return;
+    labelMore(root.querySelector('.updates-more'));
     const badge = root.querySelector('.section-head .text-mini');
     if (!badge) return;
     const count = root.querySelectorAll('.update-item, .pub').length;
@@ -523,36 +530,75 @@ window.KMTPA = window.KMTPA || {};
       .forEach(id => syncUpdateCount(document.getElementById(id)));
   };
 
+  function updateLink(item) {
+    const link = document.createElement('a');
+    link.className = 'update-item';
+    const href = resolveSiteHref(item.href);
+    link.href = href || 'mailto:info@kmtpa.org';
+    // 수집 기사는 남의 사이트로 나간다. 협회가 쓴 글은 같은 창에 둔다.
+    if (href && /^https?:/i.test(href)) {
+      link.target = '_blank';
+      link.rel = 'noopener';
+    }
+    const source = document.createElement('span');
+    source.className = 'u-source';
+    const dot = document.createElement('span');
+    dot.className = 'dot';
+    source.appendChild(dot);
+    source.append(item.source || 'KMTPA');
+    const title = document.createElement('span');
+    title.className = 'u-title';
+    title.textContent = item.title || '제목 없음';
+    const date = document.createElement('span');
+    date.className = 'u-date';
+    date.textContent = item.date || '';
+    link.append(source, title, date);
+    return link;
+  }
+
+  /* 더보기는 서버에 다시 묻지 않는다. 게시본이 이미 최대 60건을 들고 오므로
+     여기서는 그중 몇 줄을 그릴지만 늘린다 — 클릭이 곧바로 반응한다. */
+  function attachMore(root, list, items) {
+    const old = root.querySelector('.updates-more');
+    if (old) old.remove();
+    if (items.length <= UPDATE_LIST_LIMIT) return;
+
+    let shown = UPDATE_LIST_LIMIT;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'updates-more';
+    const label = () => {
+      // 남은 수는 속성에 적어 둔다. 사전이 늦게 오면 syncUpdateCounts 가
+      // 이 값을 읽어 라벨만 다시 쓴다 — 배지와 같은 처지다.
+      button.dataset.rest = String(items.length - shown);
+      labelMore(button);
+    };
+    label();
+    button.addEventListener('click', () => {
+      shown = Math.min(shown + UPDATE_LIST_LIMIT, items.length);
+      list.replaceChildren(...items.slice(0, shown).map(updateLink));
+      syncUpdateCount(root);
+      if (shown >= items.length) button.remove();
+      else label();
+    });
+    list.after(button);
+  }
+
   function applyUpdateList(selector, items) {
     const root = document.querySelector(selector);
     if (!root || !Array.isArray(items)) return false;
     const list = root.querySelector('.updates');
     if (!list) return false;
-    const shown = items.filter(isRecord).slice(0, UPDATE_LIST_LIMIT);
-    if (!shown.length) {
+    const all = items.filter(isRecord);
+    if (!all.length) {
+      const stale = root.querySelector('.updates-more');
+      if (stale) stale.remove();
       list.replaceChildren(emptyNotice(root.id));
       syncUpdateCount(root);
       return true;
     }
-    list.replaceChildren(...shown.map(item => {
-      const link = document.createElement('a');
-      link.className = 'update-item';
-      link.href = resolveSiteHref(item.href) || 'mailto:info@kmtpa.org';
-      const source = document.createElement('span');
-      source.className = 'u-source';
-      const dot = document.createElement('span');
-      dot.className = 'dot';
-      source.appendChild(dot);
-      source.append(item.source || 'KMTPA');
-      const title = document.createElement('span');
-      title.className = 'u-title';
-      title.textContent = item.title || '제목 없음';
-      const date = document.createElement('span');
-      date.className = 'u-date';
-      date.textContent = item.date || '';
-      link.append(source, title, date);
-      return link;
-    }));
+    list.replaceChildren(...all.slice(0, UPDATE_LIST_LIMIT).map(updateLink));
+    attachMore(root, list, all);
     syncUpdateCount(root);
     return true;
   }
