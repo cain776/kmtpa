@@ -212,11 +212,15 @@ window.KMTPA = window.KMTPA || {};
           </div>
         </div>
 
-        <!-- 컬럼 넷. cms.js 의 applyFooter 가 이 순서대로 CMS 데이터를 덮어쓰므로
+        <!-- 제목은 h2 입니다. h4 로 두면 본문이 h1 → h2 로 내려온 뒤 h4 로
+             건너뛰어, 화면 낭독기의 제목 목록에서 단계가 끊깁니다.
+             cms.js 의 applyFooter 와 layout.css 가 이 태그를 집으므로
+             셋을 함께 바꿔야 합니다.
+             컬럼 넷. cms.js 의 applyFooter 가 이 순서대로 CMS 데이터를 덮어쓰므로
              (위치 기준 매칭) 어드민의 footer.columns 순서와 반드시 같아야 합니다. -->
         <div class="footer-cols">
           <div class="footer-col">
-            <h4 data-i18n="nav.about">협회 소개</h4>
+            <h2 data-i18n="nav.about">협회 소개</h2>
             <a href="${page('about/#greeting')}" data-i18n="chrome.footer.2">인사말</a>
             <a href="${page('about/#vision')}" data-i18n="chrome.footer.3">비전·미션</a>
             <a href="${page('about/#organization')}" data-i18n="chrome.footer.4">조직</a>
@@ -224,21 +228,21 @@ window.KMTPA = window.KMTPA || {};
           </div>
 
           <div class="footer-col">
-            <h4 data-i18n="nav.resources">활동·자료</h4>
+            <h2 data-i18n="nav.resources">활동·자료</h2>
             <a href="${page('programs/')}" data-i18n="chrome.footer.6">주요업무</a>
             <a href="${page('programs/#history')}" data-i18n="chrome.footer.7">활동 연혁</a>
             <a href="${page('patient-journey/')}" data-i18n="chrome.footer.visitkorea">VISIT KOREA 전체 안내</a>
           </div>
 
           <div class="footer-col">
-            <h4 data-i18n="nav.community">커뮤니티</h4>
+            <h2 data-i18n="nav.community">커뮤니티</h2>
             <a href="${page('communications/#press')}" data-i18n="chrome.footer.8">보도자료</a>
             <a href="${page('communications/#notice')}" data-i18n="chrome.footer.9">공지사항</a>
             <a href="${page('communications/#newsletter')}" data-i18n="chrome.footer.10">뉴스레터</a>
           </div>
 
           <div class="footer-col footer-col--contact">
-            <h4 data-i18n="chrome.col.문의·연결">문의·연결</h4>
+            <h2 data-i18n="chrome.col.문의·연결">문의·연결</h2>
             <a href="${page('together/')}" data-i18n="nav.together">함께하기</a>
             <a href="${page('join/')}" data-i18n="chrome.footer.12">회원가입</a>
             <a href="${page('consultation/')}" data-i18n="chrome.footer.13">상담 신청</a>
@@ -276,7 +280,11 @@ window.KMTPA = window.KMTPA || {};
           <div class="footer-authorities-contact">
             <a href="mailto:info@kmtpa.org">info@kmtpa.org</a>
             <a href="mailto:concierge@kmtpa.org">concierge@kmtpa.org</a>
-            <a href="https://kmtpa.org/" target="_blank" rel="noopener">kmtpa.org</a>
+            <!-- 라벨은 협회의 대표 주소 그대로 두되, 링크는 지금 보고 있는
+                 사이트의 첫 화면으로 보낸다. kmtpa.org 는 아직 연결되지 않아
+                 (응답 없음) 밖으로 내보내면 죽은 페이지에 떨어진다. 도메인이
+                 붙으면 이 줄은 저절로 맞는 곳을 가리킨다. -->
+            <a href="${page('')}">kmtpa.org</a>
           </div>
           <div class="footer-authorities-legal">
             <span data-i18n="chrome.copyright">© 2026 (사)한국의료관광진흥협회. All rights reserved.</span>

@@ -81,6 +81,19 @@ window.KMTPA = window.KMTPA || {};
     return readLocalPublishedData();
   }
 
+  /* 게시본은 한 번만 받아 두고 그 약속을 나눠 쓴다.
+
+     i18n.js 도 같은 것을 본다 — 사무국이 고친 번역이 i18n/*.json 보다
+     우선한다. 그런데 그쪽은 app.js 안에서 먼저 돌기 시작하고, 여기는 API 가
+     없는 곳에서 왕복을 한 번 더 쓴다. 기다리지 않으면 아직 도착하지 않은
+     것을 읽어 번역이 조용히 버려진다 — 라이브를 재보니 i18n 이 46ms 먼저
+     끝났다. */
+  let pendingPublished = null;
+  NS.whenPublished = function () {
+    if (!pendingPublished) pendingPublished = readPublishedData();
+    return pendingPublished;
+  };
+
   function findNewsletterSection(data) {
     if (!isRecord(data)) return null;
 
@@ -172,10 +185,17 @@ window.KMTPA = window.KMTPA || {};
     return parts.length ? parts.join(' · ') : '한국의료관광진흥협회';
   }
 
+  /* 협회 대표 도메인은 아직 연결되지 않았다(응답 없음). 게시본에 그 절대주소가
+     들어 있으면 — 푸터 '문의·연결' 칸이 그렇다 — 방문자를 사이트 밖 죽은
+     페이지로 내보낸다. 같은 곳을 가리키는 내부 경로로 되돌린다.
+     도메인이 붙은 뒤에도 자기 사이트 안 링크가 맞으므로 그대로 둬도 된다. */
+  const OWN_ORIGIN = /^https?:\/\/(www\.)?kmtpa\.org\/?/i;
+
   function normalizeUrl(value) {
     const url = getCleanText(value);
     if (!url) return null;
     if (/^(javascript|data):/i.test(url)) return null;
+    if (OWN_ORIGIN.test(url)) return url.replace(OWN_ORIGIN, '') || 'index.html';
     return url;
   }
 
@@ -397,7 +417,7 @@ window.KMTPA = window.KMTPA || {};
     const columns = Array.from(document.querySelectorAll('.site-footer .footer-col'));
     settings.footer.columns.filter(isRecord).slice(0, columns.length).forEach((column, index) => {
       const target = columns[index];
-      const heading = target.querySelector('h4');
+      const heading = target.querySelector('h2');
       setText(heading, column.title);
       const links = Array.isArray(column.links) ? column.links.filter(isRecord) : [];
       target.querySelectorAll('a').forEach(el => el.remove());
@@ -980,9 +1000,7 @@ window.KMTPA = window.KMTPA || {};
   }
 
   NS.applyPublishedHomepageContent = async function () {
-    const data = await readPublishedData();
-    // i18n.js 가 payload 의 translations 를 읽습니다 — 사무국이 고친 번역이
-    // 파일(i18n/*.json)보다 우선합니다.
+    const data = await NS.whenPublished();
     NS.publishedData = data;
     const newsletterSection = findNewsletterSection(data);
     const newsletter = newsletterSection === null ? null : normalizeNewsletter(newsletterSection);

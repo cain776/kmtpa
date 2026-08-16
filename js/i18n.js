@@ -64,17 +64,25 @@ window.KMTPA = window.KMTPA || {};
     }
   }
 
-  // 어드민이 게시한 번역. cms.js 가 이미 받아 둔 것이 있으면 그것을 쓰고,
-  // 없으면 조용히 건너뛴다 — 번역이 CMS 때문에 막히면 안 된다.
-  function fromCms(lang) {
-    const data = NS.publishedData;
+  // 어드민이 게시한 번역. cms.js 가 받는 중이면 그 약속을 함께 기다린다 —
+  // 이 함수는 app.js 안에서 cms.js 보다 먼저 돌기 시작하므로, 그냥 읽으면
+  // 아직 안 온 것을 읽어 사무국이 고친 번역이 조용히 버려진다.
+  // cms.js 가 없는 화면(로그인 등)에서는 그대로 건너뛴다 — 번역이 CMS
+  // 때문에 막히면 안 된다.
+  async function fromCms(lang) {
+    let data = NS.publishedData;
+    if (!data && typeof NS.whenPublished === 'function') {
+      try { data = await NS.whenPublished(); } catch (ignored) { data = null; }
+    }
     const t = data && data.translations && data.translations[lang];
     return t && typeof t === 'object' ? t : {};
   }
 
   async function ensureDict(lang) {
     if (lang === DEFAULT) return {};
-    const [file, cms] = [await loadFile(lang), fromCms(lang)];
+    // 둘을 함께 띄운다. 차례로 기다리면 사전이 늦어지는 만큼 화면이 한국어로
+    // 남아 있는 시간이 길어진다.
+    const [file, cms] = await Promise.all([loadFile(lang), fromCms(lang)]);
     return Object.assign({}, file, cms);   // CMS 가 파일을 덮어쓴다
   }
 

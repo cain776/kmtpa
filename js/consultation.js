@@ -47,6 +47,29 @@
     return `mailto:info@kmtpa.org?subject=${encodeURIComponent(`[KMTPA 상담] ${data.subject}`)}&body=${encodeURIComponent(body)}`;
   }
 
+  /* 완료 화면으로 넘긴다.
+     accepted 가 false 면 아직 접수되지 않은 것이다 — 서버에 닿지 못해 메일
+     창만 열어 준 경우다. 그때 문구만 바꾸면 제목("접수되었습니다")과 초록
+     체크가 여전히 접수됐다고 말한다. 방문자가 메일 창을 닫으면 신청은
+     사라지는데 화면은 끝났다고 하는 셈이라, 제목과 표시까지 함께 바꾼다. */
+  function showDone(accepted, mailHref, title, message) {
+    document.querySelector('[data-consultation-view="form"]').hidden = true;
+    document.querySelector('[data-consultation-view="done"]').hidden = false;
+    document.querySelector('[data-consultation-mail]').href = mailHref;
+
+    if (!accepted) {
+      // .join-done-mark 는 display:flex 라 [hidden] 이 먹지 않는다. 남의
+      // 세션이 고치는 중인 CSS 를 건드리지 않으려고 아예 걷어낸다 — 이
+      // 화면은 한 번 보고 끝이라 되돌릴 일이 없다.
+      const mark = document.querySelector('[data-consultation-view="done"] .join-done-mark');
+      if (mark) mark.remove();
+    }
+    const titleEl = document.querySelector('[data-consultation-done-title]');
+    if (titleEl && title) titleEl.textContent = title;
+    const messageEl = document.querySelector('[data-consultation-done-message]');
+    if (messageEl && message) messageEl.textContent = message;
+  }
+
   form.querySelectorAll('input[name="신청자 유형"]').forEach(el => {
     el.addEventListener('change', syncApplicantType);
   });
@@ -82,9 +105,7 @@
         }
         throw new Error('접수 서버에 연결하지 못했습니다.');
       }
-      document.querySelector('[data-consultation-view="form"]').hidden = true;
-      document.querySelector('[data-consultation-view="done"]').hidden = false;
-      document.querySelector('[data-consultation-mail]').href = mailto(data);
+      showDone(true, mailto(data));
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       if (error.inputError) {
@@ -92,10 +113,8 @@
         errorEl.hidden = false;
       } else {
         const href = mailto(data);
-        document.querySelector('[data-consultation-view="form"]').hidden = true;
-        document.querySelector('[data-consultation-view="done"]').hidden = false;
-        document.querySelector('[data-consultation-done-message]').textContent = '접수 서버에 연결되지 않아 메일 작성 화면을 열었습니다. 내용을 확인한 뒤 메일을 보내 주세요.';
-        document.querySelector('[data-consultation-mail]').href = href;
+        showDone(false, href, '아직 접수되지 않았습니다',
+          '접수 서버에 연결되지 않아 메일 작성 화면을 열었습니다. 내용을 확인하고 메일을 보내 주셔야 접수됩니다.');
         window.location.href = href;
       }
     } finally {
