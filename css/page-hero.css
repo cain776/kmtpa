@@ -278,10 +278,13 @@
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.15s;
-  /* 15px 이라 AA(24px)에 못 미쳤다. 줄 높이를 바꾸지 않도록 inline-block +
-     위아래 여백만 준다. */
+  /* 높이가 15px 이라 AA(24px)에 못 미쳐 위아래 여백을 줬다. 폭도 마찬가지다 —
+     '홈' 은 한 글자라 11px 밖에 안 됐다. 좌우 여백을 주되 같은 크기의 음수
+     바깥여백으로 상쇄해서, 누를 수 있는 자리만 넓히고 글자 위치는 그대로
+     둔다. 그냥 padding 만 주면 '홈 › 협회 소개' 의 간격이 벌어진다. */
   display: inline-block;
-  padding: 5px 0;
+  padding: 5px 7px;
+  margin: 0 -7px;
 }
 .breadcrumb a:hover { color: var(--navy-900); }
 .breadcrumb li[aria-current="page"] {
