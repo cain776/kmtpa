@@ -451,9 +451,17 @@ html:has(body.is-home) {
   .is-home .home-full > .container {
     animation: home-rise linear both;
     animation-timeline: view();
-    /* 아래에서 35% 들어왔을 때 시작해 화면 한가운데서 끝난다.
-       cover 100% 까지 끌면 나갈 때 다시 흐려져 산만하다. */
-    animation-range: entry 15% cover 45%;
+    /* 끝점을 cover 로 잡았더니 모바일에서 내용이 흐린 채로 남았다.
+       cover 범위는 대상의 높이에 비례해서 늘어난다 — 카드가 한 줄로 쌓이는
+       모바일에서는 이 섹션이 1860px 로 데스크톱(900px)의 두 배가 되고,
+       그만큼 45% 지점도 아래로 밀린다. 제목이 화면에 있을 때 불투명도가
+       36~67% 였다.
+
+       entry 범위는 대상이 아무리 길어도 화면 높이로 묶인다. 그래서 끝점을
+       entry 70% 으로 옮겼다 — 섹션 위쪽이 화면 200px 지점에 오면 다 떠오른다
+       (실측: 모바일 99%, 데스크톱 100%). 100% 까지 끌지 않는 이유는 그러면
+       제목이 화면 맨 위에 닿아서야 선명해지기 때문이다. */
+    animation-range: entry 15% entry 70%;
   }
 }
 
