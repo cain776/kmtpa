@@ -70,3 +70,82 @@
   margin-top: auto;
   font-size: 14px;
 }
+
+/* ---------- 뉴스레터 카드 ----------
+   보도자료·공지사항은 한 줄짜리 목록이지만 뉴스레터는 발행물이라 표지가 먼저
+   보여야 한다. 그래서 이 패널만 카드 격자로 세운다 — 표지 · 제목 · 발행일.
+
+   선택자를 #panel-newsletter 로 묶은 이유는 .pub 을 홈 화면도 쓰기 때문이다.
+   여기서 .pub 자체를 고치면 그 화면까지 같이 바뀐다.
+
+   분류 라벨은 넣지 않았다. 이 격자에 들어오는 것은 전부 뉴스레터라 구별할
+   것이 없고, CSS content 로 박으면 i18n 사전이 닿지 못해 다른 언어에서도
+   한국어가 그대로 남는다. */
+/* 칸 수를 못박는다. auto-fit 은 남는 폭을 있는 칸에 몰아주므로, 발행물이 한
+   건일 때 카드가 1552px 로 늘어나고 16:10 표지가 970px 높이가 됐다.
+   auto-fill 은 빈 칸을 남겨 그 사고를 막고, 넓은 화면에서는 세 칸으로 고정해
+   표지 크기를 일정하게 둔다. */
+#panel-newsletter .pub-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 44px 30px;
+}
+@media (min-width: 1000px) {
+  #panel-newsletter .pub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* 테두리와 그림자를 걷어 표지가 카드 노릇을 하게 한다. */
+#panel-newsletter .pub {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+#panel-newsletter .pub:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+#panel-newsletter .pub-thumb {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  align-items: flex-end;
+  padding: 18px 20px;
+  font-size: 12px;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+#panel-newsletter .pub:hover .pub-thumb {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(2, 0, 40, 0.16);
+}
+
+#panel-newsletter .pub-body { padding: 16px 2px 0; }
+#panel-newsletter .pub-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.45;
+  margin-bottom: 10px;
+  /* 제목 길이가 제각각이라 두 줄에서 끊는다. 안 끊으면 카드마다 발행일 위치가
+     어긋나 격자가 흐트러진다. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#panel-newsletter .pub:hover .pub-title { color: var(--navy-700); }
+#panel-newsletter .pub-meta {
+  margin-bottom: 0;
+  font-size: 13px;
+}
+/* 카드 전체가 링크라 '자세히 보기' 는 같은 말을 두 번 하는 셈이다. */
+#panel-newsletter .pub-cta { display: none; }
+
+/* 발행된 것이 없을 때는 자리를 차지하지 않는다. 빈 격자는 높이가 0 이므로
+   안내 문구만 감추면 머리글 아래가 그대로 닫힌다. */
+#panel-newsletter .list-empty { display: none; }
+
+@media (max-width: 560px) {
+  #panel-newsletter .pub-grid { gap: 32px 20px; }
+  #panel-newsletter .pub-title { font-size: 16px; }
+}
