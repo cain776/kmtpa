@@ -3,24 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vol. 28 · 2026년 8월 1~3주 의료관광 산업 브리핑 | 한국의료관광진흥협회</title>
+  <title>Vol. 28 ·  2026년 6월 의료관광 산업 브리핑 | 한국의료관광진흥협회</title>
   <meta name="description" content="8월 1~3주 의료관광 뉴스를 주차별로 분석합니다. 1주차에는 의료 소비가 관광수지와 지역 상권을 움직이는 흐름, 피부미용·약국 중심의 소비 전환, 국가별 수요 차이와 사후관리 인프라를 정리했습니다.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../../css/base.css?v=e16d7365">
-  <link rel="stylesheet" href="../../../css/layout.css?v=c925d03b">
-  <link rel="stylesheet" href="../../../css/components.css?v=8b39fb26">
-  <link rel="stylesheet" href="../../../css/newsletter-modal.css?v=61211e90">
-  <link rel="stylesheet" href="../../../css/communications.css?v=2eea800e">
-  <link rel="stylesheet" href="../../../css/about.css?v=67f9c96b">
-  <link rel="stylesheet" href="../../../css/transparency.css?v=8f7aea14">
-  <link rel="stylesheet" href="../../../css/programs.css?v=2cf5aada">
-  <link rel="stylesheet" href="../../../css/page-hero.css?v=ebe3648e">
-  <link rel="stylesheet" href="../../../css/patient-journey.css?v=01e13590">
-  <link rel="stylesheet" href="../../../css/directions.css?v=ca59bfd2">
-  <link rel="stylesheet" href="../../../css/legal.css?v=6683f450">
-  <link rel="stylesheet" href="../../../css/newsletter-detail.css?v=a5322878">
+  <link rel="stylesheet" href="../../css/base.css?v=e16d7365">
+  <link rel="stylesheet" href="../../css/layout.css?v=c925d03b">
+  <link rel="stylesheet" href="../../css/components.css?v=8b39fb26">
+  <!-- pages.css 는 화면 단위 일곱으로 쪼개면서 사라졌다. 남은 것은
+       공용 헤더가 여는 뉴스레터 모달이다. 여기서 이름을 잘못 걸면
+       다시 저장하는 순간 지금 멀쩡한 페이지가 깨진다. -->
+  <link rel="stylesheet" href="../../css/newsletter-modal.css?v=61211e90">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     .newsletter-detail { padding: 88px 0 80px; }
@@ -46,14 +40,14 @@
   </style>
 </head>
 <body>
-  <div data-header></div>
+  <div id="header-mount"></div>
   <main>
     <section class="newsletter-detail-hero">
       <div class="container">
         <span class="eyebrow">Vol. 28</span>
-        <h1>Vol. 28 · 2026년 8월 1~3주 의료관광 산업 브리핑</h1>
+        <h1>Vol. 28 ·  2026년 6월 의료관광 산업 브리핑</h1>
         <p class="lede">의료관광이 관광수지를 움직이는 소비 산업으로 바뀌고 있습니다. 8월 1주차 핵심 흐름부터 확인하세요.</p>
-        <div class="newsletter-detail-meta"><span>HTML Newsletter</span><span>2026-08-15</span><span>문의 메일 / 자료 준비중</span></div>
+        <div class="newsletter-detail-meta"><span>HTML Newsletter</span><span>2026-08-16</span><span>문의 메일 / 자료 준비중</span></div>
       </div>
     </section>
     <section class="newsletter-detail">
@@ -76,12 +70,14 @@
       </div>
     </section>
   </main>
-  <div data-footer></div>
-  <script src="../../../js/runtime-config.js?v=26206d20"></script>
-  <script src="../../../js/templates.js?v=a9763635"></script>
-  <script src="../../../js/components.js?v=6f003932"></script>
-  <script src="../../../js/nav-dropdown.js?v=66d1ced0"></script>
-  <script src="../../../js/app.js?v=00b88128"></script>
-  <script src="../../../js/cms.js?v=7596ef19"></script>
+  <div id="footer-mount"></div>
+  <!-- runtime-config.js 가 API 주소를 정한다. 빠지면 cms.js 가
+       게시본을 못 읽고, nav-dropdown.js 가 빠지면 헤더 메뉴가
+       안 펴진다. 정적 화면들이 거는 것과 같은 차례여야 한다. -->
+  <script src="../../js/runtime-config.js?v=26206d20"></script>
+  <script src="../../js/templates.js?v=a9763635"></script>
+  <script src="../../js/components.js?v=6f003932"></script>
+  <script src="../../js/nav-dropdown.js?v=66d1ced0"></script>
+  <script src="../../js/app.js?v=00b88128"></script>
 </body>
 </html>
