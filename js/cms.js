@@ -309,8 +309,11 @@ window.KMTPA = window.KMTPA || {};
     // 푸터의 'Our Flagship Brand / MEDICON' 블록은 새 푸터 디자인에서 빠졌습니다.
     // MEDICON 진입점은 날개 배너에 그대로 있으므로 그쪽만 계속 CMS 로 바꿉니다.
     // 날개 배너는 회원가입 링크가 앞에 붙어 순서가 바뀌므로 위치 대신 클래스로 집습니다.
+    // 이름은 .quick-label 안에 있습니다. 예전에는 childNodes[0] 를 썼는데 그건
+    // 태그 사이 줄바꿈(빈 텍스트 노드)이라, 거기에 이름을 넣으면 라벨과 겹쳐
+    // 'MEDICON MEDICON' 처럼 두 번 찍혔습니다 — CMS 가 붙는 로컬에서만 보였습니다.
     document.querySelectorAll('.quick-link--flagship').forEach(el => {
-      setText(el.childNodes[0], brand.flagshipName);
+      setText(el.querySelector('.quick-label'), brand.flagshipName);
       setHref(el, brand.flagshipUrl);
     });
     document.querySelectorAll('.quick-link--instagram, .footer-social a[aria-label="Instagram"]').forEach(el => {
