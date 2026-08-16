@@ -92,6 +92,11 @@
 @media (min-width: 1000px) {
   #panel-newsletter .pub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+/* 1400 부터 네 칸. 컨테이너가 1600 까지 넓어지므로 세 칸으로 두면 카드 하나가
+   490px 이 되어 표지만 커지고 한 화면에 담기는 호수는 그대로다. */
+@media (min-width: 1400px) {
+  #panel-newsletter .pub-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 
 /* 테두리와 그림자를 걷어 표지가 카드 노릇을 하게 한다. */
 #panel-newsletter .pub {
