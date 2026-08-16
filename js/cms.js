@@ -770,6 +770,10 @@ window.KMTPA = window.KMTPA || {};
 
     if (item.href) {
       trigger.setAttribute('href', item.href);
+      // 주소는 남겨 둔다 — 새 탭·공유·검색엔진은 그대로 페이지로 간다.
+      // 평범한 왼쪽 클릭만 모달이 가로챈다.
+      trigger.setAttribute('data-pub-modal', '');
+      trigger.setAttribute('aria-haspopup', 'dialog');
     } else {
       trigger.setAttribute('type', 'button');
       trigger.setAttribute('aria-haspopup', 'dialog');
@@ -822,19 +826,20 @@ window.KMTPA = window.KMTPA || {};
     trigger.appendChild(thumb);
     trigger.appendChild(body);
     article.appendChild(trigger);
-    if (!item.href) {
-      article.appendChild(createNewsletterDetailTemplate(item));
-    }
+    article.appendChild(createNewsletterDetailTemplate(item));
 
     return article;
   }
 
+  /* 모달 본문. vol25 페이지와 같은 뼈대(.pub-card-body + .pub-modal-*)로 만든다.
+     그 페이지가 이미 이 클래스들로 짜여 있어서, 같은 구조로 채우면 팝업과
+     전용 페이지가 저절로 같은 모양이 된다 — 스타일을 새로 만들 일이 없다. */
   function createNewsletterDetailTemplate(item) {
     const template = document.createElement('template');
     template.className = 'pub-detail';
 
     const wrap = document.createElement('div');
-    wrap.className = 'pub-modal-placeholder';
+    wrap.className = 'pub-card-body';
 
     const eyebrow = document.createElement('span');
     eyebrow.className = 'pub-modal-eyebrow';
@@ -843,7 +848,6 @@ window.KMTPA = window.KMTPA || {};
 
     const title = document.createElement('h2');
     title.className = 'pub-modal-title';
-    title.id = 'pub-modal-title';
     title.textContent = item.title;
     wrap.appendChild(title);
 
@@ -852,51 +856,78 @@ window.KMTPA = window.KMTPA || {};
     lede.textContent = item.lede || item.summary || '뉴스레터 본문은 검수 후 공개될 예정입니다.';
     wrap.appendChild(lede);
 
-    if (item.outline.length) {
-      const section = document.createElement('section');
-      section.className = 'pub-modal-section';
-      const heading = document.createElement('h3');
-      heading.textContent = '구성안';
-      section.appendChild(heading);
-
-      item.outline.forEach(outline => {
-        const subheading = document.createElement('h4');
-        subheading.textContent = outline.heading;
-        section.appendChild(subheading);
-
-        const list = document.createElement('ul');
-        outline.bullets.forEach(text => {
-          const li = document.createElement('li');
-          li.textContent = text;
-          list.appendChild(li);
-        });
-        section.appendChild(list);
+    // '2026년 8월 · HTML 초안 · 기사 8건' 을 조각으로 끊어 나란히 둔다.
+    if (item.meta) {
+      const snapshot = document.createElement('div');
+      snapshot.className = 'pub-modal-snapshot';
+      item.meta.split('·').map(part => part.trim()).filter(Boolean).forEach(part => {
+        const stat = document.createElement('div');
+        stat.className = 'pub-modal-stat';
+        stat.textContent = part;
+        snapshot.appendChild(stat);
       });
-      wrap.appendChild(section);
+      wrap.appendChild(snapshot);
     }
 
-    if (item.articles.length) {
+    // 구성안은 묶음마다 한 절로 세운다. 전에는 한 절 안에 h4 로 눌러 담아
+    // 목차처럼 보였다.
+    item.outline.forEach(outline => {
       const section = document.createElement('section');
       section.className = 'pub-modal-section';
       const heading = document.createElement('h3');
-      heading.textContent = '선택된 기사';
+      heading.textContent = outline.heading;
       section.appendChild(heading);
 
       const list = document.createElement('ul');
+      list.className = 'pub-modal-list';
+      outline.bullets.forEach(text => {
+        const li = document.createElement('li');
+        li.textContent = text;
+        list.appendChild(li);
+      });
+      section.appendChild(list);
+      wrap.appendChild(section);
+    });
+
+    if (item.articles.length) {
+      const section = document.createElement('section');
+      section.className = 'pub-modal-refs';
+      const heading = document.createElement('h3');
+      heading.textContent = '참고 기사';
+      section.appendChild(heading);
+
+      const list = document.createElement('ul');
+      list.className = 'pub-modal-list';
       item.articles.forEach(article => {
         const li = document.createElement('li');
-        const meta = [article.sourceName, article.rawCategory, article.publishedAt].filter(Boolean).join(' · ');
-        li.textContent = meta ? `${article.title} (${meta})` : article.title;
+        const strong = document.createElement('strong');
+        strong.textContent = article.title;
+        li.appendChild(strong);
+        const meta = [article.sourceName, article.rawCategory, article.publishedAt]
+          .filter(Boolean).join(' · ');
+        if (meta) {
+          const span = document.createElement('span');
+          span.textContent = meta;
+          li.appendChild(span);
+        }
         list.appendChild(li);
       });
       section.appendChild(list);
       wrap.appendChild(section);
     }
 
-    const note = document.createElement('p');
-    note.className = 'pub-modal-lede';
-    note.textContent = '원문 자료는 준비중입니다. 뉴스레터 및 협력 문의는 사무국으로 보내주세요.';
-    wrap.appendChild(note);
+    const callout = document.createElement('aside');
+    callout.className = 'pub-modal-callout';
+    if (item.href) {
+      const link = document.createElement('a');
+      link.className = 'link-cta';
+      link.href = item.href;
+      link.textContent = '전체 화면으로 보기';
+      callout.appendChild(link);
+    } else {
+      callout.textContent = '원문 자료는 준비중입니다. 뉴스레터 및 협력 문의는 사무국으로 보내주세요.';
+    }
+    wrap.appendChild(callout);
 
     template.content.appendChild(wrap);
     return template;

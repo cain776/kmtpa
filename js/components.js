@@ -422,7 +422,11 @@ window.KMTPA = window.KMTPA || {};
     if (!allTriggers.length) return;
 
     // <button>만 모달 대상 — <a class="pub-trigger">는 navigate (스킵)
-    const triggers = Array.from(allTriggers).filter(t => t.tagName !== 'A');
+    /* 예전에는 <a> 를 전부 걸러냈다 — 링크는 페이지로 보내는 것이라서다.
+       뉴스레터 카드는 주소를 그대로 두되(공유·새 탭·검색엔진) 왼쪽 클릭만
+       모달로 받는다. 그 표시가 data-pub-modal 이다. */
+    const triggers = Array.from(allTriggers)
+      .filter(t => t.tagName !== 'A' || t.hasAttribute('data-pub-modal'));
     if (!triggers.length) return;
 
     // 모달이 페이지에 없으면 주입 (단일 인스턴스)
@@ -470,6 +474,34 @@ window.KMTPA = window.KMTPA || {};
       return wrap;
     }
 
+    /* 같은 격자에 있는 카드들이 곧 목록이다. 카드가 다시 그려질 수 있으므로
+       열 때마다 새로 읽는다 — 게시본이 늦게 도착하면 개수가 달라진다. */
+    function siblings(article) {
+      const grid = article && article.closest('.pub-grid');
+      return grid ? Array.from(grid.querySelectorAll('.pub')) : (article ? [article] : []);
+    }
+
+    function syncNav(article) {
+      const list = siblings(article);
+      const index = list.indexOf(article);
+      const count = pubModalState.modal.querySelector('.pub-modal-count');
+      const nav = pubModalState.modal.querySelector('.pub-modal-nav');
+      // 한 건뿐이면 옮길 곳이 없다.
+      if (nav) nav.hidden = list.length < 2;
+      if (count) count.textContent = list.length > 1 ? `${index + 1} / ${list.length}` : '';
+      pubModalState.modal.querySelectorAll('[data-pub-step]').forEach(button => {
+        const next = index + Number(button.dataset.pubStep);
+        button.disabled = next < 0 || next >= list.length;
+      });
+      pubModalState.current = article;
+    }
+
+    function step(delta) {
+      const list = siblings(pubModalState.current);
+      const next = list[list.indexOf(pubModalState.current) + delta];
+      if (next) open(next);
+    }
+
     function open(article) {
       if (!article) return;
       clearTimeout(pubModalState.closeTimer);
@@ -508,6 +540,7 @@ window.KMTPA = window.KMTPA || {};
         downloadEl.removeAttribute('download');
       }
 
+      syncNav(article);
       pubModalState.lastTrigger = trigger;
       modal.hidden = false;
       document.body.classList.add('modal-open');
@@ -547,9 +580,25 @@ window.KMTPA = window.KMTPA || {};
       document.addEventListener('click', e => {
         if (!e.target || typeof e.target.closest !== 'function') return;
         const trigger = e.target.closest('.pub-trigger');
-        if (!trigger || trigger.tagName === 'A') return;
-        const article = trigger.closest('.pub');
-        open(article);
+        if (!trigger) return;
+        if (trigger.tagName === 'A') {
+          // 새 탭·다운로드·보조 클릭은 그대로 링크로 둔다. 모달은 평범한
+          // 왼쪽 클릭일 때만 가로챈다.
+          if (!trigger.hasAttribute('data-pub-modal')) return;
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+          e.preventDefault();
+        }
+        open(trigger.closest('.pub'));
+      });
+
+      // 좌우 버튼과 화살표 키로 호를 옮긴다.
+      modal.querySelectorAll('[data-pub-step]').forEach(button => {
+        button.addEventListener('click', () => step(Number(button.dataset.pubStep)));
+      });
+      document.addEventListener('keydown', e => {
+        if (!pubModalState.modal || pubModalState.modal.hidden) return;
+        if (e.key === 'ArrowLeft') step(-1);
+        else if (e.key === 'ArrowRight') step(1);
       });
 
       // 닫기 버튼 / 백드롭 클릭

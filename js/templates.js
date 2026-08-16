@@ -404,6 +404,15 @@ window.KMTPA = window.KMTPA || {};
       <div class="pub-modal-dialog" role="document">
         <header class="pub-modal-header">
           <div class="pub-modal-issue" aria-hidden="true"></div>
+          <div class="pub-modal-nav">
+            <button type="button" class="pub-modal-step" data-pub-step="-1" aria-label="이전 호">
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <span class="pub-modal-count" aria-live="polite"></span>
+            <button type="button" class="pub-modal-step" data-pub-step="1" aria-label="다음 호">
+              <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
           <button type="button" class="pub-modal-close" aria-label="닫기" data-modal-close>
             <i data-lucide="x"></i>
           </button>
