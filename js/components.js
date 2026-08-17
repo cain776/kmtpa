@@ -358,14 +358,19 @@ window.KMTPA = window.KMTPA || {};
       container.prepend(trigger);
     }
 
-    // 서랍 맨 아래 로그인 — 헤더에서 자리를 내주고 여기로 내려왔다.
+    /* 서랍 맨 아래 로그인 — 헤더에서 자리를 내주고 여기로 내려왔다.
+       글자만 두면 서랍 끝의 색 상자가 무엇인지 바로 읽히지 않는다. 자물쇠
+       아이콘을 앞에 붙여 '들어가는 곳' 임을 보인다. */
     const cta = document.querySelector('.header-cta');
     if (cta && !nav.querySelector('.nav-drawer-cta')) {
+      const label = cta.textContent.trim() || '로그인';
       const link = document.createElement('a');
       link.className = 'nav-drawer-cta';
       link.href = cta.getAttribute('href') || '#';
-      link.textContent = cta.textContent.trim() || '로그인';
+      link.innerHTML = '<i data-lucide="log-in"></i>';
+      link.append(label);
       nav.appendChild(link);
+      if (window.lucide && window.lucide.createIcons) window.lucide.createIcons();
     }
 
     toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));

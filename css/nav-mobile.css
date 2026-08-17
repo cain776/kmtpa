@@ -209,15 +209,16 @@
   }
   .nav-lang-label svg { width: 20px; height: 20px; }
   .nav-lang-row .lang-select { display: block; margin: 0; }
+  /* 흰 상자에 검은 글씨다. 네이비 위에 반투명 흰색을 깔고 흰 글씨를 얹었더니
+     appearance:none 을 온전히 안 먹는 브라우저에서 상자가 제 기본 밝은 배경
+     으로 칠해져 흰 글씨가 사라졌다. 불투명하게 칠하면 어떤 엔진에서든 같다. */
   .nav-lang-row .lang-select select {
-    color: #fff;
+    color: var(--text-heading);
     font-size: 14px;
     font-weight: 600;
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: #fff;
+    border-color: #fff;
     padding: 8px 28px 8px 12px;
-    /* 흰 화살표 — 네이비 위에서는 기본 어두운 것이 안 보인다. */
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23ffffff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
   .nav-lang-row .lang-select select option { color: var(--text-body); }
 
@@ -283,9 +284,16 @@
     color: var(--text-muted);
   }
 
-  /* 서랍 맨 아래 로그인 — 헤더에서 내려온 자리다. */
-  .nav-drawer-cta {
-    display: block;
+  /* 서랍 맨 아래 로그인 — 헤더에서 내려온 자리다.
+
+     선택자에 .top-nav.open 을 붙이는 이유가 있다. 바로 위 .top-nav.open > a
+     가 대메뉴 줄을 칠하는데 그것도 (0,2,0) 이라, 클래스 하나(0,1,0)로는
+     색을 못 이긴다. 실제로 네이비 바탕에 검은 글씨가 되어 아무것도 안 보였다. */
+  .top-nav.open > .nav-drawer-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     margin: 14px 20px 4px;
     padding: 13px 16px;
     text-align: center;
@@ -293,8 +301,10 @@
     font-weight: 600;
     color: #fff;
     background: var(--navy-900);
+    border: none;
     border-radius: 8px;
   }
+  .top-nav.open > .nav-drawer-cta svg { width: 18px; height: 18px; }
 
   /* 서랍이 열린 동안 뒤 화면은 스크롤하지 않는다. */
   body.nav-open { overflow: hidden; }
