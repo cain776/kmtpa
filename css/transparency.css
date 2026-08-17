@@ -78,22 +78,30 @@
   max-width: 880px;
 }
 /* 구분선은 컨테이너를 다 쓰는데 본문은 880 에서 끊겨, 1600 에서는 오른쪽
-   절반이 통째로 비어 보였다. 제목을 왼쪽 열로 빼고 본문을 오른쪽 끝에
-   붙여서 구분선의 양 끝에 내용이 닿게 한다.
+   절반이 통째로 비어 보였다. 제목을 왼쪽 열로 빼서 구분선의 왼쪽 끝에도
+   내용이 닿게 한다.
 
-   인트로 문단도 margin-left:auto 로 같은 오른쪽 끝에 맞춘다 — 안 맞추면
-   인트로만 왼쪽에서 시작해 본문 열과 어긋난다.
+   제목 열은 260 으로 고정한다. 늘어나게(1fr) 두었더니 남는 폭이 전부
+   제목 칸으로 들어가, 제목 글자와 본문 사이가 1920 화면에서 548px 까지
+   벌어졌다 — 두 열이 한 덩어리로 안 읽히고 서로 남남처럼 보였다.
+   260 은 가장 긴 제목('이해관계자 참여와 사회적 임팩트', 253px)이 한 줄에
+   들어가는 폭이다. 제목 문구를 더 길게 쓰면 이 값도 같이 키워야 한다.
 
-   1400 부터인 이유: 제목 열이 최소 400 은 되어야 '이해관계자 참여와 사회적
-   임팩트' 가 두 줄 안에 들어간다. 1400 화면에서 1352 - 64 - 880 = 408. */
+   인트로 문단은 본문 열이 시작하는 자리에 맞춘다 — 안 맞추면 인트로만
+   왼쪽에서 시작해 본문 열과 어긋난다. 두 값을 변수로 묶어 둔 이유가
+   이것이다. 한쪽만 고치면 그 줄맞춤이 조용히 깨진다. */
 @media (min-width: 1400px) {
+  .sub-tab-panel {
+    --title-col: 260px;
+    --title-gap: 48px;
+  }
   .transparency-block {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 880px);
-    column-gap: 64px;
+    grid-template-columns: var(--title-col) minmax(0, 880px);
+    column-gap: var(--title-gap);
     align-items: start;
   }
   .transparency-block > h3 { grid-column: 1; margin-bottom: 0; }
   .transparency-block > :not(h3) { grid-column: 2; }
-  .transparency-intro { margin-left: auto; }
+  .transparency-intro { margin-left: calc(var(--title-col) + var(--title-gap)); }
 }
