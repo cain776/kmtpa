@@ -581,3 +581,25 @@
 @media (prefers-reduced-motion: reduce) {
   .inquiry-summary .chev { transition: none; }
 }
+
+/* 뉴스레터 수신 동의 — 내 정보에서 바로 켜고 끕니다. 읽기만 하던 줄이라
+   사무국에 연락해야 바꿀 수 있었습니다. */
+.consent-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.consent-toggle input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--navy-700, #1e2638);
+  cursor: pointer;
+}
+.consent-toggle input:disabled { cursor: progress; }
+.consent-note {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: var(--join-faint);
+  line-height: 1.6;
+}

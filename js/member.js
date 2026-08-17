@@ -190,13 +190,47 @@
     rows.push(['이메일', member.email], ['연락처', member.phone || '-']);
     rows.push(['가입 신청일', formatDate(member.createdAt)]);
     if (member.approvedAt) rows.push(['승인일', formatDate(member.approvedAt)]);
-    rows.push(['뉴스레터', member.newsletterConsent ? '수신 동의함' : '수신하지 않음']);
-
     const status = member.status || 'pending';
+    /* 뉴스레터는 읽기만 하던 줄이었다. 받고 싶어진 사람도, 그만 받고 싶은
+       사람도 사무국에 연락하는 수밖에 없었다. 여기서 바로 바꾼다. */
     dl.innerHTML = `
       <dt>상태</dt>
       <dd><span class="status-pill status-${esc(status)}">${esc(STATUS_LABEL[status] || status)}</span></dd>
-      ${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}`;
+      ${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}
+      <dt>뉴스레터</dt>
+      <dd>
+        <label class="consent-toggle">
+          <input type="checkbox" data-newsletter-consent${member.newsletterConsent ? ' checked' : ''}>
+          <span data-newsletter-label>${member.newsletterConsent ? '수신 동의함' : '수신하지 않음'}</span>
+        </label>
+        <p class="consent-note">협회 소식·교육 안내를 이메일로 받습니다. 언제든 여기서 끌 수 있습니다.</p>
+      </dd>`;
+  }
+
+  /* 켜고 끌 때마다 서버에 남긴다. 동의는 값 하나가 아니라 이력이라,
+     화면 상태만 바꿔 두면 무엇에 언제 동의했는지 말할 수 없다. */
+  async function bindNewsletterConsent() {
+    document.addEventListener('change', async event => {
+      const box = event.target.closest('[data-newsletter-consent]');
+      if (!box) return;
+      const label = document.querySelector('[data-newsletter-label]');
+      const wanted = box.checked;
+      box.disabled = true;
+      try {
+        const payload = await request('/member/newsletter', {
+          method: 'PATCH', body: { consent: wanted },
+        });
+        const granted = Boolean(payload.member && payload.member.newsletterConsent);
+        box.checked = granted;
+        if (label) label.textContent = granted ? '수신 동의함' : '수신하지 않음';
+      } catch (error) {
+        // 실패했는데 켜진 채로 두면, 안 받는 사람이 받는 줄 안다.
+        box.checked = !wanted;
+        window.alert(`수신 설정을 바꾸지 못했습니다: ${error.message}`);
+      } finally {
+        box.disabled = false;
+      }
+    });
   }
 
   function renderInquiries(list) {
@@ -481,6 +515,7 @@
       const member = data.member || {};
       greeting.innerHTML = `<b>${esc(member.name || '회원')}</b>님, 안녕하세요.`;
       renderInfo(member);
+      bindNewsletterConsent();
       renderInquiries(data.consultations || []);
       setupPasswordChange();
       setupWithdrawal();
