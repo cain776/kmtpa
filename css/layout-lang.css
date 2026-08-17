@@ -45,36 +45,17 @@
 }
 
 @media (max-width: 960px) {
-  /* 모바일에서는 햄버거 왼쪽에 남긴다 — 언어는 메뉴보다 먼저 필요할 수 있다 */
-  .lang-select { margin-left: auto; }
+  /* 모바일에서는 헤더 맨 왼쪽 칸이다 — 자리는 nav-mobile.css 의 order 가
+     정하고, 여기서는 크기만 줄인다. */
   .lang-select select { padding: 6px 24px 6px 8px; font-size: 12px; }
 }
 
-/* 좁은 화면에서는 헤더를 두 줄로 — 로고 한 줄, 언어·메뉴 한 줄.
+/* 좁은 화면에서 헤더를 두 줄로 나누던 규칙은 걷어냈다.
 
-   한 줄에 다 넣으면 언어 선택(82px)과 햄버거(36px)가 자리를 차지해서
-   브랜드 글자에 남는 폭이 390px 화면에서 81px, 360px 에서 59px 밖에
-   안 된다. 그 폭에서 영문 이름이 네댓 줄로 접혀 글자 덩어리가 107px 이
-   되고, 헤더 높이 73px 을 넘겨 위로 잘려 나갔다.
+   그 규칙이 있던 이유는 한 줄에 다섯(로고 그림 · 이름 · 언어 · 로그인 ·
+   햄버거)이 들어가 390px 에서 이름에 남는 폭이 81px 뿐이었고, 영문 이름이
+   네댓 줄로 접혀 헤더 높이를 넘겨 잘렸기 때문이다.
 
-   560 부터인 이유: 그 위로는 영문이 한 줄에 들어가서 두 줄로 나눌 이유가
-   없다. 데스크톱은 건드리지 않는다.
-
-   height 대신 min-height 로 바꾼다 — 고정 높이면 둘째 줄이 들어갈 자리가
-   없어 그대로 잘린다. */
-@media (max-width: 560px) {
-  .site-header .container {
-    flex-wrap: wrap;
-    height: auto;
-    min-height: 72px;
-    align-content: center;
-    gap: 8px 12px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  .site-header .brand { flex: 1 0 100%; }
-  /* 언어 선택과 햄버거 둘 다 margin-left:auto 를 갖고 있어서, 줄이 나뉘자
-     둘째 줄의 남는 공간을 106px 씩 나눠 갖고 가운데에 흩어졌다. 햄버거의
-     auto 를 풀어 언어 선택 하나만 밀도록 한다 — 둘이 오른쪽에 붙는다. */
-  .site-header .mobile-toggle { margin-left: 0; }
-}
+   지금은 모바일 헤더가 셋(언어 · 한글 이름 · 햄버거)뿐이라 한 줄에 넉넉히
+   들어간다. 로고 그림과 로그인은 nav-mobile.css 가 각각 감추고 서랍으로
+   내렸다. 두 줄로 나눌 이유가 사라졌다. */

@@ -234,20 +234,112 @@ window.KMTPA = window.KMTPA || {};
     heroVideo.addEventListener('play', setRate); // autoplay reset 케이스 대응
   };
 
-  /* ----- 모바일 메뉴 토글 ----- */
+  /* ----- 모바일 메뉴 서랍 -----
+     대메뉴만 보이고 + 를 눌러야 하위가 열린다. 예전에는 22개 링크가 한 번에
+     쏟아져서 무엇이 상위인지 알아보기 어려웠다.
+
+     닫는 길을 셋 둔다 — 햄버거를 다시 누르기(아이콘이 ✕ 로 바뀐다), 바깥
+     누르기, ESC. 예전에도 다시 누르면 닫히긴 했는데 아이콘이 ☰ 그대로라
+     닫을 수 있다는 것이 보이지 않았다. */
   NS.setupMobileNav = function () {
     const toggle = document.getElementById('mobile-toggle');
     const nav = document.getElementById('top-nav');
     if (!toggle || !nav) return;
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    });
-    nav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        nav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
+
+    const header = toggle.closest('.site-header');
+    let backdrop = null;
+
+    function icon(name) {
+      toggle.innerHTML = '';
+      const i = document.createElement('i');
+      i.setAttribute('data-lucide', name);
+      toggle.appendChild(i);
+      if (window.lucide && window.lucide.createIcons) window.lucide.createIcons();
+    }
+
+    function setOpen(open) {
+      nav.classList.toggle('open', open);
+      if (header) header.classList.toggle('is-open', open);
+      document.body.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+      icon(open ? 'x' : 'menu');
+
+      if (open && !backdrop) {
+        // 바깥을 눌러 닫는 자리. 버튼으로 두어야 키보드로도 닿는다.
+        backdrop = document.createElement('button');
+        backdrop.type = 'button';
+        backdrop.className = 'nav-backdrop';
+        backdrop.setAttribute('aria-label', '메뉴 닫기');
+        backdrop.addEventListener('click', () => setOpen(false));
+        (header || document.body).appendChild(backdrop);
+      } else if (!open && backdrop) {
+        backdrop.remove();
+        backdrop = null;
+      }
+      if (!open) collapseAll();
+    }
+
+    function setExpandIcon(button, open) {
+      button.innerHTML = `<i data-lucide="${open ? 'minus' : 'plus'}"></i>`;
+      if (window.lucide && window.lucide.createIcons) window.lucide.createIcons();
+    }
+
+    function collapseAll() {
+      nav.querySelectorAll('.nav-dropdown.is-open').forEach(d => d.classList.remove('is-open'));
+      nav.querySelectorAll('.nav-expand[aria-expanded="true"]').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        setExpandIcon(b, false);
       });
+    }
+
+    /* 하위가 있는 대메뉴마다 + 버튼을 단다. 마크업이 아니라 여기서 만드는
+       이유는 데스크톱에는 없는 부품이기 때문이다 — templates.js 를 모바일
+       사정으로 어지럽히지 않는다. */
+    nav.querySelectorAll('.nav-item-with-dropdown').forEach((item, index) => {
+      const dropdown = item.querySelector('.nav-dropdown');
+      const link = item.querySelector(':scope > a');
+      if (!dropdown || !link) return;
+
+      const id = dropdown.id || `nav-sub-${index}`;
+      dropdown.id = id;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'nav-expand';
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', id);
+      button.setAttribute('aria-label', `${link.textContent.trim()} 하위 메뉴`);
+      button.innerHTML = '<i data-lucide="plus"></i>';
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const open = !dropdown.classList.contains('is-open');
+        // 한 번에 하나만 연다. 여섯이 다 열리면 처음 모습으로 되돌아간다.
+        collapseAll();
+        dropdown.classList.toggle('is-open', open);
+        button.setAttribute('aria-expanded', String(open));
+        setExpandIcon(button, open);
+      });
+      item.appendChild(button);
+    });
+
+    // 서랍 맨 아래 로그인 — 헤더에서 자리를 내주고 여기로 내려왔다.
+    const cta = document.querySelector('.header-cta');
+    if (cta && !nav.querySelector('.nav-drawer-cta')) {
+      const link = document.createElement('a');
+      link.className = 'nav-drawer-cta';
+      link.href = cta.getAttribute('href') || '#';
+      link.textContent = cta.textContent.trim() || '로그인';
+      nav.appendChild(link);
+    }
+
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        setOpen(false);
+        toggle.focus();
+      }
     });
   };
 

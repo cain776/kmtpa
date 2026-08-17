@@ -215,60 +215,13 @@
 
 @media (max-width: 960px) {
   /* 모바일·태블릿에서는 헤더가 사진(홈 히어로) 바로 위에 붙어 있어
-     반투명이면 배경이 비쳐 로고와 글자가 흐려집니다. 불투명으로 고정. */
+     반투명이면 배경이 비쳐 로고와 글자가 흐려집니다. 불투명으로 고정.
+     (홈에서는 nav-mobile.css 가 다시 투명으로 되돌려 사진 위에 얹습니다.) */
   .site-header {
     background: #fff;
     backdrop-filter: none;
   }
-  .top-nav, .header-cta, .header-user { display: none; }
-  .mobile-toggle { display: inline-flex; }
-  .top-nav.open {
-    display: flex;
-    position: absolute;
-    top: 72px; left: 0; right: 0;
-    flex-direction: column;
-    background: #fff;
-    border-bottom: 1px solid var(--border-default);
-    padding: 16px 24px;
-    gap: 14px;
-    align-items: stretch;
-    margin-left: 0;
-  }
-  /* 모바일에서는 드롭다운을 항상 펼쳐서 들여쓰기로 표시 */
-  .top-nav.open .nav-dropdown {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    box-shadow: none;
-    border: none;
-    background: transparent;
-    padding: 4px 0 4px 12px;
-    min-width: 0;
-    margin-top: 4px;
-  }
-  .top-nav.open .nav-dropdown a {
-    padding: 6px 0;
-    margin: 0;
-    font-size: 13px;
-  }
-  /* 모바일에서는 메가 드롭다운을 세로로 복원 */
-  .top-nav.open .nav-dropdown--mega {
-    display: block;
-    min-width: 0;
-    padding: 0;
-    left: 0;
-  }
-  .top-nav.open .nav-dropdown--mega .dropdown-group {
-    padding: 0;
-  }
-  .top-nav.open .dropdown-group + .dropdown-group {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid var(--border-default);
-    border-left: none;
-  }
-  .top-nav.open .dropdown-group-label {
-    padding: 4px 0;
-  }
 }
+
+/* 모바일 헤더 세 칸과 메뉴 서랍은 nav-mobile.css 에 있다. 이 파일 뒤에
+   싣는다 — 위 규칙을 홈에서 덮어야 하기 때문이다. */
