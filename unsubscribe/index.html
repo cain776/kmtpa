@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>뉴스레터 수신거부 — 한국의료관광진흥협회 KMTPA</title>
+  <meta name="description" content="한국의료관광진흥협회 뉴스레터 수신을 해제합니다.">
+  <meta name="theme-color" content="#020028">
+  <!-- 검색에 걸릴 이유가 없는 화면입니다. 링크를 받은 사람만 옵니다. -->
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="../images_homepage/logo2.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="../css/base.css?v=ce124a3d">
+  <link rel="stylesheet" href="../css/layout.css?v=b255a30b">
+  <link rel="stylesheet" href="../css/layout-hero.css?v=5160bece">
+  <link rel="stylesheet" href="../css/layout-footer.css?v=579827e9">
+  <link rel="stylesheet" href="../css/layout-lang.css?v=cf6e1849">
+  <link rel="stylesheet" href="../css/nav-mobile.css?v=09dd31ca">
+  <link rel="stylesheet" href="../css/components.css?v=ce6dbd4f">
+  <!-- 카드·폼·버튼 모양은 로그인 화면 것을 그대로 씁니다 -->
+  <link rel="stylesheet" href="../css/join.css?v=1a1238d0">
+  <link rel="stylesheet" href="../css/join-form.css?v=dceed41a">
+  <link rel="stylesheet" href="../css/member.css?v=3bd1665a">
+</head>
+<body class="is-join is-member">
+
+  <div id="header-mount"></div>
+
+  <main class="login-wrap">
+    <div class="login-card">
+
+      <span class="eyebrow">Newsletter · 수신거부</span>
+      <h1>뉴스레터 수신거부</h1>
+
+      <!-- 화면을 못 보는 분께는 이 자리가 유일한 신호라 role 을 답니다. -->
+      <p class="form-error" data-unsub-error role="alert" tabindex="-1" hidden></p>
+      <p class="form-success" data-unsub-done role="status" hidden></p>
+
+      <div data-unsub-ready hidden>
+        <p class="lede">
+          <b data-unsub-email></b> 주소로 보내던 협회 소식·교육 안내를 더 이상 보내지 않습니다.
+        </p>
+        <div class="login-actions">
+          <button type="button" class="btn-solid" data-unsub-submit>수신 해제하기</button>
+        </div>
+        <p class="consent-note">
+          해제해도 회원 자격과 문의 답변은 그대로입니다. 다시 받고 싶으시면
+          <a href="../mypage/index.html">내 정보</a>에서 언제든 켤 수 있습니다.
+        </p>
+      </div>
+
+      <p class="lede" data-unsub-loading>확인하는 중입니다…</p>
+
+      <div class="login-links">
+        <a href="../index.html">홈으로</a>
+        <span aria-hidden="true">·</span>
+        <a href="../mypage/index.html">내 정보</a>
+        <span aria-hidden="true">·</span>
+        <a href="../consultation/index.html">문의하기</a>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-mount"></div>
+
+  <script src="../js/runtime-config.js?v=26206d20"></script>
+  <script src="../js/templates.js?v=62d1e173"></script>
+  <script src="../js/components.js?v=6065fe79"></script>
+  <script src="../js/components-modal.js?v=595a1199"></script>
+  <!-- 이 화면에 가입 폼은 없지만 app.js 가 setupJoinFlow() 를 조건 없이 부른다.
+       빼면 콘솔에 'NS.setupJoinFlow is not a function' 이 뜨고 그 뒤 초기화가
+       통째로 멈춘다 — 헤더·푸터까지 안 그려진다. -->
+  <script src="../js/components-join.js?v=6a176298"></script>
+  <script src="../js/nav-dropdown.js?v=66d1ced0"></script>
+  <script src="../js/app.js?v=00b88128"></script>
+  <script src="../js/i18n.js?v=6aa7d8d7"></script>
+  <script src="../js/unsubscribe.js?v=850851ce"></script>
+</body>
+</html>
