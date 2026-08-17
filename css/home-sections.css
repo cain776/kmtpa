@@ -146,9 +146,13 @@ html:has(body.is-home) {
 
 @media (max-width: 900px) {
   /* 모바일에서는 공용 헤더(햄버거 메뉴)를 항상 보이게 두고,
-     히어로 안쪽 중앙 네비는 감춥니다. */
+     히어로 안쪽 중앙 네비는 감춥니다.
+
+     position 은 여기서 정하지 않는다 — nav-mobile.css 가 사진 위에 얹기
+     위해 absolute 로 잡는다. 예전에는 여기서 sticky 로 되돌려서, 헤더가
+     흐름에 남아 히어로를 아래로 밀어냈고 흰 바탕 위 흰 글씨가 되어
+     이름도 햄버거도 보이지 않았다. */
   .is-home .site-header {
-    position: sticky;
     transform: none;
     opacity: 1;
     pointer-events: auto;

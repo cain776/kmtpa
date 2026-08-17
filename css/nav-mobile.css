@@ -89,22 +89,56 @@
   }
 
   /* 사진 위쪽이 밝으면 흰 글씨가 그대로 묻힌다 — 실제로 하늘이 걸린 슬라이드
-     에서 이름도 햄버거도 보이지 않았다. 위에서 아래로 옅어지는 어두운 막을
-     깔아 글자가 어느 사진에서나 읽히게 한다. 아래쪽은 완전히 투명이라 사진을
-     가리지 않는다. */
-  .is-home .site-header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(2, 0, 40, 0.55), rgba(2, 0, 40, 0));
-    pointer-events: none;
+     에서 이름도 햄버거도 보이지 않았다.
+
+     막을 깔지 않고 글자 쪽을 세운다. 사진 위에 어두운 띠를 얹으면 첫 화면의
+     인상이 그만큼 탁해진다. 이름은 한 급 키우고 그림자를 넣어 어떤 배경에서도
+     윤곽이 남게 한다. 햄버거와 언어 상자는 SVG·폼 요소라 text-shadow 가 안
+     먹으므로 drop-shadow 로 같은 일을 한다. */
+  .is-home .site-header .brand-name .ko {
+    font-size: 18px;
+    font-weight: 700;
+    /* 두 겹이다. 붙은 것은 글자 가장자리를 세우고, 퍼진 것은 글자 뒤에만
+       옅은 그늘을 만든다 — 막을 깐 것과 같은 효과를 글자 크기만큼만 낸다.
+       가장 밝은 슬라이드에서 배경 대비가 3.3:1 이라 이 그늘이 있어야 읽힌다. */
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.75),
+      0 0 10px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(0, 0, 0, 0.3);
   }
+  .is-home .site-header .mobile-toggle,
+  .is-home .site-header .lang-select {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75))
+            drop-shadow(0 0 8px rgba(0, 0, 0, 0.4));
+  }
+  .is-home .site-header .mobile-toggle svg { stroke-width: 2.4; }
+  .is-home .site-header .lang-select select {
+    /* 테두리만으로는 밝은 하늘에서 상자가 사라진다. 아주 옅게 깔아 둔다 —
+       글자 뒤에만 있어서 사진을 가리지 않는다. */
+    background-color: rgba(2, 0, 40, 0.28);
+    border-color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+  }
+
   /* 위 .site-header .container 와 같은 값이어야 한다. 여기만 낮게 두면
      특이도가 높아서 홈에서만 백드롭이 서랍을 덮는다 — 실제로 그랬다. */
   .is-home .site-header .container { position: relative; z-index: 2; }
-  /* 막이 걷힌 뒤(흰 헤더)에는 필요 없다. */
-  .is-home .site-header.is-revealed::before,
-  .is-home .site-header.is-open::before { display: none; }
+
+  /* 흰 헤더로 내려오면 그림자도 배경도 필요 없다. */
+  .is-home .site-header.is-revealed .brand-name .ko,
+  .is-home .site-header.is-open .brand-name .ko {
+    font-size: 15px;
+    text-shadow: none;
+  }
+  .is-home .site-header.is-revealed .mobile-toggle,
+  .is-home .site-header.is-open .mobile-toggle,
+  .is-home .site-header.is-revealed .lang-select,
+  .is-home .site-header.is-open .lang-select { filter: none; }
+  .is-home .site-header.is-revealed .lang-select select,
+  .is-home .site-header.is-open .lang-select select {
+    background-color: transparent;
+    font-weight: 500;
+  }
   .is-home .site-header .brand-name .ko,
   .is-home .site-header .mobile-toggle { color: #fff; }
   .is-home .site-header .lang-select select {
