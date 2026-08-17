@@ -545,7 +545,6 @@
   "transparency.meta.description": "(사)한국의료관광진흥협회의 지속가능경영, 재정 및 활동보고, 투명성과 책무성 안내.",
   "transparency.meta.og:title": "투명경영 — (사)한국의료관광진흥협회 KMTPA",
   "transparency.meta.og:description": "투명한 거버넌스와 책무성. 재정 및 활동보고와 공시 자료를 안내합니다.",
-  "home.div.1": "<!-- 슬라이드를 늘리려면 여기에 <img class=\"hero-slide\"> 를 추가하고\n           components.js 의 HERO_COPY 에 같은 순서로 문구를 넣으세요.\n           표시기(.hero-dot)도 같은 개수로 맞춰야 합니다. -->\n<img alt=\"\" class=\"hero-slide is-active\" decoding=\"async\" fetchpriority=\"high\" src=\"images_homepage/hero/hero-1.avif\"/>\n<img alt=\"\" class=\"hero-slide\" decoding=\"async\" loading=\"lazy\" src=\"images_homepage/hero/hero-2.avif\"/>",
   "home.h1.1": "세계가 신뢰하는 <em>K-의료관광</em>을<br/>만들어갑니다.",
   "home.h2.1": "협회의 핵심 활동",
   "home.p.1": "회원의 전문성과 환자의 신뢰를 동시에 지키기 위한 여덟 가지 사업 영역.",

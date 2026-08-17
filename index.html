@@ -63,7 +63,11 @@
        상단 바·하단 바로가기 바는 templates.js에서 주입되고,
        슬라이드 전환과 헤드라인은 components.js의 setupHeroSlider가 담당합니다. -->
   <section class="hero-stage">
-    <div data-i18n="home.div.1" class="hero-media" aria-hidden="true">
+    <!-- data-i18n 을 두지 않는다. 이 안에는 번역할 글자가 없고 <img> 뿐인데,
+         키가 붙어 있으면 i18n 이 innerHTML 을 통째로 갈아끼워 슬라이더가
+         붙잡고 있던 <img> 가 떨어져 나간다. 그러면 한국어 아닌 모든 언어에서
+         헤드라인만 바뀌고 배경 사진은 첫 장에 멈춘다. -->
+    <div class="hero-media" aria-hidden="true">
       <!-- 슬라이드를 늘리려면 여기에 <img class="hero-slide"> 를 추가하고
            components.js 의 HERO_COPY 에 같은 순서로 문구를 넣으세요.
            표시기(.hero-dot)도 같은 개수로 맞춰야 합니다. -->

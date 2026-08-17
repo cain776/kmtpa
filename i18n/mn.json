@@ -646,7 +646,6 @@
   "join.@placeholder.10": "Хон Гил Дон",
   "join.@placeholder.11": "Сөүл хот, ○○ дүүрэг, ○○ гудамж 00",
   "join.@placeholder.12": "Хон Гил Дон",
-  "home.div.1": "<!-- 슬라이드를 늘리려면 여기에 <img class=\"hero-slide\"> 를 추가하고\n           components.js 의 HERO_COPY 에 같은 순서로 문구를 넣으세요.\n           표시기(.hero-dot)도 같은 개수로 맞춰야 합니다. -->\n<img alt=\"\" class=\"hero-slide is-active\" decoding=\"async\" fetchpriority=\"high\" src=\"images_homepage/hero/hero-1.avif\"/>\n<img alt=\"\" class=\"hero-slide\" decoding=\"async\" loading=\"lazy\" src=\"images_homepage/hero/hero-2.avif\"/>",
   "@이전 슬라이드": "Өмнөх слайд",
   "@다음 슬라이드": "Дараагийн слайд",
   "@아래로 스크롤": "Доош гүйлгэх",
