@@ -261,7 +261,11 @@
   background: var(--join-band);
 }
 .my-inquiry-form[hidden] { display: none; }
-.my-inquiry-form .field + .field { margin-top: 14px; }
+/* 세로로 쌓일 때만 띄운다. 이 규칙이 .field-grid 안에서 나란히 선 칸에도
+   걸려서, 오른쪽 칸이 14px 아래로 내려앉아 있었다 — 같은 줄인데 입력칸의
+   윗선이 어긋나 보이던 이유다. */
+.my-inquiry-form > .field + .field,
+.my-inquiry-form .field-stack > .field + .field { margin-top: 14px; }
 .my-inquiry-form .field-grid { gap: 14px; }
 .my-inquiry-form textarea { min-height: 140px; resize: vertical; }
 .my-inquiry-consent { margin-top: 16px; }
