@@ -146,6 +146,13 @@ window.KMTPA = window.KMTPA || {};
       if (cta) cta.before(wrap); else header.appendChild(wrap);
     }
 
+    // 모바일 메뉴 서랍 첫 줄 — components.js 가 자리를 만들어 둔다.
+    // 좁은 화면에서는 헤더에 상자를 놓을 폭이 없어 이쪽이 본자리다.
+    const drawerMount = document.querySelector('[data-drawer-lang]');
+    if (drawerMount && !drawerMount.querySelector('.lang-select')) {
+      drawerMount.appendChild(buildSelect());
+    }
+
     // 홈 히어로 — 첫 화면에서는 공용 헤더가 숨어 있어 여기에도 따로 둔다.
     // 언어를 바꾸면 페이지를 새로 여니 두 상자를 맞출 필요는 없다.
     const heroMount = document.querySelector('[data-hero-lang]');

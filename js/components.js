@@ -323,6 +323,41 @@ window.KMTPA = window.KMTPA || {};
       item.appendChild(button);
     });
 
+    /* 서랍 첫 줄에 언어 자리를 만든다. 상자 자체는 i18n.js 가 넣는다 —
+       언어 목록이 그쪽에 있고, 이 파일이 그것까지 알 필요는 없다.
+
+       좁은 화면에서 헤더에 두면 이름과 자리를 다툰다. 실제로 360px 에서
+       4px 겹쳤다. 그렇다고 언어를 서랍 안에만 두면 한국어를 못 읽는 사람이
+       메뉴를 열어 볼 생각을 못 한다. 그래서 헤더에는 지구본만 남기고, 그것을
+       누르면 서랍이 이 줄과 함께 열린다. */
+    if (!nav.querySelector('.nav-lang-row')) {
+      const row = document.createElement('div');
+      row.className = 'nav-lang-row';
+      row.setAttribute('data-drawer-lang', '');
+      const label = document.createElement('span');
+      label.className = 'nav-lang-label';
+      label.innerHTML = '<i data-lucide="globe"></i><span>Language</span>';
+      row.appendChild(label);
+      nav.prepend(row);
+    }
+
+    // 헤더 왼쪽 지구본 — 서랍을 열어 위 줄로 데려간다.
+    const container = toggle.closest('.container');
+    if (container && !container.querySelector('.lang-trigger')) {
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'lang-trigger';
+      trigger.setAttribute('aria-label', '언어 선택');
+      trigger.setAttribute('aria-controls', 'top-nav');
+      trigger.innerHTML = '<i data-lucide="globe"></i>';
+      trigger.addEventListener('click', () => {
+        if (!nav.classList.contains('open')) setOpen(true);
+        const select = nav.querySelector('.nav-lang-row select');
+        if (select) select.focus({ preventScroll: true });
+      });
+      container.prepend(trigger);
+    }
+
     // 서랍 맨 아래 로그인 — 헤더에서 자리를 내주고 여기로 내려왔다.
     const cta = document.querySelector('.header-cta');
     if (cta && !nav.querySelector('.nav-drawer-cta')) {

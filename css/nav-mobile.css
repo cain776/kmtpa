@@ -35,9 +35,34 @@
     flex-wrap: nowrap;
     padding-top: 0;
     padding-bottom: 0;
+    /* 본문 여백(24)보다 좁게 잡아 지구본과 햄버거를 화면 양끝으로 민다.
+       둘 다 40·36px 짜리 누름판이라 안쪽에 이미 여백이 있어서, 글자를
+       24 에 맞추듯 맞추면 오히려 가운데로 몰려 보인다. */
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
-  .site-header .lang-select { order: 1; flex: 0 0 auto; margin: 0; }
+  /* 언어 상자는 서랍 첫 줄이 본자리다. 헤더에는 지구본만 남긴다 —
+     상자를 그대로 두면 82px 을 먹어 이름과 자리를 다툰다(360px 에서 4px
+     겹쳤다). 상자 자체는 지우지 않고 감춘다. 데스크톱에서는 그대로 쓴다. */
+  .site-header .lang-select { display: none; }
+
+  .lang-trigger {
+    order: 1;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-heading);
+  }
+  .lang-trigger svg { width: 22px; height: 22px; }
+
   .site-header .mobile-toggle { order: 3; flex: 0 0 auto; margin: 0; margin-left: auto; }
 
   /* 이름은 화면 정중앙에 둔다.
@@ -55,7 +80,9 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    max-width: calc(100% - 160px);
+    /* 양옆은 지구본 40 + 햄버거 36 이다. 여유를 얹어 120 을 비운다 —
+       언어 상자(82px)를 서랍으로 내린 만큼 이름이 쓸 폭이 넓어졌다. */
+    max-width: calc(100% - 120px);
     justify-content: center;
     pointer-events: none;
   }
@@ -96,6 +123,7 @@
      윤곽이 남게 한다. 햄버거와 언어 상자는 SVG·폼 요소라 text-shadow 가 안
      먹으므로 drop-shadow 로 같은 일을 한다. */
   .is-home .site-header .brand-name .ko {
+    color: #fff;
     font-size: 18px;
     font-weight: 700;
     /* 두 겹이다. 붙은 것은 글자 가장자리를 세우고, 퍼진 것은 글자 뒤에만
@@ -107,47 +135,21 @@
       0 0 20px rgba(0, 0, 0, 0.3);
   }
   .is-home .site-header .mobile-toggle,
-  .is-home .site-header .lang-select {
+  .is-home .site-header .lang-trigger {
+    color: #fff;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75))
             drop-shadow(0 0 8px rgba(0, 0, 0, 0.4));
   }
-  .is-home .site-header .mobile-toggle svg { stroke-width: 2.4; }
-  .is-home .site-header .lang-select select {
-    /* 테두리만으로는 밝은 하늘에서 상자가 사라진다. 아주 옅게 깔아 둔다 —
-       글자 뒤에만 있어서 사진을 가리지 않는다. */
-    background-color: rgba(2, 0, 40, 0.28);
-    border-color: rgba(255, 255, 255, 0.7);
-    font-weight: 600;
-  }
+  .is-home .site-header .mobile-toggle svg,
+  .is-home .site-header .lang-trigger svg { stroke-width: 2.4; }
 
   /* 위 .site-header .container 와 같은 값이어야 한다. 여기만 낮게 두면
      특이도가 높아서 홈에서만 백드롭이 서랍을 덮는다 — 실제로 그랬다. */
   .is-home .site-header .container { position: relative; z-index: 2; }
 
-  /* 흰 헤더로 내려오면 그림자도 배경도 필요 없다. */
-  .is-home .site-header.is-revealed .brand-name .ko,
-  .is-home .site-header.is-open .brand-name .ko {
-    font-size: 15px;
-    text-shadow: none;
-  }
-  .is-home .site-header.is-revealed .mobile-toggle,
-  .is-home .site-header.is-open .mobile-toggle,
-  .is-home .site-header.is-revealed .lang-select,
-  .is-home .site-header.is-open .lang-select { filter: none; }
-  .is-home .site-header.is-revealed .lang-select select,
-  .is-home .site-header.is-open .lang-select select {
-    background-color: transparent;
-    font-weight: 500;
-  }
-  .is-home .site-header .brand-name .ko,
-  .is-home .site-header .mobile-toggle { color: #fff; }
-  .is-home .site-header .lang-select select {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.55);
-    /* 화살표도 흰색으로. 기본 것은 어두워서 사진 위에서 안 보인다. */
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23ffffff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  }
-  .is-home .site-header .lang-select select option { color: var(--text-body); }
+  /* 헤더의 언어 상자는 모바일에서 감춰 뒀다(서랍 첫 줄이 본자리). 그래서
+     사진 위·흰 바탕용 색을 따로 두지 않는다 — 남겨 두면 특이도가 높아
+     서랍 안 상자까지 잡아당긴다. 실제로 서랍의 흰 글씨가 회색이 됐다. */
 
   /* 히어로를 지나면 흰 바탕으로 내려온다. 서랍을 연 동안에도 마찬가지 —
      사진 위 흰 글씨 그대로 두면 흰 서랍과 겹쳐 글자가 사라진다. */
@@ -158,14 +160,17 @@
     border-bottom: 1px solid var(--border-default);
   }
   .is-home .site-header.is-revealed .brand-name .ko,
-  .is-home .site-header.is-open .brand-name .ko,
+  .is-home .site-header.is-open .brand-name .ko {
+    font-size: 15px;
+    color: var(--text-heading);
+    text-shadow: none;
+  }
   .is-home .site-header.is-revealed .mobile-toggle,
-  .is-home .site-header.is-open .mobile-toggle { color: var(--text-heading); }
-  .is-home .site-header.is-revealed .lang-select select,
-  .is-home .site-header.is-open .lang-select select {
-    color: var(--text-body);
-    border-color: var(--border-strong);
-    background-image: none;
+  .is-home .site-header.is-open .mobile-toggle,
+  .is-home .site-header.is-revealed .lang-trigger,
+  .is-home .site-header.is-open .lang-trigger {
+    color: var(--text-heading);
+    filter: none;
   }
 
   /* ----- 서랍 ----- */
@@ -182,6 +187,39 @@
     padding: 4px 0 12px;
     margin: 0;
   }
+
+  /* 서랍 첫 줄 — 언어. 메뉴 항목과 색을 달리해서 '고르는 줄' 임을 보인다.
+     한국어를 못 읽는 사람이 서랍을 열었을 때 맨 먼저 닿아야 하는 것이다. */
+  .nav-lang-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--navy-900);
+    color: #fff;
+  }
+  .nav-lang-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .nav-lang-label svg { width: 20px; height: 20px; }
+  .nav-lang-row .lang-select { display: block; margin: 0; }
+  .nav-lang-row .lang-select select {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.5);
+    padding: 8px 28px 8px 12px;
+    /* 흰 화살표 — 네이비 위에서는 기본 어두운 것이 안 보인다. */
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%23ffffff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .nav-lang-row .lang-select select option { color: var(--text-body); }
 
   /* 대메뉴 한 줄 — 이름과 + 버튼이 양끝에 붙는다. */
   .top-nav.open > a,
@@ -270,9 +308,11 @@
   }
 }
 
-/* 데스크톱에서는 서랍 부품이 존재하지 않는다. */
+/* 데스크톱에서는 서랍 부품이 존재하지 않는다. 언어 상자는 헤더의 것을 쓴다. */
 @media (min-width: 961px) {
   .nav-expand,
   .nav-backdrop,
-  .nav-drawer-cta { display: none; }
+  .nav-drawer-cta,
+  .nav-lang-row,
+  .lang-trigger { display: none; }
 }
