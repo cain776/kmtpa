@@ -288,10 +288,14 @@
   .my-inquiry-form .field-grid { grid-template-columns: 1fr; }
 }
 
-/* 내 정보 — 항목 이름과 값. 패널이 넓어져도 표는 읽기 좋은 폭까지만 씁니다. */
+/* 내 정보 — 항목 이름과 값. 패널이 넓어져도 표는 읽기 좋은 폭까지만 씁니다.
+
+   이름 칸은 92px 로 시작해 필요한 만큼 늘어납니다. 항목 이름은 번역되는데
+   한글 넉 자가 몽골어에서는 "Хүсэлт гаргасан огноо" 처럼 스무 자가 넘어
+   고정 폭에서는 석 줄로 접혔습니다. */
 .info-dl {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
+  grid-template-columns: minmax(92px, max-content) minmax(0, 1fr);
   gap: 12px 14px;
   margin: 0;
   max-width: 560px;
