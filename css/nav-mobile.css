@@ -100,6 +100,48 @@
     white-space: nowrap;
   }
 
+  /* 이름이 긴 언어 — 영어·스페인어·몽골어.
+
+     헤더 이름은 번역된다(chrome.brand.ko). 한글 열 자가 라틴·키릴로 오면
+     44~51 자가 되는데, nowrap 이라 칸을 넘어도 줄이 안 바뀐다. 넘친 글자는
+     잘리지 않고 그대로 흘러 양옆 버튼 위를 덮었다 — 360px 에서 잰 값이다.
+
+         ko  154px (칸 240px)   겹침 0
+         en  392px             겹침 124px
+         es  451px             겹침 184px
+         mn  517px             겹침 250px  ← 지구본·햄버거 둘 다 덮임
+
+     한 줄을 지키며 크기만 줄이면 몽골어는 8px 이 돼야 들어간다. 읽을 수 있는
+     크기가 아니다. 그래서 13px 로 줄이고 두 줄을 허용한다. 두 줄이라도
+     30px 이라 64px 헤더 안에 든다. CJK 는 열 자라 손대지 않는다.
+
+     .container 를 끼운 것은 특이도 때문이다. 홈에서
+     .is-home .site-header.is-revealed .brand-name .ko 가 15px 을 다시 박는데
+     그것이 클래스 다섯이라, 이 규칙도 다섯을 채우고 요소 하나를 더 얹어야
+     언어별 크기가 살아남는다. */
+  html[lang="en"] .site-header .container .brand-name .ko,
+  html[lang="es"] .site-header .container .brand-name .ko,
+  html[lang="mn"] .site-header .container .brand-name .ko {
+    font-size: 13px;
+    line-height: 1.15;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* 칸을 끝까지 쓰게 폭을 못 박는다.
+
+     이름 상자는 left:50% 로 띄워 놓고 transform 으로 되당기는 방식이라,
+     브라우저가 줄바꿈 폭을 잴 때 보는 것은 max-width(240) 가 아니라 '왼쪽
+     끝에서 컨테이너 오른쪽까지' 인 172px 이다. nowrap 이던 시절에는 한 줄이
+     그보다 길어 max-width 가 걸렸는데, 줄바꿈을 허용하자 172 로 주저앉아
+     몽골어·스페인어가 세 줄이 됐다. 폭을 직접 주면 240 을 다 쓴다 —
+     두 줄로 줄고 64px 헤더 안에 넉넉히 든다. */
+  html[lang="en"] .site-header .container .brand,
+  html[lang="es"] .site-header .container .brand,
+  html[lang="mn"] .site-header .container .brand {
+    width: calc(100% - 120px);
+  }
+
   /* 로그인은 서랍 안으로 내렸다. 헤더에서는 감춘다. */
   .site-header .header-cta,
   .site-header .header-user { display: none; }
