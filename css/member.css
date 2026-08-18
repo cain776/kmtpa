@@ -139,7 +139,9 @@
   font-size: 16px;
   color: var(--join-body);
 }
-.mypage-head .who b { color: var(--join-ink); }
+/* 이 인사말은 짙은 네이비 히어로 위에 얹힌다. --join-ink 는 흰 바탕용
+   짙은 색이라 이름만 배경에 묻혔다. */
+.mypage-head .who b { color: #fff; }
 
 .mypage-grid {
   margin-top: 40px;
