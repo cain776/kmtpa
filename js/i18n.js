@@ -183,6 +183,9 @@ window.KMTPA = window.KMTPA || {};
     if (typeof NS.refreshHeroCopy === 'function') NS.refreshHeroCopy();
     // 커뮤니티의 '총 ○○건' 은 사전이 아니라 cms.js 가 숫자와 함께 만든다.
     if (typeof NS.syncUpdateCounts === 'function') NS.syncUpdateCounts();
+    // 마이페이지의 내 정보·문의 목록도 member.js 가 서버 응답으로 만든다.
+    // data-i18n 이 붙을 자리가 없어 applyI18n 이 닿지 않는다.
+    if (typeof NS.refreshMemberCopy === 'function') NS.refreshMemberCopy();
 
     // <title> 과 검색용 설명도 함께 바꾼다
     const page = document.body.dataset.i18nPage;
