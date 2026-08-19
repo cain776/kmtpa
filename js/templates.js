@@ -398,6 +398,10 @@ window.KMTPA = window.KMTPA || {};
         <span class="quick-label" data-i18n="chrome.quick-label.MEDICON Network">MEDI NET</span>
         <span class="quick-icon"><i data-lucide="network"></i></span>
       </a>
+      <a href="https://medi-checkkorea.vercel.app" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--medicheck">
+        <span class="quick-label" data-i18n="chrome.quick-label.MEDI-CHECK">MEDI-CHECK</span>
+        <span class="quick-icon"><i data-lucide="badge-check"></i></span>
+      </a>
       <a href="https://www.instagram.com/mediconeng/" target="_blank" rel="noopener" class="quick-link quick-link--external quick-link--instagram">
         <span class="quick-label" data-i18n="chrome.quick-label.Instagram">Instagram</span>
         <span class="quick-icon"><i data-lucide="instagram"></i></span>
